@@ -18,8 +18,10 @@
     <div class="header">
     <!--TITLE-->
     <h1>
+    	<a class="linklogo" href="/cleanUp">
     	<img id="logo" src="<c:url value='/resources/img/logosolo.png'  />" title="logo"/>
     	<spring:message code='project.name'/>
+    	</a>
     </h1>
     <!--END TITLE-->
     
@@ -48,7 +50,9 @@
     <!--FOOTER-->
     <div class="footer">
     <!--LOGIN BUTTON--><input type="submit" name="submit" value="<spring:message code="login.signIn" />" class="button" /><!--END LOGIN BUTTON-->
-    <!--REGISTER BUTTON--><input type="submit" name="submit" value="Register" class="register" /><!--END REGISTER BUTTON-->
+    <!--REGISTER BUTTON--><button >
+    						<a class="register" href="registrar" class="scroll">Registrar</a>
+    					  </button><!--END REGISTER BUTTON-->
     </div>
     <!--END FOOTER-->
 

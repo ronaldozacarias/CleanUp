@@ -23,6 +23,9 @@
     <definition name="welcomePage" extends="master.page">
         <put-attribute name="body" value="/protected/welcomePage.jsp"/>
     </definition>
+    <definition name="registrar" extends="master-welcome.page">
+        <put-attribute name="body" value="/public/registro.jsp"/>
+    </definition>
     <definition name="welcome" extends="master-welcome.page">
         <put-attribute name="body" value="/public/welcome.jsp"/>
     </definition>
@@ -33,5 +36,10 @@
         <put-attribute name="header" value=""/>
         <put-attribute name="footer" value=""/>
         <put-attribute name="body" value="/public/login.jsp"/>
+    </definition>
+    <definition name="forgot" extends="master-login.page">
+        <put-attribute name="header" value=""/>
+        <put-attribute name="footer" value=""/>
+        <put-attribute name="body" value="/public/forgot.jsp"/>
     </definition>
 </tiles-definitions>

@@ -4,19 +4,32 @@
 <!doctype html>
 <html lang="pt-BR" id="ng-app" ng-app="">
 <head>
-        <title><spring:message  code="project.title" /></title>
-        <link href="<c:url value='/resources/css/bootstrap.min.css'  />" rel="stylesheet"/>
-        <link href="<c:url value='/resources/css/bootstrap-responsive.min.css'  />" rel="stylesheet"/>
-        <link href="<c:url value='/resources/css/project_style.css'  />" rel="stylesheet"/>
-        <script src="<c:url value='/resources/js/jquery-1.9.1.min.js' />"></script>
-        <script src="<c:url value='/resources/js/angular.min.js' />"></script>
+       <script src="<c:url value='/resources/js/angular.min.js' />"></script>       	
+		
+		<link href="<c:url value='/resources/css/bootstrap.css'  />" rel="stylesheet" type="text/css"/>
+		<link href="<c:url value='/resources/img/fav.png'  />" rel="shortcut icon"/>
+		
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+		
+		 <!-- start-smoth-scrolling-->
+		 <script src="<c:url value='/resources/js/move-top.js' />"></script>
+		 <script src="<c:url value='/resources/js/easing.js' />"></script>
+
+		 <!-- Custom Theme files -->
+		<link href="<c:url value='/resources/css/style.css' />" rel="stylesheet" type="text/css"/>
+		
+   		 <!-- Custom Theme files -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+		</script>
     </head>
     <body>
-        <div class="container">
+
             <tiles:insertAttribute name="header" />
 
             <tiles:insertAttribute name="body" />
-        </div>
+
 
         <!--[if IE]>
             <script src="<c:url value='/resources/js/bootstrap.min.ie.js' />"></script>
