@@ -16,8 +16,7 @@ public class Usuario {
     @GeneratedValue
     private int id;
     private String email;
-    private String nome;
-    private String ativo;
+    private boolean ativo;
     private String senha;
 
     @Enumerated(EnumType.STRING)
@@ -40,22 +39,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(String ativo) {
-		this.ativo = ativo;
-	}
-
 	public String getSenha() {
 		return senha;
 	}
@@ -71,4 +54,14 @@ public class Usuario {
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
+	
 }

@@ -51,7 +51,7 @@
     <div class="footer">
     <!--LOGIN BUTTON--><input type="submit" name="submit" value="<spring:message code="login.signIn" />" class="button" /><!--END LOGIN BUTTON-->
     <!--REGISTER BUTTON--><button >
-    						<a class="register" href="registrar" class="scroll">Registrar</a>
+    						<a class="register" href="public/registrar" class="scroll">Registrar</a>
     					  </button><!--END REGISTER BUTTON-->
     </div>
     <!--END FOOTER-->

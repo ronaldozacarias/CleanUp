@@ -1,0 +1,30 @@
+package br.com.cleanUp.model;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "ID_DIARISTA")
+public class Diarista extends Pessoa {
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="DIARISTA_ESPECIALIDADE",
+			joinColumns=@JoinColumn(name="COD_PESSOA"),
+			inverseJoinColumns=@JoinColumn(name="ID_ESPECIADIDADE"))
+	private List<Espepcialidade> especialidade;
+
+	public List<Espepcialidade> getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(List<Espepcialidade> especialidade) {
+		this.especialidade = especialidade;
+	}
+	
+}

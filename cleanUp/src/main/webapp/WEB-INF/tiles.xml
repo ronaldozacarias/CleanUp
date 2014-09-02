@@ -24,7 +24,7 @@
         <put-attribute name="body" value="/protected/welcomePage.jsp"/>
     </definition>
     <definition name="registrar" extends="master-welcome.page">
-        <put-attribute name="body" value="/public/registro.jsp"/>
+        <put-attribute name="body" value="/public/registrar/registro.jsp"/>
     </definition>
     <definition name="welcome" extends="master-welcome.page">
         <put-attribute name="body" value="/public/welcome.jsp"/>

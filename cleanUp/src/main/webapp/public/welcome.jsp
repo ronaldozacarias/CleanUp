@@ -615,8 +615,8 @@
 			<div class="contact-form col-md-10">
 				<h3>Say hello!</h3>
 				<form>
-					<input type="text" placeholder="Name" required /> <input
-						type="text" placeholder="Email" required />
+					<input type="text" placeholder="Name" required /> 
+					<input type="text" placeholder="Email" required />
 					<textarea placeholder="Message" required />
 					</textarea>
 					<input type="submit" value="Send message" />
