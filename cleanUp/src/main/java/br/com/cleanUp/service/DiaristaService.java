@@ -21,7 +21,8 @@ public class DiaristaService {
 	}
 	
 	public void editDiarista(Diarista d){
-		diaristaRepository.delete(d);
+		diaristaRepository.delete(diaristaRepository.findOne(d.getCodigo()));
+		diaristaRepository.save(d);
 	}
 	
 	public void removeDiarista(Diarista d){
