@@ -2,6 +2,7 @@ package br.com.cleanUp.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,18 +36,13 @@ public abstract class Pessoa {
 	@Column(name = "TelefonPessoa", length = 13, nullable = true)
 	private String telefone;
 	
-	@Column(name = "DataNascimentoPessoa", length = 10, nullable = false) 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataNascimento;
-	
 	private Endereco endereco;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Usuario")
 	private Usuario usuario;
 
 	public Pessoa() {
-		super();
 		this.endereco = new Endereco();
 		this.usuario = new Usuario();
 	}
@@ -89,14 +85,6 @@ public abstract class Pessoa {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public Endereco getEndereco() {

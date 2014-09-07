@@ -2,79 +2,49 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div class="header-section">
-	<div id="home" class="header">
-		<div class="container">
-			<div class="top-header">
-				<div class="logo">
-					<a href="#"><img
-						src="<c:url value='/resources/img/logo.png'  />" title="logo" /></a>
-				</div>
-				<!----start-top-nav---->
-				<nav class="top-nav">
-					<ul class="top-nav" ng-controller="LocationController">
-						<li class="page-scroll"
-							ng-class="{'active': activeURL == 'home', '': activeURL != 'home'}">
-							<a href="<c:url value="/"/>" class="scroll"
-							title='<spring:message code="header.home"/>'>
-								<p>
-									<spring:message code="header.home" />
-								</p>
-						</a>
-						</li>
-						<li class="page-scroll"
-							ng-class="{'gray': activeURL == 'contacts', '': activeURL != 'contacts'}"><a
-							title='<spring:message code="header.contacts"/>' class="scroll"
-							href="<c:url value='/protected/contacts'/>"><p>
-									<spring:message code="header.contacts" />
-								</p></a>
-						</li>
-						<li class="page-scroll"><a class="scroll"
-							href="<c:url value='/logout' />"
-							title='<spring:message code="header.logout"/>'><p
-									class="displayInLine">
-									<spring:message code="header.logout" />
-									&nbsp;(${user.name})
-								</p></a>
-						</li>
-					</ul>
-<!-- 					<ul class="top-nav"> -->
-						
-<!-- 					</ul> -->
-					<a href="#" id="pull"> <img
-						src="<c:url value='/resources/img/nav-icon.png'  />" title="menu" />
-					</a>
-				</nav>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+            </div>
 
-
-
-<!-- <div class="masthead"> -->
-<!--     <h3 class="muted"> -->
-<%--         <spring:message code='header.message'/> --%>
-<!--     </h3>  -->
-
-<!--     <div class="navbar"> -->
-<!--         <div class="navbar-inner"> -->
-<!--             <div class="container"> -->
-<!--                 <ul class="nav" ng-controller="LocationController"> -->
-<!--                     <li ng-class="{'active': activeURL == 'home', '': activeURL != 'home'}" > -->
-<%--                         <a href="<c:url value="/"/>" --%>
-<%--                            title='<spring:message code="header.home"/>' --%>
-<!--                                 > -->
-<%--                             <p><spring:message code="header.home"/></p> --%>
-<!--                         </a> -->
-<!--                     </li> -->
-<%--                     <li ng-class="{'gray': activeURL == 'contacts', '': activeURL != 'contacts'}"><a title='<spring:message code="header.contacts"/>' href="<c:url value='/protected/contacts'/>"><p><spring:message code="header.contacts"/></p></a></li> --%>
-<!--                 </ul> -->
-<!--                 <ul class="nav pull-right"> -->
-<%--                     <li><a href="<c:url value='/logout' />" title='<spring:message code="header.logout"/>'><p class="displayInLine"><spring:message code="header.logout"/>&nbsp;(${user.name})</p></a></li> --%>
-<!--                 </ul> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
-<!-- </div> -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">como funciona</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Team</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">cadastrar</a>
+                    </li>
+                    <li class="sco-btn-light">
+                    	<a  href="login">ENTRAR</a>
+                	</li>
+                    
+                </ul>
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>

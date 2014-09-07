@@ -3,706 +3,611 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<!-----start-container----->
-<!-----header-section------>
-<div class="header-section">
-	<!----- start-header---->
-	<div id="home" class="header">
-		<div class="container">
-			<div class="top-header">
-				<div class="logo">
-					<a href="#"><img src="<c:url value='/resources/img/logo.png'  />" title="logo"/></a>
-				</div>
-				<!----start-top-nav---->
-				<nav class="top-nav">
-					<ul class="top-nav">
-						<li class="active"><a href="#home" class="scroll">Home </a></li>
-						<li class="page-scroll"><a href="#fea" class="scroll">FEATURES</a></li>
-						<li class="page-scroll"><a href="#gallery" class="scroll">Gallery</a></li>
-						<li class="page-scroll"><a href="#about" class="scroll">About</a></li>
-						<li class="page-scroll"><a href="login" class="scroll">Login</a></li>
-						<li class="contatct-active" class="page-scroll"><a
-							href="#contact" class="scroll">Contact</a></li>
-					</ul>
-					<a href="#" id="pull">
-						<img src="<c:url value='/resources/img/nav-icon.png'  />" title="menu"/>
-					</a>
-				</nav>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	<!----- //End-header---->
-	<!----- start-slider---->
-	<!----start-slider-script---->
-	<script src="<c:url value='/resources/js/responsiveslides.min.js' />"></script>
-	<script>
-		// You can also use "$(window).load(function() {"
-		$(function() {
-			// Slideshow 4
-			$("#slider4").responsiveSlides({
-				auto : true,
-				pager : true,
-				nav : true,
-				speed : 500,
-				namespace : "callbacks",
-				before : function() {
-					$('.events').append("<li>before event fired.</li>");
-				},
-				after : function() {
-					$('.events').append("<li>after event fired.</li>");
-				}
-			});
+<!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Encontrando diarista de maneira</div>
+                <div class="intro-heading">inteligente</div>
+                <a href="#services" class="page-scroll btn btn-xl">conheça-nos</a>
+            </div>
+        </div>
+    </header>
 
-		});
-	</script>
-	<!--//End-slider-script-->
-	<!-- Slideshow 4 -->
-	<div id="top" class="callbacks_container">
-		<ul class="rslides" id="slider4">
-			<li>
-			<img src="<c:url value='/resources/img/slide.jpg'  />" alt=""/>
-				<div class="caption text-center">
-					<div class="slide-text-info">
-						<h1>
-							Introducing <span>Umbrella.</span>
-						</h1>
-						<h2>Made to modify and use anywhere</h2>
-						<div class="slide-text">
-							<ul>
-								<li><span> </span>Sed ut perspiciatis unde omnis</li>
-								<li><span> </span>Iste natus error sit voluptatem
-									accusantium</li>
-								<li><span> </span>doloremque laudantium</li>
-							</ul>
-						</div>
-						<div class="clearfix"></div>
-						<div class="big-btns">
-							<a class="download" href="#"><label> </label>Download</a> <a
-								class="view" href="#"><label> </label>Vew Gallery</a>
-						</div>
-					</div>
-				</div></li>
-			<li>
-			<img src="<c:url value='/resources/img/slide.jpg'  />" alt=""/>
-				<div class="caption text-center">
-					<div class="slide-text-info">
-						<h1>
-							Introducing <span>Amazing app.</span>
-						</h1>
-						<h2>Made to modify and use anywhere</h2>
-						<div class="slide-text">
-							<ul>
-								<li><span> </span>Sed ut perspiciatis unde omnis</li>
-								<li><span> </span>Iste natus error sit voluptatem
-									accusantium</li>
-								<li><span> </span>doloremque laudantium</li>
-							</ul>
-						</div>
-						<div class="clearfix"></div>
-						<div class="big-btns">
-							<a class="download" href="#"><label> </label>Download</a> <a
-								class="view" href="#"><label> </label>Vew Gallery</a>
-						</div>
-					</div>
-				</div></li>
-			<li>
-			<img src="<c:url value='/resources/img/slide.jpg'  />" alt=""/>
-				<div class="caption text-center">
-					<div class="slide-text-info">
-						<h1>
-							Introducing <span>Best app.</span>
-						</h1>
-						<h2>Made to modify and use anywhere</h2>
-						<div class="slide-text">
-							<ul>
-								<li><span> </span>Sed ut perspiciatis unde omnis</li>
-								<li><span> </span>Iste natus error sit voluptatem
-									accusantium</li>
-								<li><span> </span>doloremque laudantium</li>
-							</ul>
-						</div>
-						<div class="clearfix"></div>
-						<div class="big-btns">
-							<a class="download" href="#"><label> </label>Download</a> <a
-								class="view" href="#"><label> </label>Vew Gallery</a>
-						</div>
-					</div>
-				</div></li>
-			<li>
-			<img src="<c:url value='/resources/img/slide.jpg'  />" alt=""/>
-				<div class="caption text-center">
-					<div class="slide-text-info">
-						<h1>
-							Introducing <span>Amazing app.</span>
-						</h1>
-						<h2>Made to modify and use anywhere</h2>
-						<div class="slide-text">
-							<ul>
-								<li><span> </span>Sed ut perspiciatis unde omnis</li>
-								<li><span> </span>Iste natus error sit voluptatem
-									accusantium</li>
-								<li><span> </span>doloremque laudantium</li>
-							</ul>
-						</div>
-						<div class="clearfix"></div>
-						<div class="big-btns">
-							<a class="download" href="#"><label> </label>Download</a> <a
-								class="view" href="#"><label> </label>Vew Gallery</a>
-						</div>
-					</div>
-				</div></li>
-		</ul>
-	</div>
-	<div class="clearfix"></div>
-	<!--divice-->
-	<div class="divice-demo">
-		<img src="<c:url value='/resources/img/divice-in-hand.png'  />" title="demo"/>
-	</div>
-	<!--//divice-->
-	<!-- //End-slider-->
-</div>
-<!--//header-section-->
-<!--features-->
-<div id="fea" class="features">
-	<div class="container">
-		<div class="section-head text-center">
-			<h3>
-				<span class="frist"> </span>AMAZING FEATURES<span class="second">
-				</span>
-			</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-				accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-				quae ab illo inventore veritatis et quasi architecto beatae vitae
-				dicta.</p>
-		</div>
-		<!--features-grids-->
-		<div class="features-grids">
-			<div class="col-md-4 features-grid">
-				<div class="features-grid-info">
-					<div class="col-md-2 features-icon">
-						<span class="f-icon0"> </span>
-					</div>
-					<div class="col-md-10 features-info">
-						<h4>Accusan timar</h4>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit
-							voluptatem accusantium doloremque laudantium.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="features-grid-info">
-					<div class="col-md-2 features-icon">
-						<span class="f-icon1"> </span>
-					</div>
-					<div class="col-md-10 features-info">
-						<h4>Accusan timar</h4>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit
-							voluptatem accusantium doloremque laudantium.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="features-grid-info">
-					<div class="col-md-2 features-icon">
-						<span class="f-icon2"> </span>
-					</div>
-					<div class="col-md-10 features-info">
-						<h4>Accusan timar</h4>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit
-							voluptatem accusantium doloremque laudantium.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Como funciona</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">E-Commerce</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Responsive Design</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Web Security</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-			</div>
-			<!---end-features-grid-->
-			<div class="col-md-4 features-grid">
-				<div class="big-divice">
-					<img src="<c:url value='/resources/img/divice.png'  />" title="features-demo"/>
-				</div>
-			</div>
-			<!---end-features-grid-->
-			<div class="col-md-4 features-grid">
-				<div class="features-grid-info">
-					<div class="col-md-2 features-icon1">
-						<span class="f-icon3"> </span>
-					</div>
-					<div class="col-md-10 features-info">
-						<h4>Accusan timar</h4>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit
-							voluptatem accusantium doloremque laudantium.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="features-grid-info">
-					<div class="col-md-2 features-icon1">
-						<span class="f-icon4"> </span>
-					</div>
-					<div class="col-md-10 features-info">
-						<h4>Accusan timar</h4>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit
-							voluptatem accusantium doloremque laudantium.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="features-grid-info">
-					<div class="col-md-2 features-icon1">
-						<span class="f-icon5"> </span>
-					</div>
-					<div class="col-md-10 features-info">
-						<h4>Accusan timar</h4>
-						<p>Sed ut perspiciatis unde omnis iste natus error sit
-							voluptatem accusantium doloremque laudantium.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Portfolio</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="<c:url value='/resources/img/portfolio/roundicons.png'  />" class="img-responsive" alt=""/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Round Icons</h4>
+                        <p class="text-muted">Graphic Design</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="<c:url value='/resources/img/portfolio/startup-framework.png'  />" class="img-responsive" alt=""/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Startup Framework</h4>
+                        <p class="text-muted">Website Design</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="<c:url value='/resources/img/portfolio/treehouse.png'  />" class="img-responsive" alt=""/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Treehouse</h4>
+                        <p class="text-muted">Website Design</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="<c:url value='/resources/img/portfolio/golden.png'  />" class="img-responsive" alt=""/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Golden</h4>
+                        <p class="text-muted">Website Design</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="<c:url value='/resources/img/portfolio/escape.png'  />" class="img-responsive" alt=""/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Escape</h4>
+                        <p class="text-muted">Website Design</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                         <img src="<c:url value='/resources/img/portfolio/dreams.png'  />" class="img-responsive" alt=""/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Dreams</h4>
+                        <p class="text-muted">Website Design</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-			</div>
-			<!---end-features-grid-->
-			<div class="clearfix"></div>
-		</div>
-	</div>
-</div>
-<!--//features-grids-->
-<!--//features-->
-<!--screen-shot-gallery-->
-<div id="gallery" class="screen-shot-gallery">
-	<div class="container">
-		<div class="section-head text-center">
-			<h3>
-				<span class="frist"> </span>SCREENSHOTS GALLERY<span class="second">
-				</span>
-			</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-				accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-				quae ab illo inventore veritatis et quasi architecto beatae vitae
-				dicta.</p>
-		</div>
-	</div>
-	<!--sreen-gallery-cursual-->
-	<div class="sreen-gallery-cursual">
-		<!-- requried-jsfiles-for owl -->
-		<link href="<c:url value='/resources/css/owl.carousel.css'  />" rel="stylesheet"/>
-		<script src="<c:url value='/resources/js/owl.carousel.js' />"></script>
-		<script>
-			$(document).ready(function() {
-				$("#owl-demo").owlCarousel({
-					items : 3,
-					lazyLoad : true,
-					autoPlay : true,
-				});
-			});
-		</script>
-		<!-- //requried-jsfiles-for owl -->
-		<!-- start content_slider -->
-		<div class="container">
-			<div id="owl-demo" class="owl-carousel">
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-				<div class="item">
-					<img class="lazyOwl" data-src="<c:url value='/resources/img/screen.png'  />" alt="screen-name"/>
-				</div>
-			</div>
-		</div>
-		<!--//sreen-gallery-cursual-->
-	</div>
-</div>
-<!--//screen-shot-gallery-->
-<!-- show-reel -->
-<!--pop-up-box-->
-<link href="<c:url value='/resources/css/popuo-box.css'  />" media="all" rel="stylesheet"/>
-<script src="<c:url value='/resources/js/jquery.magnific-popup.js' />"></script>
-<!--//pop-up-box-->
-<div class="show-reel text-center">
-	<div class="container">
-		<h5>
-			SHOW <a class="popup-with-zoom-anim" href="#small-dialog"><span>
-			</span></a> REEL
-		</h5>
-		<div id="small-dialog" class="mfp-hide">
-			<iframe src="//player.vimeo.com/video/38584262" width="100%"
-				height="400" frameborder="0" webkitallowfullscreen
-				mozallowfullscreen allowfullscreen> </iframe>
-		</div>
-		<script>
-			$(document).ready(function() {
-				$('.popup-with-zoom-anim').magnificPopup({
-					type : 'inline',
-					fixedContentPos : false,
-					fixedBgPos : true,
-					overflowY : 'auto',
-					closeBtnInside : true,
-					preloader : false,
-					midClick : true,
-					removalDelay : 300,
-					mainClass : 'my-mfp-zoom-in'
-				});
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">About</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img src="<c:url value='/resources/img/about/1.jpg'  />" class="img-circle img-responsive"/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>2009-2011</h4>
+                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img src="<c:url value='/resources/img/about/2.jpg'  />" class="img-circle img-responsive"/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>March 2011</h4>
+                                    <h4 class="subheading">An Agency is Born</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                            	<img src="<c:url value='/resources/img/about/3.jpg'  />" class="img-circle img-responsive"/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>December 2012</h4>
+                                    <h4 class="subheading">Transition to Full Service</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img src="<c:url value='/resources/img/about/4.jpg'  />" class="img-circle img-responsive"/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>July 2014</h4>
+                                    <h4 class="subheading">Phase Two Expansion</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>Be Part
+                                    <br>Of Our
+                                    <br>Story!</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-			});
-		</script>
-	</div>
-</div>
-<!-- //show-reel -->
-<!--team-->
-<div id="about" class="team">
-	<div class="container">
-		<div class="section-head text-center">
-			<h3>
-				<span class="frist"> </span>PEOPLE BEHIND THE APP<span
-					class="second"> </span>
-			</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-				accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-				quae ab illo inventore veritatis et quasi architecto beatae vitae
-				dicta.</p>
-		</div>
-	</div>
-	<!--team-members-->
-	<div class="team-members">
-		<div class="container">
-			<div class="col-md-3 team-member">
-				<div class="team-member-info">
-					<img class="member-pic" src="<c:url value='/resources/img/team-member4.jpg'  />" title="name"/>
-					<h5>
-						<a href="#">Jonh Doe eh</a>
-					</h5>
-					<span>Lead Designer</span> <label
-						class="team-member-caption text-center">
-						<p>sit aspernatur aut odit aut fugit, sed quia consequuntur
-							magni dolores eos qui ratione voluptatem.</p>
-						<ul>
-							<li><a class="t-twitter" href="#"><span> </span></a></li>
-							<li><a class="t-facebook" href="#"><span> </span></a></li>
-							<li><a class="t-googleplus" href="#"><span> </span></a></li>
-							<div class="clearfix"></div>
-						</ul>
-					</label>
-				</div>
-			</div>
-			<!-- end-team-member -->
-			<div class="col-md-3 team-member">
-				<div class="team-member-info">
-					<img class="member-pic" src="<c:url value='/resources/img/team-member1.jpg'  />" title="name"/>
-					<h5>
-						<a href="#">Amanda Fenrnicas</a>
-					</h5>
-					<span>Lead Developer</span> <label
-						class="team-member-caption text-center">
-						<p>sit aspernatur aut odit aut fugit, sed quia consequuntur
-							magni dolores eos qui ratione voluptatem.</p>
-						<ul>
-							<li><a class="t-twitter" href="#"><span> </span></a></li>
-							<li><a class="t-facebook" href="#"><span> </span></a></li>
-							<li><a class="t-googleplus" href="#"><span> </span></a></li>
-							<div class="clearfix"></div>
-						</ul>
-					</label>
-				</div>
-			</div>
-			<!-- end-team-member -->
-			<div class="col-md-3 team-member">
-				<div class="team-member-info">
-					<img class="member-pic" src="<c:url value='/resources/img/team-member2.jpg'  />" title="name"/>
-					<h5>
-						<a href="#">Hamberg Rodny</a>
-					</h5>
-					<span>Artist</span> <label class="team-member-caption text-center">
-						<p>sit aspernatur aut odit aut fugit, sed quia consequuntur
-							magni dolores eos qui ratione voluptatem.</p>
-						<ul>
-							<li><a class="t-twitter" href="#"><span> </span></a></li>
-							<li><a class="t-facebook" href="#"><span> </span></a></li>
-							<li><a class="t-googleplus" href="#"><span> </span></a></li>
-							<div class="clearfix"></div>
-						</ul>
-					</label>
-				</div>
-			</div>
-			<!-- end-team-member -->
-			<div class="col-md-3 team-member">
-				<div class="team-member-info">
-					<img class="member-pic" src="<c:url value='/resources/img/team-member3.jpg'  />" title="name"/>
-					<h5>
-						<a href="#">Jessica Leonardo</a>
-					</h5>
-					<span>Photographer</span> <label
-						class="team-member-caption text-center">
-						<p>sit aspernatur aut odit aut fugit, sed quia consequuntur
-							magni dolores eos qui ratione voluptatem.</p>
-						<ul>
-							<li><a class="t-twitter" href="#"><span> </span></a></li>
-							<li><a class="t-facebook" href="#"><span> </span></a></li>
-							<li><a class="t-googleplus" href="#"><span> </span></a></li>
-							<div class="clearfix"></div>
-						</ul>
-					</label>
-				</div>
-			</div>
-			<!-- end-team-member -->
-			<div class="clearfix"></div>
-		</div>
-		<div class="clearfix"></div>
-		<!--//team-members-->
-	</div>
-</div>
-<!--//team-->
-<div class="clearfix"></div>
-<!--people-says-->
-<div class="test-monials text-center">
-	<div class="container">
-		<span>
-			<img src="<c:url value='/resources/img/icon1.png'  />" title="quit"/>
-		</span>
-		<script>
-			$(document).ready(function() {
-				$("#owl-demo1").owlCarousel({
-					items : 1,
-					lazyLoad : true,
-					autoPlay : true,
-					itemsDesktop : 2,
-				});
-			});
-		</script>
-		<div id="owl-demo1" class="owl-carousel">
-			<div class="item">
-				<p>Sed ut perspiciatis unde omnis iste natus error sit
-					voluptatem accusantium doloremque laudantium, totam rem aperiam,
-					eaque ipsa quae ab illo inventore veritatis et quasi architecto
-					beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-					voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-					magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-				<div class="quit-people">
-					<img src="<c:url value='/resources/img/quit-people.jpg'  />" title="name"/>
-					<h4>
-						<a href="#"> Robert Leonaro</a>
-					</h4>
-					<span>CEO at CUBEDES</span>
-				</div>
-			</div>
-			<div class="item">
-				<p>Sed ut perspiciatis unde omnis iste natus error sit
-					voluptatem accusantium doloremque laudantium, totam rem aperiam,
-					eaque ipsa quae ab illo inventore veritatis et quasi architecto
-					beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-					voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-					magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-				<div class="quit-people">
-					<img src="<c:url value='/resources/img/quit-people.jpg'  />" title="name"/>
-					<h4>
-						<a href="#"> Robert Leonaro</a>
-					</h4>
-					<span>CEO at CUBEDES</span>
-				</div>
-			</div>
-			<div class="item">
-				<p>Sed ut perspiciatis unde omnis iste natus error sit
-					voluptatem accusantium doloremque laudantium, totam rem aperiam,
-					eaque ipsa quae ab illo inventore veritatis et quasi architecto
-					beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-					voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-					magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-				<div class="quit-people">
-					<img src="<c:url value='/resources/img/quit-people.jpg'  />" title="name"/>
-					<h4>
-						<a href="#"> Robert Leonaro</a>
-					</h4>
-					<span>CEO at CUBEDES</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!--//people-says-->
-<!--FEATURED-->
-<div class="featured">
-	<div class="section-head text-center">
-		<h3>
-			<span class="frist"> </span>FEATURED IN<span class="second"> </span>
-		</h3>
-	</div>
-	<script>
-		$(document).ready(function() {
-			$("#owl-demo2").owlCarousel({
-				items : 5,
-				lazyLoad : true,
-				autoPlay : true,
-				pagination : false,
-			});
-		});
-	</script>
-	<div id="owl-demo2" class="owl-carousel">
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo1.png'  />" title="the verge"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo2.png'  />" title="Mashable"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo3.png'  />" title="TNW"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo4.png'  />" title="bribble"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo1.png'  />" title="the verge"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo1.png'  />" title="the verge"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo2.png'  />" title="Mashable"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo3.png'  />" title="TNW"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo4.png'  />" title="bribble"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo1.png'  />" title="the verge"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo1.png'  />" title="the verge"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo2.png'  />" title="Mashable"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo3.png'  />" title="TNW"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo4.png'  />" title="bribble"/>
-		</div>
-		<div class="item">
-			<img src="<c:url value='/resources/img/brand-logo1.png'  />" title="the verge"/>
-		</div>
-	</div>
-</div>
-<!--FEATURED-->
-<!--getintouch-->
-<div id="contact" class="getintouch">
-	<div class="container">
-		<div class="section-head text-center">
-			<h3>
-				<span class="frist"> </span>GET IN TOUCH<span class="second">
-				</span>
-			</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-				accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-				quae ab illo inventore veritatis et quasi architecto beatae vitae
-				dicta.</p>
-		</div>
-		<!---->
-		<div class="col-md-9 getintouch-left">
-			<div class="contact-form col-md-10">
-				<h3>Say hello!</h3>
-				<form>
-					<input type="text" placeholder="Name" required /> 
-					<input type="text" placeholder="Email" required />
-					<textarea placeholder="Message" required />
-					</textarea>
-					<input type="submit" value="Send message" />
-				</form>
-			</div>
-			<ul class="footer-social-icons col-md-2 text-center">
-				<li><a class="f-be" href="#"><span> </span></a></li>
-				<li><a class="f-tw" href="#"><span> </span></a></li>
-				<li><a class="f-db" href="#"><span> </span></a></li>
-				<li><a class="f-ti" href="#"><span> </span></a></li>
-				<li><a class="f-go" href="#"><span> </span></a></li>
-				<div class="clearfix"></div>
-			</ul>
-		</div>
-		<div class="col-md-2 getintouch-left">
-			<div class="footer-divice">
-				<img src="<c:url value='/resources/img/divice-half.png'  />" title="getintouch"/>
-			</div>
-		</div>
-	</div>
-</div>
-<!---//getintouch-->
-<!--footer-->
-<div class="footer">
-	<div class="container">
-		<div class="footer-grids">
-			<div class="col-md-3 footer-grid about-info">
-				<a href="#">
-					<img src="<c:url value='/resources/img/logo.png'  />" title="Umbrella"/>
-				</a>
-				<p>eusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-md-3 footer-grid subscribe">
-				<h3>Subscribe</h3>
-				<form>
-					<input type="text" placeholder="" required /> <input type="submit"
-						value="" />
-				</form>
-				<p>eusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-			</div>
-			<div class="col-md-3 footer-grid explore">
-				<h3>Explore</h3>
-				<ul class="col-md-6">
-					<li><a href="#">Envato</a></li>
-					<li><a href="#">Themecurve</a></li>
-					<li><a href="#">Kreativeshowcase</a></li>
-					<li><a href="#">Freebiescurve</a></li>
-				</ul>
-				<ul class="col-md-6">
-					<li><a href="#">Themeforest</a></li>
-					<li><a href="#">Microsoft</a></li>
-					<li><a href="#">Google</a></li>
-					<li><a href="#">Yahoo</a></li>
-				</ul>
-				<div class="clearfix"></div>
-			</div>
-			<div class="col-md-3 footer-grid copy-right">
-				<p>Eusmod tempor incididunt ut labore et dolore magna aliqua. ut
-					labore et dolore magna aliqua.</p>
-				<p class="copy">
-					Template by <a href="http://w3layouts.com/">w3layouts</a>
-				</p>
-			</div>
-			<div class="clearfix"></div>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					/*
-					var defaults = {
-						containerID: 'toTop', // fading element id
-						containerHoverID: 'toTopHover', // fading element hover id
-						scrollSpeed: 1200,
-						easingType: 'linear' 
-					};
-					 */
+    <!-- Team Section -->
+    <section id="team" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Our Amazing Team</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="<c:url value='/resources/img/team/1.jpg'  />" class="img-responsive img-circle" alt=""/>
+                        <h4>Kay Garland</h4>
+                        <p class="text-muted">Lead Designer</p>
+                        <ul class="list-inline social-buttons">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">                        
+                        <img src="<c:url value='/resources/img/team/2.jpg'  />" class="img-responsive img-circle" alt=""/>
+                        <h4>Larry Parker</h4>
+                        <p class="text-muted">Lead Marketer</p>
+                        <ul class="list-inline social-buttons">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="<c:url value='/resources/img/team/3.jpg'  />" class="img-responsive img-circle" alt=""/>
+                        <h4>Diana Pertersen</h4>
+                        <p class="text-muted">Lead Developer</p>
+                        <ul class="list-inline social-buttons">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-					$().UItoTop({
-						easingType : 'easeOutQuart'
-					});
+    <!-- Clients Aside -->
+    <aside class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="<c:url value='/resources/img/logos/envato.jpg'  />" class="img-responsive img-centered" alt=""/>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="<c:url value='/resources/img/logos/designmodo.jpg'  />" class="img-responsive img-centered" alt=""/>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">                        
+                        <img src="<c:url value='/resources/img/logos/themeforest.jpg'  />" class="img-responsive img-centered" alt=""/>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="<c:url value='/resources/img/logos/creative-market.jpg'  />" class="img-responsive img-centered" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
 
-				});
-			</script>
-			<a href="#" id="toTop" style="display: block;"> <span
-				id="toTopHover" style="opacity: 1;"> </span></a>
-		</div>
-	</div>
-</div>
-<!--//footer-->
+    <section id="contact">
+        <div class="container" ng-controller="testeController">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Cadastrar</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="newPeopleForm" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                            
+                            	<div class="form-group">
+                                    <span class="tomwel">Dados Pessoais</span>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <input type="text" ng-model="cliente.nome" class="form-control" placeholder="Seu nome *" id="name" required data-validation-required-message="Por favor preencha o nome.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <input type="text" ng-model="cliente.rg" class="form-control" placeholder="Seu rg *" id="name" required data-validation-required-message="Por favor preencha o rg.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" ng-model="cliente.cpf" class="form-control" placeholder="Seu cpf *" id="name" required data-validation-required-message="Por favor preencha o rg.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="tel" ng-model="cliente.telefone" class="form-control" placeholder="Seu telefone *" id="phone" required data-validation-required-message="Por favor preencha o telefone.">
+                                    <p class="help-block text-danger"></p>
+                                </div>                            
+                                
+                            </div>
+                            <div class="col-md-6">
+                            
+                            	<div class="form-group">
+                                    <span class="tomwel">Login</span>
+                                </div>
+                            
+                            	<div class="form-group">
+                                    <input type="email" ng-model="cliente.email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Por favor preencha o email.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="password" ng-model="cliente.senha" class="form-control" placeholder="Sua senha" id="email" required data-validation-required-message="PPor favor preencha a senha.">
+                                    <p class="help-block text-danger"></p>
+                                </div> 
+<!--                            <div class="form-group"> -->
+<!--                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea> -->
+<!--                                <p class="help-block text-danger"></p> -->
+<!--                            </div> -->
+                            </div>
+                             <div class="col-md-6">
+                            
+                            	<div class="form-group">
+                                    <span class="tomwel">Endereço</span>
+                                </div>
+                            
+                            	<div class="form-group">
+                                    <input type="text" ng-model="cliente.rua" class="form-control" placeholder="Seu logradouro *" id="name" required data-validation-required-message="Por favor preencha o logradouro.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="cliente.cep" class="form-control" placeholder="Seu CEP *" id="name" required data-validation-required-message="Por favor preencha o CEP.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="cliente.numero" class="form-control" placeholder="Seu número *" id="name" required data-validation-required-message="Por favor preencha o número.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="cliente.cidade" class="form-control" placeholder="Sua cidade *" id="name" required data-validation-required-message="Por favor preencha a cidade.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="cliente.bairro" class="form-control" placeholder="Seu bairro *" id="name" required data-validation-required-message="Por favor preencha o bairro.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="button" class="btn btn-xl" ng-click="createPeople(newPeopleForm)">cadastrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
+
+    <!-- Portfolio Modal 1 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>                            
+							<img src="<c:url value='/resources/img/portfolio/roundicons-free.png'  />" class="img-responsive" alt=""/>
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                            <p>
+                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
+                            <ul class="list-inline">
+                                <li>Date: July 2014</li>
+                                <li>Client: Round Icons</li>
+                                <li>Category: Graphic Design</li>
+                            </ul>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 2 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Project Heading</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>                      
+                            <img src="<c:url value='/resources/img/portfolio/startup-framework-preview.png'  />" class="img-responsive img-centered" alt=""/>
+                            <p><a href="http://designmodo.com/startup/?u=787">Startup Framework</a> is a website builder for professionals. Startup Framework contains components and complex blocks (PSD+HTML Bootstrap themes and templates) which can easily be integrated into almost any design. All of these components are made in the same style, and can easily be integrated into projects, allowing you to create hundreds of solutions for your future projects.</p>
+                            <p>You can preview Startup Framework <a href="http://designmodo.com/startup/?u=787">here</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 3 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img src="<c:url value='/resources/img/portfolio/treehouse-preview.png'  />" class="img-responsive img-centered" alt=""/>
+                            <p>Treehouse is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. This is bright and spacious design perfect for people or startup companies looking to showcase their apps or other projects.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/treehouse-free-psd-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 4 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img src="<c:url value='/resources/img/portfolio/golden-preview.png'  />" class="img-responsive img-centered" alt=""/>
+                            <p>Start Bootstrap's Agency theme is based on Golden, a free PSD website template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Golden is a modern and clean one page web template that was made exclusively for Best PSD Freebies. This template has a great portfolio, timeline, and meet your team sections that can be easily modified to fit your needs.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/golden-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 5 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img src="<c:url value='/resources/img/portfolio/escape-preview.png'  />" class="img-responsive img-centered" alt=""/>
+                            <p>Escape is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Escape is a one page web template that was designed with agencies in mind. This template is ideal for those looking for a simple one page solution to describe your business and offer your services.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/escape-one-page-psd-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 6 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img src="<c:url value='/resources/img/portfolio/dreams-preview.png'  />" class="img-responsive img-centered" alt=""/>
+                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery Version 1.11.0 -->    
+    <script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="<c:url value='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js' />"></script>
+    <script src="<c:url value='/resources/js/classie.js' />"></script>
+    <script src="<c:url value='/resources/js/cbpAnimatedHeader.js' />"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="<c:url value='/resources/js/jqBootstrapValidation.js' />"></script>
+    <script src="<c:url value='/resources/js/contact_me.js' />"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="<c:url value='/resources/js/agency.js' />"></script>
+    
+    <script src="<c:url value='/resources/js/pages/testeController.js' />"></script>

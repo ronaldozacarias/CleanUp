@@ -6,58 +6,36 @@
 <head>
         <title><spring:message  code="project.title" /></title>
             
-        <script src="<c:url value='/resources/js/angular.min.js' />"></script>       	
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
 		
-		<link href="<c:url value='/resources/css/bootstrap.css'  />" rel="stylesheet" type="text/css"/>
-		<link href="<c:url value='/resources/img/fav.png'  />" rel="shortcut icon"/>
+		<script src="<c:url value='/resources/js/angular.min.js' />"></script> 
 		
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-		
-		 <!-- start-smoth-scrolling-->
-		 <script src="<c:url value='/resources/js/move-top.js' />"></script>
-		 <script src="<c:url value='/resources/js/easing.js' />"></script>
-
-		 <!-- Custom Theme files -->
-		<link href="<c:url value='/resources/css/style.css' />" rel="stylesheet" type="text/css"/>
-		
-   		 <!-- Custom Theme files -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-		</script>
-		
-		<!--webfonts-->
-		<link href="<c:url value='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700'  />" rel="stylesheet" type="text/css"/>
-
-		<!--//webfonts-->
-		<!--start-top-nav-script-->
-		<script>
-			$(function() {
-				var pull 		= $('#pull');
-					menu 		= $('nav ul');
-					menuHeight	= menu.height();
-				$(pull).on('click', function(e) {
-					e.preventDefault();
-					menu.slideToggle();
-				});
-				$(window).resize(function(){
-	        		var w = $(window).width();
-	        		if(w > 320 && menu.is(':hidden')) {
-	        			menu.removeAttr('style');
-	        		}
-	    		});
-			});
-		</script>
-		<!--//End-top-nav-script-->		
-                
+<!-- 	    <title>CleanUp</title> -->
+	
+	    <!-- Bootstrap Core CSS -->
+	    <link href="<c:url value='/resources/css/bootstrap.min.css'  />" rel="stylesheet" type="text/css"/>
+	    
+	    <!-- Custom CSS -->
+	    <link href="<c:url value='/resources/css/agency.css' />" rel="stylesheet" type="text/css"/>
+	
+	    <!-- Custom Fonts -->
+	    <link href="<c:url value='/resources/font-awesome-4.1.0/css/font-awesome.min.css' />" rel="stylesheet" type="text/css"/>
+	    <link href="<c:url value='http://fonts.googleapis.com/css?family=Montserrat:400,700' />" rel="stylesheet" type="text/css"/>
+	    <link href="<c:url value='http://fonts.googleapis.com/css?family=Kaushan+Script' />" rel="stylesheet" type="text/css"/>
+	    <link href="<c:url value='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' />" rel="stylesheet" type="text/css"/>
+	    <link href="<c:url value='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' />" rel="stylesheet" type="text/css"/>
+	                    
     </head>
-    <body>
-<!--         <div class="container"> -->
-<%--             <tiles:insertAttribute name="header" /> --%>
+    <body id="page-top" class="index">
+            <tiles:insertAttribute name="header" />
 
             <tiles:insertAttribute name="body" />
 <!--         </div> -->
 
-<%--         <tiles:insertAttribute name="footer" /> --%>
+        	<tiles:insertAttribute name="footer" />
     </body>
 </html>

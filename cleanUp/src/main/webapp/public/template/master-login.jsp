@@ -11,7 +11,7 @@
 		<link href="<c:url value='/resources/img/fav.png'  />" rel="shortcut icon"/>
 		
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+		<script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
 
 		 <!-- Custom Theme files -->
 		<link href="<c:url value='/resources/css/stylelogin.css' />" rel="stylesheet" type="text/css"/>

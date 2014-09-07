@@ -5,13 +5,13 @@
 
     <!-- Master -->
     <definition name="master.page" template="/public/template/master.jsp">
-        <put-attribute name="header" value="/public/template/header.jsp"/>
-        <put-attribute name="footer" value="/public/template/footer.jsp"/>
+<!--         <put-attribute name="header" value="/public/template/header.jsp"/> -->
+<!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
     </definition>
     
     <definition name="master-welcome.page" template="/public/template/master-welcome.jsp">
-<!--         <put-attribute name="header" value="/public/template/header.jsp"/> -->
-<!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
+        <put-attribute name="header" value="/public/template/header.jsp"/>
+        <put-attribute name="footer" value="/public/template/footer.jsp"/>
     </definition>
     
     <definition name="master-login.page" template="/public/template/master-login.jsp">
@@ -41,5 +41,8 @@
         <put-attribute name="header" value=""/>
         <put-attribute name="footer" value=""/>
         <put-attribute name="body" value="/public/forgot.jsp"/>
+    </definition>
+    <definition name="cadastro" extends="master.page">
+        <put-attribute name="body" value="/public/cadastro/cadastro.jsp"/>
     </definition>
 </tiles-definitions>

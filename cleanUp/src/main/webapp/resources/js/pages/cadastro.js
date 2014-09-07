@@ -1,6 +1,6 @@
 function cadastroController($scope, $http) {
 	
-	$scope.url = "cleanUp/public/registrar/";
+	$scope.url = "cleanUp/public/registrar";
 	
 	$scope.perfils = [
 	     'ROLE_ADMIN', 
@@ -26,6 +26,36 @@ function cadastroController($scope, $http) {
                 $scope.handleErrorInDialogs(status);
             });
     };
+    
+    $scope.createContact = function(newContactForm) {
+
+		if (!newContactForm.$valid) {
+			$scope.displayValidationError = true;
+			return;
+		}
+
+		var url = $scope.url;
+
+		var config = {
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+			}
+		};
+
+		$http.post(url, $.param($scope.contact), config).success(function() {
+			$scope.getContactList();
+        });
+	};
 	
 	
 }
+
+
+
+
+
+
+
+
+
+/* ######################################################### */

@@ -17,13 +17,13 @@ public class Diarista extends Pessoa {
 	@JoinTable(name="DIARISTA_ESPECIALIDADE",
 			joinColumns=@JoinColumn(name="COD_PESSOA"),
 			inverseJoinColumns=@JoinColumn(name="ID_ESPECIADIDADE"))
-	private List<Espepcialidade> especialidade;
+	private List<Especialidade> especialidade;
 
-	public List<Espepcialidade> getEspecialidade() {
+	public List<Especialidade> getEspecialidade() {
 		return especialidade;
 	}
 
-	public void setEspecialidade(List<Espepcialidade> especialidade) {
+	public void setEspecialidade(List<Especialidade> especialidade) {
 		this.especialidade = especialidade;
 	}
 	
