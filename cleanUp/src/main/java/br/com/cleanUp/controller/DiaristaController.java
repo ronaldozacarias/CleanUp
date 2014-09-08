@@ -18,7 +18,7 @@ import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.DiaristaService;
 
 @Controller
-@RequestMapping(value = "/public/registrar")
+@RequestMapping(value = "/public/registrarDiarista")
 public class DiaristaController {
 	
 	@Autowired

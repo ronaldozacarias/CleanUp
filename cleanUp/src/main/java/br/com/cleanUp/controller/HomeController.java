@@ -22,8 +22,8 @@ public class HomeController {
     	Usuario usuarioLogado = (Usuario)RequestContextHolder.currentRequestAttributes()    			
 				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
     	
-    	if(usuarioLogado.getPerfil().equals(Perfil.ROLE_USER)){
-    		return "welcomePage";
+    	if(usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)){
+    		return "welcomeClient";
     	}else{
     		return "login";
     	}

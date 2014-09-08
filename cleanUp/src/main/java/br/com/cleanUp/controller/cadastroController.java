@@ -41,7 +41,7 @@ public class cadastroController {
 		usu.isAtivo();
 		usu.setEmail(c.getEmail());
 		usu.setSenha(c.getSenha());
-		usu.setPerfil(Perfil.ROLE_USER);
+		usu.setPerfil(Perfil.ROLE_CLIENT);
 		
 		Endereco end = new Endereco();
 		end.setBairro(c.getBairro());
@@ -76,7 +76,7 @@ public class cadastroController {
 		cli.setUsuario(usu);
 		cli.setEndereco(e);*/
 		
-		clienteService.save(cli);
+		clienteService.salvarCliente(cli);
 	}
 	
 //	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
