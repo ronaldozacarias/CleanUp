@@ -24,11 +24,11 @@ public class HomeController {
     	
     	if(usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)){
     		return "welcomeClient";
+    	}else if(usuarioLogado.getPerfil().equals(Perfil.ROLE_DIARIST)){
+    		return "welcomeDiarist";
     	}else{
     		return "login";
-    	}
-    	
-    	
+    	}	
     	
     }
 

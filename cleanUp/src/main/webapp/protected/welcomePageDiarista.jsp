@@ -7,7 +7,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">CleanUp Dashboard Cliente</a>
+                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">CleanUp Dashboard Diarista</a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
@@ -43,8 +43,7 @@
       <ul class="mainnav">
         <li class="active"><a href="home"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
         <li><a href=""><i class="icon-list-alt"></i><span>Notificações</span> </a> </li>
-        <li><a href=""><i class="icon-search"></i><span>Buscar Diarista</span> </a></li>
-        <li><a href=""><i class="icon-star-empty"></i><span>Classificar Diarista</span> </a></li>
+        <li><a href=""><i class="icon-paste"></i><span>Planos</span> </a></li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Mais..</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="">Icons</a></li>
@@ -65,12 +64,6 @@
 <div class="main">
   <div class="main-inner">
     <div class="container">
-      <div class="widget widget-nopad" id="map-canvas" style="width: auto; height: 336px">
-      		<div class="widget-header"> <i class="icon-list-alt"></i>
-              	<h3> Status Diário</h3>
-            </div>
-      </div>
-      <br>
       <div class="row">
         <div class="span6">
           <div class="widget widget-nopad">
@@ -102,6 +95,17 @@
             </div>
           </div>
           <!-- /widget -->
+          <div class="widget widget-nopad">
+            <div class="widget-header"> <i class="icon-list-alt"></i>
+              <h3> Agenda</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <div id='calendar'>
+              </div>
+            </div>
+            <!-- /widget-content --> 
+          </div>
           <div class="widget widget-nopad">
             <div class="widget-header"> <i class="icon-list-alt"></i>
               <h3> Histórico de atividades</h3>
@@ -157,6 +161,17 @@
             <!-- /widget-content --> 
           </div>
           <!-- /widget -->
+          <div class="widget">
+            <div class="widget-header"> <i class="icon-signal"></i>
+              <h3> Area Chart Example</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <canvas id="area-chart" class="chart-holder" height="250" width="538"> </canvas>
+              <!-- /area-chart --> 
+            </div>
+            <!-- /widget-content --> 
+          </div>
           <!-- /widget -->
           <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-th-list"></i>
@@ -296,20 +311,6 @@
 <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 <script src="<c:url value='/resources/js/full-calendar/fullcalendar.min.js' />"></script>
 <script src="<c:url value='/resources/js/base.js' />"></script>
-	
-	<!-- Maps API Javascript -->
-    <script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
-        
-    <!-- Caixa de informação -->
-    <script src="<c:url value='/resources/js/infobox.js' />"></script>
-		
-    <!-- Agrupamento dos marcadores -->
-    <script src="<c:url value='/resources/js/markerclusterer.js' />"></script>
-    
-    <!-- Arquivo de inicialização do mapa -->
-	<script src="<c:url value='/resources/js/mapa.js' />"></script>
-
-
 <script>     
 
         var lineChartData = {
@@ -432,6 +433,4 @@
       });
     </script><!-- /Calendar -->
     
-    
-    
-<%--     <script src="<c:url value='/resources/js/pages/clienteController.js' />"></script> --%> 
+<%--     <script src="<c:url value='/resources/js/pages/clienteController.js' />"></script> --%>    

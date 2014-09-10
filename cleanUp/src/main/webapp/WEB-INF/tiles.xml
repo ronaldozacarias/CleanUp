@@ -19,12 +19,23 @@
         <put-attribute name="footer" value="/public/template/footer.jsp"/>
     </definition>
     
+    <definition name="master-home-diarista.page" template="/public/template/master-home-diarista.jsp">
+        <put-attribute name="header" value="/public/template/headerClient.jsp"/>
+        <put-attribute name="footer" value="/public/template/footer.jsp"/>
+    </definition>
+    
+    <definition name="master-home-cadastro-diarista.page" template="/public/template/master-home-cadastro-diarista.jsp">
+<!--         <put-attribute name="header" value="/public/template/headerClient.jsp"/> -->
+<!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
+    </definition>
+    
     <definition name="master-login.page" template="/public/template/master-login.jsp">
 <!--         <put-attribute name="header" value="/public/template/header.jsp"/> -->
 <!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
     </definition>
 
-    <!--  Pages -->
+<!--  Pages #############################################################################################-->
+    
     <definition name="welcomePage" extends="master-welcome.page">
         <put-attribute name="body" value="/protected/welcomePageCliente.jsp"/>
     </definition>
@@ -36,6 +47,9 @@
     </definition>
     <definition name="welcomeClient" extends="master-home-cliente.page">
         <put-attribute name="body" value="/protected/welcomePageCliente.jsp"/>
+    </definition>
+    <definition name="welcomeDiarist" extends="master-home-diarista.page">
+        <put-attribute name="body" value="/protected/welcomePageDiarista.jsp"/>
     </definition>
     <definition name="contactsList" extends="master.page">
         <put-attribute name="body" value="/protected/contacts/contacts.jsp"/>
@@ -52,5 +66,8 @@
     </definition>
     <definition name="cadastro" extends="master.page">
         <put-attribute name="body" value="/public/cadastro/cadastro.jsp"/>
+    </definition>
+    <definition name="diarista" extends="master-home-cadastro-diarista.page">
+        <put-attribute name="body" value="/public/diarista/cadastroDiarista.jsp"/>
     </definition>
 </tiles-definitions>

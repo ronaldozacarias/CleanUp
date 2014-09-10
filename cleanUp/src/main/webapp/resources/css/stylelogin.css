@@ -43,11 +43,20 @@ BODY STYLING
 }
 
 body {
-	background: url(../img/slide.jpg) repeat;
+	text-align: center;
+	background-attachment: scroll;
+	background-image: url(../img/slide.jpg);
+	background-position: center center;
+	background-repeat: none;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight:300;
 	text-align: left;
 	text-decoration: none;
+	display: block;
 }
 
 #wrapper {
