@@ -37,6 +37,9 @@
                     <li>
                         <a class="page-scroll" href="#contact">cadastrar</a>
                     </li>
+                    <li>
+                        <a class="page-scroll" href="public/diarista">Sou diarista</a>
+                    </li>
                     <li class="sco-btn-light">
                     	<a  href="login">ENTRAR</a>
                 	</li>

@@ -347,12 +347,12 @@
                                 </div>
                                
                                 <div class="form-group">
-                                    <input type="text" ng-model="cliente.rg" class="form-control" placeholder="Seu rg *" id="name" required data-validation-required-message="Por favor preencha o rg.">
+                                    <input type="number" ng-model="cliente.rg" class="form-control" placeholder="Seu rg *" id="name" required data-validation-required-message="Por favor preencha o rg.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <input type="text" ng-model="cliente.cpf" class="form-control" placeholder="Seu cpf *" id="name" required data-validation-required-message="Por favor preencha o rg.">
+                                    <input type="number" ng-model="cliente.cpf" class="form-control" placeholder="Seu cpf *" id="name" required data-validation-required-message="Por favor preencha o rg.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 

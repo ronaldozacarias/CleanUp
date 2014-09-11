@@ -12,7 +12,6 @@
 		
 		<script src="<c:url value='/resources/js/angular.min.js' />"></script>
 		
-		<link href="<c:url value='/resources/css/bootstrap2.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/bootstrap2.min.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/bootstrap-responsive.min.css'  />" rel="stylesheet" type="text/css"/>
 
@@ -21,13 +20,17 @@
     
 		<link href="<c:url value='/resources/css/styleDashBord.css' />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/pages/dashboard.css' />" rel="stylesheet" type="text/css"/>
+
+	    
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		      <script src="<c:url value='http://html5shim.googlecode.com/svn/trunk/html5.js' />"></script>
+		    <![endif]-->
 	                    
     </head>
     <body>
-<%--             <tiles:insertAttribute name="header" /> --%>
 
             <tiles:insertAttribute name="body" />
-<!--         </div> -->
 
 <%--         	<tiles:insertAttribute name="footer" /> --%>
     </body>

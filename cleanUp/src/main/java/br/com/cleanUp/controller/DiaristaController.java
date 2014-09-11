@@ -18,7 +18,7 @@ import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.DiaristaService;
 
 @Controller
-@RequestMapping(value = "/public/registrarDiarista")
+@RequestMapping(value = "/public/diarista")
 public class DiaristaController {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class DiaristaController {
 	
 	@RequestMapping(method = RequestMethod.GET)
     public ModelAndView registrar() {
-        return new ModelAndView("registrar");
+        return new ModelAndView("diarista");
     }
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
