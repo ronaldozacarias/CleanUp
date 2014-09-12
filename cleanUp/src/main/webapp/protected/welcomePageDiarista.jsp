@@ -18,7 +18,7 @@
             </ul>
           </li>
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> (Olá ${usuario.email}) <b class="caret"></b></a>
+                            class="icon-user"></i> (Olá ${usuario.apelido}) <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Perfil</a></li>
               <li><a href="<c:url value='/logout' />">Sair</a></li>

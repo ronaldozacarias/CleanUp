@@ -1,19 +1,20 @@
 package br.com.cleanUp.vo;
 
-public class ClienteVO {
+import java.util.List;
+
+import br.com.cleanUp.model.Especialidade;
+
+public class PessoaVO {
 
 	private String nome;
 	private String cpf;
-	private String rg;
 	private String telefone;
-	private String rua;
-	private String numero;
-	private String bairro;
-	private String cidade;
-	private String cep;
+	private String endereco;
+	private int cidade;
 	private String email;
 	private String senha;
-	
+	private boolean diarista;
+	private List<Especialidade> especialidades;
 	public String getNome() {
 		return nome;
 	}
@@ -26,47 +27,23 @@ public class ClienteVO {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public String getRg() {
-		return rg;
-	}
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
 	public String getTelefone() {
 		return telefone;
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getRua() {
-		return rua;
+	public String getEndereco() {
+		return endereco;
 	}
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
-	public String getNumero() {
-		return numero;
-	}
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getCidade() {
+	public int getCidade() {
 		return cidade;
 	}
-	public void setCidade(String cidade) {
+	public void setCidade(int cidade) {
 		this.cidade = cidade;
-	}
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 	public String getEmail() {
 		return email;
@@ -79,6 +56,18 @@ public class ClienteVO {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public boolean isDiarista() {
+		return diarista;
+	}
+	public void setDiarista(boolean diarista) {
+		this.diarista = diarista;
+	}
+	public List<Especialidade> getEspecialidades() {
+		return especialidades;
+	}
+	public void setEspecialidades(List<Especialidade> especialidades) {
+		this.especialidades = especialidades;
 	}	
 
 }

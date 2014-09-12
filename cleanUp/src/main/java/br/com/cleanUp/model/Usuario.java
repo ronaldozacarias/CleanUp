@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -16,6 +18,8 @@ public class Usuario {
     @GeneratedValue
     private int id;
     private String email;
+    private String apelido;    
+    @Type(type="boolean")
     private boolean ativo;
     private String senha;
 
@@ -62,6 +66,13 @@ public class Usuario {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
+	}	
 	
 }

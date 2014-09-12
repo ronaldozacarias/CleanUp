@@ -10,16 +10,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
-import br.com.cleanUp.model.Endereco;
-import br.com.cleanUp.model.Pessoa;
+import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
+import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
-@RequestMapping(value = "/public/registrarCliente")
+@RequestMapping(value = "/public/cliente")
 public class ClienteController {
 
+	Usuario usuario;
+	Cidade cidade;
+	Cliente cliente;
+	
 	@Autowired
 	private ClienteService clienteService;
 
@@ -28,30 +33,52 @@ public class ClienteController {
 		return new ModelAndView("registrar");
 	}
 
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void create(@ModelAttribute("pessoa") Pessoa p,
-			@ModelAttribute("usuario") Usuario u,
-			@ModelAttribute("endereco") Endereco e) {
-
-		Pessoa cli = new Cliente();
-		cli.setUsuario(u);
-		cli.setEndereco(e);
-
-		clienteService.salvarCliente((Cliente) cli);
+	public void create(@ModelAttribute("pessoa") PessoaVO pessoa) {
+		
+		cliente = new Cliente();		
+		
+		cidade = new Cidade();
+		cidade.setCodigoCidade(pessoa.getCidade());
+		usuario = new Usuario();
+		usuario.isAtivo();
+		usuario.setEmail(pessoa.getEmail());
+		usuario.setPerfil(Perfil.ROLE_CLIENT);
+		usuario.setSenha(pessoa.getSenha());
+		
+		cliente.setCidade(cidade);
+		cliente.setCpf(pessoa.getCpf());
+		cliente.setEndereco(pessoa.getEndereco());
+		cliente.setNome(pessoa.getNome());
+		cliente.setTelefone(pessoa.getTelefone());
+		cliente.setUsuario(usuario);			
+		
+		clienteService.salvarCliente(cliente);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-	public void edit(@ModelAttribute("pessoa") Pessoa p,
-			@ModelAttribute("usuario") Usuario u,
-			@ModelAttribute("endereco") Endereco e) {
+	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) {
 
-		Pessoa cli = new Cliente();
-		cli.setUsuario(u);
-		cli.setEndereco(e);
+		cliente = new Cliente();		
+		
+		cidade = new Cidade();
+		cidade.setCodigoCidade(pessoa.getCidade());
+		usuario = new Usuario();
+		usuario.isAtivo();
+		usuario.setEmail(pessoa.getEmail());
+		usuario.setPerfil(Perfil.ROLE_CLIENT);
+		usuario.setSenha(pessoa.getSenha());
+		
+		cliente.setCidade(cidade);
+		cliente.setCpf(pessoa.getCpf());
+		cliente.setEndereco(pessoa.getEndereco());
+		cliente.setNome(pessoa.getNome());
+		cliente.setTelefone(pessoa.getTelefone());
+		cliente.setUsuario(usuario);
 
-		clienteService.editarCliente((Cliente) cli);
+		clienteService.editarCliente(cliente);
 
 	}
 
