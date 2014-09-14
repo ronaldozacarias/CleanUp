@@ -1,25 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.cleanUp</groupId>
-  <artifactId>cleanUp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-  <build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.cleanUp</groupId>
+	<artifactId>cleanUp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<build>
 		<finalName>cleanUp</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.1</version><!--$NO-MVN-MAN-VER$-->
-                <configuration>
-                   <port>8080</port>
-                    <path>/${project.build.finalName}</path>
-                    <additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>
-                    <systemProperties>
-                        <log4j.configuration>file:./src/main/tomcat/conf/log4j.xml</log4j.configuration>
-                    </systemProperties>
-                </configuration>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version><!--$NO-MVN-MAN-VER$ -->
+				<configuration>
+					<port>8080</port>
+					<path>/${project.build.finalName}</path>
+					<additionalConfigFilesDir>${basedir}/src/main/tomcat/conf</additionalConfigFilesDir>
+					<systemProperties>
+						<log4j.configuration>file:./src/main/tomcat/conf/log4j.xml</log4j.configuration>
+					</systemProperties>
+				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>log4j</groupId>
@@ -51,7 +52,7 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -156,6 +157,11 @@
 			<artifactId>jackson-jaxrs</artifactId>
 			<version>1.8.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jettison</groupId>
+			<artifactId>jettison</artifactId>
+			<version>1.3.6</version>
+		</dependency>
 
 		<!-- Tiles -->
 		<dependency>
@@ -242,5 +248,5 @@
 			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
-  
+
 </project>
