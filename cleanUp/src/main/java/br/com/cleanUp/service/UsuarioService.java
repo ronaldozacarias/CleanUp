@@ -21,5 +21,9 @@ public class UsuarioService {
     public Usuario findByEmail(String email){
         return userRepository.findByEmail(email);
     }
+    
+    public Usuario compareUsuario(Usuario usuario){
+        return userRepository.findByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
+    }
 
 }
