@@ -29,16 +29,7 @@
                         <a class="page-scroll" href="#portfolio">Portfolio</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="#team">Team</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">cadastrar</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="public/diarista">Sou diarista</a>
                     </li>
                     <li class="sco-btn-light">
                     	<a  href="login">ENTRAR</a>

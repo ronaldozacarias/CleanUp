@@ -12,7 +12,7 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 .account-container {
 	width: 380px; 
 	display: block;
-	margin: 60px auto 0 auto;
+	margin: 20px auto 0 auto !important;
 	
 	background: #f9f9f9;
 	

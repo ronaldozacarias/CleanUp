@@ -39,7 +39,7 @@ public class DiaristaController {
         
 		diarista = new Diarista();
 		cidade = new Cidade();
-		cidade.setCodigoCidade(pessoa.getCidade());
+		cidade.setCodigoCidade(Integer.parseInt(pessoa.getCidade()));
 		usuario = new Usuario();
 		usuario.isAtivo();
 		usuario.setEmail(pessoa.getEmail());
@@ -64,7 +64,7 @@ public class DiaristaController {
         
 		diarista = new Diarista();
 		cidade = new Cidade();
-		cidade.setCodigoCidade(pessoa.getCidade());
+		cidade.setCodigoCidade(Integer.parseInt(pessoa.getCidade()));
 		usuario = new Usuario();
 		usuario.isAtivo();
 		usuario.setEmail(pessoa.getEmail());

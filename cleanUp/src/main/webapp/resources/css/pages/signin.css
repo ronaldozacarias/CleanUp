@@ -79,6 +79,37 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 	border-left: none;	
 }
 
+span.soudiarista-checkbox {
+	float: left;
+	margin-top: 2px;
+}
+
+span.soudiarista-checkbox  > input[type='checkbox'] {
+	opacity: 0;
+    float: left;
+    width: 15px;
+}
+
+span.soudiarista-checkbox > input[type='checkbox'] + label {    
+    clear: none;
+    
+	height: 15px; 
+	display: block;
+    padding: 0 0 0 22px;
+    margin: 0;
+    
+    font-size: 12px;
+    line-height: 1.2em;
+    
+    background: url(../../img/signin/check.png) no-repeat 0 0;
+    
+    cursor: pointer;
+}
+
+span.soudiarista-checkbox > input[type='checkbox']:checked + label {	
+	background-position: 0 -15px;
+}
+
 span.login-checkbox {
 	float: left;
 	margin-top: 31px;

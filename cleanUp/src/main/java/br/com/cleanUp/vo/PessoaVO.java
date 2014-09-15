@@ -7,14 +7,23 @@ import br.com.cleanUp.model.Especialidade;
 public class PessoaVO {
 
 	private String nome;
+	private String sobrenome;
 	private String cpf;
 	private String telefone;
+	private String message;
 	private String endereco;
-	private int cidade;
+	private String cidade;
 	private String email;
 	private String senha;
-	private boolean diarista;
-	private List<Especialidade> especialidades;
+	private int tipo;
+	private List<Especialidade> especialidades;	
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -39,10 +48,10 @@ public class PessoaVO {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public int getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
-	public void setCidade(int cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 	public String getEmail() {
@@ -56,18 +65,24 @@ public class PessoaVO {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}	
+	public int getTipo() {
+		return tipo;
 	}
-	public boolean isDiarista() {
-		return diarista;
-	}
-	public void setDiarista(boolean diarista) {
-		this.diarista = diarista;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 	public List<Especialidade> getEspecialidades() {
 		return especialidades;
 	}
 	public void setEspecialidades(List<Especialidade> especialidades) {
 		this.especialidades = especialidades;
-	}	
+	}
+	public String getSobrenome() {
+		return sobrenome;
+	}
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
 
 }

@@ -21,19 +21,19 @@ public class Cliente {
 	@Column(name = "ID_CLIENTE")
 	private Integer codigo;
 	
-	@Column(name = "NOME_CLIENTE", length = 50, nullable = false)
+	@Column(name = "NOME_CLIENTE", length = 150, nullable = false)
 	private String nome;
 	
 	@Column(name = "CPF_CLIENTE", length = 11, nullable = false)
 	private String cpf;
 	
-	@Column(name = "TELEFONE_CLIENTE", length = 13, nullable = true)
+	@Column(name = "TELEFONE_CLIENTE", length = 10, nullable = false)
 	private String telefone;
 	
-	@Column(name = "ENDERECO_CLIENTE", length = 13, nullable = true)
+	@Column(name = "ENDERECO_CLIENTE", length = 150, nullable = true)
 	private String endereco;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "ID_CIDADE")
 	private Cidade cidade;
 

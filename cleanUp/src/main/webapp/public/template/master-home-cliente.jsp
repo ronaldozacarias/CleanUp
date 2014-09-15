@@ -12,7 +12,6 @@
 		
 		<script src="<c:url value='/resources/js/angular.min.js' />"></script>
 		
-		<link href="<c:url value='/resources/css/bootstrap2.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/bootstrap2.min.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/bootstrap-responsive.min.css'  />" rel="stylesheet" type="text/css"/>
 

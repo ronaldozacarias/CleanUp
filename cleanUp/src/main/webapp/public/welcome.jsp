@@ -323,104 +323,104 @@
         </div>
     </aside>
 
-    <section id="contact">
-        <div class="container" ng-controller="testeController">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Cadastrar</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <form name="newPeopleForm" id="contactForm" novalidate>
-                        <div class="row">
-                            <div class="col-md-6">
+<!--     <section id="contact"> -->
+<!--         <div class="container" ng-controller="testeController"> -->
+<!--             <div class="row"> -->
+<!--                 <div class="col-lg-12 text-center"> -->
+<!--                     <h2 class="section-heading">Cadastrar</h2> -->
+<!--                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--             <div class="row"> -->
+<!--                 <div class="col-lg-12"> -->
+<!--                     <form name="newPeopleForm" id="contactForm" novalidate> -->
+<!--                         <div class="row"> -->
+<!--                             <div class="col-md-6"> -->
                             
-                            	<div class="form-group">
-                                    <span class="tomwel">Dados Pessoais</span>
-                                </div>
+<!--                             	<div class="form-group"> -->
+<!--                                     <span class="tomwel">Dados Pessoais</span> -->
+<!--                                 </div> -->
                             
-                                <div class="form-group">
-                                    <input type="text" ng-model="cliente.nome" class="form-control" placeholder="Seu nome *" id="name" required data-validation-required-message="Por favor preencha o nome.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="text" ng-model="cliente.nome" class="form-control" placeholder="Seu nome *" id="name" required data-validation-required-message="Por favor preencha o nome."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
                                
-                                <div class="form-group">
-                                    <input type="number" ng-model="cliente.rg" class="form-control" placeholder="Seu rg *" id="name" required data-validation-required-message="Por favor preencha o rg.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="number" ng-model="cliente.rg" class="form-control" placeholder="Seu rg *" id="name" required data-validation-required-message="Por favor preencha o rg."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
                                 
-                                <div class="form-group">
-                                    <input type="number" ng-model="cliente.cpf" class="form-control" placeholder="Seu cpf *" id="name" required data-validation-required-message="Por favor preencha o rg.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="number" ng-model="cliente.cpf" class="form-control" placeholder="Seu cpf *" id="name" required data-validation-required-message="Por favor preencha o rg."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
                                 
-                                <div class="form-group">
-                                    <input type="tel" ng-model="cliente.telefone" class="form-control" placeholder="Seu telefone *" id="phone" required data-validation-required-message="Por favor preencha o telefone.">
-                                    <p class="help-block text-danger"></p>
-                                </div>                            
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="tel" ng-model="cliente.telefone" class="form-control" placeholder="Seu telefone *" id="phone" required data-validation-required-message="Por favor preencha o telefone."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div>                             -->
                                 
-                            </div>
-                            <div class="col-md-6">
+<!--                             </div> -->
+<!--                             <div class="col-md-6"> -->
                             
-                            	<div class="form-group">
-                                    <span class="tomwel">Login</span>
-                                </div>
+<!--                             	<div class="form-group"> -->
+<!--                                     <span class="tomwel">Login</span> -->
+<!--                                 </div> -->
                             
-                            	<div class="form-group">
-                                    <input type="email" ng-model="cliente.email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Por favor preencha o email.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
+<!--                             	<div class="form-group"> -->
+<!--                                     <input type="email" ng-model="cliente.email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Por favor preencha o email."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
                                 
-                                <div class="form-group">
-                                    <input type="password" ng-model="cliente.senha" class="form-control" placeholder="Sua senha" id="email" required data-validation-required-message="PPor favor preencha a senha.">
-                                    <p class="help-block text-danger"></p>
-                                </div> 
-<!--                            <div class="form-group"> -->
-<!--                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea> -->
-<!--                                <p class="help-block text-danger"></p> -->
-<!--                            </div> -->
-                            </div>
-                             <div class="col-md-6">
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="password" ng-model="cliente.senha" class="form-control" placeholder="Sua senha" id="email" required data-validation-required-message="PPor favor preencha a senha."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div>  -->
+<!-- <!--                            <div class="form-group"> -->
+<!-- <!--                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea> -->
+<!-- <!--                                <p class="help-block text-danger"></p> -->
+<!-- <!--                            </div> -->
+<!--                             </div> -->
+<!--                              <div class="col-md-6"> -->
                             
-                            	<div class="form-group">
-                                    <span class="tomwel">Endereço</span>
-                                </div>
+<!--                             	<div class="form-group"> -->
+<!--                                     <span class="tomwel">Endereço</span> -->
+<!--                                 </div> -->
                             
-                            	<div class="form-group">
-                                    <input type="text" ng-model="cliente.rua" class="form-control" placeholder="Seu logradouro *" id="name" required data-validation-required-message="Por favor preencha o logradouro.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" ng-model="cliente.cep" class="form-control" placeholder="Seu CEP *" id="name" required data-validation-required-message="Por favor preencha o CEP.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" ng-model="cliente.numero" class="form-control" placeholder="Seu número *" id="name" required data-validation-required-message="Por favor preencha o número.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" ng-model="cliente.cidade" class="form-control" placeholder="Sua cidade *" id="name" required data-validation-required-message="Por favor preencha a cidade.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" ng-model="cliente.bairro" class="form-control" placeholder="Seu bairro *" id="name" required data-validation-required-message="Por favor preencha o bairro.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
+<!--                             	<div class="form-group"> -->
+<!--                                     <input type="text" ng-model="cliente.rua" class="form-control" placeholder="Seu logradouro *" id="name" required data-validation-required-message="Por favor preencha o logradouro."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="text" ng-model="cliente.cep" class="form-control" placeholder="Seu CEP *" id="name" required data-validation-required-message="Por favor preencha o CEP."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="text" ng-model="cliente.numero" class="form-control" placeholder="Seu número *" id="name" required data-validation-required-message="Por favor preencha o número."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="text" ng-model="cliente.cidade" class="form-control" placeholder="Sua cidade *" id="name" required data-validation-required-message="Por favor preencha a cidade."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                                 <div class="form-group"> -->
+<!--                                     <input type="text" ng-model="cliente.bairro" class="form-control" placeholder="Seu bairro *" id="name" required data-validation-required-message="Por favor preencha o bairro."> -->
+<!--                                     <p class="help-block text-danger"></p> -->
+<!--                                 </div> -->
+<!--                             </div> -->
                             
-                            <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
-                                <div id="success"></div>
-                                <button type="button" class="btn btn-xl" ng-click="createPeople(newPeopleForm)">cadastrar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+<!--                             <div class="clearfix"></div> -->
+<!--                             <div class="col-lg-12 text-center"> -->
+<!--                                 <div id="success"></div> -->
+<!--                                 <button type="button" class="btn btn-xl" ng-click="createPeople(newPeopleForm)">cadastrar</button> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </form> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </section> -->
 
     <!-- Portfolio Modals -->
     <!-- Use the modals below to showcase details about your portfolio projects! -->
