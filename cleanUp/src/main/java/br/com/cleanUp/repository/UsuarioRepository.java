@@ -6,4 +6,6 @@ import br.com.cleanUp.model.Usuario;
 
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
     Usuario findByEmail(String email);
+    Usuario findByEmailAndSenha(String email, String senha);
+    
 }
