@@ -25,16 +25,17 @@ public class LoginController {
         return new ModelAndView("login");
     }
     
+    
+    
 	@RequestMapping(value = "/mobile", method = RequestMethod.POST)
-	public @ResponseBody
-	String loginMobile(@RequestBody Usuario u) {
-		
+	@ResponseBody
+	public String LoginMobile(@RequestBody Usuario u) {
 		try {
 			Usuario user = usuarioService.compareUsuario(u);
 
 			if (user.getEmail().equals(u.getEmail())
 					&& user.getSenha().equals(u.getSenha())) {
-				return Util.constructJSON("register", true);
+				return Util.constructJSON("register", true, user);
 			} else {
 				return Util
 						.constructJSON("register", false,
@@ -44,7 +45,6 @@ public class LoginController {
 		} catch (Exception e) {
 			return Util.constructJSON("register", false, "Error occured");
 		}
-
-	}
-   
+		//return null;
+	}   
 }

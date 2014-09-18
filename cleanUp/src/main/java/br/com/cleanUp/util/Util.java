@@ -1,7 +1,16 @@
 package br.com.cleanUp.util;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+import br.com.cleanUp.model.Usuario;
  
 public class Util {
     /**
@@ -33,6 +42,30 @@ public class Util {
         return obj.toString();
     }
  
+    
+    public static String constructJSON(String tag, boolean status, Object o) {
+        JSONObject obj = new JSONObject();
+        
+        ObjectMapper obj2 = new ObjectMapper();
+      
+        try {
+        	
+        	 String usuario = obj2.defaultPrettyPrintingWriter().writeValueAsString(o);
+            obj.put("tag", tag);
+            obj.put("status", new Boolean(status));
+            obj.put("objeto", usuario);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+        } catch (org.codehaus.jackson.JsonGenerationException e) {
+        // TODO Auto-generated catch block
+        } catch (org.codehaus.jackson.map.JsonMappingException e) {
+            // TODO Auto-generated catch block
+        } catch (IOException e) {
+        	//
+        }
+        return obj.toString();
+    	}
+    
     /**
      * Method to construct JSON with Error Msg
      * 
