@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.repository.DiaristaRepository;
 
@@ -15,6 +16,9 @@ public class DiaristaService {
 
 	@Autowired
 	private DiaristaRepository diaristaRepository;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	public void saveDiarista(Diarista d){
 		diaristaRepository.save(d);
@@ -32,4 +36,9 @@ public class DiaristaService {
 	public List<Diarista> listToDiarista(){
 		return (List<Diarista>) diaristaRepository.findAll();
 	}
+	
+	public List<Cliente> listToCliente(){
+		return clienteService.listCliente();
+	}
+	
 }
