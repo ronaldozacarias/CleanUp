@@ -26,16 +26,16 @@ public class Diarista {
 	@Column(name = "ID_DIARISTA")
 	private Integer codigo;
 	
-	@Column(name = "NOME_DIARISTA", length = 50, nullable = false)
+	@Column(name = "NOME_DIARISTA", length = 150, nullable = false)
 	private String nome;
 	
 	@Column(name = "CPF_DIARISTA", length = 11, nullable = false)
 	private String cpf;
 	
-	@Column(name = "TELEFONE_DIARISTA", length = 13, nullable = false)
+	@Column(name = "TELEFONE_DIARISTA", length = 10, nullable = false)
 	private String telefone;
 	
-	@Column(name = "ENDERECO_DIARISTA", length = 100, nullable = false)
+	@Column(name = "ENDERECO_DIARISTA", length = 150, nullable = false)
 	private String endereco;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

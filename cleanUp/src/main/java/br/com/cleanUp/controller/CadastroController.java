@@ -41,7 +41,7 @@ public class CadastroController {
 	@ResponseBody
 	public void create(@ModelAttribute("pessoa") PessoaVO pessoa) {
 		
-		if(pessoa.isDiarista()){
+		if(pessoa.getTipo()==0){
 			
 			/*Diarista diarista = new Diarista();
 			cidade = new Cidade();

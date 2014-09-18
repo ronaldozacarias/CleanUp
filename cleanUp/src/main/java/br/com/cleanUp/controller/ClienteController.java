@@ -40,17 +40,18 @@ public class ClienteController {
 		cliente = new Cliente();		
 		
 		cidade = new Cidade();
-		cidade.setCodigoCidade(pessoa.getCidade());
+		cidade.setCodigoCidade(Integer.parseInt(pessoa.getCidade()));
 		usuario = new Usuario();
 		usuario.isAtivo();
 		usuario.setEmail(pessoa.getEmail());
+		usuario.setApelido(pessoa.getNome());
 		usuario.setPerfil(Perfil.ROLE_CLIENT);
 		usuario.setSenha(pessoa.getSenha());
 		
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
 		cliente.setEndereco(pessoa.getEndereco());
-		cliente.setNome(pessoa.getNome());
+		cliente.setNome(pessoa.getNome()+" "+pessoa.getSobrenome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);			
 		
@@ -64,7 +65,7 @@ public class ClienteController {
 		cliente = new Cliente();		
 		
 		cidade = new Cidade();
-		cidade.setCodigoCidade(pessoa.getCidade());
+		cidade.setCodigoCidade(Integer.parseInt(pessoa.getCidade()));
 		usuario = new Usuario();
 		usuario.isAtivo();
 		usuario.setEmail(pessoa.getEmail());
@@ -74,7 +75,7 @@ public class ClienteController {
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
 		cliente.setEndereco(pessoa.getEndereco());
-		cliente.setNome(pessoa.getNome());
+		cliente.setNome(pessoa.getNome()+" "+pessoa.getSobrenome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);
 
