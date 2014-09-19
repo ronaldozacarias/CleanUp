@@ -2,6 +2,7 @@ package br.com.cleanUp.vo;
 
 import java.util.List;
 
+import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
 
 public class PessoaVO {
@@ -11,7 +12,7 @@ public class PessoaVO {
 	private String cpf;
 	private String telefone;
 	private String message;
-	private String endereco;
+	private Endereco endereco;
 	private String cidade;
 	private String email;
 	private String senha;
@@ -42,10 +43,10 @@ public class PessoaVO {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 	public String getCidade() {
