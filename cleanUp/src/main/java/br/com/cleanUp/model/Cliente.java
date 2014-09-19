@@ -44,6 +44,7 @@ public class Cliente {
 	public Cliente() {
 		this.usuario = new Usuario();
 		this.cidade = new Cidade();
+		this.endereco = new Endereco();
 	}
 
 	public Integer getCodigo() {

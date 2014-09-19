@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Diarista;
+import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.DiaristaService;
@@ -33,6 +34,7 @@ public class DiaristaController {
         return new ModelAndView("diarista");
     }
 
+	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
     public void create(@ModelAttribute("pessoa") PessoaVO pessoa) {

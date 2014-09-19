@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
+import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
