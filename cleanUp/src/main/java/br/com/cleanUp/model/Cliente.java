@@ -31,7 +31,7 @@ public class Cliente {
 	private String telefone;
 	
 	@Column(name = "ENDERECO_CLIENTE", length = 150, nullable = true)
-	private String endereco;
+	private Endereco endereco;
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_CIDADE")
@@ -78,11 +78,11 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 
