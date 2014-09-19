@@ -55,6 +55,7 @@ public class Diarista {
 	public Diarista(){
 		this.usuario = new Usuario();
 		this.cidade = new Cidade();
+		this.endereco = new Endereco();
 	}
 
 	public Integer getCodigo() {
