@@ -1,13 +1,9 @@
 package br.com.cleanUp.util;
 
 import java.io.IOException;
-
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-
-import br.com.cleanUp.model.Usuario;
  
 public class Util {
     /**

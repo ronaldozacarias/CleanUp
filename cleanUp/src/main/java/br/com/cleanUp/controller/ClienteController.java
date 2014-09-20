@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,7 @@ public class ClienteController {
 	Usuario usuario;
 	Cidade cidade;
 	Cliente cliente;
+	Endereco endereco;
 	
 	@Autowired
 	private ClienteService clienteService;
@@ -36,7 +38,10 @@ public class ClienteController {
 
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void create(@ModelAttribute("pessoa") PessoaVO pessoa) {
+	public void create(@RequestBody PessoaVO pessoa) {
+		
+		endereco = new Endereco();
+		endereco.setEndereco(pessoa.getEndereco());
 		
 		cliente = new Cliente();		
 		
@@ -51,8 +56,8 @@ public class ClienteController {
 		
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
-		cliente.setEndereco(pessoa.getEndereco());
-		cliente.setNome(pessoa.getNome()+" "+pessoa.getSobrenome());
+		cliente.setEndereco(endereco);
+		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);			
 		
@@ -62,6 +67,9 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
 	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) {
+		
+		endereco = new Endereco();
+		endereco.setEndereco(pessoa.getEndereco());
 
 		cliente = new Cliente();		
 		
@@ -75,8 +83,8 @@ public class ClienteController {
 		
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
-		cliente.setEndereco(pessoa.getEndereco());
-		cliente.setNome(pessoa.getNome()+" "+pessoa.getSobrenome());
+		cliente.setEndereco(endereco);
+		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);
 

@@ -1,5 +1,6 @@
 package br.com.cleanUp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -48,13 +48,14 @@ public class Diarista {
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="DIARISTA_ESPECIALIDADE",
-			joinColumns=@JoinColumn(name="COD_PESSOA"),
+			joinColumns=@JoinColumn(name="ID_DIARISTA"),
 			inverseJoinColumns=@JoinColumn(name="ID_ESPECIADIDADE"))
-	private List<Especialidade> especialidade;
+	private List<Especialidade> especialidades;
 	
 	public Diarista(){
 		this.usuario = new Usuario();
 		this.cidade = new Cidade();
+		this.especialidades = new ArrayList<Especialidade>();		
 		this.endereco = new Endereco();
 	}
 
@@ -114,12 +115,12 @@ public class Diarista {
 		this.usuario = usuario;
 	}
 
-	public List<Especialidade> getEspecialidade() {
-		return especialidade;
+	public List<Especialidade> getEspecialidades() {
+		return especialidades;
 	}
 
-	public void setEspecialidade(List<Especialidade> especialidade) {
-		this.especialidade = especialidade;
+	public void setEspecialidades(List<Especialidade> especialidades) {
+		this.especialidades = especialidades;
 	}
 	
 }

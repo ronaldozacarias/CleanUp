@@ -1,46 +1,61 @@
 function cadastroController($scope, $http) {
-
-	$scope.url = "/cleanUp/public/cadastro/";
 	
-	$scope.values = {};
-	
+	$scope.especialidades = new Array();
+	$scope.especialidadesDiarista = [];
+	$scope.cidades = new Array();
+	$scope.url = "/cleanUp/public/";	
+	$scope.values = false;
 	$scope.termos = false;
-		
-	$scope.especialidades = [
-	            {
-	            	'id':1,
-	            	'especialidade':'Passar'
-	            },
-	            {
-	            	'id':2,
-	            	'especialidade':'Limpar'
-	            },
-	            {
-	            	'id':3,
-	            	'especialidade':'Arrumar'
-	            },
-	            {
-	            	'id':4,
-	            	'especialidade':'Fachinar'
-	            },
-	            {
-	            	'id':5,
-	            	'especialidade':'Cozinhar'
-	            }
-	];
+	$scope.pessoa = {};
 	
+	//Trazer especialidades do banco
+	$http({
+        url: '/cleanUp/public/diarista/getEspecialidades',
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .success(function (data, status, headers, config) {
+    	$scope.especialidades = data;
+    	console.log($scope.especialidades);
+    })
+    .error(function (data, status, headers, config) {
+    	exibirMensagemErro(data);
+    });
+	
+	//Trazer cidades do banco
+	$http({
+        url: '/cleanUp/public/cadastro/getCidades',
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .success(function (data, status, headers, config) {
+    	$scope.cidades = data;
+    	console.log($scope.cidades);
+    })
+    .error(function (data, status, headers, config) {
+    	exibirMensagemErro(data);
+    });	
+	
+	function checkList(){
+		if($scope.values){
+			especialidadesDiarista.push();
+		}
+	}		
 
-	//Essa funÃ§Ã£o retorna a lista de contatos do backend 
-//	$scope.getContactList = function() {
+	//Esta função retorna a lista de especialidades do backend 
+//	$scope.getEspecialidades = function() {
 //
-//		var url = $scope.url;
+//		var url = $scope.url + "diarista/getEspecialidades";
 //
 //		$http.get(url).success(function(data) {
-//			$scope.contacts = data;
-//			//console.log($scope.contacts);
-//		});
+//			$scope.especialidades = data;
+//		}).error(function(data) {
+//        	$scope.message = "Erro!";
+//			$scope.$scope.returnMessageError = true;
+//       });
 //	};
-	$scope.pessoa = {};
+	
+	
 	
 	$scope.message = "Cadastro realizado com sucesso!";
 
@@ -68,32 +83,52 @@ function cadastroController($scope, $http) {
 			
 			if($scope.mostrar){
 				$scope.pessoa.tipo = 0;
+//				console.log($scope.especialidadesDiarista);
+				$scope.pessoa.especialidades = $scope.especialidadesDiarista;				
+//				console.log($scope.pessoa.especialidades);
+				
+				
+				
 			}else{
 				$scope.pessoa.tipo = 1;
+				console.log($scope.pessoa);
 			}			
 			
 		var url = $scope.url;
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-			}
-		};
+//		var config = {
+//				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+//		};
+		
 
-		$http.post(url + "add", $.param($scope.pessoa), config).success(function(data) {
+		console.log($scope.pessoa.especialidades);
+		$http({
+            url: url + "cadastro/add",
+            data: $scope.pessoa,
+            method: "POST",
+            headers: {'Content-Type': 'application/json'}
+        }).success(function(data) {
 			$scope.message = "Cadastro realizado com sucesso!";
-			$scope.$scope.returnMessageSuccess = true;
-			alert("que beleza")
-			
+			$scope.returnMessageSuccess = true;
+			$scope.pessoa = null;
         }).error(function(data) {
         	$scope.message = "Erro!";
-			$scope.$scope.returnMessageError = true;
+			$scope.returnMessageError = true;
        });
+		
+//		$http.post(url + "cadastro/add", $.param($scope.pessoa), config).success(function(data) {
+//			$scope.message = "Cadastro realizado com sucesso!";
+//			$scope.$scope.returnMessageSuccess = true;
+//			alert("que beleza");
+//			
+//        }).error(function(data) {
+//        	$scope.message = "Erro!";
+//			$scope.$scope.returnMessageError = true;
+//       });
 		
 		}
 	};
 	
-	
-	
-//	$scope.getContactList();
+//$scope.getEspecialidades();
 }
+

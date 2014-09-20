@@ -53,12 +53,21 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 	box-shadow: inset 2px 2px 4px #f1f1f1;
 }
 
+.login-fields select {
+	font-family: 'Open Sans';
+	font-size: 13px;
+	color: #8e8d8d;
+	padding: 11px 15px 10px 50px;
+	background-color: #fdfdfd;
+	width: 255px;
+	display: block;
+	margin: 0;
+	box-shadow: inset 2px 2px 4px #f1f1f1;
+}
+
 .username-field { background: url(../../img/signin/user.png) no-repeat; }
 
 .password-field { background: url(../../img/signin/password.png) no-repeat; }
-
-
-
 
 .login-actions {
 	float: left;
@@ -212,11 +221,6 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 
 .button {-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; float: right; margin-top: 18px;}
 
-
-
-
-
-
 .register .login-social {
 	margin-bottom: 1em;
 }
@@ -226,6 +230,11 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 }
 
 .register .login-fields input {
+	width: 299px;
+	padding-left: 6px;
+}
+
+.register .login-fields select {
 	width: 299px;
 	padding-left: 6px;
 }
@@ -249,7 +258,6 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 }
 
 
-
 @media (max-width: 480px) {
 	
 	.account-container {
@@ -258,6 +266,10 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 	}
 	
 	.login-fields input {
+		width: 160px;
+	}
+	
+	.login-fields select {
 		width: 160px;
 	}
 	
@@ -271,6 +283,11 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 	}
 	
 	.register .login-fields input {
+		width: 204px;
+		padding-left: 6px;
+	}
+	
+	.register .login-fields select {
 		width: 204px;
 		padding-left: 6px;
 	}
