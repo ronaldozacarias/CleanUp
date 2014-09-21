@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
@@ -44,7 +45,7 @@ public class DiaristaController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-    public void create(@RequestBody PessoaVO pessoa) {
+    public void create(@RequestBody PessoaVO pessoa) throws NegocioException {
 		
 		//System.out.println("#####" + pessoa.getEspecialidades());
 		ArrayList<Especialidade> especialidadeDiarista = new ArrayList<Especialidade>();
@@ -91,7 +92,7 @@ public class DiaristaController {
 	
 	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-    public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) {
+    public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) throws NegocioException {
 		
 //		ArrayList<Especialidade> especialidadeDiarista = new ArrayList<Especialidade>();
 //		Especialidade espe;
@@ -127,7 +128,7 @@ public class DiaristaController {
 	
 	@RequestMapping(method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseBody
-    public void delete(@ModelAttribute("pessoa") Diarista id) {
+    public void delete(@ModelAttribute("pessoa") Diarista id) throws NegocioException {
 			
 		diaristaService.removeDiarista(id);
 
@@ -135,7 +136,7 @@ public class DiaristaController {
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-    public List<Diarista> getAll() {
+    public List<Diarista> getAll() throws NegocioException {
 			
 		return  diaristaService.listToDiarista();
 
