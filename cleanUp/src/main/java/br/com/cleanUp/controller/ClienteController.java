@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Endereco;
@@ -38,7 +39,7 @@ public class ClienteController {
 
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void create(@RequestBody PessoaVO pessoa) {
+	public void create(@RequestBody PessoaVO pessoa) throws NegocioException {
 		
 		endereco = new Endereco();
 		endereco.setEndereco(pessoa.getEndereco());
@@ -66,7 +67,7 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) {
+	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) throws NegocioException {
 		
 		endereco = new Endereco();
 		endereco.setEndereco(pessoa.getEndereco());
@@ -94,7 +95,7 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseBody
-	public void delete(@ModelAttribute("pessoa") Cliente id) {
+	public void delete(@ModelAttribute("pessoa") Cliente id) throws NegocioException {
 
 		clienteService.removerCliente(id);
 
@@ -102,7 +103,7 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Cliente> getAll() {
+	public List<Cliente> getAll() throws NegocioException {
 
 		return clienteService.listCliente();
 
