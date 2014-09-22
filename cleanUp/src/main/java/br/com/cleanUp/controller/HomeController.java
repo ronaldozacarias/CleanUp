@@ -50,10 +50,4 @@ public class HomeController {
 		return new ResponseEntity<Object>(HttpStatus.FORBIDDEN);
 	}
 	
-	@RequestMapping(value = "getCliente", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
-	public List<Cliente> todosClientesQueSolicitaramServicos(){
-		
-		return diaristaSevice.listToCliente(); 
-	}
 }
