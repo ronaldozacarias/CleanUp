@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
-<html lang="pt-BR" id="ng-app" ng-app="">
+<html lang="pt-BR" id="ng-app" ng-app="app">
 <head>
         <title><spring:message  code="project.title" /></title>
             
@@ -26,6 +26,12 @@
 		<!--[if lt IE 9]>
 		      <script src="<c:url value='http://html5shim.googlecode.com/svn/trunk/html5.js' />"></script>
 		    <![endif]-->
+		    
+		<script type="text/javascript">
+
+			var app = angular.module("app", ["checklist-model"]);
+
+		</script>	
 	                    
     </head>
     <body>

@@ -1,34 +1,28 @@
 package br.com.cleanUp.vo;
 
-import java.util.List;
-
-import br.com.cleanUp.model.Especialidade;
-
 public class PessoaVO {
 
 	private String nome;
-	private String sobrenome;
+	private Integer[] especialidades;
 	private String cpf;
 	private String telefone;
-	private String message;
 	private String endereco;
 	private String cidade;
 	private String email;
 	private String senha;
 	private int tipo;
-	private List<Especialidade> especialidades;	
 	
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public Integer[] getEspecialidades() {
+		return especialidades;
+	}
+	public void setEspecialidades(Integer[] especialidades) {
+		this.especialidades = especialidades;
 	}
 	public String getCpf() {
 		return cpf;
@@ -65,24 +59,12 @@ public class PessoaVO {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}	
+	}
 	public int getTipo() {
 		return tipo;
 	}
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
-	}
-	public List<Especialidade> getEspecialidades() {
-		return especialidades;
-	}
-	public void setEspecialidades(List<Especialidade> especialidades) {
-		this.especialidades = especialidades;
-	}
-	public String getSobrenome() {
-		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-
+	}	
+	
 }

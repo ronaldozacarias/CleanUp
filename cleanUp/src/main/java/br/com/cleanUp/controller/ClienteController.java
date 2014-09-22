@@ -5,13 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
+import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
@@ -24,6 +27,7 @@ public class ClienteController {
 	Usuario usuario;
 	Cidade cidade;
 	Cliente cliente;
+	Endereco endereco;
 	
 	@Autowired
 	private ClienteService clienteService;
@@ -35,7 +39,10 @@ public class ClienteController {
 
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void create(@ModelAttribute("pessoa") PessoaVO pessoa) {
+	public void create(@RequestBody PessoaVO pessoa) throws NegocioException {
+		
+		endereco = new Endereco();
+		endereco.setEndereco(pessoa.getEndereco());
 		
 		cliente = new Cliente();		
 		
@@ -50,8 +57,8 @@ public class ClienteController {
 		
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
-		cliente.setEndereco(pessoa.getEndereco());
-		cliente.setNome(pessoa.getNome()+" "+pessoa.getSobrenome());
+		cliente.setEndereco(endereco);
+		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);			
 		
@@ -60,7 +67,10 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) {
+	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) throws NegocioException {
+		
+		endereco = new Endereco();
+		endereco.setEndereco(pessoa.getEndereco());
 
 		cliente = new Cliente();		
 		
@@ -74,8 +84,8 @@ public class ClienteController {
 		
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
-		cliente.setEndereco(pessoa.getEndereco());
-		cliente.setNome(pessoa.getNome()+" "+pessoa.getSobrenome());
+		cliente.setEndereco(endereco);
+		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);
 
@@ -85,7 +95,7 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseBody
-	public void delete(@ModelAttribute("pessoa") Cliente id) {
+	public void delete(@ModelAttribute("pessoa") Cliente id) throws NegocioException {
 
 		clienteService.removerCliente(id);
 
@@ -93,7 +103,7 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Cliente> getAll() {
+	public List<Cliente> getAll() throws NegocioException {
 
 		return clienteService.listCliente();
 

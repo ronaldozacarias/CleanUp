@@ -84,7 +84,7 @@
 				
 				<div class="field">
 					<label for="tel">Telefone:</label>	
-					<input ng-model="pessoa.telefone" type="tel" id="tel" name="tel" value="" placeholder="Seu Telefone (Somente números)" class="login" required="required" name="numbers" />
+					<input ng-model="pessoa.telefone" type="text" id="tel" name="tel" value="" placeholder="Seu Telefone (Somente números)" class="login" required="required" pattern=".{13,}" maxlength="13" name="numbers" />
 				</div> <!-- /field -->
 				
 				<div class="field">
@@ -97,10 +97,7 @@
 <!-- 					<input type="text" id="firstname" name="firstname" value="" placeholder="Exp: logradouro, numero - bairro" class="login" /> -->
 					<select ng-model="pessoa.cidade" id="select" name="select" class="login" required>
 					  <option value=""></option>
-					  <option value="1">Nazaré da Mata</option>
-					  <option value="2">Recife</option>
-					  <option value="3">Carpina</option>
-					  <option value="4">Vicência</option>
+					  <option ng-repeat="cidade in cidades" value={{cidade.codigoCidade}}>{{cidade.nomeCidade}}</option>
 					</select>
 					
 					
@@ -109,10 +106,12 @@
 				<p>Especialidades:</p>
 				<table>
 				  <tr ng-repeat="especialidade in especialidades">
-				    <td>{{especialidade.especialidade}}</td>
-				    <td><input type="checkbox" ng-model="values[especialidade.id]"/></td>
-				  </tr>
+				    <td>{{especialidade.nomeEspecialidade}}</td>
+				    <td><input type="checkbox" checklist-model="especialidadesDiarista" checklist-value="especialidade.codigoEspecialidade"/></td>				    				    
+				  </tr>				 
 				</table>
+				<p>Teste itens selecionados:</p>
+				<p>{{especialidadesDiarista}}</p>
 				<br>
 				</div>								
 				<div class="field">
@@ -167,3 +166,4 @@
     
     <script src="<c:url value='/resources/js/pages/cadastroController.js' />"></script>
     <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
+    <script src="<c:url value='/resources/js/checklist-model.js' />"></script>

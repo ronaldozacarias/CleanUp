@@ -1,5 +1,6 @@
 package br.com.cleanUp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,10 +27,14 @@ public class Especialidade {
 	private String nomeEspecialidade;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="DIARISTA_ESPECIALIDADE",
-			joinColumns=@JoinColumn(name="ID_ESPECIADIDADE"),
-			inverseJoinColumns=@JoinColumn(name="COD_PESSOA"))
-	private List<Usuario> especialidade;
+	@JoinTable(name="DIARISTA_ESPECIALIDADE", joinColumns=@JoinColumn(name="ID_ESPECIADIDADE"),
+	inverseJoinColumns=@JoinColumn(name="ID_DIARISTA"))
+	private List<Diarista> diaristas;
+	
+	
+	public Especialidade() {
+		this.diaristas = new ArrayList<Diarista>();
+	}
 	
 	public Integer getCodigoEspecialidade() {
 		return codigoEspecialidade;
@@ -43,11 +48,5 @@ public class Especialidade {
 	public void setNomeEspecialidade(String nomeEspecialidade) {
 		this.nomeEspecialidade = nomeEspecialidade;
 	}
-	public List<Usuario> getEspecialidade() {
-		return especialidade;
-	}
-	public void setEspecialidade(List<Usuario> especialidade) {
-		this.especialidade = especialidade;
-	}
-
+		
 }
