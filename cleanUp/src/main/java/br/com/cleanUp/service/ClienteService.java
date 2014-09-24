@@ -79,4 +79,12 @@ public class ClienteService {
 		}
 		 return retorno;
 	}
+	
+	public Cliente findByCpf(String cpf) throws NegocioException {
+		try {
+			return clienteRepository.findByCpf(cpf);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao tentar buscar Cliente.");
+		}
+	}
 }

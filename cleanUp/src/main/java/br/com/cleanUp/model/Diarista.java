@@ -32,7 +32,7 @@ public class Diarista {
 	@Column(name = "CPF_DIARISTA", length = 11, nullable = false)
 	private String cpf;
 	
-	@Column(name = "TELEFONE_DIARISTA", length = 10, nullable = false)
+	@Column(name = "TELEFONE_DIARISTA", length = 11, nullable = false)
 	private String telefone;
 	
 	@Column(name = "ENDERECO_DIARISTA", length = 150, nullable = false)

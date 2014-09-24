@@ -6,4 +6,5 @@ import br.com.cleanUp.model.Cliente;
 
 public interface ClienteRepository extends CrudRepository<Cliente, Integer> {
 	
+	Cliente findByCpf(String cpf);
 }

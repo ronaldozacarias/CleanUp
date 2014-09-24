@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,7 @@ public class ClienteController {
 	Cidade cidade;
 	Cliente cliente;
 	Endereco endereco;
-	
+
 	@Autowired
 	private ClienteService clienteService;
 
@@ -42,12 +40,12 @@ public class ClienteController {
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void create(@RequestBody PessoaVO pessoa) throws NegocioException {
-		
+
 		endereco = new Endereco();
 		endereco.setEndereco(pessoa.getEndereco());
-		
-		cliente = new Cliente();		
-		
+
+		cliente = new Cliente();
+
 		cidade = new Cidade();
 		cidade.setCodigoCidade(Integer.parseInt(pessoa.getCidade()));
 		usuario = new Usuario();
@@ -56,26 +54,27 @@ public class ClienteController {
 		usuario.setApelido(pessoa.getNome());
 		usuario.setPerfil(Perfil.ROLE_CLIENT);
 		usuario.setSenha(pessoa.getSenha());
-		
+
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
 		cliente.setEndereco(endereco);
 		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
-		cliente.setUsuario(usuario);			
-		
+		cliente.setUsuario(usuario);
+
 		clienteService.salvarCliente(cliente);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa) throws NegocioException {
-		
+	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa)
+			throws NegocioException {
+
 		endereco = new Endereco();
 		endereco.setEndereco(pessoa.getEndereco());
 
-		cliente = new Cliente();		
-		
+		cliente = new Cliente();
+
 		cidade = new Cidade();
 		cidade.setCodigoCidade(Integer.parseInt(pessoa.getCidade()));
 		usuario = new Usuario();
@@ -83,7 +82,7 @@ public class ClienteController {
 		usuario.setEmail(pessoa.getEmail());
 		usuario.setPerfil(Perfil.ROLE_CLIENT);
 		usuario.setSenha(pessoa.getSenha());
-		
+
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
 		cliente.setEndereco(endereco);
@@ -97,7 +96,8 @@ public class ClienteController {
 
 	@RequestMapping(method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseBody
-	public void delete(@ModelAttribute("pessoa") Cliente id) throws NegocioException {
+	public void delete(@ModelAttribute("pessoa") Cliente id)
+			throws NegocioException {
 
 		clienteService.removerCliente(id);
 
@@ -111,4 +111,7 @@ public class ClienteController {
 
 	}
 
+	public Cliente findByCpf(String cpf) throws NegocioException {
+		return clienteService.findByCpf(cpf);
+	}
 }
