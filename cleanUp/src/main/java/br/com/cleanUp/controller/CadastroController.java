@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.service.CidadeService;
@@ -53,22 +54,7 @@ public class CadastroController {
 
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void create(@RequestBody PessoaVO pessoa) {
-		
-		System.out.println(pessoa.getCidade());
-		System.out.println(pessoa.getCpf());
-		System.out.println(pessoa.getEndereco());
-		System.out.println(pessoa.getNome());
-		System.out.println(pessoa.getSenha());
-		System.out.println(pessoa.getTelefone());
-		System.out.println(pessoa.getTipo());
-		System.out.println(pessoa.getEmail());
-		
-		if(pessoa.getTipo()==0){
-			for(int i = 0; i < pessoa.getEspecialidades().length; i++){
-				System.out.println(pessoa.getEspecialidades()[i]);
-			}
-		}
+	public void create(@RequestBody PessoaVO pessoa) throws NegocioException {
 		
 		if(pessoa.getTipo()==0){			
 			diaristaController.create(pessoa);			

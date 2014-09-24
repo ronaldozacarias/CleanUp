@@ -50,15 +50,15 @@
 	
 	<div class="content clearfix">
 	
-				<div ng-show="returnMessageSuccess" class="alert alert-success">
-                     <button type="button" class="close" data-dismiss="alert">×</button>
-                     <strong>{{message}}</strong>
-                </div>
+<!-- 				<div ng-show="returnMessageSuccess" class="alert alert-success"> -->
+<!--                      <button type="button" class="close" data-dismiss="alert">×</button> -->
+<!--                      <strong>{{message}}</strong> -->
+<!--                 </div> -->
                 
-                <div ng-show="returnMessageError" class="alert">
-                     <button type="button" class="close" data-dismiss="alert">×</button>
-                     <strong>{{message}}</strong>
-                </div>
+<!--                 <div ng-show="returnMessageError" class="alert"> -->
+<!--                      <button type="button" class="close" data-dismiss="alert">×</button> -->
+<!--                      <strong>{{message}}</strong> -->
+<!--                 </div> -->
 		
 		<form name="newPeopleForm">
 		
@@ -84,7 +84,7 @@
 				
 				<div class="field">
 					<label for="tel">Telefone:</label>	
-					<input ng-model="pessoa.telefone" type="text" id="tel" name="tel" value="" placeholder="Seu Telefone (Somente números)" class="login" required="required" pattern=".{13,}" maxlength="13" name="numbers" />
+					<input ng-model="pessoa.telefone" type="text" id="tel" name="tel" value="" placeholder="Seu Telefone (Somente números)" class="login" required="required" pattern=".{10,}" maxlength="10" name="numbers" />
 				</div> <!-- /field -->
 				
 				<div class="field">
@@ -96,7 +96,7 @@
 					<label for="select">Cidade:</label>
 <!-- 					<input type="text" id="firstname" name="firstname" value="" placeholder="Exp: logradouro, numero - bairro" class="login" /> -->
 					<select ng-model="pessoa.cidade" id="select" name="select" class="login" required>
-					  <option value=""></option>
+					  <option value="" disabled selected>Sua Cidade</option>
 					  <option ng-repeat="cidade in cidades" value={{cidade.codigoCidade}}>{{cidade.nomeCidade}}</option>
 					</select>
 					
@@ -110,8 +110,8 @@
 				    <td><input type="checkbox" checklist-model="especialidadesDiarista" checklist-value="especialidade.codigoEspecialidade"/></td>				    				    
 				  </tr>				 
 				</table>
-				<p>Teste itens selecionados:</p>
-				<p>{{especialidadesDiarista}}</p>
+<!-- 				<p>Teste itens selecionados:</p> -->
+<!-- 				<p>{{especialidadesDiarista}}</p> -->
 				<br>
 				</div>								
 				<div class="field">
@@ -154,16 +154,15 @@
 	Você já tem uma conta? <a href="/cleanUp/login">Faça login na sua conta</a>
 </div> <!-- /login-extra -->
 
-
     <!-- jQuery Version 1.11.0 -->    
     <script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>    
     <script src="<c:url value='/resources/js/signin.js' />"></script>
     <script src="<c:url value='/resources/js/jquery.mask.min.js' />"></script>
 	<script src="<c:url value='/resources/js/jquery.mask.js' />"></script>
-	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
-    
+	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>    
     <script src="<c:url value='/resources/js/pages/cadastroController.js' />"></script>
     <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
     <script src="<c:url value='/resources/js/checklist-model.js' />"></script>

@@ -11,6 +11,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		
 		<script src="<c:url value='/resources/js/angular.min.js' />"></script>
+		<script src="<c:url value='/public/util.js' />"></script>
 		
 <%-- 		<link href="<c:url value='/resources/css/bootstrap.css'  />" rel="stylesheet" type="text/css"/> --%>
 		<link href="<c:url value='/resources/css/bootstrap2.min.css'  />" rel="stylesheet" type="text/css"/>

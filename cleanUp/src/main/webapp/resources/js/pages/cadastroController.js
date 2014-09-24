@@ -40,22 +40,7 @@ function cadastroController($scope, $http) {
 		if($scope.values){
 			especialidadesDiarista.push();
 		}
-	}		
-
-	//Esta função retorna a lista de especialidades do backend 
-//	$scope.getEspecialidades = function() {
-//
-//		var url = $scope.url + "diarista/getEspecialidades";
-//
-//		$http.get(url).success(function(data) {
-//			$scope.especialidades = data;
-//		}).error(function(data) {
-//        	$scope.message = "Erro!";
-//			$scope.$scope.returnMessageError = true;
-//       });
-//	};
-	
-	
+	}	
 	
 	$scope.message = "Cadastro realizado com sucesso!";
 
@@ -83,22 +68,13 @@ function cadastroController($scope, $http) {
 			
 			if($scope.mostrar){
 				$scope.pessoa.tipo = 0;
-//				console.log($scope.especialidadesDiarista);
 				$scope.pessoa.especialidades = $scope.especialidadesDiarista;				
-//				console.log($scope.pessoa.especialidades);
-				
-				
-				
 			}else{
 				$scope.pessoa.tipo = 1;
 				console.log($scope.pessoa);
 			}			
 			
 		var url = $scope.url;
-
-//		var config = {
-//				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-//		};
 		
 
 		console.log($scope.pessoa.especialidades);
@@ -108,12 +84,18 @@ function cadastroController($scope, $http) {
             method: "POST",
             headers: {'Content-Type': 'application/json'}
         }).success(function(data) {
-			$scope.message = "Cadastro realizado com sucesso!";
-			$scope.returnMessageSuccess = true;
+        	bootbox.dialog({
+        		title:"Cadastro realizado com sucesso!",
+        		message: "<div class='loginbootbox'><a href='/cleanUp/login'>Clique aqui e realize o login</a></div>"
+            });
 			$scope.pessoa = null;
         }).error(function(data) {
-        	$scope.message = "Erro!";
-			$scope.returnMessageError = true;
+        	bootbox.dialog({
+        		title:"Erro ao tentar cadastrar!",
+                message: "Erro ao tentar Cadastrar!"
+            });
+//        	$scope.message = "Erro ao tentar Cadastrar";
+//			$scope.returnMessageError = true;
        });
 		
 //		$http.post(url + "cadastro/add", $.param($scope.pessoa), config).success(function(data) {
