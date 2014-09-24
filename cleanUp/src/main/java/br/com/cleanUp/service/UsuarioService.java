@@ -26,4 +26,5 @@ public class UsuarioService {
         return userRepository.findByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
     }
 
+
 }

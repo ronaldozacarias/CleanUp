@@ -27,7 +27,7 @@ public class Cliente {
 	@Column(name = "CPF_CLIENTE", length = 11, nullable = false)
 	private String cpf;
 	
-	@Column(name = "TELEFONE_CLIENTE", length = 10, nullable = false)
+	@Column(name = "TELEFONE_CLIENTE", length = 11, nullable = false)
 	private String telefone;
 	
 	@Column(name = "ENDERECO_CLIENTE", length = 150, nullable = true)
