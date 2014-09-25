@@ -92,7 +92,7 @@ function cadastroController($scope, $http) {
         }).error(function(data) {
         	bootbox.dialog({
         		title:"Erro ao tentar cadastrar!",
-                message: "Erro ao tentar Cadastrar!"
+                message: data
             });
 //        	$scope.message = "Erro ao tentar Cadastrar";
 //			$scope.returnMessageError = true;

@@ -71,7 +71,8 @@
         <put-attribute name="body" value="/public/diarista/cadastroDiarista.jsp"/>
     </definition>
     
-    <definition name="customError" template="/public/error/customError.jsp">   
+    <definition name="customError" template="/public/error/customError.jsp">
+    
     </definition>
 
 </tiles-definitions>
