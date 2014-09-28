@@ -42,8 +42,8 @@
     <div class="container">
       <ul class="mainnav">
         <li class="active"><a href="home"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href=""><i class="icon-list-alt"></i><span>Notificações</span> </a> </li>
-        <li><a href=""><i class="icon-search"></i><span>Buscar Diarista</span> </a></li>
+        <li><a href=""><i class="icon-list-alt"><span class="badge badge-info">16</span></i><span>Notificações</span> </a> </li>
+        <li><a href="cliente/diaristas"><i class="icon-search"></i><span>Buscar Diarista</span> </a></li>
         <li><a href=""><i class="icon-star-empty"></i><span>Classificar Diarista</span> </a></li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Mais..</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -65,12 +65,7 @@
 <div class="main">
   <div class="main-inner">
     <div class="container">
-      <div class="widget widget-nopad" id="map-canvas" style="width: auto; height: 336px">
-      		<div class="widget-header"> <i class="icon-list-alt"></i>
-              	<h3> Status Diário</h3>
-            </div>
-      </div>
-      <br>
+
       <div class="row">
         <div class="span6">
           <div class="widget widget-nopad">

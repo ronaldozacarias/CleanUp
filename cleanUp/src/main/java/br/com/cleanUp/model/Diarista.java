@@ -46,7 +46,7 @@ public class Diarista {
 	@JoinColumn(name = "usuario", insertable = true, updatable = true)
 	private Usuario usuario;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="DIARISTA_ESPECIALIDADE",
 			joinColumns=@JoinColumn(name="ID_DIARISTA"),
 			inverseJoinColumns=@JoinColumn(name="ID_ESPECIADIDADE"))

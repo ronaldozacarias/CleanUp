@@ -49,7 +49,7 @@ public class DiaristaService {
 		}
 	}
 
-	public List<Diarista> listToDiarista() throws NegocioException {
+	public List<Diarista> listToDiarista() throws NegocioException{
 		// return (List<Diarista>) diaristaRepository.findAll();
 		List<Diarista> retorno;
 		retorno = (List<Diarista>) diaristaRepository.findAll();

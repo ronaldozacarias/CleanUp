@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
+import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Usuario;
@@ -21,7 +22,7 @@ import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
-@RequestMapping(value = "/public/cliente")
+@RequestMapping(value = "/protected/cliente")
 public class ClienteController {
 
 	Usuario usuario;
@@ -31,10 +32,13 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private DiaristaController diaristaController;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "diaristas", method = RequestMethod.GET)
 	public ModelAndView registrar() {
-		return new ModelAndView("registrar");
+		return new ModelAndView("diaristas");
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
@@ -108,6 +112,14 @@ public class ClienteController {
 	public List<Cliente> getAll() throws NegocioException {
 
 		return clienteService.listCliente();
+
+	}
+	
+	@RequestMapping(value = "diaristas/listDiaristas", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public List<Diarista> getAllDiaristas() throws NegocioException {
+
+		return diaristaController.getAll();
 
 	}
 

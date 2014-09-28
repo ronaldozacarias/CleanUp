@@ -120,7 +120,7 @@ public class DiaristaController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Diarista> getAll() throws NegocioException {
+	public List<Diarista> getAll() throws NegocioException{
 
 		return diaristaService.listToDiarista();
 

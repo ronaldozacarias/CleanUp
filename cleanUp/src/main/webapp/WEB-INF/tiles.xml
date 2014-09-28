@@ -48,6 +48,9 @@
     <definition name="welcomeClient" extends="master-home-cliente.page">
         <put-attribute name="body" value="/protected/welcomePageCliente.jsp"/>
     </definition>
+    <definition name="diaristas" extends="master-home-cliente.page">
+        <put-attribute name="body" value="/protected/cliente/buscarListarDiaristas.jsp"/>
+    </definition>    
     <definition name="welcomeDiarist" extends="master-home-diarista.page">
         <put-attribute name="body" value="/protected/welcomePageDiarista.jsp"/>
     </definition>
