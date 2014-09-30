@@ -45,9 +45,6 @@ public class ClienteController {
 	@ResponseBody
 	public void create(@RequestBody PessoaVO pessoa) throws NegocioException {
 
-		endereco = new Endereco();
-		endereco.setEndereco(pessoa.getEndereco());
-
 		cliente = new Cliente();
 
 		cidade = new Cidade();
@@ -72,9 +69,6 @@ public class ClienteController {
 	@ResponseBody
 	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa)
 			throws NegocioException {
-
-		endereco = new Endereco();
-		endereco.setEndereco(pessoa.getEndereco());
 
 		cliente = new Cliente();
 

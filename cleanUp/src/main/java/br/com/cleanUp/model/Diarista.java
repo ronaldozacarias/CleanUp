@@ -35,7 +35,7 @@ public class Diarista {
 	@Column(name = "TELEFONE_DIARISTA", length = 11, nullable = false)
 	private String telefone;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_ENDERECO")
 	private Endereco endereco;
 	

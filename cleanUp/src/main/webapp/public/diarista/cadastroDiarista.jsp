@@ -85,12 +85,7 @@
 				<div class="field">
 					<label for="tel">Telefone:</label>	
 					<input ng-model="pessoa.telefone" type="text" id="tel" name="tel" value="" placeholder="Seu Telefone (Somente números)" class="login" required="required" pattern=".{10,}" maxlength="10" name="numbers" />
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="endereco">Endereço:</label>
-					<input ng-model="pessoa.endereco" type="text" id="firstname" name="endereco" value="" placeholder="Exp: logradouro, numero - bairro" class="login" pattern=".{6,150}"  required/>
-				</div> <!-- /field -->
+				</div> <!-- /field -->			
 				
 				<div class="field">
 					<label for="select">Cidade:</label>
@@ -103,6 +98,12 @@
 					
 				</div> <!-- /field -->
 				<div  ng-show="mostrar">
+				
+				<div class="field">
+					<label for="endereco">Endereço:</label>
+					<input ng-model="pessoa.endereco" type="text" id="firstname" name="endereco" value="" placeholder="Exp: logradouro, numero - bairro" class="login" pattern=".{6,150}"  required/>
+				</div> <!-- /field -->
+				
 				<p>Especialidades:</p>
 				<table>
 				  <tr ng-repeat="especialidade in especialidades">
