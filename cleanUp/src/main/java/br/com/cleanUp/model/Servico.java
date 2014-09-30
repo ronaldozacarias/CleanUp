@@ -45,6 +45,11 @@ public class Servico {
 	@Fetch(FetchMode.JOIN)
 	private Diarista diarista;
 	
+	@ManyToOne
+	@JoinColumn(name="CODENDERECO",insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	private Endereco endereco;
+	
 	@Column(name = "DataServico", length = 10, nullable = false) 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataServico;
@@ -55,6 +60,7 @@ public class Servico {
 	public  Servico() {
 		this.diarista = new Diarista();
 		this.cliente = new Cliente();
+		this.endereco = new Endereco();
 	}
 	
 	public Servico(Integer codServico, TipoServico tipoServico,
@@ -94,22 +100,6 @@ public class Servico {
 		this.descricao = descricao;
 	}
 
-	public Cliente getCodCliente() {
-		return cliente;
-	}
-
-	public void setCodCliente(Cliente codCliente) {
-		this.cliente = codCliente;
-	}
-
-	public Diarista getCodDiarista() {
-		return diarista;
-	}
-
-	public void setCodDiarista(Diarista codDiarista) {
-		this.diarista = codDiarista;
-	}
-
 	public Date getDataServico() {
 		return dataServico;
 	}
@@ -126,4 +116,27 @@ public class Servico {
 		this.valor = valor;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Diarista getDiarista() {
+		return diarista;
+	}
+
+	public void setDiarista(Diarista diarista) {
+		this.diarista = diarista;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 }

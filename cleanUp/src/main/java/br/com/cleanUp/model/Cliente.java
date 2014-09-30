@@ -41,7 +41,6 @@ public class Cliente {
 	public Cliente() {
 		this.usuario = new Usuario();
 		this.cidade = new Cidade();
-		this.endereco = new Endereco();
 	}
 
 	public Integer getCodigo() {
@@ -74,14 +73,6 @@ public class Cliente {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public Cidade getCidade() {

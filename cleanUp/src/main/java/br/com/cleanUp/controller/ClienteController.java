@@ -61,7 +61,6 @@ public class ClienteController {
 
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
-		cliente.setEndereco(endereco);
 		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);
@@ -89,7 +88,6 @@ public class ClienteController {
 
 		cliente.setCidade(cidade);
 		cliente.setCpf(pessoa.getCpf());
-		cliente.setEndereco(endereco);
 		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);
