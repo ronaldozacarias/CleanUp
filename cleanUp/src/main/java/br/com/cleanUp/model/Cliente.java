@@ -30,9 +30,6 @@ public class Cliente {
 	@Column(name = "TELEFONE_CLIENTE", length = 11, nullable = false)
 	private String telefone;
 	
-	@Column(name = "ENDERECO_CLIENTE", length = 150, nullable = true)
-	private Endereco endereco;
-	
 	@ManyToOne
 	@JoinColumn(name = "ID_CIDADE")
 	private Cidade cidade;

@@ -35,7 +35,8 @@ public class Diarista {
 	@Column(name = "TELEFONE_DIARISTA", length = 11, nullable = false)
 	private String telefone;
 	
-	@Column(name = "ENDERECO_DIARISTA", length = 150, nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_ENDERECO")
 	private Endereco endereco;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
