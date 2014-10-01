@@ -21,8 +21,8 @@
         <security:authentication-provider>
             <security:jdbc-user-service
                     data-source-ref="myCleanUpDataSource"
-                    users-by-username-query="select email, senha, 1 from usuario where email = ?"
-                    authorities-by-username-query="select u.email as login, u.perfil as perfil from usuario u where u.email = ?" />
+                    users-by-username-query="select EMAIL, SENHA, 1 from TB_USUARIO where EMAIL = ?"
+                    authorities-by-username-query="select u.EMAIL as login, u.PERFIL as PERFIL from TB_USUARIO u where u.EMAIL = ?" />
         </security:authentication-provider>
     </security:authentication-manager>
 </beans>

@@ -1,6 +1,7 @@
 package br.com.cleanUp.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +27,7 @@ public class Servico {
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO) 
-	@Column(name = "COD_SERVICO")
+	@Column(name = "ID_SERVICO")
 	private Integer codServico;
 	
 	@Enumerated(EnumType.STRING)
@@ -36,26 +38,29 @@ public class Servico {
 	private String descricao;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="CODCLIENTE", insertable=true, updatable=true)
+	@JoinColumn(name="ID_CLIENTE", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
 	private Cliente cliente;
 	
 	@ManyToOne
-	@JoinColumn(name="CODDIARISTA",insertable=true, updatable=true)
+	@JoinColumn(name="ID_DIARISTA",insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
 	private Diarista diarista;
 	
 	@ManyToOne
-	@JoinColumn(name="CODENDERECO",insertable=true, updatable=true)
+	@JoinColumn(name="ID_ENDERECO",insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
 	private Endereco endereco;
 	
-	@Column(name = "DataServico", length = 10, nullable = false) 
+	@Column(name = "DATASERVICO", length = 10, nullable = false) 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataServico;
 	
 	@Column(name="VALOR",length = 10, nullable = false)
 	private double valor;
+	
+	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
+	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
 	
 	public  Servico() {
 		this.diarista = new Diarista();
@@ -139,4 +144,14 @@ public class Servico {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
+	public List<ServicoTipoNotificacao> getServicoTipoNotificacoes() {
+		return servicoTipoNotificacoes;
+	}
+
+	public void setServicoTipoNotificacoes(
+			List<ServicoTipoNotificacao> servicoTipoNotificacoes) {
+		this.servicoTipoNotificacoes = servicoTipoNotificacoes;
+	}
+	
 }

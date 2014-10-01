@@ -35,7 +35,7 @@ public class Cliente {
 	private Cidade cidade;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "usuario", insertable = true, updatable = true)
+	@JoinColumn(name = "ID_USUARIO", insertable = true, updatable = true)
 	private Usuario usuario;
 
 	public Cliente() {

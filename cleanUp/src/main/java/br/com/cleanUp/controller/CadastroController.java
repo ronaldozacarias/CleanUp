@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
-import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.service.CidadeService;
 import br.com.cleanUp.service.EspecialidadeService;

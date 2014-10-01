@@ -11,20 +11,29 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "TB_USUARIO")
 public class Usuario {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID_USUARIO")
     private int id;
+    
+    @Column(name = "EMAIL")
     private String email;
+    
+    @Column(name = "APELIDO")
     private String apelido;    
+    
     @Type(type="boolean")
+    @Column(name = "STATUS")
     private boolean ativo;
+    
+    @Column(name = "SENHA")
     private String senha;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "perfil")
+    @Column(name = "PERFIL")
     private Perfil perfil;
 
 	public int getId() {

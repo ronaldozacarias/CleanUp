@@ -35,6 +35,9 @@ public class Diarista {
 	@Column(name = "TELEFONE_DIARISTA", length = 11, nullable = false)
 	private String telefone;
 	
+	@Column(name = "VALOR")
+	private float valor;
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_ENDERECO")
 	private Endereco endereco;
@@ -50,7 +53,7 @@ public class Diarista {
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="DIARISTA_ESPECIALIDADE",
 			joinColumns=@JoinColumn(name="ID_DIARISTA"),
-			inverseJoinColumns=@JoinColumn(name="ID_ESPECIADIDADE"))
+			inverseJoinColumns=@JoinColumn(name="ID_ESPECIALIDADE"))
 	private List<Especialidade> especialidades;
 	
 	public Diarista(){
@@ -122,6 +125,14 @@ public class Diarista {
 
 	public void setEspecialidades(List<Especialidade> especialidades) {
 		this.especialidades = especialidades;
+	}
+
+	public float getValor() {
+		return valor;
+	}
+
+	public void setValor(float valor) {
+		this.valor = valor;
 	}
 	
 }

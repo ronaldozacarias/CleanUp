@@ -5,17 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TB_ENDERECO")
 public class Endereco {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "CODIGO")
+	@Column(name = "ID_ENDERECO")
 	private Integer codigo;
 	
-	@Column(name = "ENDERECO", length = 150, nullable = false)
-	private String endereco;
+	@Column(name = "LOGRADOURO", length = 150, nullable = false)
+	private String logradouro;
 	
 	@Column(name = "LATITUDE")
 	private long lat;
@@ -27,16 +29,8 @@ public class Endereco {
 		
 	}
 	
-	public Endereco(String endereco){
-		this.endereco = endereco;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public Endereco(String logradouro){
+		this.logradouro = logradouro;
 	}
 
 	public Integer getCodigo() {
@@ -45,6 +39,14 @@ public class Endereco {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 	public long getLat() {
@@ -62,4 +64,5 @@ public class Endereco {
 	public void setLog(long log) {
 		this.log = log;
 	}
+	
 }

@@ -50,7 +50,7 @@ public class DiaristaController {
 		ArrayList<Especialidade> especialidadeDiarista = new ArrayList<Especialidade>();
 		Especialidade espe;
 		endereco = new Endereco();
-		endereco.setEndereco(pessoa.getEndereco());
+		endereco.setLogradouro(pessoa.getEndereco());
 		//
 		for (int i = 0; i < pessoa.getEspecialidades().length; i++) {
 			espe = new Especialidade();
@@ -86,7 +86,7 @@ public class DiaristaController {
 
 
 		endereco = new Endereco();
-		endereco.setEndereco(pessoa.getEndereco());
+		endereco.setLogradouro(pessoa.getEndereco());
 
 		diarista = new Diarista();
 		cidade = new Cidade();

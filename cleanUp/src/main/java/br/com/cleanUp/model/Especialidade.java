@@ -15,19 +15,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ESPECIALIDADE")
+@Table(name = "TB_ESPECIALIDADE")
 public class Especialidade {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "ID_ESPECIADIDADE")
+	@Column(name = "ID_ESPECIALIDADE")
 	private Integer codigoEspecialidade;
 	
 	@Column(name = "NOMEESPECIALIDADE")
 	private String nomeEspecialidade;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="DIARISTA_ESPECIALIDADE", joinColumns=@JoinColumn(name="ID_ESPECIADIDADE"),
+	@JoinTable(name="DIARISTA_ESPECIALIDADE", joinColumns=@JoinColumn(name="ID_ESPECIALIDADE"),
 	inverseJoinColumns=@JoinColumn(name="ID_DIARISTA"))
 	private List<Diarista> diaristas;
 	

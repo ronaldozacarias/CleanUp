@@ -15,6 +15,7 @@ public class Cidade {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_CIDADE")
 	private int codigoCidade;
+	
 	@Column(name = "CIDADE")
 	private String cidade;
 	
