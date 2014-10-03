@@ -62,6 +62,9 @@ public class Servico {
 	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
 	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
 	
+	@Enumerated(EnumType.STRING)
+	private StatusServico status;
+	
 	public  Servico() {
 		this.diarista = new Diarista();
 		this.cliente = new Cliente();
@@ -153,5 +156,12 @@ public class Servico {
 			List<ServicoTipoNotificacao> servicoTipoNotificacoes) {
 		this.servicoTipoNotificacoes = servicoTipoNotificacoes;
 	}
-	
+
+	public StatusServico getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusServico status) {
+		this.status = status;
+	}
 }
