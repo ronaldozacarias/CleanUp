@@ -21,12 +21,14 @@ public class ServicoService {
 
 	public void save(Servico s, ArrayList<Endereco> listaE) throws NegocioException{
 		DiaristaController dc = new DiaristaController();
+		ArrayList<Servico> listaServ = new ArrayList<Servico>();
 		try {
 			for (int i = 0; i < listaE.size(); i++) {
 				s.setEndereco(listaE.get(i));
 				servicoRepository.save(s);
+				listaServ.add(s);
 			}
-			dc.solicitacaoDeServico(s);
+			dc.solicitacaoDeServico(listaServ);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
 		}

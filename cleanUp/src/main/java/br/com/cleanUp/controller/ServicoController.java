@@ -96,6 +96,7 @@ public class ServicoController {
 		Endereco e = new Endereco();
 		Endereco e1 = new Endereco();
 		Endereco eDiarista = new Endereco();
+		
 		e.setLat(10);
 		e.setLog(20);
 		e.setLogradouro("Rua Padre Guedes");
@@ -103,6 +104,8 @@ public class ServicoController {
 		e1.setLat(21);
 		e1.setLog(32);
 		e1.setLogradouro("Av. João de Souza Lima");
+		
+		eDiarista.setCodigo(1);
 		
 		ArrayList<Endereco> listaE = new ArrayList<Endereco>();
 		listaE.add(e);
