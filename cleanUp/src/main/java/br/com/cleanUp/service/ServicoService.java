@@ -28,10 +28,19 @@ public class ServicoService {
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
 		try {
 			for (int i = 0; i < listaE.size(); i++) {
+				Servico serv = new Servico();
+				serv.setCliente(s.getCliente());
+				serv.setDataServico(s.getDataServico());
+				serv.setDescricao(s.getDescricao());
+				serv.setDiarista(s.getDiarista());
+				serv.setServicoTipoNotificacoes(s.getServicoTipoNotificacoes());
+				serv.setStatus(s.getStatus());
+				serv.setTipoServico(s.getTipoServico());
+				serv.setValor(s.getValor());
 				enderecoRepository.save(listaE.get(i));
-				s.setEndereco(listaE.get(i));
-				servicoRepository.save(s);
-				listaServ.add(s);
+				serv.setEndereco(listaE.get(i));
+				servicoRepository.save(serv);
+				listaServ.add(serv);
 			}
 			dc.solicitacaoDeServico(listaServ);
 		} catch (Exception e) {
