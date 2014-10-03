@@ -10,6 +10,7 @@ import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.repository.EnderecoRepository;
 import br.com.cleanUp.repository.ServicoRepository;
 
 @Service
@@ -18,12 +19,16 @@ public class ServicoService {
 	
 	@Autowired
 	private ServicoRepository servicoRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public void save(Servico s, ArrayList<Endereco> listaE) throws NegocioException{
 		DiaristaController dc = new DiaristaController();
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
 		try {
 			for (int i = 0; i < listaE.size(); i++) {
+				enderecoRepository.save(listaE.get(i));
 				s.setEndereco(listaE.get(i));
 				servicoRepository.save(s);
 				listaServ.add(s);
