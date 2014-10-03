@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
@@ -86,6 +87,18 @@ public class ServicoController {
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		}
-}
+	}
 	
+	@RequestMapping(value="cancelar", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public void cancelarServico(Servico s){
+		Servico s1 = new Servico();
+		s1.setDataServico(new Date());
+		s1.setCodServico(4);
+		try {
+			servicoService.cancelarServico(s1);
+		} catch (NegocioException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
