@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
+import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.repository.ServicoRepository;
 
@@ -18,11 +19,12 @@ public class ServicoService {
 	@Autowired
 	private ServicoRepository servicoRepository;
 
-	public void save(ArrayList<Servico> s) throws NegocioException{
+	public void save(Servico s, ArrayList<Endereco> listaE) throws NegocioException{
 		DiaristaController dc = new DiaristaController();
 		try {
-			for (int i = 0; i < s.size(); i++) {
-				servicoRepository.save(s.get(i));
+			for (int i = 0; i < listaE.size(); i++) {
+				s.setEndereco(listaE.get(i));
+				servicoRepository.save(s);
 			}
 			dc.solicitacaoDeServico(s);
 		} catch (Exception e) {
