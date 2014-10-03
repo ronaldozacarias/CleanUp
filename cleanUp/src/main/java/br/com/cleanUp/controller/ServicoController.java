@@ -36,7 +36,7 @@ public class ServicoController {
 	@RequestMapping(value="add", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public void saved(){
-		Endereco e = new Endereco();
+		/*Endereco e = new Endereco();
 		Cliente c = new Cliente();
 		Diarista d = new Diarista();
 		Cidade ci = new Cidade();
@@ -92,9 +92,50 @@ public class ServicoController {
 		
 		ArrayList<Servico> lista = new ArrayList<Servico>();
 		lista.add(s);
-		lista.add(s1);
+		lista.add(s1);*/
+		Endereco e = new Endereco();
+		Endereco e1 = new Endereco();
+		Endereco eDiarista = new Endereco();
+		e.setLat(10);
+		e.setLog(20);
+		e.setLogradouro("Rua Padre Guedes");
+		
+		e1.setLat(21);
+		e1.setLog(32);
+		e1.setLogradouro("Av. João de Souza Lima");
+		
+		ArrayList<Endereco> listaE = new ArrayList<Endereco>();
+		listaE.add(e);
+		listaE.add(e1);
+		
+		Cliente c = new Cliente();
+		Diarista d = new Diarista();
+		Cidade ci = new Cidade();
+		Usuario u = new Usuario();
+		Usuario u2 = new Usuario();
+		
+		c.setCodigo(1);
+		d.setCodigo(1);
+		ci.setCodigoCidade(1);
+		u.setId(1);
+		u2.setId(2);
+		c.setCidade(ci);
+		d.setCidade(ci);
+		c.setUsuario(u2);
+		d.setUsuario(u);
+		d.setEndereco(e);
+		
+		Servico s = new Servico();
+		
+		s.setCliente(c);
+		s.setDataServico(new Date());
+		s.setDescricao("Teste");
+		s.setDiarista(d);
+		s.setTipoServico(TipoServico.LAVAR);
+		s.setValor(200);
+		s.setStatus(StatusServico.PENDENTE);
 		try {
-			servicoService.save(lista);
+			servicoService.save(s,listaE);
 		} catch (Exception e2) {
 			System.out.println("Fudeu!!");
 		}
