@@ -36,63 +36,7 @@ public class ServicoController {
 	@RequestMapping(value="add", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public void saved(){
-		/*Endereco e = new Endereco();
-		Cliente c = new Cliente();
-		Diarista d = new Diarista();
-		Cidade ci = new Cidade();
-		Usuario u = new Usuario();
-		Usuario u2 = new Usuario();
-		Servico s = new Servico();
-		e.setCodigo(1);
-		c.setCodigo(1);
-		d.setCodigo(1);
-		ci.setCodigoCidade(1);
-		u.setId(1);
-		u2.setId(2);
-		c.setCidade(ci);
-		d.setCidade(ci);
-		c.setUsuario(u2);
-		d.setUsuario(u);
-		d.setEndereco(e);
-		s.setCliente(c);
-		s.setDataServico(new Date());
-		s.setDescricao("Teste");
-		s.setDiarista(d);
-		s.setEndereco(e);
-		s.setTipoServico(TipoServico.LAVAR);
-		s.setValor(200);
-		s.setStatus(StatusServico.PENDENTE);
 		
-		Endereco e1 = new Endereco();
-		Cliente c1 = new Cliente();
-		Diarista d1 = new Diarista();
-		Cidade ci1 = new Cidade();
-		Usuario u3 = new Usuario();
-		Usuario u4 = new Usuario();
-		Servico s1 = new Servico();
-		e1.setCodigo(1);
-		c1.setCodigo(1);
-		d1.setCodigo(1);
-		ci1.setCodigoCidade(1);
-		u3.setId(1);
-		u4.setId(2);
-		c1.setCidade(ci);
-		d1.setCidade(ci);
-		c1.setUsuario(u2);
-		d1.setUsuario(u);
-		d1.setEndereco(e);
-		s1.setCliente(c);
-		s1.setDataServico(new Date());
-		s1.setDescricao("Teste2");
-		s1.setDiarista(d);
-		s1.setEndereco(e);
-		s1.setTipoServico(TipoServico.LIMPAR);
-		s1.setValor(200);
-		s1.setStatus(StatusServico.PENDENTE);
-		
-		ArrayList<Servico> lista = new ArrayList<Servico>();
-		lista.add(s);
-		lista.add(s1);*/
 		Endereco e = new Endereco();
 		Endereco e1 = new Endereco();
 		Endereco eDiarista = new Endereco();
