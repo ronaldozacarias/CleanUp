@@ -1,6 +1,7 @@
 package br.com.cleanUp.service;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.repository.EnderecoRepository;
 import br.com.cleanUp.repository.ServicoRepository;
 
@@ -56,6 +58,25 @@ public class ServicoService {
 			}
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
+		}
+	}
+	
+	public void cancelarServico(Servico s)throws NegocioException{
+		GregorianCalendar calendar = new GregorianCalendar();
+		int diaDoCancelamento = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+		GregorianCalendar calendar2 = new GregorianCalendar();
+		calendar2.setTime(s.getDataServico());
+		int diaDoServico = calendar2.get(GregorianCalendar.DAY_OF_MONTH);
+		try {
+			if ((diaDoServico - diaDoCancelamento) <= 2) {
+				throw new NegocioException("Cancelamento não pode ser Realizado");
+			}else{
+				s.setStatus(StatusServico.INATIVO);
+				servicoRepository.delete(s);
+				servicoRepository.save(s);
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Cancelar Servico");
 		}
 	}
 }
