@@ -140,7 +140,7 @@ public class ServicoController {
 		try {
 			servicoService.save(s,listaE);
 		} catch (Exception e2) {
-			System.out.println("Fudeu!!");
+			System.out.println(e2.getMessage());
 		}
 }
 	
