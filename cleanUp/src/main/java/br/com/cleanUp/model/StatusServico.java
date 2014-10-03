@@ -1,4 +1,4 @@
-package br.com.cleanUp.service;
+package br.com.cleanUp.model;
 
 public enum StatusServico {
 	PENDENTE,ATIVO,INATIVO
