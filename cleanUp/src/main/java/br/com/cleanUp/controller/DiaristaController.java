@@ -18,9 +18,12 @@ import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Perfil;
+import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.EspecialidadeService;
+import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
@@ -31,12 +34,16 @@ public class DiaristaController {
 	Usuario usuario;
 	Cidade cidade;
 	Endereco endereco;
+	static ArrayList<Servico> SERVICO = new ArrayList<Servico>();
 
 	@Autowired
 	private DiaristaService diaristaService;
 
 	@Autowired
 	private EspecialidadeService especialidadeService;
+	
+	@Autowired
+	private ServicoService servicoService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView registrar() {
@@ -139,5 +146,29 @@ public class DiaristaController {
 
 	public Diarista findByCpf(String cpf) throws NegocioException {
 		return diaristaService.findByCpf(cpf);
+	}
+	
+	public void solicitacaoDeServico(ArrayList<Servico> s){
+		this.SERVICO = s;
+	}
+	
+	@RequestMapping(value = "getSolicitacaoDeServico", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public ArrayList<Servico> getSolicitacaoDeServico(){
+		return this.SERVICO;
+	}
+	
+	@RequestMapping(value = "confirmacao", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public void confirmacaoDeServico(/*Servico serv*/){
+		//this.servico = serv;
+		try {
+			for (int i = 0; i < this.SERVICO.size(); i++) {
+				this.SERVICO.get(i).setStatus(StatusServico.ATIVO);
+			}
+			this.servicoService.edit(this.SERVICO);
+		} catch (NegocioException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
