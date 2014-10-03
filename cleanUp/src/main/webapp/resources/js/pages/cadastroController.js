@@ -109,7 +109,9 @@ function cadastroController($scope, $http) {
 			        }).success(function(data) {
 			        	bootbox.dialog({
 			        		title:"Cadastro realizado com sucesso!",
-			        		message: "<div class='loginbootbox'><a href='/cleanUp/login'>Clique aqui e realize o login</a></div>"
+			        		message: "<div class='loginbootbox'>" +
+			        					"<a href='/cleanUp/login'>Clique aqui e realize o login</a>" +
+			        				 "</div>"
 			            });
 						$scope.pessoa = null;
 			        }).error(function(data) {
