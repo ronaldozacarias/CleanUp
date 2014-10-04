@@ -87,15 +87,32 @@
                     </div>                    	
                   </div>                  
                   <div class="news-item-date"> 
-                  		<a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a>
+                  		<a href="javascript:;" class="btn btn-small btn-success" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="btn-icon-only icon-ok"> </i></a>
                   		<span class="news-item-month">Selecionar</span>
-                  </div> 
-                  <div class="news-item-date"> 
-                  		<a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a>
-                  		<span class="news-item-month">Classificar</span>
                   </div>                                 
                 </li>                
               </ul>
+            </div>
+            <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Nome da Diarista</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+
+
+                    </div>
+                  ...
+                </div>
+              </div>
             </div>
 
 
@@ -213,12 +230,9 @@
 ================================================== --> 
 <!-- Placed at the end of the document so the pages load faster --> 
 <!-- jQuery Version 1.11.0 -->    
-<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+<%-- <script src="<c:url value='/resources/js/jquery.min.js' />"></script> --%>
 <script src="<c:url value='/resources/js/excanvas.min.js' />"></script>
 <script src="<c:url value='/resources/js/chart.min.js' />"></script>
-<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
-<script src="<c:url value='/resources/js/full-calendar/fullcalendar.min.js' />"></script>
-<script src="<c:url value='/resources/js/base.js' />"></script>
 	
 	<!-- Maps API Javascript -->
     <script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
@@ -229,11 +243,14 @@
     <!-- Agrupamento dos marcadores -->
     <script src="<c:url value='/resources/js/markerclusterer.js' />"></script>
     
-    <!-- Arquivo de inicialização do mapa -->
-	<script src="<c:url value='/resources/js/mapa.js' />"></script>
 	    
     <script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
+    <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>    
+    <script src="<c:url value='/resources/js/signin.js' />"></script>
     <script src="<c:url value='/resources/js/jquery.mask.min.js' />"></script>
 	<script src="<c:url value='/resources/js/jquery.mask.js' />"></script>
-    <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
+	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
+    <script src="<c:url value='/resources/js/checklist-model.js' />"></script>      
     <script src="<c:url value='/resources/js/pages/clienteController.js' />"></script> 
+        <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script> 

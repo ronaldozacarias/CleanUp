@@ -60,6 +60,7 @@ public class HistorioServico {
 	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "STATUS")
 	private StatusServico status;
 
 	public HistorioServico() {

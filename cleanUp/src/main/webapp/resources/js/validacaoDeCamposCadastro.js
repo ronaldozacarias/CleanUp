@@ -1,20 +1,3 @@
-//$(function() {
-//
-//    $('#cpf').keypress(function(event) {
-//        var tecla = (window.event) ? event.keyCode : event.which;
-//        if ((tecla > 47 && tecla < 58)) return true;
-//        else {
-//            if (tecla != 8) return false;
-//            else return true;
-//        }
-//    });
-//    
-//    $("#tel").mask("(00) 0000-00009");
-//
-//});
-
-
-
 $(document).ready(function(){
 	  $('.date').mask('00/00/0000');
 	  $('.time').mask('00:00:00');

@@ -25,14 +25,7 @@
     </h1>
     <!--END TITLE-->
     
-    <!--DESCRIPTION-->
-<!--     <span> -->
-<!--         <div class="alert alert-error" ng-class="{'': displayLoginError == true, 'none': displayLoginError == false}"> -->
-<%--             <spring:message code="login.error" /> --%>
-<!--         </div> -->
-<!--     </span> -->
-    <!--END DESCRIPTION-->
-<%--     <legend><spring:message code="login.header" /></legend> --%>
+	<%--     <legend><spring:message code="login.header" /></legend> --%>
     </div>
     <!--END HEADER-->
 	
@@ -51,7 +44,7 @@
     <div class="footer">
     <!--LOGIN BUTTON--><input type="submit" name="submit" value="<spring:message code="login.signIn" />" class="button" /><!--END LOGIN BUTTON-->
     <!--REGISTER BUTTON--><button >
-    						<a class="register" href="public/diarista/" class="scroll">Registrar</a>
+    						<a class="register" href="public/cadastro/" class="scroll">Registrar</a>
     					  </button><!--END REGISTER BUTTON-->
     </div>
     <!--END FOOTER-->
@@ -63,34 +56,4 @@
 <!--END WRAPPER-->
 
 <!--GRADIENT--><div class="gradient"></div><!--END GRADIENT-->
-
-
-
-
-<!-- NÃO FAZ PARTE DO TEMPLATE INICIO -->
-
-<!-- <div class="row-fluid"> -->
-<!--     <div class="jumbotron"> -->
-<%--         <h1><spring:message code='project.name'/></h1> --%>
-<%--         <img src="<c:url value='/resources/img/brand-logo1.png'  />" title="the verge"/> --%>
-<!--     </div> -->
-<!-- </div> -->
-<!-- <div class="row-fluid"> -->
-<!--     <div class="span4 offset4 well" ng-controller="loginController"> -->
-<%--         <legend><spring:message code="login.header" /></legend> --%>
-<!--         <div class="alert alert-error" ng-class="{'': displayLoginError == true, 'none': displayLoginError == false}"> -->
-<%--             <spring:message code="login.error" /> --%>
-<!--         </div> -->
-<!--         <form method="post" action="j_spring_security_check"> -->
-<!--             <div> -->
-<%--                 <input name="j_username" id="j_username" type="text" class="span12" placeholder="<spring:message code='sample.email' /> "><br/> --%>
-<!--                 <input name="j_password" id="j_password" type="password"  class="span12" placeholder="Password"><br/> -->
-<%--                 <button type="submit" name="submit" class="btn btn-inverse btn-block"><spring:message code="login.signIn" /></button> --%>
-<!--             </div> -->
-<!--         </form> -->
-<!--     </div> -->
-<!-- </div> -->
-
-<!-- NÃO FAZ PARTE DO TEMPLATE FIM  -->
-
 <script src="<c:url value='/resources/js/pages/login.js' />"></script>

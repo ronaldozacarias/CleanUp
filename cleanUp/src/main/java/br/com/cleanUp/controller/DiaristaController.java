@@ -27,7 +27,7 @@ import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
-@RequestMapping(value = "/public/diarista")
+@RequestMapping(value = "/protected/diarista")
 public class DiaristaController {
 
 	Diarista diarista;
@@ -44,11 +44,6 @@ public class DiaristaController {
 	
 	@Autowired
 	private ServicoService servicoService;
-
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView registrar() {
-		return new ModelAndView("diarista");
-	}
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -125,7 +120,7 @@ public class DiaristaController {
 
 	}
 
-	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "listarDiaristas", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Diarista> getAll() throws NegocioException{
 
