@@ -24,14 +24,13 @@
         <put-attribute name="footer" value="/public/template/footer.jsp"/>
     </definition>
     
-    <definition name="master-home-cadastro-diarista.page" template="/public/template/master-home-cadastro-diarista.jsp">
+    <definition name="master-home-cadastro.page" template="/public/template/master-home-cadastro.jsp">
 <!--         <put-attribute name="header" value="/public/template/headerClient.jsp"/> -->
 <!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
     </definition>
     
     <definition name="master-login.page" template="/public/template/master-login.jsp">
-<!--         <put-attribute name="header" value="/public/template/header.jsp"/> -->
-<!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
+        <put-attribute name="header" value="/public/template/headerLogin.jsp"/>
     </definition>
 
 <!--  Pages #############################################################################################-->
@@ -58,8 +57,6 @@
         <put-attribute name="body" value="/protected/contacts/contacts.jsp"/>
     </definition>
     <definition name="login" extends="master-login.page">
-        <put-attribute name="header" value=""/>
-        <put-attribute name="footer" value=""/>
         <put-attribute name="body" value="/public/login.jsp"/>
     </definition>
     <definition name="forgot" extends="master-login.page">
@@ -67,7 +64,7 @@
         <put-attribute name="footer" value=""/>
         <put-attribute name="body" value="/public/forgot.jsp"/>
     </definition>
-    <definition name="cadastro" extends="master-home-cadastro-diarista.page">
+    <definition name="cadastro" extends="master-home-cadastro.page">
         <put-attribute name="body" value="/public/cadastro/cadastro.jsp"/>
     </definition>
     

@@ -93,36 +93,27 @@
                 </li>                
               </ul>
             </div>
-            <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
 
+			 <!-- BEGIN MODAL -->
             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
+                            <span class="sr-only"></span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">Nome da Diarista</h4>
+                        <h4 class="modal-title" id="myModalLabel">Contratar diarista</h4>
                     </div>
                     <div class="modal-body">
                         
+						...
 
-
-                    </div>
-                  ...
+                    </div>                  
                 </div>
               </div>
             </div>
-
-
-
-
-
-
-
-
-
+            <!-- END MODAL -->
 
             <!-- /widget-content --> 
           </div>
@@ -231,26 +222,25 @@
 <!-- Placed at the end of the document so the pages load faster --> 
 <!-- jQuery Version 1.11.0 -->    
 <%-- <script src="<c:url value='/resources/js/jquery.min.js' />"></script> --%>
-<script src="<c:url value='/resources/js/excanvas.min.js' />"></script>
-<script src="<c:url value='/resources/js/chart.min.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/excanvas.min.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/chart.min.js' />"></script>
 	
 	<!-- Maps API Javascript -->
     <script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
         
     <!-- Caixa de informação -->
-    <script src="<c:url value='/resources/js/infobox.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/infobox.js' />"></script>
 		
     <!-- Agrupamento dos marcadores -->
-    <script src="<c:url value='/resources/js/markerclusterer.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/markerclusterer.js' />"></script>
     
 	    
-    <script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
-    <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+    <script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/bootstrap.js' />"></script>
     <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>    
-    <script src="<c:url value='/resources/js/signin.js' />"></script>
-    <script src="<c:url value='/resources/js/jquery.mask.min.js' />"></script>
-	<script src="<c:url value='/resources/js/jquery.mask.js' />"></script>
-	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/signin.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
+	<script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>
     <script src="<c:url value='/resources/js/checklist-model.js' />"></script>      
-    <script src="<c:url value='/resources/js/pages/clienteController.js' />"></script> 
+    <script src="<c:url value='/protected/controller/clienteController.js' />"></script> 
         <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script> 

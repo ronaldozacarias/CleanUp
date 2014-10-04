@@ -596,18 +596,16 @@
     <script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
+    <script src="<c:url value='/resources/js/js-home/bootstrap.min.js' />"></script>
 
     <!-- Plugin JavaScript -->
     <script src="<c:url value='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js' />"></script>
-    <script src="<c:url value='/resources/js/classie.js' />"></script>
-    <script src="<c:url value='/resources/js/cbpAnimatedHeader.js' />"></script>
+    <script src="<c:url value='/resources/js/js-home/classie.js' />"></script>
+    <script src="<c:url value='/resources/js/js-home/cbpAnimatedHeader.js' />"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="<c:url value='/resources/js/jqBootstrapValidation.js' />"></script>
-    <script src="<c:url value='/resources/js/contact_me.js' />"></script>
+    <script src="<c:url value='/resources/js/js-home/jqBootstrapValidation.js' />"></script>
+    <script src="<c:url value='/resources/js/js-home/contact_me.js' />"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="<c:url value='/resources/js/agency.js' />"></script>
-    
-    <script src="<c:url value='/resources/js/pages/testeController.js' />"></script>
+    <script src="<c:url value='/resources/js/js-home/agency.js' />"></script>

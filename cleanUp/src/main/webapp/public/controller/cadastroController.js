@@ -10,7 +10,7 @@ function cadastroController($scope, $http) {
 	
 	//Trazer especialidades do banco
 	$http({
-        url: '/cleanUp/public/diarista/getEspecialidades',
+        url: '/cleanUp/public/cadastro/getEspecialidades',
         method: "POST",
         headers: {'Content-Type': 'application/json'}
     })
@@ -84,10 +84,7 @@ function cadastroController($scope, $http) {
 				            });
 							$scope.pessoa = null;
 				        }).error(function(data) {
-				        	bootbox.dialog({
-				        		title:"Erro ao tentar cadastrar!",
-				                message: data
-				            });
+				        	exibirMensagemErro(data);
 				       });
 					}					
 					

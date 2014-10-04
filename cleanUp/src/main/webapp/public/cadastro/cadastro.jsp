@@ -16,7 +16,7 @@
 			</a>
 			
 			<a class="brand" href="/cleanUp/">
-				CleanUp				
+				<img id="logoBarra" src="<c:url value='/resources/img/CleanUp2.png'  />" title="logo"/>			
 			</a>		
 			
 			<div class="nav-collapse">
@@ -151,19 +151,18 @@
 
 
 <!-- Text Under Box -->
-<div class="login-extra">
-	Você já tem uma conta? <a href="/cleanUp/login">Faça login na sua conta</a>
-</div> <!-- /login-extra -->
+<!-- <div class="login-extra"> -->
+<!-- 	Você já tem uma conta? <a href="/cleanUp/login">Faça login na sua conta</a> -->
+<!-- </div> /login-extra -->
 
     <!-- jQuery Version 1.11.0 -->    
-    <script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
+    <script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/bootstrap.js' />"></script>
     <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>    
-    <script src="<c:url value='/resources/js/signin.js' />"></script>
-    <script src="<c:url value='/resources/js/jquery.mask.min.js' />"></script>
-	<script src="<c:url value='/resources/js/jquery.mask.js' />"></script>
-	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>    
-    <script src="<c:url value='/resources/js/pages/cadastroController.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/signin.js' />"></script>
+    <script src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
+	<script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>  
+    <script src="<c:url value='/public/controller/cadastroController.js' />"></script>
     <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
     <script src="<c:url value='/resources/js/checklist-model.js' />"></script>

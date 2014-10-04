@@ -13,7 +13,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                	<img id="logoBarraHome" src="<c:url value='/resources/img/CleanUp3.png'  />" title="logo"/>
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

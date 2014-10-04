@@ -3,57 +3,68 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<!--WRAPPER-->
-<div id="wrapper" ng-controller="loginController">
-
-	<!--SLIDE-IN ICONS-->
-    <div class="user-icon"></div>
-    <div class="pass-icon"></div>
-    <!--END SLIDE-IN ICONS-->
-
-<!--LOGIN FORM-->
-<form name="login-form" class="login-form" action="j_spring_security_check" method="post">
-
-	<!--HEADER-->
-    <div class="header">
-    <!--TITLE-->
-    <h1>
-    	<a class="linklogo" href="/cleanUp">
-    	<img id="logo" src="<c:url value='/resources/img/logosolo.png'  />" title="logo"/>
-    	<spring:message code='project.name'/>
-    	</a>
-    </h1>
-    <!--END TITLE-->
-    
-	<%--     <legend><spring:message code="login.header" /></legend> --%>
-    </div>
-    <!--END HEADER-->
+<div class="account-container" ng-controller="loginController">
 	
-	<!--CONTENT-->
-    <div class="content">
-	<!--USERNAME--><input name="j_username" id="j_username" type="text" class="input username" placeholder="<spring:message code='sample.email' /> " /><!--END USERNAME-->
-    <!--PASSWORD--><input name="j_password" id="j_password" type="password" class="input password" placeholder="Password" /><!--END PASSWORD-->
-    <div class="alert alert-error" ng-class="{'': displayLoginError == true, 'none': displayLoginError == false}">
-        <br>
-        <span id="alert"><spring:message code="login.error" /></span>
-    </div>
-    </div>
-    <!--END CONTENT-->
-    
-    <!--FOOTER-->
-    <div class="footer">
-    <!--LOGIN BUTTON--><input type="submit" name="submit" value="<spring:message code="login.signIn" />" class="button" /><!--END LOGIN BUTTON-->
-    <!--REGISTER BUTTON--><button >
-    						<a class="register" href="public/cadastro/" class="scroll">Registrar</a>
-    					  </button><!--END REGISTER BUTTON-->
-    </div>
-    <!--END FOOTER-->
+	<div class="content clearfix">
+		
+		<form action="j_spring_security_check" method="post">
+		
+			<h1>
+<!-- 				<a class="linklogo" href="/cleanUp"> -->
+<%-- 		    	<img id="logoBarra" src="<c:url value='/resources/img/CleanUp.png'  />" title="logo"/> --%>
+<!-- 		    	</a> -->
+				Member Login
+			</h1>		
+			
+			<div class="login-fields">
+				
+				<p>Por favor, forneça suas informaçoes</p>
+				
+				<div class="field">
+					<label for="username">Username</label>
+					<input name="j_username" id="j_username" type="text" class="login username-field" placeholder="Seu email: exemplo@email.com" />
+				</div> <!-- /field -->
+				
+				<div class="field">
+					<label for="password">Password:</label>					
+					<input name="j_password" id="j_password" type="password" class="login password-field" placeholder="Sua Senha" />
+				</div> <!-- /password -->
+				
+				<div class="alert alert-error" ng-class="{'': displayLoginError == true, 'none': displayLoginError == false}">
+			        <span id="alert"><spring:message code="login.error" /></span>
+			    </div><!-- /AlertError -->
+				
+			</div> <!-- /login-fields -->
+			
+			<div class="login-actions">
+				
+				<span class="login-checkbox">					
+					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
+					<label class="choice" for="Field">Mantenha-me conectado</label>
+				</span>
+									
+				<button class="button btn btn-success btn-large">Logar</button>
+				
+			</div> <!-- .actions -->
+			
+			
+			
+		</form>
+		
+	</div> <!-- /content -->
+	
+</div> <!-- /account-container -->
 
-</form>
-<!--END LOGIN FORM-->
 
-</div>
-<!--END WRAPPER-->
 
-<!--GRADIENT--><div class="gradient"></div><!--END GRADIENT-->
-<script src="<c:url value='/resources/js/pages/login.js' />"></script>
+<div class="login-extra">
+<!-- 	<a href="#">Reset Password</a> -->
+<!-- 	<a href="public/cadastro/" class="scroll">Registrar</a> -->
+</div> <!-- /login-extra -->
+
+<script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/bootstrap.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/signin.js' />"></script>
+
+
+<script src="<c:url value='/public/controller/login.js' />"></script>

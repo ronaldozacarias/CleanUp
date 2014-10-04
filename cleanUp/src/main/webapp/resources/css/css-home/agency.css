@@ -4,6 +4,17 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
  
+#logoBarraHome{
+	width: 198px;
+	height: 73px;
+}
+
+.navbar-brand {
+float: left;
+height: 73px !important;
+padding: 0 !important;
+}
+ 
  .tomwel{
 	text-transform: uppercase;
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -250,7 +261,7 @@ fieldset[disabled] .btn-xl.active {
 
 @media(min-width:768px) {
     .navbar-default {
-        padding: 25px 0;
+        padding: 15px 0;
         border: 0;
         background-color: transparent;
         -webkit-transition: padding .3s;
@@ -283,7 +294,7 @@ header {
     text-align: center;
     color: #fff;
     background-attachment: scroll;
-    background-image: url(../img/hd-bg.jpg);
+    background-image: url(../../img/hd-bg.jpg);
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;

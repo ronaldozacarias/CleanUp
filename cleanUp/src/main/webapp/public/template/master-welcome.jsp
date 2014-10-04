@@ -11,16 +11,12 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-		
-		<script src="<c:url value='/resources/js/angular.min.js' />"></script> 
-		
-<!-- 	    <title>CleanUp</title> -->
 	
 	    <!-- Bootstrap Core CSS -->
-	    <link href="<c:url value='/resources/css/bootstrap.min.css'  />" rel="stylesheet" type="text/css"/>
+	    <link href="<c:url value='/resources/css/css-home/bootstrap.min.css'  />" rel="stylesheet" type="text/css"/>
 	    
 	    <!-- Custom CSS -->
-	    <link href="<c:url value='/resources/css/agency.css' />" rel="stylesheet" type="text/css"/>
+	    <link href="<c:url value='/resources/css/css-home/agency.css' />" rel="stylesheet" type="text/css"/>
 	
 	    <!-- Custom Fonts -->
 	    <link href="<c:url value='/resources/font-awesome-4.1.0/css/font-awesome.min.css' />" rel="stylesheet" type="text/css"/>
