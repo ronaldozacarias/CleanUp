@@ -1,5 +1,6 @@
 package br.com.cleanUp.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,8 +60,8 @@ public class Servico {
 	@Column(name="VALOR",length = 10, nullable = false)
 	private double valor;
 	
-	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
-	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
+//	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
+//	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")
@@ -70,6 +71,7 @@ public class Servico {
 		this.diarista = new Diarista();
 		this.cliente = new Cliente();
 		this.endereco = new Endereco();
+		//this.servicoTipoNotificacoes = new ArrayList<ServicoTipoNotificacao>();
 	}
 	
 	public Servico(Integer codServico, TipoServico tipoServico,
@@ -149,14 +151,14 @@ public class Servico {
 		this.endereco = endereco;
 	}
 
-	public List<ServicoTipoNotificacao> getServicoTipoNotificacoes() {
+/*	public List<ServicoTipoNotificacao> getServicoTipoNotificacoes() {
 		return servicoTipoNotificacoes;
 	}
 
 	public void setServicoTipoNotificacoes(
 			List<ServicoTipoNotificacao> servicoTipoNotificacoes) {
 		this.servicoTipoNotificacoes = servicoTipoNotificacoes;
-	}
+	}*/
 
 	public StatusServico getStatus() {
 		return status;

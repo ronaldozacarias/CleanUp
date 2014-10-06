@@ -40,7 +40,7 @@ public class ServicoService {
 				serv.setDataServico(s.getDataServico());
 				serv.setDescricao(s.getDescricao());
 				serv.setDiarista(s.getDiarista());
-				serv.setServicoTipoNotificacoes(s.getServicoTipoNotificacoes());
+				//serv.setServicoTipoNotificacoes(s.getServicoTipoNotificacoes());
 				serv.setStatus(s.getStatus());
 				serv.setTipoServico(s.getTipoServico());
 				serv.setValor(s.getValor());
@@ -80,7 +80,7 @@ public class ServicoService {
 		try {
 			if ((diaDoServico - diaDoCancelamento) <= 2) {
 				serv.setStatus(StatusServico.ATIVO);
-				throw new NegocioException("Cancelamento não pode ser Realizado");
+				throw new NegocioException("Cancelamento nï¿½o pode ser Realizado");
 			}else{
 				hs.setCodServico(serv.getCodServico());
 				hs.setCliente(serv.getCliente());
@@ -88,7 +88,7 @@ public class ServicoService {
 				hs.setDescricao(serv.getDescricao());
 				hs.setDiarista(serv.getDiarista());
 				hs.setEndereco(serv.getEndereco());
-				hs.setServicoTipoNotificacoes(serv.getServicoTipoNotificacoes());
+				//hs.setServicoTipoNotificacoes(serv.getServicoTipoNotificacoes());
 				hs.setStatus(StatusServico.INATIVO);
 				hs.setTipoServico(serv.getTipoServico());
 				hs.setValor(serv.getValor());

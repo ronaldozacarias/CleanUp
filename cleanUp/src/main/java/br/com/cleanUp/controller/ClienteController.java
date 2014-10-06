@@ -1,5 +1,6 @@
 package br.com.cleanUp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,10 @@ import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Perfil;
+import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
+import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
@@ -35,7 +38,7 @@ public class ClienteController {
 	
 	@Autowired
 	private DiaristaController diaristaController;
-
+	
 	@RequestMapping(value = "diaristas", method = RequestMethod.GET)
 	public ModelAndView registrar() {
 		return new ModelAndView("diaristas");
@@ -113,6 +116,20 @@ public class ClienteController {
 
 		return diaristaController.getAll();
 
+	}
+	
+	@RequestMapping(value = "listaServicoPorCliente", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public ArrayList<Servico> listaServicoPorDiarista(Cliente c){
+		ArrayList<Servico> listaS = new ArrayList<Servico>();
+		Cliente c1 = new Cliente();
+		c1.setCodigo(1);
+		try {
+			listaS = clienteService.listaDeServicoPorCliente(c1);
+		} catch (NegocioException e) {
+			System.out.println(e.getMessage());
+		}
+		return listaS;
 	}
 
 	public Cliente findByCpf(String cpf) throws NegocioException {

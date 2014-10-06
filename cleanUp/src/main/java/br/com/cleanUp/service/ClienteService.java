@@ -1,5 +1,6 @@
 package br.com.cleanUp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cliente;
+import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.repository.ClienteRepository;
+import br.com.cleanUp.repository.ServicoRepository;
 import br.com.cleanUp.repository.UsuarioRepository;
 
 @Service
@@ -27,6 +30,9 @@ public class ClienteService {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ServicoRepository servicoRepository;
 
 	public void salvarCliente(Cliente cli) throws NegocioException{
 		//clienteRepository.save(cli);		
@@ -86,5 +92,15 @@ public class ClienteService {
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao tentar buscar Cliente.");
 		}
+	}
+	
+	public ArrayList<Servico> listaDeServicoPorCliente(Cliente c)throws NegocioException{
+		ArrayList<Servico> listServico = new ArrayList<Servico>();
+		try {
+			listServico = this.servicoRepository.listarServicosPorCliente(c.getCodigo());
+		} catch (Exception e) {
+			throw new NegocioException();
+		}
+		return listServico;
 	}
 }
