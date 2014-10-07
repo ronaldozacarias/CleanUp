@@ -1,5 +1,6 @@
 package br.com.cleanUp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Diarista;
+import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.repository.DiaristaRepository;
 
 @Service
@@ -69,5 +71,25 @@ public class DiaristaService {
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao tentar buscar diarista.");
 		}
+	}
+	
+	public List<Diarista> listaDeDiaristaPorEspecialidade(Especialidade e) throws NegocioException{
+		ArrayList<Diarista> listaDeDiarista = new ArrayList<Diarista>();
+		ArrayList<Diarista> listaDeDiaristaPorEspecialidade = new ArrayList<Diarista>();
+		Diarista d = new Diarista();
+		try {
+			listaDeDiarista = (ArrayList<Diarista>) this.listToDiarista();
+			for (int i = 0; i < listaDeDiarista.size(); i++) {
+				for (int j = 0; j < listaDeDiarista.get(j).getEspecialidades().size(); j++) {
+					if (listaDeDiarista.get(i).getEspecialidades().get(j).getCodigoEspecialidade() == e.getCodigoEspecialidade()) {
+						d = listaDeDiarista.get(i);
+						listaDeDiaristaPorEspecialidade.add(d);
+					}
+				}
+			}
+		} catch (Exception e2) {
+			throw new NegocioException("Erro ao buscar a Diarista por Especialidade");
+		}
+		return listaDeDiaristaPorEspecialidade;
 	}
 }

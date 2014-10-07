@@ -17,10 +17,12 @@ import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
+import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
+import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.vo.PessoaVO;
 
@@ -38,6 +40,9 @@ public class ClienteController {
 	
 	@Autowired
 	private DiaristaController diaristaController;
+	
+	@Autowired
+	private DiaristaService diaristaServico;
 	
 	@RequestMapping(value = "diaristas", method = RequestMethod.GET)
 	public ModelAndView registrar() {
@@ -110,7 +115,7 @@ public class ClienteController {
 
 	}
 	
-	@RequestMapping(value = "diaristas/listDiaristas", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "diaristas/listDiaristas", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Diarista> getAllDiaristas() throws NegocioException {
 
@@ -130,6 +135,20 @@ public class ClienteController {
 			System.out.println(e.getMessage());
 		}
 		return listaS;
+	}
+	
+	@RequestMapping(value = "listaDeDiaristaPorEspecialidade", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Diarista> listarDiaristaPorEspecialidade(/*Especialidade e*/){
+		ArrayList<Diarista> listaDiaristaPorEspecialidade = new ArrayList<Diarista>();
+		Especialidade e = new Especialidade();
+		e.setCodigoEspecialidade(5);
+		try {
+			listaDiaristaPorEspecialidade = (ArrayList<Diarista>) this.diaristaServico.listaDeDiaristaPorEspecialidade(e);
+		} catch (NegocioException e2) {
+			System.out.println(e2.getMessage());
+		}
+		return listaDiaristaPorEspecialidade;
 	}
 
 	public Cliente findByCpf(String cpf) throws NegocioException {
