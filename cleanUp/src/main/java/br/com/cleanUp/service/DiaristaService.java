@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleanUp.exception.NegocioException;
+import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.repository.DiaristaRepository;
@@ -91,5 +92,15 @@ public class DiaristaService {
 			throw new NegocioException("Erro ao buscar a Diarista por Especialidade");
 		}
 		return listaDeDiaristaPorEspecialidade;
+	}
+	
+	public List<Diarista> listaDeDiaristaPorCidade(Cidade c) throws NegocioException{
+		ArrayList<Diarista> listaD = new ArrayList<Diarista>();
+		try {
+			listaD = (ArrayList<Diarista>) diaristaRepository.findByCidade(c.getCodigoCidade());
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao buscar Diarista Por Cidade");
+		}
+		return listaD;
 	}
 }
