@@ -305,12 +305,12 @@
 ================================================== --> 
 <!-- Placed at the end of the document so the pages load faster --> 
 <!-- jQuery Version 1.11.0 -->    
-<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-<script src="<c:url value='/resources/js/excanvas.min.js' />"></script>
-<script src="<c:url value='/resources/js/chart.min.js' />"></script>
-<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+<script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/excanvas.min.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/chart.min.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/bootstrap.js' />"></script>
 <script src="<c:url value='/resources/js/full-calendar/fullcalendar.min.js' />"></script>
-<script src="<c:url value='/resources/js/base.js' />"></script>
+<script src="<c:url value='/resources/js/js-template/base.js' />"></script>
 <script>     
 
         var lineChartData = {

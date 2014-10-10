@@ -13,7 +13,7 @@
 <!-- 				<a class="linklogo" href="/cleanUp"> -->
 <%-- 		    	<img id="logoBarra" src="<c:url value='/resources/img/CleanUp.png'  />" title="logo"/> --%>
 <!-- 		    	</a> -->
-				Member Login
+				Login
 			</h1>		
 			
 			<div class="login-fields">
@@ -59,7 +59,7 @@
 
 <div class="login-extra">
 <!-- 	<a href="#">Reset Password</a> -->
-<!-- 	<a href="public/cadastro/" class="scroll">Registrar</a> -->
+	<a href="public/cadastro/" class="scroll">Registrar</a>
 </div> <!-- /login-extra -->
 
 <script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>

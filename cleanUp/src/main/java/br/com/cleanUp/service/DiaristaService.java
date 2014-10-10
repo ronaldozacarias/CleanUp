@@ -29,15 +29,11 @@ public class DiaristaService {
 	public void editDiarista(Diarista d) throws NegocioException {
 		diaristaRepository.delete(diaristaRepository.findOne(d.getCodigo()));
 		// diaristaRepository.save(d);
-		try {
-
-		} catch (Exception e) {
 			try {
 				diaristaRepository.save(d);
-			} catch (Exception e2) {
+			} catch (Exception e) {
 				throw new NegocioException("Erro Ao tentar edita a diarista");
 			}
-		}
 	}
 
 	public void removeDiarista(Diarista d) throws NegocioException {

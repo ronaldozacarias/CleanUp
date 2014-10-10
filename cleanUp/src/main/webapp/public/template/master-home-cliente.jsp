@@ -11,6 +11,9 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		
 		<script src="<c:url value='/resources/js/angular.min.js' />"></script>		
+		<script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
+		
+		<link href="<c:url value='/resources/js/angular-xeditable-0.1.8/css/xeditable.css'  />" rel="stylesheet" type="text/css"/>			
 		<link href="<c:url value='/resources/css/css-template/bootstrap.min.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/css-template/bootstrap-responsive.min.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/font-awesome.css' />" rel="stylesheet" type="text/css"/>
@@ -18,10 +21,13 @@
 		<link href="<c:url value='/resources/css/css-template/styleDashBord.css' />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/pages/dashboard.css' />" rel="stylesheet" type="text/css"/>
 		
-		
 		<script type="text/javascript">
 
-			var app = angular.module("app", ["checklist-model"]);
+			var app = angular.module("app", ["xeditable"]);
+			
+			app.run(function(editableOptions) {
+				  editableOptions.theme = 'bs2'; // bootstrap3 theme. Can be also 'bs2', 'default'
+			});
 
 		</script>
 	                    

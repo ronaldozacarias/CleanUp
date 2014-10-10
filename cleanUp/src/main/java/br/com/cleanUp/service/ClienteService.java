@@ -87,4 +87,12 @@ public class ClienteService {
 			throw new NegocioException("Erro ao tentar buscar Cliente.");
 		}
 	}
+	
+	public Cliente findByIdUsuario(int idUsuario) throws NegocioException {
+		try {
+			return clienteRepository.findByIdUsuario(idUsuario);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao tentar buscar Cliente.");
+		}
+	}
 }

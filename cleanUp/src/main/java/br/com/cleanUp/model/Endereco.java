@@ -1,5 +1,7 @@
 package br.com.cleanUp.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +22,10 @@ public class Endereco {
 	private String logradouro;
 	
 	@Column(name = "LATITUDE")
-	private long lat;
+	private BigDecimal lat;
 	
 	@Column(name = "LOGITUDE")
-	private long log;
+	private BigDecimal lng;
 	
 	public Endereco(){
 		
@@ -49,20 +51,19 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-	public long getLat() {
+	public BigDecimal getLat() {
 		return lat;
 	}
 
-	public void setLat(long lat) {
+	public void setLat(BigDecimal lat) {
 		this.lat = lat;
 	}
 
-	public long getLog() {
-		return log;
+	public BigDecimal getLng() {
+		return lng;
 	}
 
-	public void setLog(long log) {
-		this.log = log;
-	}
-	
+	public void setLng(BigDecimal lng) {
+		this.lng = lng;
+	}	
 }
