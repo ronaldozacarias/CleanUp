@@ -3,11 +3,9 @@ package br.com.cleanUp.service;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Endereco;
@@ -40,8 +38,7 @@ public class ServicoService {
 				serv.setCliente(s.getCliente());
 				serv.setDataServico(s.getDataServico());
 				serv.setDescricao(s.getDescricao());
-				serv.setDiarista(s.getDiarista());
-//				serv.setServicoTipoNotificacoes(s.getServicoTipoNotificacoes());
+				serv.setDiarista(s.getDiarista());				
 				serv.setStatus(s.getStatus());
 				serv.setTipoServico(s.getTipoServico());
 				serv.setValor(s.getValor());
@@ -81,15 +78,14 @@ public class ServicoService {
 		try {
 			if ((diaDoServico - diaDoCancelamento) <= 2) {
 				serv.setStatus(StatusServico.ATIVO);
-				throw new NegocioException("Cancelamento n�o pode ser Realizado");
+				throw new NegocioException("Cancelamento não pode ser Realizado");
 			}else{
 				hs.setCodServico(serv.getCodServico());
 				hs.setCliente(serv.getCliente());
 				hs.setDataServico(serv.getDataServico());
 				hs.setDescricao(serv.getDescricao());
 				hs.setDiarista(serv.getDiarista());
-				hs.setEndereco(serv.getEndereco());
-//				hs.setServicoTipoNotificacoes(serv.getServicoTipoNotificacoes());
+				hs.setEndereco(serv.getEndereco());				
 				hs.setStatus(StatusServico.INATIVO);
 				hs.setTipoServico(serv.getTipoServico());
 				hs.setValor(serv.getValor());

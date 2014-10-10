@@ -2,7 +2,6 @@ package br.com.cleanUp.model;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -58,9 +56,6 @@ public class Servico {
 	
 	@Column(name="VALOR",length = 10, nullable = true)
 	private double valor;
-	
-//	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
-//	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")
@@ -148,15 +143,6 @@ public class Servico {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-//	public List<ServicoTipoNotificacao> getServicoTipoNotificacoes() {
-//		return servicoTipoNotificacoes;
-//	}
-//
-//	public void setServicoTipoNotificacoes(
-//			List<ServicoTipoNotificacao> servicoTipoNotificacoes) {
-//		this.servicoTipoNotificacoes = servicoTipoNotificacoes;
-//	}
 
 	public StatusServico getStatus() {
 		return status;

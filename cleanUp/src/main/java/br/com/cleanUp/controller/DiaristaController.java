@@ -166,4 +166,18 @@ public class DiaristaController {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	@RequestMapping(value = "listaDiaristaPorCidade", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Diarista> listaDiaristaPorCidade(/*Cidade c*/){
+		Cidade c = new Cidade();
+		c.setCodigoCidade(2);
+		ArrayList<Diarista> listaD = new ArrayList<Diarista>();
+		try {
+			listaD = (ArrayList<Diarista>) diaristaService.listaDeDiaristaPorCidade(c);
+		} catch (NegocioException e) {
+			System.out.println(e.getMessage());
+		}
+		return listaD;
+	}
 }
