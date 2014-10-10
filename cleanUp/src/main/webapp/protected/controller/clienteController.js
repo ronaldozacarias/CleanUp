@@ -76,7 +76,7 @@ function clienteController($scope, $filter, $http) {
  /*---------  LIST DIARISTAS FROM DATABASE  ------------------------------*/
 	$http({
         url: '/cleanUp/protected/cliente/diaristas/listDiaristas',
-        method: "POST",
+        method: "GET",
         headers: {'Content-Type': 'application/json'}
     })
     .success(function (data, status, headers, config) {    	
