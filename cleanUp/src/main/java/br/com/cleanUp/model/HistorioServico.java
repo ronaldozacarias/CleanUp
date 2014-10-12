@@ -56,8 +56,8 @@ public class HistorioServico {
 	@Column(name="VALOR",length = 10, nullable = false)
 	private double valor;
 	
-	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
-	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
+//	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
+//	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")
@@ -131,14 +131,14 @@ public class HistorioServico {
 		this.valor = valor;
 	}
 
-	public List<ServicoTipoNotificacao> getServicoTipoNotificacoes() {
-		return servicoTipoNotificacoes;
-	}
-
-	public void setServicoTipoNotificacoes(
-			List<ServicoTipoNotificacao> servicoTipoNotificacoes) {
-		this.servicoTipoNotificacoes = servicoTipoNotificacoes;
-	}
+//	public List<ServicoTipoNotificacao> getServicoTipoNotificacoes() {
+//		return servicoTipoNotificacoes;
+//	}
+//
+//	public void setServicoTipoNotificacoes(
+//			List<ServicoTipoNotificacao> servicoTipoNotificacoes) {
+//		this.servicoTipoNotificacoes = servicoTipoNotificacoes;
+//	}
 
 	public StatusServico getStatus() {
 		return status;

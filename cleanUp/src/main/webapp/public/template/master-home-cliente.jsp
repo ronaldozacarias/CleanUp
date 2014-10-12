@@ -23,12 +23,8 @@
 		
 		<script type="text/javascript">
 
-			var app = angular.module("app", ["xeditable"]);
-			
-			app.run(function(editableOptions) {
-				  editableOptions.theme = 'bs2'; // bootstrap3 theme. Can be also 'bs2', 'default'
-			});
-
+			var app = angular.module("app", []);
+					
 		</script>
 	                    
     </head>

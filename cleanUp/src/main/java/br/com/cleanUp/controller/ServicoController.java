@@ -19,8 +19,10 @@ import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
+import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusServico;
+import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.TipoServico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
@@ -54,57 +56,20 @@ public class ServicoController {
 		
 		Cliente cliente = clienteService.findByIdUsuario(usuario.getId());
 		
-//		Endereco e = new Endereco();
-//		Endereco e1 = new Endereco();
-//		Endereco eDiarista = new Endereco();
-//		
-//		e.setLat(10);
-//		e.setLng(20);
-//		e.setLogradouro("Rua Padre Guedes");
-//		
-//		e1.setLat(21);
-//		e1.setLng(32);
-//		e1.setLogradouro("Av. Jo�o de Souza Lima");
-//		
-//		eDiarista.setCodigo(1);
-//		
 		List<Endereco> listaE = servicoVO.getEnderecos();
-//		listaE.add(e);
-//		listaE.add(e1);
-//		
-//		Cliente c = new Cliente();
-//		Diarista d = new Diarista();
-//		Cidade ci = new Cidade();
-//		Usuario u = new Usuario();
-//		Usuario u2 = new Usuario();
-//		
-//		c.setCodigo(1);
-//		d.setCodigo(1);
-//		ci.setCodigoCidade(1);
-//		u.setId(1);
-//		u2.setId(2);
-//		c.setCidade(ci);
-//		d.setCidade(ci);
-//		c.setUsuario(u2);
-//		d.setUsuario(u);
-//		d.setEndereco(e);
-//		
+
 		Servico servico = new Servico();
+		
+		servico.getNotificacao().setCliente(cliente);
+		servico.getNotificacao().setDiarista(servicoVO.getDiarista());
+		servico.getNotificacao().setDataEnvioNotificacao(new Date());
+		servico.getNotificacao().setNotificacaoDiarista(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
 		
 		servico.setStatus(StatusServico.PENDENTE);
 		servico.setCliente(cliente);
 		servico.setDiarista(servicoVO.getDiarista());
 		servico.setDataServico(servicoVO.getData());
 		servico.setDescricao(servicoVO.getDescricao());
-//		
-//		s.setCliente(c);
-//		s.setDataServico(new Date());
-//		s.setDescricao("Teste");
-//		s.setDiarista(d);
-//		s.setTipoServico(TipoServico.LAVAR);
-//		s.setValor(200);
-		
-//		s.setStatus(StatusServico.PENDENTE);
 		
 		try {
 			servicoService.save(servico, listaE);

@@ -2,6 +2,8 @@ package br.com.cleanUp.model;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -61,10 +64,15 @@ public class Servico {
 	@Column(name = "STATUS")
 	private StatusServico status;
 	
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_NOTIFICACAO")
+	private Notificacao notificacao;
+	
 	public  Servico() {
 		this.diarista = new Diarista();
 		this.cliente = new Cliente();
 		this.endereco = new Endereco();
+		this.notificacao = new Notificacao();
 	}
 	
 	public Servico(Integer codServico, TipoServico tipoServico,
@@ -151,4 +159,13 @@ public class Servico {
 	public void setStatus(StatusServico status) {
 		this.status = status;
 	}
+
+	public Notificacao getNotificacao() {
+		return notificacao;
+	}
+
+	public void setNotificacao(Notificacao notificacao) {
+		this.notificacao = notificacao;
+	}
+	
 }

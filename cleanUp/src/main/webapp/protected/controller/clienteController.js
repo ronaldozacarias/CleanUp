@@ -2,6 +2,7 @@ function clienteController($scope, $filter, $http) {
 	
 	$scope.url = "/cleanUp/protected/servico/add";
 	$scope.enderecos = [];
+	var count = 0;
 	
 	/*---------  SENDING SERVICO  -----------------------------------------*/
 	$scope.enviarServico = function(servicoForm) {
@@ -73,7 +74,7 @@ function clienteController($scope, $filter, $http) {
 	 
 	 
 
- /*---------  LIST DIARISTAS FROM DATABASE  ------------------------------*/
+ /*---------  LIST DIARISTAS FROM DATABASE  ------------------------------*/    
 	$http({
         url: '/cleanUp/protected/cliente/diaristas/listDiaristas',
         method: "GET",
@@ -81,7 +82,8 @@ function clienteController($scope, $filter, $http) {
     })
     .success(function (data, status, headers, config) {    	
     	$scope.diaristas = data;
-    	console.log($scope.diaristas);
+    	count++;
+    	console.log("Rodou pela " + count + "ª vez");
     })
     .error(function (data, status, headers, config) {
     	bootbox.dialog({
@@ -223,5 +225,36 @@ function clienteController($scope, $filter, $http) {
     });
 
  /*---------  END GOOGLE MAPS API  ------------------------------*/   
+    
+    
+    
+    
+    
+  /* ----------------  THREAD EM JAVASCRIPT ------------------------ */
+  
+    /*var intervalo = window.setInterval(function() {
+	
+	$http({
+        url: '/cleanUp/protected/cliente/diaristas/listDiaristas',
+        method: "GET",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .success(function (data, status, headers, config) {    	
+    	$scope.diaristas = data;
+    	count++;
+    	console.log("Rodou pela " + count + "ª vez");
+    })
+    .error(function (data, status, headers, config) {
+    	bootbox.dialog({
+    		title:"Erro inesperado!",
+            message: data
+        });
+    });
+	
+	}, 10000);
+
+window.setTimeout(function() {
+	clearInterval(intervalo);
+}, 30000); */
 	
 }

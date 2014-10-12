@@ -40,7 +40,7 @@ public class ServicoService {
 				serv.setDescricao(s.getDescricao());
 				serv.setDiarista(s.getDiarista());				
 				serv.setStatus(s.getStatus());
-				serv.setTipoServico(s.getTipoServico());
+				serv.setNotificacao(s.getNotificacao());
 				serv.setValor(s.getValor());
 				enderecoRepository.save(listaE.get(i));
 				serv.setEndereco(listaE.get(i));
