@@ -28,10 +28,10 @@
                         <a class="page-scroll" href="#services">como funciona</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                        <a class="page-scroll" href="#portfolio">Depoimentos</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#team">Team</a>
+                        <a class="page-scroll" href="#team">Time</a>
                     </li>
                     <li class="sco-btn-light">
                     	<a  href="login">ENTRAR</a>

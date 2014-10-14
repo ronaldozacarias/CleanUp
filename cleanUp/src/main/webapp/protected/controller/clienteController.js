@@ -81,9 +81,7 @@ function clienteController($scope, $filter, $http) {
         headers: {'Content-Type': 'application/json'}
     })
     .success(function (data, status, headers, config) {    	
-    	$scope.diaristas = data;
-    	count++;
-    	console.log("Rodou pela " + count + "ª vez");
+    	$scope.diaristas = data;    	
     })
     .error(function (data, status, headers, config) {
     	bootbox.dialog({

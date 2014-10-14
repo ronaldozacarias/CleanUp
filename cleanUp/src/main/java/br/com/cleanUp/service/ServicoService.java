@@ -3,11 +3,14 @@ package br.com.cleanUp.service;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
+import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.HistorioServico;
 import br.com.cleanUp.model.Servico;
@@ -112,6 +115,14 @@ public class ServicoService {
 			servicoRepository.delete(s);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Deletar o Servico");
+		}
+	}
+	
+	public List<Servico> listServiceToDiarista(Integer codDiarista) throws NegocioException{
+		try {
+			return servicoRepository.listarServicosPorDiarista(codDiarista);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Listar os Servico");
 		}
 	}
 }

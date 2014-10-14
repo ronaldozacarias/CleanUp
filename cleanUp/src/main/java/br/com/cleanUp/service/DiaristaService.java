@@ -11,6 +11,7 @@ import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Especialidade;
+import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.repository.DiaristaRepository;
 
 @Service
@@ -65,6 +66,14 @@ public class DiaristaService {
 	public Diarista findByCpf(String cpf) throws NegocioException {
 		try {
 			return diaristaRepository.findByCpf(cpf);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao tentar buscar diarista.");
+		}
+	}
+	
+	public Diarista findByUsuario(Usuario usuario) throws NegocioException {
+		try {
+			return diaristaRepository.findByUsuario(usuario);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao tentar buscar diarista.");
 		}

@@ -12,4 +12,7 @@ import br.com.cleanUp.model.Servico;
 public interface ServicoRepository extends CrudRepository<Servico, Integer> {
 	@Query("FROM Servico s where s.cliente.codigo =:codCliente")
 	ArrayList<Servico> listarServicosPorCliente(@Param("codCliente") Integer codCliente);
+	
+	@Query("FROM Servico s where s.diarista.codigo =:codDiarista")
+	ArrayList<Servico> listarServicosPorDiarista(@Param("codDiarista") Integer codDiarista);
 }

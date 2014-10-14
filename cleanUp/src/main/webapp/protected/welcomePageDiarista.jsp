@@ -37,12 +37,22 @@
   <!-- /navbar-inner --> 
 </div>
 <!-- /navbar -->
-<div class="subnavbar">
+<div class="subnavbar" ng-controller="diaristaController">
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
         <li class="active"><a href="home"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href=""><i class="icon-list-alt"></i><span>Notificações</span> </a> </li>
+        <li class="dropdown">
+        	<a href="" class="dropdown-toggle" data-toggle="dropdown">
+        		<i class="icon-list-alt"><span class="badge badge-info">{{notificacoes.length}}</span></i>
+        		<span>Notificações</span>
+        	</a>        
+	        <ul class="dropdown-menu">
+	            <li ng-repeat="notificacao in notificacoes">
+	            	<a href="">{{notificacao.notificacaoDiarista}} por {{notificacao.cliente.nome}}</a>
+	            </li>	            
+	        </ul>        
+        </li>
         <li><a href=""><i class="icon-paste"></i><span>Planos</span> </a></li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Mais..</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -433,4 +443,5 @@
       });
     </script><!-- /Calendar -->
     
-<%--     <script src="<c:url value='/resources/js/pages/clienteController.js' />"></script> --%>    
+    <script src="<c:url value='/protected/controller/diaristaController.js' />"></script>   
+    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>  
