@@ -34,7 +34,9 @@ public class DiaristaController {
 	Usuario usuario;
 	Cidade cidade;
 	Endereco endereco;
-	static ArrayList<Servico> SERVICO = new ArrayList<Servico>();
+	Integer idDiarista;
+	static ArrayList<Servico> SERVICO = new ArrayList<Servico>();	
+	ArrayList<Servico> listaDeServicoPorDiarista = new ArrayList<Servico>();
 
 	@Autowired
 	private DiaristaService diaristaService;
@@ -166,6 +168,43 @@ public class DiaristaController {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	// Alex teles alterei aki 
+		@RequestMapping(value = "servicopordiarista", method = RequestMethod.GET, produces = "application/json")
+		@ResponseBody
+		public ArrayList<Servico> buscaServicoPorDiarista(/* Id da Diarista */) {
+			idDiarista = 1;//id Fake aqui vai ter que pergar o id da diarista logada
+			new Thread() {
+				public void run() {
+					for (int i = 0; i < 2; i++) {
+						i = i - 1;
+						try {
+							try {
+								listaDeServicoPorDiarista = servicoService.todosServicoProDiarista(idDiarista);
+								if(listaDeServicoPorDiarista != null){
+									//teste no consolle traz aquantidade de servisso da diarista com id 1
+									System.err.println("Metodo de alex Retornou a quntidade de:  "+  listaDeServicoPorDiarista.size());
+									Thread.sleep(10000);
+								}else{
+									System.out.println("Remova as diarista null");
+								}
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}	
+						} catch (NegocioException e) {
+							try {
+								Thread.sleep(10000);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							System.out.println("A thread parou");
+						}
+					}
+				}
+			}.start();
+			return listaDeServicoPorDiarista;
+		}
 	
 	@RequestMapping(value = "listaDiaristaPorCidade", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
