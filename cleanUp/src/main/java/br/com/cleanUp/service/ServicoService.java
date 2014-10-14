@@ -19,17 +19,17 @@ import br.com.cleanUp.repository.ServicoRepository;
 @Service
 @Transactional
 public class ServicoService {
-	
+
 	@Autowired
 	private ServicoRepository servicoRepository;
-	
+
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	private HistoricoServicoRepository historicoServico;
 
-	public void save(Servico s, List<Endereco> listaE) throws NegocioException{
+	public void save(Servico s, List<Endereco> listaE) throws NegocioException {
 		DiaristaController dc = new DiaristaController();
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
 		try {
@@ -38,7 +38,7 @@ public class ServicoService {
 				serv.setCliente(s.getCliente());
 				serv.setDataServico(s.getDataServico());
 				serv.setDescricao(s.getDescricao());
-				serv.setDiarista(s.getDiarista());				
+				serv.setDiarista(s.getDiarista());
 				serv.setStatus(s.getStatus());
 				serv.setTipoServico(s.getTipoServico());
 				serv.setValor(s.getValor());
@@ -52,8 +52,8 @@ public class ServicoService {
 			throw new NegocioException("Erro ao Salvar Servico");
 		}
 	}
-	
-	public void edit(ArrayList<Servico> s)throws NegocioException{
+
+	public void edit(ArrayList<Servico> s) throws NegocioException {
 		try {
 			for (int i = 0; i < s.size(); i++) {
 				servicoRepository.delete(s.get(i).getCodServico());
@@ -63,29 +63,30 @@ public class ServicoService {
 			throw new NegocioException("Erro ao Salvar Servico");
 		}
 	}
-	
-	public void cancelarServico(Servico s)throws NegocioException{
+
+	public void cancelarServico(Servico s) throws NegocioException {
 		Servico serv = new Servico();
 		serv = this.findById(s);
-		
+
 		GregorianCalendar calendar = new GregorianCalendar();
 		int diaDoCancelamento = calendar.get(GregorianCalendar.DAY_OF_MONTH);
 		GregorianCalendar calendar2 = new GregorianCalendar();
 		calendar2.setTime(serv.getDataServico());
 		int diaDoServico = calendar2.get(GregorianCalendar.DAY_OF_MONTH);
-		
+
 		HistorioServico hs = new HistorioServico();
 		try {
 			if ((diaDoServico - diaDoCancelamento) <= 2) {
 				serv.setStatus(StatusServico.ATIVO);
-				throw new NegocioException("Cancelamento não pode ser Realizado");
-			}else{
+				throw new NegocioException(
+						"Cancelamento não pode ser Realizado");
+			} else {
 				hs.setCodServico(serv.getCodServico());
 				hs.setCliente(serv.getCliente());
 				hs.setDataServico(serv.getDataServico());
 				hs.setDescricao(serv.getDescricao());
 				hs.setDiarista(serv.getDiarista());
-				hs.setEndereco(serv.getEndereco());				
+				hs.setEndereco(serv.getEndereco());
 				hs.setStatus(StatusServico.INATIVO);
 				hs.setTipoServico(serv.getTipoServico());
 				hs.setValor(serv.getValor());
@@ -96,8 +97,8 @@ public class ServicoService {
 			throw new NegocioException("Erro ao Cancelar Servico!!");
 		}
 	}
-	
-	public Servico findById(Servico s) throws NegocioException{
+
+	public Servico findById(Servico s) throws NegocioException {
 		Servico serv = new Servico();
 		try {
 			serv = servicoRepository.findOne(s.getCodServico());
@@ -106,12 +107,41 @@ public class ServicoService {
 		}
 		return serv;
 	}
-	
-	public void removeServico(Servico s)throws NegocioException{
+
+	public void removeServico(Servico s) throws NegocioException {
 		try {
 			servicoRepository.delete(s);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Deletar o Servico");
 		}
+	}
+
+	// Alex Teles: Criei aki
+	public ArrayList<Servico> todosServicoProDiarista(Integer idDiarista)
+			throws NegocioException {
+		ArrayList<Servico> listaServico = new ArrayList<Servico>();
+		ArrayList<Servico> listaServicoPorDiarista = new ArrayList<Servico>();
+		try {
+			listaServico = (ArrayList<Servico>) servicoRepository.findAll();
+			for (Servico servico : listaServico) {
+				if (servico.getDiarista().getCodigo() == idDiarista) {
+					listaServicoPorDiarista.add(servico);
+				}
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao tentar lista todos o Sevisso");
+		}
+		// return listaServico;
+		return listaServicoPorDiarista;
+	}
+
+	public ArrayList<Servico> listaTodosServico() throws NegocioException {
+		ArrayList<Servico> listaServico = new ArrayList<Servico>();
+		try {
+			listaServico = (ArrayList<Servico>) servicoRepository.findAll();
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao tentar lista todos o Sevisso");
+		}
+		return listaServico;
 	}
 }
