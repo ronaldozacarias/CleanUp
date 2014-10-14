@@ -125,4 +125,15 @@ public class ServicoService {
 			throw new NegocioException("Erro ao Listar os Servico");
 		}
 	}
+	
+	public ArrayList<Servico> listaTodosServico() throws NegocioException {
+		ArrayList<Servico> listaServico = new ArrayList<Servico>();
+		try {
+			listaServico = (ArrayList<Servico>) servicoRepository.findAll();
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao tentar lista todos o Sevisso");
+		}
+		return listaServico;
+	}
+	
 }
