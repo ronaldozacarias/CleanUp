@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,19 +33,15 @@ public class Notificacao {
 	@JoinColumn(name = "ID_CLIENTE")
 	private Cliente cliente;
 	
-	@Column(name = "NOTIFICACAO_DIARISTA", nullable = true)
-	private String notificacaoDiarista;
-	
-	@Column(name = "NOTIFICACAO_CLIENTE", nullable = true)
-	private String notificacaoCiente;
+	@Column(name = "DESCRICAO", nullable = true)
+	private String descricaoNotificacao;
 	
 	@Column(name = "DH_ENVIO_DA_NOTIFICACAO")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataEnvioNotificacao;
-	
-	@Column(name = "DH_VISUALIZACAO_DA_NOTIFICACAO", nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date visualizacaoNotificaao;
+		
+	@Enumerated(EnumType.STRING)
+	private StatusNotificacao status;
 	
 	public int getIdNotificacao() {
 		return idNotificacao;
@@ -63,17 +61,11 @@ public class Notificacao {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public String getNotificacaoDiarista() {
-		return notificacaoDiarista;
+	public String getDescricaoNotificacao() {
+		return descricaoNotificacao;
 	}
-	public void setNotificacaoDiarista(String notificacaoDiarista) {
-		this.notificacaoDiarista = notificacaoDiarista;
-	}
-	public String getNotificacaoCiente() {
-		return notificacaoCiente;
-	}
-	public void setNotificacaoCiente(String notificacaoCiente) {
-		this.notificacaoCiente = notificacaoCiente;
+	public void setDescricaoNotificacao(String descricaoNotificacao) {
+		this.descricaoNotificacao = descricaoNotificacao;
 	}
 	public Date getDataEnvioNotificacao() {
 		return dataEnvioNotificacao;
@@ -81,11 +73,11 @@ public class Notificacao {
 	public void setDataEnvioNotificacao(Date dataEnvioNotificacao) {
 		this.dataEnvioNotificacao = dataEnvioNotificacao;
 	}
-	public Date getVisualizacaoNotificaao() {
-		return visualizacaoNotificaao;
+	public StatusNotificacao getStatus() {
+		return status;
 	}
-	public void setVisualizacaoNotificaao(Date visualizacaoNotificaao) {
-		this.visualizacaoNotificaao = visualizacaoNotificaao;
+	public void setStatus(StatusNotificacao status) {
+		this.status = status;
 	}	
 
 }

@@ -7,10 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import br.com.cleanUp.exception.NegocioException;
+import br.com.cleanUp.model.Cliente;
+import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Notificacao;
+import br.com.cleanUp.model.Usuario;
+import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.NotificacaoService;
+import br.com.cleanUp.util.AtributoDeSessao;
 
 @Controller
 @RequestMapping(value = "/protected/notificacoes")
@@ -19,11 +26,19 @@ public class NotificacaoController {
 	@Autowired
 	private NotificacaoService notificacoesService;
 	
+	@Autowired
+	private DiaristaService diaristaService;
+	
 	@RequestMapping(value = "/getNotificacoes", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Notificacao> notificacoes() throws NegocioException {
+		
+		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
 
-		List<Notificacao> listaDeNotificacoes = notificacoesService.todasNotificacoesDiaristaList();
+		Diarista diarista = diaristaService.findByUsuario(usuario);
+
+		List<Notificacao> listaDeNotificacoes = notificacoesService.todasNotificacoesDiaristaList(diarista.getCodigo());
 
 		return listaDeNotificacoes;
 

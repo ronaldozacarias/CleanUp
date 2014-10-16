@@ -69,7 +69,7 @@
 <!-- /subnavbar -->
 <div class="main" ng-controller="clienteController">
 
-<!-- 	MODAL --------------------------------------------------------------------------->
+	<!-- 	MODAL --------------------------------------------------------------------------->
 	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
@@ -85,46 +85,56 @@
 				<div class="pull-left">
 					<div class="inputsCliente">
 						<div class="form-group">
-							<label for="date">Data do Serviço</label> <input
-								ng-model="data" type="date" id="date" name="input"
-								placeholder="dd-MM-yyyy" min="10-07-2014" required />
+							<label for="date">Data do Serviço</label> <input ng-model="data"
+								type="date" id="date" name="input" placeholder="dd-MM-yyyy"
+								min="10-07-2014" required />
 						</div>
 
 						<div class="form-group">
 							<label for="desc">Descrição do serviço, quantidade de
 								cômodos e espaço físico.</label>
 							<textarea id="desc" ng-model="descricao" required></textarea>
-						</div>   
+						</div>
 
-						<label for="desc">Endereço</label>						
+						<label for="desc">Endereço</label>
 						<div class="enderecos input-append">
 							<p class="campoEnde">
-								<input ng-model="logradouro" placeholder="Digite um endereço e confirme no botão (+)" class="txtEndereco span2 m-wrap" type="text">
-								<button class=" btn btn-success" ng-click="addEndereco()" type="button">+</button>
+								<input ng-model="logradouro"
+									placeholder="Digite um endereço e confirme no botão (+)"
+									class="txtEndereco span2 m-wrap" type="text">
+								<button class=" btn btn-success" ng-click="addEndereco()"
+									type="button">+</button>
 							</p>
 						</div>
-						
-						<div ng-show="enderecos.length > 0"class="input-group">
-	                        <table style="width:520px;" class="table table-striped table-hover table-condensed">  
-	                            <tr ng-repeat="endereco in enderecos" class="item-unchecked">
-	                                <td style="width:470px;">{{endereco.logradouro}}</td>
-	                                <td>
-	                                    <button class="btn btn-danger" ng-click="removeEndereco($index)">x</button>
-	                                </td>
-	                            </tr>
-	                        </table>
-	                    </div>
-						
+
+						<div ng-show="enderecos.length > 0" class="input-group">
+							<table style="width: 520px;"
+								class="table table-striped table-hover table-condensed">
+								<tr ng-repeat="endereco in enderecos" class="item-unchecked">
+									<td style="width: 470px;">{{endereco.logradouro}}</td>
+									<td>
+										<button class="btn btn-danger"
+											ng-click="removeEndereco($index)">x</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+
 						<div hidden id="mapa" style="height: 400px; width: 400px"></div>
 
-						<input type="hidden" ng-model="lat" id="txtLatitude" name="txtLatitude" /> 
-						<input type="hidden" ng-model="lng" id="txtLongitude" name="txtLongitude" />
+						<input type="hidden" ng-model="lat" id="txtLatitude"
+							name="txtLatitude" /> <input type="hidden" ng-model="lng"
+							id="txtLongitude" name="txtLongitude" />
 
 					</div>
 				</div>
 
 			</div>
 			<div class="modal-footer">
+				<div class="alert" ng-show="arrayEnd">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>Obrigatório!</strong>{{msg}}
+				</div>
 				<button type="submit" class="btn btn-primary"
 					ng-click="enviarServico(servicoForm)">Enviar</button>
 			</div>
@@ -323,16 +333,21 @@
 <script src="<c:url value='/resources/js/js-template/infobox.js' />"></script>
 
 <!-- Agrupamento dos marcadores -->
-<script src="<c:url value='/resources/js/js-template/markerclusterer.js' />"></script>
+<script
+	src="<c:url value='/resources/js/js-template/markerclusterer.js' />"></script>
 <script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>
 <script src="<c:url value='/resources/js/jquery-ui.custom.mim.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/bootstrap.js' />"></script>
 <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/signin.js' />"></script>
-<script src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
+<script
+	src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>
 <script src="<c:url value='/resources/js/checklist-model.js' />"></script>
-<script src="<c:url value='/protected/controller/clienteController.js' />"></script>
-<script src="<c:url value='/resources/js/angular-xeditable-0.1.8/js/xeditable.min.js' />"></script>
-<script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
+<script
+	src="<c:url value='/protected/controller/clienteController.js' />"></script>
+<script
+	src="<c:url value='/resources/js/angular-xeditable-0.1.8/js/xeditable.min.js' />"></script>
+<script
+	src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
 

@@ -2,9 +2,9 @@ package br.com.cleanUp.model;
 
 public enum TipoNotificacao {
 	
-    SOLICITACAO_DO_CLIENTE("Seus serviços foram solicitados "), 
-    CANCELAMENTO_DO_CLIENTE("Seus serviços foram cancelados pelo cliente "),
-    SOLICITACAO_CLIENTE_PENDENTE("Aguardando confimação"),
+    SOLICITACAO_DO_CLIENTE("quer contratá-la"), 
+    CANCELAMENTO_DO_CLIENTE("cancelou a solicitação"),
+    SOLICITACAO_CLIENTE_PENDENTE("esta aguardando sua confimação"),
     CONFIRMACAO_DE_SERVICO_PELO_CLIENTE("Sua solicitação foi confirmada"),
     CONFIRMACAO_DE_SOLICITACAO("Sua solicitação foi confirmada"),
     CANCELAMENTO_DE_SOLICITACAO("Sua solicitação foi confirmada"),;

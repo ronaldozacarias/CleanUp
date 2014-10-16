@@ -1,6 +1,7 @@
 package br.com.cleanUp.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -13,8 +14,11 @@ import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.HistorioServico;
+import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusNotificacao;
 import br.com.cleanUp.model.StatusServico;
+import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.repository.EnderecoRepository;
 import br.com.cleanUp.repository.HistoricoServicoRepository;
 import br.com.cleanUp.repository.ServicoRepository;
@@ -32,18 +36,25 @@ public class ServicoService {
 	@Autowired
 	private HistoricoServicoRepository historicoServico;
 
-	public void save(Servico s, List<Endereco> listaE) throws NegocioException{
+	public void save(Servico s, List<Endereco> listaE, Notificacao noti) throws NegocioException{
 		DiaristaController dc = new DiaristaController();
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
 		try {
 			for (int i = 0; i < listaE.size(); i++) {
 				Servico serv = new Servico();
+				Notificacao notificacao = new Notificacao();
+				notificacao.setCliente(noti.getCliente());
+				notificacao.setDiarista(noti.getDiarista());
+				notificacao.setDataEnvioNotificacao(new Date());
+				notificacao.setDescricaoNotificacao(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
+				notificacao.setStatus(StatusNotificacao.PENDENTE);
+				
 				serv.setCliente(s.getCliente());
 				serv.setDataServico(s.getDataServico());
 				serv.setDescricao(s.getDescricao());
 				serv.setDiarista(s.getDiarista());				
 				serv.setStatus(s.getStatus());
-				serv.setNotificacao(s.getNotificacao());
+				serv.setNotificacao(notificacao);
 				serv.setValor(s.getValor());
 				enderecoRepository.save(listaE.get(i));
 				serv.setEndereco(listaE.get(i));

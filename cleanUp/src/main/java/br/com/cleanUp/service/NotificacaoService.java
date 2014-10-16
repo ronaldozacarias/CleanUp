@@ -32,24 +32,11 @@ public class NotificacaoService {
 	@Autowired
 	private DiaristaService diaristaService;
 	
-	public List<Notificacao> todasNotificacoesDiaristaList() throws NegocioException{
+	public List<Notificacao> todasNotificacoesDiaristaList(int idDiarista) throws NegocioException{
 		
-		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
-				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
-		
-		Diarista diarista = diaristaService.findByUsuario(usuario);
-		
-		List<Servico> servicosDaDiarista = new ArrayList<Servico>();
-		
-		servicosDaDiarista = servicoService.listServiceToDiarista(diarista.getCodigo());
-		
-		List<Notificacao> notificacoesDiarista = new ArrayList<Notificacao>();
-		
-		for(int i = 0 ; i < servicosDaDiarista.size(); i++){
-			notificacoesDiarista.add(servicosDaDiarista.get(i).getNotificacao());
-		}
-					
+		List<Notificacao> notificacoesDiarista = notificacaoRepository.findByTopTenNotifications(idDiarista);
 		return notificacoesDiarista;
+		
 	}
 
 }

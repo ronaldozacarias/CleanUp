@@ -21,6 +21,7 @@ import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusNotificacao;
 import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.TipoServico;
@@ -58,21 +59,23 @@ public class ServicoController {
 		
 		List<Endereco> listaE = servicoVO.getEnderecos();
 
-		Servico servico = new Servico();
-		
-		servico.getNotificacao().setCliente(cliente);
-		servico.getNotificacao().setDiarista(servicoVO.getDiarista());
-		servico.getNotificacao().setDataEnvioNotificacao(new Date());
-		servico.getNotificacao().setNotificacaoDiarista(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
+		Servico servico = new Servico();		
+		Notificacao notificacao = new Notificacao();
+		notificacao.setCliente(cliente);
+		notificacao.setDiarista(servicoVO.getDiarista());
+		notificacao.setDataEnvioNotificacao(new Date());
+		notificacao.setDescricaoNotificacao(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
+		notificacao.setStatus(StatusNotificacao.PENDENTE);
 		
 		servico.setStatus(StatusServico.PENDENTE);
+		servico.setNotificacao(notificacao);
 		servico.setCliente(cliente);
 		servico.setDiarista(servicoVO.getDiarista());
 		servico.setDataServico(servicoVO.getData());
 		servico.setDescricao(servicoVO.getDescricao());
 		
 		try {
-			servicoService.save(servico, listaE);
+			servicoService.save(servico, listaE, notificacao);
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		}

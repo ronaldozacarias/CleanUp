@@ -21,10 +21,10 @@ public class Endereco {
 	@Column(name = "LOGRADOURO", length = 150, nullable = false)
 	private String logradouro;
 	
-	@Column(name = "LATITUDE")
+	@Column(name = "LATITUDE", precision=19, scale=7)
 	private BigDecimal lat;
 	
-	@Column(name = "LOGITUDE")
+	@Column(name = "LOGITUDE", precision=19, scale=7)
 	private BigDecimal lng;
 	
 	public Endereco(){

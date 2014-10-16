@@ -9,6 +9,12 @@ Bootstrap Admin Template by EGrappler.com
 */
 
 /* =============== Estilos do autocomplete =============== */
+.notify{
+	max-height: 100px;
+	max-width: 200px;
+	overflow-y: auto;
+  	overflow-x: hidden;
+}
 
 .input-append .add-on, .input-append .btn{
 	margin-top: -6px !important;

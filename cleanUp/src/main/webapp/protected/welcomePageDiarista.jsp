@@ -44,12 +44,12 @@
         <li class="active"><a href="home"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
         <li class="dropdown">
         	<a href="" class="dropdown-toggle" data-toggle="dropdown">
-        		<i class="icon-list-alt"><span class="badge badge-info">{{notificacoes.length}}</span></i>
+        		<i class="icon-list-alt"><span class="badge badge-info" ng-show="notificacoes.length > 0">{{notificacoes.length}}</span></i>
         		<span>Notificações</span>
         	</a>        
-	        <ul class="dropdown-menu">
-	            <li ng-repeat="notificacao in notificacoes">
-	            	<a href="">{{notificacao.notificacaoDiarista}} por {{notificacao.cliente.nome}}</a>
+	        <ul class="dropdown-menu notify" ng-show="notificacoes.length > 0">
+	            <li  ng-repeat="notificacao in notificacoes">
+	            	<a href="">{{notificacao.cliente.nome}} {{notificacao.descricaoNotificacao}}</a>
 	            </li>	            
 	        </ul>        
         </li>

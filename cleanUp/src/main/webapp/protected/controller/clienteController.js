@@ -3,6 +3,8 @@ function clienteController($scope, $filter, $http) {
 	$scope.url = "/cleanUp/protected/servico/add";
 	$scope.enderecos = [];
 	var count = 0;
+	$scope.arrayEnd = false;
+	$scope.msg = '';
 	
 	/*---------  SENDING SERVICO  -----------------------------------------*/
 	$scope.enviarServico = function(servicoForm) {
@@ -16,8 +18,14 @@ function clienteController($scope, $filter, $http) {
 				diarista:$scope.diarista
 		};
 		
+		if($scope.enderecos.length <= 0){
+			$scope.msg = ' Para adicionar um endereço, clique no botão verde "+"';
+			$scope.arrayEnd = true;
+			
+		}
+		
 		if($scope.descricao != '' &&
-		   $scope.data != ''){			
+		   $scope.data != '' && $scope.enderecos.length > 0){			
 			
 			console.log("INTO");
 			
@@ -50,7 +58,13 @@ function clienteController($scope, $filter, $http) {
                 lat: $scope.lat,
                 lng: $scope.lng
             });
-            console.log($scope.enderecos);
+            
+            if($scope.enderecos.length > 0){
+            	$scope.arrayEnd = false;
+            }            
+        }else{
+        	$scope.msg = ' É necessário que digite um endereço';
+        	$scope.arrayEnd = true;
         }
 
         /*---------  CLEAN INPUT AFTER ADD ENDERECO  ------------------------------*/
