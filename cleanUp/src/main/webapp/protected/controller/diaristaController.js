@@ -28,7 +28,7 @@ function diaristaController($scope, $filter, $http) {
 			
 			listarNotificacoes();
 			
-		}, 10000);
+		}, 100000);
 	}
 	
 }

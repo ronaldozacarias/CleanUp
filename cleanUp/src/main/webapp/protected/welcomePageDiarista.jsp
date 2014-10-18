@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-
+<div>
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
@@ -43,8 +43,8 @@
       <ul class="mainnav">
         <li class="active"><a href="home"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
         <li class="dropdown">
-        	<a href="" class="dropdown-toggle" data-toggle="dropdown">
-        		<i class="icon-list-alt"><span class="badge badge-info" ng-show="notificacoes.length > 0">{{notificacoes.length}}</span></i>
+        	<a href="/cleanUp/protected/diarista/notificacoes" class="dropdown-toggle" data-toggle="dropdown">
+        		<i class="icon-warning-sign"><span class="badge badge-info" ng-show="notificacoes.length > 0">{{notificacoes.length}}</span></i>
         		<span>Notificações</span>
         	</a>        
 	        <ul class="dropdown-menu notify" ng-show="notificacoes.length > 0">
@@ -161,11 +161,13 @@
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-              <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span
-                                        class="shortcut-label">Apps</span> </a><a href="javascript:;" class="shortcut"><i
-                                            class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span
-                                                class="shortcut-label">Users</span> </a><a href="javascript:;" class="shortcut"><i
-                                                    class="shortcut-icon icon-file"></i><span class="shortcut-label">Notes</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i> <span class="shortcut-label">Photos</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span> </a> </div>
+              <div class="shortcuts"> 
+              	<a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">Apps</span> </a>
+                <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a>
+                <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a>
+                <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a>
+                <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Users</span> </a>
+                <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i><span class="shortcut-label">Notes</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i> <span class="shortcut-label">Photos</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span> </a> </div>
               <!-- /shortcuts --> 
             </div>
             <!-- /widget-content --> 
@@ -312,7 +314,87 @@
 </div>
 <!-- /footer --> 
 <!-- Le javascript
-================================================== --> 
+================================================== -->
+
+<!-- MODAL -->
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true" ng-click="reset()">×</button>
+			<h3 id="myModalLabel">Contactar {{diarista.nome}}</h3>
+		</div>
+		<form name="servicoForm" method="post">
+			<div class="modal-body">
+				<input type="hidden" required ng-model="diarista.codigo" name="id"
+					value="{{diarista.codigo}}" />
+
+				<div class="pull-left">
+					<div class="inputsCliente">
+						<div class="form-group">
+							<label for="date">Data do Serviço</label> <input ng-model="data"
+								type="date" id="date" name="input" placeholder="dd-MM-yyyy"
+								min="10-07-2014" required />
+						</div>
+
+						<div class="form-group">
+							<label for="desc">Descrição do serviço, quantidade de
+								cômodos e espaço físico.</label>
+							<textarea id="desc" ng-model="descricao" required></textarea>
+						</div>
+
+						<label for="desc">Endereço</label>
+						<div class="enderecos input-append">
+							<p class="campoEnde">
+								<input ng-model="logradouro"
+									placeholder="Digite um endereço e confirme no botão (+)"
+									class="txtEndereco span2 m-wrap" type="text">
+								<button class=" btn btn-success" ng-click="addEndereco()"
+									type="button">+</button>
+							</p>
+						</div>
+
+						<div ng-show="enderecos.length > 0" class="input-group">
+							<table style="width: 520px;"
+								class="table table-striped table-hover table-condensed">
+								<tr ng-repeat="endereco in enderecos" class="item-unchecked">
+									<td style="width: 470px;">{{endereco.logradouro}}</td>
+									<td>
+										<button class="btn btn-danger"
+											ng-click="removeEndereco($index)">x</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<div hidden id="mapa" style="height: 400px; width: 400px"></div>
+
+						<input type="hidden" ng-model="lat" id="txtLatitude"
+							name="txtLatitude" /> <input type="hidden" ng-model="lng"
+							id="txtLongitude" name="txtLongitude" />
+
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<div class="alert" ng-show="arrayEnd">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>Obrigatório!</strong>{{msg}}
+				</div>
+				<button type="submit" class="btn btn-primary"
+					ng-click="enviarServico(servicoForm)">Enviar</button>
+			</div>
+		</form>
+	</div>
+
+
+<!-- END MODAL -->
+
+
+
+</div> 
 <!-- Placed at the end of the document so the pages load faster --> 
 <!-- jQuery Version 1.11.0 -->    
 <script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>

@@ -46,6 +46,12 @@ public class DiaristaController {
 	
 	@Autowired
 	private ServicoService servicoService;
+	
+	@RequestMapping(value = "/notificacoes", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGet() {
+        return new ModelAndView("notificacoes");
+    }
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
