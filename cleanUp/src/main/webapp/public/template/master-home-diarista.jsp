@@ -20,6 +20,7 @@
     
 		<link href="<c:url value='/resources/css/css-template/styleDashBord.css' />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/pages/dashboard.css' />" rel="stylesheet" type="text/css"/>
+		<script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
 
 	    
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->

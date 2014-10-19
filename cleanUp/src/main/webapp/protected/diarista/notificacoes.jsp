@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div>
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
@@ -117,11 +116,14 @@
 					
 						<div class="accordion-group" ng-repeat="notificacao in notificacoes">
 	                          <div class="accordion-heading">
-	                               	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
+	                               	<a class="accordion-toggle" data-toggle="modal" data-target="#myModal" 
+	                               	   data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" 
+	                               	   ng-click="selectedCliente(notificacao.cliente);">
 	                                    Cliente: {{notificacao.cliente.nome}}
 	                                </a>
 	                          </div>
-	                          <div id="collapseOne" class="accordion-body collapse in">
+	                          <div class="accordion-body collapse in">
 	                                <div class="accordion-inner">
 	                                   	{{notificacao.cliente.nome}} {{notificacao.descricaoNotificacao}} em 
 	                                   	{{notificacao.dataEnvioNotificacao | date:'dd/MM/yyyy'}}
@@ -135,9 +137,6 @@
 				
 		    </div> <!-- /spa12 -->
 		    
-		    
-		    
-		    
 	      	
 	      	
 	      	
@@ -146,6 +145,64 @@
 	    </div> <!-- /container -->
     
 	</div> <!-- /main-inner -->
+	
+	
+	
+	<!-- MODAL -->
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true" ng-click="reset()">×</button>
+			<h3 id="myModalLabel">Serviços solicitados por {{cliente.nome}}</h3>
+		</div>
+		<form name="servicoForm" method="post">
+			<div class="modal-body">
+				<input type="hidden" required ng-model="notificacao.cliente.codigo" name="id"
+					value="{{notificacao.cliente.codigo}}" />
+					
+					<table style="width:50%" class="span6">
+					<tr>
+					
+						<td>
+						<div class="accordion-group" ng-repeat="notificacao in notificacoes">
+	                          <div class="accordion-heading">
+	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
+	                               	<a class="accordion-toggle" data-toggle="modal" data-target="#myModal" 
+	                               	   data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+	                                    Data: dd/MM/yyy
+	                                </a>
+	                          </div>
+	                          <div class="accordion-body collapse in">
+	                                <div class="accordion-inner">
+	                                   	Endereço </br>
+	                                   	Decrição </br> 
+	                                   	<button class="btn btn-primary">Aceitar</button>
+	                                	<button class="btn btn-danger">Recusar</button>	                                 	
+	                                </div>	                                                                
+	                          </div>
+	                     </div>
+	                     </td>	                     
+	                   </tr>					
+					</table>
+					<div id="map-canvas" class="span6"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="alert" ng-show="arrayEnd">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>Obrigatório!</strong>{{msg}}
+				</div>
+				<button type="submit" class="btn btn-primary"
+					ng-click="enviarServico(servicoForm)">Enviar</button>
+			</div>
+		</form>
+	</div>
+
+<!-- END MODAL -->
+	
+	
+	
 	    
 </div> <!-- /main -->
     
@@ -207,10 +264,7 @@
 
 	</div> <!-- /extra-inner -->
 
-</div> <!-- /extra -->
-
-
-    
+</div> <!-- /extra -->    
     
 <div class="footer">
 	
@@ -255,7 +309,6 @@
 <script
 	src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>
-<script src="<c:url value='/resources/js/checklist-model.js' />">
+<script src="<c:url value='/resources/js/checklist-model.js' />"></script>
 
-</script><script src="<c:url value='/protected/controller/diaristaController.js' />"></script>   
-    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
+<script src="<c:url value='/protected/controller/diaristaController.js' />"></script>

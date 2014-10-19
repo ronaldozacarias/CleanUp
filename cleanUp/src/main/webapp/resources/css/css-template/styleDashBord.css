@@ -9,7 +9,16 @@ Bootstrap Admin Template by EGrappler.com
 */
 
 /* =============== Estilos do autocomplete =============== */
+#map-canvas {
+  width:400px;
+  height:400px;
+}
 
+#myModal{
+	width: 970px !important;
+	margin: -300px 0 0 -500px !important;
+	height: 600px !importante;
+}
 
 .accordion-group{
 	margin-bottom: 10px;
