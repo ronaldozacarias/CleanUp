@@ -142,7 +142,7 @@ public class ClienteController {
 	public List<Diarista> listarDiaristaPorEspecialidade(/*Especialidade e*/){
 		ArrayList<Diarista> listaDiaristaPorEspecialidade = new ArrayList<Diarista>();
 		Especialidade e = new Especialidade();
-		e.setCodigoEspecialidade(5);
+		e.setCodigoEspecialidade(4);
 		try {
 			listaDiaristaPorEspecialidade = (ArrayList<Diarista>) this.diaristaServico.listaDeDiaristaPorEspecialidade(e);
 		} catch (NegocioException e2) {

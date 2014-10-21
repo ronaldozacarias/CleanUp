@@ -86,10 +86,12 @@ public class DiaristaService {
 		try {
 			listaDeDiarista = (ArrayList<Diarista>) this.listToDiarista();
 			for (int i = 0; i < listaDeDiarista.size(); i++) {
-				for (int j = 0; j < listaDeDiarista.get(j).getEspecialidades().size(); j++) {
+				for (int j = 0; j < listaDeDiarista.get(i).getEspecialidades().size(); j++) {
 					if (listaDeDiarista.get(i).getEspecialidades().get(j).getCodigoEspecialidade() == e.getCodigoEspecialidade()) {
 						d = listaDeDiarista.get(i);
 						listaDeDiaristaPorEspecialidade.add(d);
+						System.out.println(d.getNome());
+						d = new Diarista();
 					}
 				}
 			}
