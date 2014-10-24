@@ -11,6 +11,7 @@ public class PessoaVO {
 	private String email;
 	private String senha;
 	private int tipo;
+	private int codigo;
 	
 	public String getNome() {
 		return nome;
@@ -65,6 +66,13 @@ public class PessoaVO {
 	}
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
-	}	
+	}
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	
 	
 }

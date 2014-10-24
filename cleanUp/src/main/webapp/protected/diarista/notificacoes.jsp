@@ -117,7 +117,7 @@
 						<div class="accordion-group" ng-repeat="notificacao in notificacoes">
 	                          <div class="accordion-heading">
 	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
-	                               	<a class="accordion-toggle" data-toggle="modal" data-target="#myModal" 
+	                               	<a class="accordion-toggle" data-toggle="modal" data-target="#myModal2" 
 	                               	   data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" 
 	                               	   ng-click="selectedCliente(notificacao.cliente);">
 	                                    Cliente: {{notificacao.cliente.nome}}
@@ -150,7 +150,7 @@
 	
 	<!-- MODAL -->
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
+<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
@@ -162,26 +162,28 @@
 				<input type="hidden" required ng-model="notificacao.cliente.codigo" name="id"
 					value="{{notificacao.cliente.codigo}}" />
 					
-					<table style="width:50%" class="span6">
+					<table class="span6 tableservicos">
 					<tr>
 					
 						<td>
-						<div class="accordion-group" ng-repeat="notificacao in notificacoes">
+						<div class="scroll-container">
+						<div class="accordion-group" ng-repeat="servico in servicos">
 	                          <div class="accordion-heading">
 	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
-	                               	<a class="accordion-toggle" data-toggle="modal" data-target="#myModal" 
-	                               	   data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-	                                    Data: dd/MM/yyy
+	                               	<a class="accordion-toggle"
+	                               	   data-toggle="collapse" data-parent="#accordion2">
+	                                   Data: {{servico.dataServico | date:'dd/MM/yyyy'}}
 	                                </a>
 	                          </div>
 	                          <div class="accordion-body collapse in">
 	                                <div class="accordion-inner">
-	                                   	Endereço </br>
-	                                   	Decrição </br> 
+	                                   	Endereço: {{servico.endereco.logradouro}} </br>
+	                                   	Decrição: {{servico.descricao}} </br></br> 
 	                                   	<button class="btn btn-primary">Aceitar</button>
 	                                	<button class="btn btn-danger">Recusar</button>	                                 	
 	                                </div>	                                                                
 	                          </div>
+	                     </div>
 	                     </div>
 	                     </td>	                     
 	                   </tr>					

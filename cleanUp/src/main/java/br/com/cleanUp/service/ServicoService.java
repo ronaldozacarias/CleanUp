@@ -146,5 +146,12 @@ public class ServicoService {
 		}
 		return listaServico;
 	}
+
+	public List<Servico> findByServicosPorCliente(int codigoCliente, Integer codigoDiarista)throws NegocioException {
+		
+		List<Servico> servicosPorCliente = servicoRepository.listarServicoPorClienteEDiarista(codigoCliente, codigoDiarista);
+		
+		return servicosPorCliente;
+	}
 	
 }

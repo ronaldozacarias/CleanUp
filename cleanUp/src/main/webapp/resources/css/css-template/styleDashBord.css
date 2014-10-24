@@ -9,15 +9,29 @@ Bootstrap Admin Template by EGrappler.com
 */
 
 /* =============== Estilos do autocomplete =============== */
-#map-canvas {
-  width:400px;
-  height:400px;
+.tableservicos{
+	width: 50%;
 }
 
-#myModal{
+.scroll-container{
+	max-height: 370px;
+	overflow-y: hidden;
+}
+
+.scroll-container:hover{
+	max-height: 370px;
+	overflow-y: auto;
+}
+
+#map-canvas {
+  width:390px;
+  height:370px;
+}
+
+#myModal2{
 	width: 970px !important;
 	margin: -300px 0 0 -500px !important;
-	height: 600px !importante;
+	height: 700px !importante;	
 }
 
 .accordion-group{

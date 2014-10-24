@@ -6,9 +6,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -27,13 +29,14 @@ import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.TipoServico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
+import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.PessoaVO;
 import br.com.cleanUp.vo.ServicoVO;
 
 @Controller
-@RequestMapping("/protected/servico/")
+@RequestMapping(value = "/protected/servico/")
 public class ServicoController {
 	
 	@Autowired
@@ -41,6 +44,9 @@ public class ServicoController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private DiaristaService diaristaService;
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -92,5 +98,38 @@ public class ServicoController {
 		} catch (NegocioException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+//	@RequestMapping(value="listarServicosPorCliente", method = RequestMethod.POST, produces = "application/json")
+//	@ResponseBody
+//	public List<Servico> servicosPorCliente(@RequestBody PessoaVO pessoa)throws NegocioException {
+//		
+//		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+//				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
+//
+//		Diarista diarista = diaristaService.findByUsuario(usuario);
+//		
+//		List<Servico> servicosPorCliente = servicoService.findByServicosPorCliente(pessoa.getCodigo(), diarista.getCodigo());
+//
+//		System.out.print(pessoa.getCodigo() + "#########################");
+//		
+//		return servicosPorCliente;
+//		
+//	}	
+	
+	
+	@RequestMapping(value = "listarServicosPorCliente", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Servico> servicosPorCliente(@RequestParam("codigoCliente") int codigoCliente) throws NegocioException {
+		
+		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
+
+		Diarista diarista = diaristaService.findByUsuario(usuario);
+		
+		List<Servico> servicosPorCliente = servicoService.findByServicosPorCliente(codigoCliente, diarista.getCodigo());
+		
+		return servicosPorCliente;
+		
 	}
 }
