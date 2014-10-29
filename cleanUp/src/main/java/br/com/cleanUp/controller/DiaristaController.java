@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,11 +20,14 @@ import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusNotificacao;
 import br.com.cleanUp.model.StatusServico;
+import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.EspecialidadeService;
 import br.com.cleanUp.service.ServicoService;
+import br.com.cleanUp.vo.AceitarServicoVO;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
@@ -51,6 +55,12 @@ public class DiaristaController {
     @ResponseBody
     public ModelAndView doGet() {
         return new ModelAndView("notificacoes");
+    }
+	
+	@RequestMapping(value = "/servicos", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetServicos() {
+        return new ModelAndView("servicosDiarista");
     }
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
@@ -161,15 +171,17 @@ public class DiaristaController {
 		return this.SERVICO;
 	}
 	
-	@RequestMapping(value = "confirmacao", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/confirmacao", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void confirmacaoDeServico(/*Servico serv*/){
-		//this.servico = serv;
+	public void confirmacaoDeServico(@RequestBody AceitarServicoVO aceitarServicoVO){
+
 		try {
-			for (int i = 0; i < this.SERVICO.size(); i++) {
-				this.SERVICO.get(i).setStatus(StatusServico.ATIVO);
+			for (int i = 0; i < aceitarServicoVO.getServicosVO().size(); i++) {
+				aceitarServicoVO.getServicosVO().get(i).setStatus(StatusServico.ATIVO);
+				aceitarServicoVO.getServicosVO().get(i).getNotificacao().setStatus(StatusNotificacao.CONCLUIDA);
+				aceitarServicoVO.getServicosVO().get(i).getNotificacao().setDescricaoNotificacao(TipoNotificacao.CONFIRMACAO_DE_SOLICITACAO.getTipoNotificacao());
 			}
-			this.servicoService.edit(this.SERVICO);
+			this.servicoService.edit(aceitarServicoVO.getServicosVO());
 		} catch (NegocioException e) {
 			System.out.println(e.getMessage());
 		}

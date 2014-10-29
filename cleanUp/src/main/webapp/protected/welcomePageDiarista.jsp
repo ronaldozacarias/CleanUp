@@ -3,74 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">CleanUp Dashboard Diarista</a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-cog"></i> Conta <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Configurações</a></li>
-              <li><a href="javascript:;">Ajuda</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> (Olá ${usuario.apelido}) <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Perfil</a></li>
-              <li><a href="<c:url value='/logout' />">Sair</a></li>
-              
-            </ul>
-          </li>
-        </ul>
-<!--         <form class="navbar-search pull-right"> -->
-<!--           <input type="text" class="search-query" placeholder="Search"> -->
-<!--         </form> -->
-      </div>
-      <!--/.nav-collapse --> 
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /navbar-inner --> 
-</div>
-<!-- /navbar -->
-<div class="subnavbar" ng-controller="diaristaController">
-  <div class="subnavbar-inner">
-    <div class="container">
-      <ul class="mainnav">
-        <li class="active"><a href="home"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li class="dropdown">
-        	<a href="/cleanUp/protected/diarista/notificacoes" class="dropdown-toggle" data-toggle="dropdown">
-        		<i class="icon-warning-sign"><span class="badge badge-info" ng-show="notificacoes.length > 0">{{notificacoes.length}}</span></i>
-        		<span>Notificações</span>
-        	</a>        
-	        <ul class="dropdown-menu notify" ng-show="notificacoes.length > 0">
-	            <li  ng-repeat="notificacao in notificacoes">
-	            	<a href="">{{notificacao.cliente.nome}} {{notificacao.descricaoNotificacao}}</a>
-	            </li>	            
-	        </ul>        
-        </li>
-        <li><a href=""><i class="icon-paste"></i><span>Planos</span> </a></li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Mais..</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="">Icons</a></li>
-            <li><a href="">FAQ</a></li>
-            <li><a href="">Pricing Plans</a></li>
-            <li><a href="">Login</a></li>
-            <li><a href="">Signup</a></li>
-            <li><a href="">404</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
-</div>
-<!-- /subnavbar -->
+<div ng-controller="diaristaController">
+
 <div class="main">
   <div class="main-inner">
     <div class="container">
@@ -162,7 +96,7 @@
             <!-- /widget-header -->
             <div class="widget-content">
               <div class="shortcuts"> 
-              	<a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">Apps</span> </a>
+              	<a href="/cleanUp/protected/diarista/servicos" class="shortcut"><i class="shortcut-icon icon-list-alt" ng-click="listarServicos();"></i><span class="shortcut-label">Serviços</span> </a>
                 <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a>
                 <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a>
                 <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a>

@@ -20,7 +20,7 @@
     </definition>
     
     <definition name="master-home-diarista.page" template="/public/template/master-home-diarista.jsp">
-        <put-attribute name="header" value="/public/template/headerClient.jsp"/>
+        <put-attribute name="header" value="/public/template/headerDiarista.jsp"/>
         <put-attribute name="footer" value="/public/template/footer.jsp"/>
     </definition>
     
@@ -69,6 +69,9 @@
     </definition>
     <definition name="notificacoes" extends="master-home-diarista.page">
         <put-attribute name="body" value="/protected/diarista/notificacoes.jsp"/>
+    </definition>
+    <definition name="servicosDiarista" extends="master-home-diarista.page">
+    	<put-attribute name="body" value="/protected/diarista/servicosDiarista.jsp"/>
     </definition>
     
     <definition name="customError" template="/public/error/customError.jsp">

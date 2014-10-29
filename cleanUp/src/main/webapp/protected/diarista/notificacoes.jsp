@@ -3,93 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">CleanUp Dashboard Diarista</a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-cog"></i> Conta <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Configurações</a></li>
-              <li><a href="javascript:;">Ajuda</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> (Olá ${usuario.apelido}) <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Perfil</a></li>
-              <li><a href="<c:url value='/logout' />">Sair</a></li>
-              
-            </ul>
-          </li>
-        </ul>
-<!--         <form class="navbar-search pull-right"> -->
-<!--           <input type="text" class="search-query" placeholder="Search"> -->
-<!--         </form> -->
-      </div>
-      <!--/.nav-collapse --> 
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /navbar-inner --> 
-</div>
-<!-- /navbar -->
+<div ng-controller="diaristaController">
     
-
-
-
-    
-<div class="subnavbar" ng-controller="diaristaController">
-  <div class="subnavbar-inner">
-    <div class="container">
-      <ul class="mainnav">
-        <li class="active"><a href="home"><i class="icon-home"></i><span>Início</span> </a> </li>
-        <li class="dropdown">
-        	<a href="" class="dropdown-toggle" data-toggle="dropdown">
-        		<i class="icon-warning-sign"><span class="badge badge-info" ng-show="notificacoes.length > 0">{{notificacoes.length}}</span></i>
-        		<span>Notificações</span>
-        	</a>        
-	        <ul class="dropdown-menu notify" ng-show="notificacoes.length > 0">
-	            <li  ng-repeat="notificacao in notificacoes">
-	            	<a href="">{{notificacao.cliente.nome}} {{notificacao.descricaoNotificacao}}</a>
-	            </li>	            
-	        </ul>        
-        </li>
-        <li><a href=""><i class="icon-paste"></i><span>Planos</span> </a></li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Mais..</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="">Icons</a></li>
-            <li><a href="">FAQ</a></li>
-            <li><a href="">Pricing Plans</a></li>
-            <li><a href="">Login</a></li>
-            <li><a href="">Signup</a></li>
-            <li><a href="">404</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
-</div>
-    
-    
-<div class="main" ng-controller="diaristaController">
+<div class="main">
 	
 	<div class="main-inner">
 
 	    <div class="container">
 	
     	<div class="row">
-    	<div class="span12">
+    	<div class="span8 mainTitleNotification">
 						
 				<div class="widget widget-plain">
 					
 					<div class="widget-content">
 						
-						<h2>Selecione uma notificação para ser redirecionado para serviço no qual ela esta vinculada.</h2>	
+						<h2>Selecione uma notificação para ser acessar os serviços.</h2>	
 						
 						
 					</div> <!-- /widget-content -->
@@ -103,7 +32,7 @@
     
 	      <div class="row">
 	      	
-	      	<div class="span12">
+	      	<div class="span8 mainNotification">
 	      		
 	      		<div class="widget">
 						
@@ -114,7 +43,7 @@
 					
 					<div class="widget-content">
 					
-						<div class="accordion-group" ng-repeat="notificacao in notificacoes">
+						<div class="accordion-group" ng-repeat="notificacao in note">
 	                          <div class="accordion-heading">
 	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
 	                               	<a class="accordion-toggle" data-toggle="modal" data-target="#myModal2" 
@@ -179,10 +108,21 @@
 	                                <div class="accordion-inner">
 	                                   	Endereço: {{servico.endereco.logradouro}} </br>
 	                                   	Decrição: {{servico.descricao}} </br></br> 
-	                                   	<button class="btn btn-primary">Aceitar</button>
-	                                	<button class="btn btn-danger">Recusar</button>	                                 	
+	                                   	<button class="btn btn-primary" ng-click="addService(servico, $index);">Aceitar</button>
+<!-- 	                                	<button class="btn btn-danger" ng-click="removeService($index)">Recusar</button>	                                 	 -->
 	                                </div>	                                                                
 	                          </div>
+	                     </div>
+	                     <div ng-show="servicos.length == 0">
+	                          <div class="alert alert-success">
+	                                <div class="accordion-inner">
+	                                   	<h2>Todos os serviços foram aceitos</h2>	                                   	                               	
+	                                </div>	                                                                                                
+	                          </div>
+	                          
+	                          <div id="imagem">
+	                                <img src="<c:url value='/resources/img/confirm2.fw.png'  />" class="imagem" alt=""/>	                                   	                               	
+	                           </div>	
 	                     </div>
 	                     </div>
 	                     </td>	                     
@@ -196,7 +136,7 @@
 					<strong>Obrigatório!</strong>{{msg}}
 				</div>
 				<button type="submit" class="btn btn-primary"
-					ng-click="enviarServico(servicoForm)">Enviar</button>
+					ng-click="enviarServicos(servicoForm)">Enviar</button>
 			</div>
 		</form>
 	</div>
@@ -287,6 +227,8 @@
 	</div> <!-- /footer-inner -->
 	
 </div> <!-- /footer -->
+
+</div>
 
 <!-- Le javascript
 ================================================== -->

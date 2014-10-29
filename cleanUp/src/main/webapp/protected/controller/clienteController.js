@@ -5,6 +5,41 @@ function clienteController($scope, $filter, $http) {
 	var count = 0;
 	$scope.arrayEnd = false;
 	$scope.msg = '';
+	listarNotificacoes();	
+	
+	
+	function listarNotificacoes(){
+		$http({
+	        url: '/cleanUp/protected/notificacoes/getNotificacoesPorCliente',
+	        method: "GET",
+	        headers: {'Content-Type': 'application/json'}
+	    })
+	    .success(function (data, status, headers, config) {
+	    	$scope.notificacoes = [];
+	    	$scope.note = data;
+	    	$scope.count = data.length;
+	    	
+	    	if(data.length > 0){
+		    	for(var i = 0; i < 10 ; i++){
+		    		if($scope.note[i]){
+		    			$scope.notificacoes.push($scope.note[i]);
+		    		};		    		
+		    	};
+	    	};
+	    })
+	    .error(function (data, status, headers, config) {
+	    	bootbox.dialog({
+	    		title:"Erro inesperado!",
+	            message: data
+	        });
+	    });		
+	}
+	
+	var thread = setInterval(function() {
+			
+			listarNotificacoes();
+			
+	}, 10000);	
 	
 	/*---------  SENDING SERVICO  -----------------------------------------*/
 	$scope.enviarServico = function(servicoForm) {

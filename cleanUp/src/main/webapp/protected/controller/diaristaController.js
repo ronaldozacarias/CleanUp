@@ -2,25 +2,56 @@ function diaristaController($scope, $filter, $http) {
 	
 	/*---------  LIST NOTIFICATIONS DIARISTAS FROM DATABASE  ------------------------------*/  
 	listarNotificacoes();
+	listarServicos();
 	var myLatlng;
 	$scope.servicos = [];
+	$scope.servicosVO = [];
 	var markerLatLngs = [];
+	$scope.indexNumber = -1;
+	$scope.see = true;
+	$scope.feedback = true;
 	var infowindow;
 	
+	function hideModal(){
+    	$('#myModal2').modal('hide');
+    }
 	
+	function listarServicos(){
+		$http({
+	        url: '/cleanUp/protected/servico/listarServicosPorDiarista',
+	        method: "POST",
+	        headers: {'Content-Type': 'application/json'}
+	    })
+	    .success(function (data, status, headers, config) {     	    	
+		    $scope.servicosList = data;
 	
-	$scope.issoaqui = function(){
-		alert("Midiã, Neidinha, Mariana Teste de clique");
+	    })
+	    .error(function (data, status, headers, config) {
+	    	bootbox.dialog({
+	    		title:"Erro inesperado!",
+	            message: data
+	        });
+	    });
 	};
-	
+
 	function listarNotificacoes(){
 		$http({
 	        url: '/cleanUp/protected/notificacoes/getNotificacoes',
 	        method: "GET",
 	        headers: {'Content-Type': 'application/json'}
 	    })
-	    .success(function (data, status, headers, config) {    	
-	    	$scope.notificacoes = data;
+	    .success(function (data, status, headers, config) {
+	    	$scope.notificacoes = [];
+	    	$scope.note = data;
+	    	$scope.count = data.length;
+	    	
+	    	if(data.length > 0){
+		    	for(var i = 0; i < 10 ; i++){
+		    		if($scope.note[i]){
+		    			$scope.notificacoes.push($scope.note[i]);
+		    		};		    		
+		    	};
+	    	};
 	    })
 	    .error(function (data, status, headers, config) {
 	    	bootbox.dialog({
@@ -30,28 +61,108 @@ function diaristaController($scope, $filter, $http) {
 	    });		
 	}
 	
-	thread();
-	
-	function thread(){
-		setInterval(function() {
+	var thread = setInterval(function() {
 			
 			listarNotificacoes();
 			
-		}, 100000);
-	}
+	}, 10000);
 	
+	$scope.enviarServicos = function(servicoForm){
+		
+		$scope.aceitarServicoVO = {
+			servicosVO: $scope.servicosVO	
+		};
+		
+        $http({
+	        url: '/cleanUp/protected/diarista/confirmacao',
+	        data: $scope.aceitarServicoVO,
+	        method: "POST",
+            headers: {'Content-Type': 'application/json'}
+	    })
+	    .success(function (data, status, headers, config) {   	    	
+	    	hideModal();
+	    	bootbox.dialog({
+        		title:"Serviço enviado com sucesso!",
+        		message: "Para cancelar o serviço clique neste <a href='/cleanUp/protected/diarista/servicos'>link</a>"
+            });
+	    	listarNotificacoes();
+			$scope.aceitarServicoVO = null;
+	    })
+	    .error(function (data, status, headers, config) {
+	    	bootbox.dialog({
+	    		title:"Erro inesperado!",
+	            message: data
+	        });
+	    });
+		
+	};
+	
+	
+	$scope.cancelarServico = function(servico){
+
+//		$scope.servicoVO = new Object();
+		
+		$scope.servicoVO = {
+			codigo:servico.codServico
+		};
+		
+        $http({
+	        url: '/cleanUp/protected/servico/cancelar',
+	        data: $scope.servicoVO,
+	        method: "POST",
+            headers: {'Content-Type': 'application/json'}
+	    })
+	    .success(function (data, status, headers, config) {   	    	
+	    	hideModal();
+	    	bootbox.dialog({
+        		title:"Serviço enviado com sucesso!",
+        		message: "Para cancelar o serviço clique neste <a href='/cleanUp/protected/diarista/servicos'>link</a>"
+            });
+	    	listarNotificacoes();
+			$scope.aceitarServicoVO = null;
+	    })
+	    .error(function (data, status, headers, config) {
+	    	bootbox.dialog({
+	    		title:"Erro inesperado!",
+	            message: data
+	        });
+	    });
+		
+	};
+	
+	
+	/*---------  ADD SERVICE IN LIST  -----------------------------------------*/
+    $scope.addService = function (servico, index) {
+    	
+        if(servico){
+        	
+        	$scope.servicoVO = servico;
+        	
+            $scope.servicosVO.push($scope.servicoVO);
+            
+            $scope.servicos.splice(index, 1);
+        }
+        
+    };
+    
+    /*---------  REMOVE SERVICE OF LIST  ------------------------------*/
+    $scope.removeService = function(index) {
+
+    	$scope.servicos.splice(index, 1);
+    };
+    
 	/*---------  SET CLIENTE IN MODAL  ------------------------------*/
 	$scope.selectedCliente = function(cliente) {
         
+//		$('#myModal2').modal('show');
 		//SETANDO CLIENTE SELECIONADO NO SCOPO
 		var selectedCliente = angular.copy(cliente);
         $scope.cliente = selectedCliente;
         $scope.pessoa = $scope.cliente;
         
         var codigoCliente = $scope.cliente.codigo;
-        
-        
-        //BUSCANDO SERVIÇOS SOLICITADOS PO ESSE CLIENTE
+                
+        //BUSCANDO SERVIÇOS SOLICITADOS POR ESSE CLIENTE
         $http({
 	        url: '/cleanUp/protected/servico/listarServicosPorCliente',
 	        method: "POST",
@@ -82,22 +193,17 @@ function diaristaController($scope, $filter, $http) {
 	    		title:"Erro inesperado!",
 	            message: data
 	        });
-	    });     
-        
-        
+	    });           
               
         
     };
     
     
     /*---------  GOOGLE MAPS ---------------------------------------*/
-    
-    
-    
+        
     var map;
     var marker;
     
-
     function initialize() {
     	  myLatlng = new google.maps.LatLng(-25.363882,131.044922);
     	  var mapOptions = {

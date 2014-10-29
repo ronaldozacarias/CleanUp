@@ -3,6 +3,7 @@ package br.com.cleanUp.vo;
 import java.util.Date;
 import java.util.List;
 
+import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 
@@ -13,7 +14,14 @@ public class ServicoVO {
 	private List<Endereco> enderecos;
 	private Date data;
 	private Diarista diarista;
+	private Cliente cliente;	
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	public String getDescricao() {
 		return descricao;
 	}

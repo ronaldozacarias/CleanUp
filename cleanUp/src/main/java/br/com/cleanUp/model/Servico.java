@@ -52,7 +52,7 @@ public class Servico {
 	@Fetch(FetchMode.JOIN)
 	private Endereco endereco;
 	
-	@Column(name = "DATASERVICO", length = 10, nullable = false) 
+	@Column(name = "DATASERVICO", nullable = false) 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataServico;
 	

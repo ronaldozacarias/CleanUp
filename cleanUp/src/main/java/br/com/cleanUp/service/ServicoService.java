@@ -89,7 +89,7 @@ public class ServicoService {
 		int diaDoServico = calendar2.get(GregorianCalendar.DAY_OF_MONTH);
 		
 		HistorioServico hs = new HistorioServico();
-		try {
+//		try {
 			if ((diaDoServico - diaDoCancelamento) <= 2) {
 				serv.setStatus(StatusServico.ATIVO);
 				throw new NegocioException("Cancelamento não pode ser Realizado");
@@ -106,9 +106,9 @@ public class ServicoService {
 				this.historicoServico.save(hs);
 				this.removeServico(serv);
 			}
-		} catch (Exception e) {
-			throw new NegocioException("Erro ao Cancelar Servico!!");
-		}
+//		} catch (Exception e) {
+//			throw new NegocioException("Erro ao Cancelar Servico!!");
+//		}
 	}
 	
 	public Servico findById(Servico s) throws NegocioException{
@@ -152,6 +152,13 @@ public class ServicoService {
 		List<Servico> servicosPorCliente = servicoRepository.listarServicoPorClienteEDiarista(codigoCliente, codigoDiarista);
 		
 		return servicosPorCliente;
+	}
+
+	public List<Servico> listServicosDiarista(Integer codigoDiarista) {
+		
+		List<Servico> servicosPorDiarista = servicoRepository.listarServicoPorDiarista(codigoDiarista);
+		
+		return servicosPorDiarista;
 	}
 	
 }

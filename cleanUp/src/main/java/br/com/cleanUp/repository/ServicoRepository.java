@@ -16,6 +16,9 @@ public interface ServicoRepository extends CrudRepository<Servico, Integer> {
 	@Query("FROM Servico s where s.diarista.codigo =:codDiarista")
 	ArrayList<Servico> listarServicosPorDiarista(@Param("codDiarista") Integer codDiarista);
 
-	@Query("FROM Servico s where s.diarista.codigo =:codigoDiarista and s.cliente.codigo =:codigoCliente")
+	@Query("FROM Servico s where s.diarista.codigo =:codigoDiarista AND s.cliente.codigo =:codigoCliente AND s.status = 'PENDENTE'")
 	List<Servico> listarServicoPorClienteEDiarista(@Param("codigoCliente") int codigoCliente, @Param("codigoDiarista") Integer codigoDiarista);
+
+	@Query("FROM Servico s where s.diarista.codigo =:codigoDiarista")
+	List<Servico> listarServicoPorDiarista(@Param("codigoDiarista") int codigoDiarista);
 }

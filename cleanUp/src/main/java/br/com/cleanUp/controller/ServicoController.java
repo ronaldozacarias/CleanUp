@@ -87,17 +87,20 @@ public class ServicoController {
 		}
 	}
 	
-	@RequestMapping(value="cancelar", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="cancelar", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void cancelarServico(Servico s){
-		Servico s1 = new Servico();
-		s1.setDataServico(new Date());
-		s1.setCodServico(4);
-		try {
-			servicoService.cancelarServico(s1);
-		} catch (NegocioException e) {
-			System.out.println(e.getMessage());
-		}
+	public void cancelarServico(@RequestBody ServicoVO servicoVO) throws NegocioException{
+		
+		Servico servico = new Servico();
+		
+		servico.setCodServico(servicoVO.getCodigo());
+		servico.setDataServico(new Date());
+
+//		try {
+			servicoService.cancelarServico(servico);
+//		} catch (NegocioException e) {
+//			System.out.println(e.getMessage());
+//		}
 	}
 	
 //	@RequestMapping(value="listarServicosPorCliente", method = RequestMethod.POST, produces = "application/json")
@@ -128,6 +131,21 @@ public class ServicoController {
 		Diarista diarista = diaristaService.findByUsuario(usuario);
 		
 		List<Servico> servicosPorCliente = servicoService.findByServicosPorCliente(codigoCliente, diarista.getCodigo());
+		
+		return servicosPorCliente;
+		
+	}
+	
+	@RequestMapping(value = "listarServicosPorDiarista", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public List<Servico> servicosPorDiarista() throws NegocioException {
+		
+		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
+
+		Diarista diarista = diaristaService.findByUsuario(usuario);
+		
+		List<Servico> servicosPorCliente = servicoService.listServicosDiarista(diarista.getCodigo());
 		
 		return servicosPorCliente;
 		

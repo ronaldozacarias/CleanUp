@@ -24,7 +24,7 @@ public class Endereco {
 	@Column(name = "LATITUDE", precision=19, scale=7)
 	private BigDecimal lat;
 	
-	@Column(name = "LOGITUDE", precision=19, scale=7)
+	@Column(name = "LOGITUDE", precision=19, scale=14)
 	private BigDecimal lng;
 	
 	public Endereco(){

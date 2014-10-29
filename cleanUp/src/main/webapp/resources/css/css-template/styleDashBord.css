@@ -9,6 +9,28 @@ Bootstrap Admin Template by EGrappler.com
 */
 
 /* =============== Estilos do autocomplete =============== */
+#serviceButton{
+	margin: 10px;
+}
+
+#imagem{
+	text-align: center;	height: 250px;
+}
+
+.noneClass{
+	visibility: hidden;
+}
+
+.moreNotifications{
+	color:#00008B !important;
+	font-weight:bold !important; 
+}
+
+.moreNotifications:hover{
+	color:#fff !important;
+	font-weight:bold !important; 
+}
+
 .tableservicos{
 	width: 50%;
 }
@@ -38,15 +60,25 @@ Bootstrap Admin Template by EGrappler.com
 	margin-bottom: 10px;
 }
 
-ul li:hover ul{
-        display: block; /* display the dropdown */
+/*ul li:hover ul{
+        display: block;  display the dropdown 
+}*/
+
+.mainNotification {
+	margin: 0 auto !important;
+	float: none !important;
+}
+
+.mainTitleNotification{
+	margin: 0 auto !important;
+	float: none !important;
 }
 		
 .notify{
-	max-height: 100px;
+	max-height: 274px;
 	max-width: 200px;
-	overflow-y: auto;
-  	overflow-x: hidden;
+
+  	width: 192px;
 }
 
 .input-append .add-on, .input-append .btn{

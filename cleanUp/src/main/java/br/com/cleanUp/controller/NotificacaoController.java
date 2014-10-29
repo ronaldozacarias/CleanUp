@@ -15,6 +15,7 @@ import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Usuario;
+import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.NotificacaoService;
 import br.com.cleanUp.util.AtributoDeSessao;
@@ -28,6 +29,9 @@ public class NotificacaoController {
 	
 	@Autowired
 	private DiaristaService diaristaService;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	@RequestMapping(value = "/getNotificacoes", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
@@ -43,5 +47,20 @@ public class NotificacaoController {
 		return listaDeNotificacoes;
 
 	}
+	
+	@RequestMapping(value = "/getNotificacoesPorCliente", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Notificacao> notificacoesPorCliente() throws NegocioException {
+		
+		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
+
+		Cliente cliente = clienteService.findByIdUsuario(usuario.getId());
+
+		List<Notificacao> listaDeNotificacoes = notificacoesService.todasNotificacoesDiaristaList(cliente.getCodigo());
+
+		return listaDeNotificacoes;
+
+	}	
 
 }
