@@ -5,7 +5,41 @@ function clienteController($scope, $filter, $http) {
 	var count = 0;
 	$scope.arrayEnd = false;
 	$scope.msg = '';
-	listarNotificacoes();	
+	listarNotificacoes();
+	$scope.data = 0;
+	$scope.minDate = '';
+	
+	var hoje = new Date();
+
+    var d = hoje.getDate();
+    var m = hoje.getMonth() +1;
+    var y = hoje.getFullYear();
+    var datamin = y + '-' + m + '-' + d;
+	
+	// Disable weekend selection
+	$scope.disabled = function(date, mode) {
+	  return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+	};
+	
+	$scope.toggleMin = function() {
+	    $scope.minDate = $scope.minDate ? null : new Date();
+	  };
+	  $scope.toggleMin();
+
+	  $scope.open = function($event) {
+	    $event.preventDefault();
+	    $event.stopPropagation();
+
+	    $scope.opened = true;
+	  };
+
+	  $scope.dateOptions = {
+	    formatYear: 'yy',
+	    startingDay: 1
+	  };
+
+	  $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+	  $scope.format = $scope.formats[0];
 	
 	
 	function listarNotificacoes(){
@@ -46,12 +80,18 @@ function clienteController($scope, $filter, $http) {
 		
 		var url = $scope.url;
 		
+		var d =  $scope.data;
+		var time = new Date($scope.data);
+		var d1 = time.getTime() + 10800000;
+ 		
 		$scope.servicoVO = {
 				descricao: $scope.descricao,
-				data: $scope.data,
+				data: d1,
 				enderecos: $scope.enderecos,
 				diarista:$scope.diarista
 		};
+		
+		console.log($scope.servicoVO.data);
 		
 		if($scope.enderecos.length <= 0){
 			$scope.msg = ' Para adicionar um endereço, clique no botão verde "+"';
@@ -120,8 +160,7 @@ function clienteController($scope, $filter, $http) {
 
     	$scope.enderecos.splice(0, $scope.enderecos.length);
     };
-	 
-	 
+	 	 
 
  /*---------  LIST DIARISTAS FROM DATABASE  ------------------------------*/    
 	$http({
@@ -143,13 +182,15 @@ function clienteController($scope, $filter, $http) {
 	
  /*---------  SET DIARISTA IN MODAL  ------------------------------*/
 	$scope.selectedDiarista = function (diarista) {
+		$scope.minDate = datamin;
         var selectedDiarista = angular.copy(diarista);
         $scope.diarista = selectedDiarista;
+        $('#myModal').modal({
+            show: 'true'
+        });
     };
  /*---------  END SET DIARISTA IN MODAL  ------------------------------*/
-    
-    
-    
+        
     
  /*---------  RESET MODAL BOOTSTRAP  ------------------------------*/
     $('.modal').on('hidden.bs.modal', function(){
@@ -203,7 +244,7 @@ function clienteController($scope, $filter, $http) {
     					var latitude = results[0].geometry.location.lat();
     					var longitude = results[0].geometry.location.lng();
     		
-    					$('.txtEndereco').val(results[0].formatted_address);
+    					$('#txtEndereco').val(results[0].formatted_address);
     					$('#txtLatitude').val(latitude);
                        	$('#txtLongitude').val(longitude);
                        	
@@ -222,10 +263,10 @@ function clienteController($scope, $filter, $http) {
     	
     	$("#btnEndereco").click(function() {
     		if($(this).val() != "")
-    			carregarNoMapa($(".txtEndereco").val());
+    			carregarNoMapa($("#txtEndereco").val());
     	})
     	
-    	$(".txtEndereco").blur(function() {
+    	$("#txtEndereco").blur(function() {
     		if($(this).val() != "")
     			carregarNoMapa($(this).val());
     	})
@@ -234,7 +275,7 @@ function clienteController($scope, $filter, $http) {
     		geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
     			if (status == google.maps.GeocoderStatus.OK) {
     				if (results[0]) {  
-    					$('.txtEndereco').val(results[0].formatted_address);
+    					$('#txtEndereco').val(results[0].formatted_address);
     					$('#txtLatitude').val(marker.getPosition().lat());
     					$('#txtLongitude').val(marker.getPosition().lng());
     				}
@@ -242,7 +283,7 @@ function clienteController($scope, $filter, $http) {
     		});
     	});
     	
-    	$(".txtEndereco").autocomplete({
+    	$("#txtEndereco").autocomplete({
     		source: function (request, response) {
     			geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
     				response($.map(results, function (item) {

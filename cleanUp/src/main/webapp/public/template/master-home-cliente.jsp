@@ -10,7 +10,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		
-		<script src="<c:url value='/resources/js/angular.min.js' />"></script>		
+		<script src="<c:url value='/resources/js/angular.min.js' />"></script>
+		<script src="<c:url value='/resources/js/angular-locale_pt-br.js' />"></script>
+		<script src="<c:url value='/resources/js/ui-bootstrap-tpls-0.11.2.min.js' />"></script>
+				
 		<script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
 		
 		<link href="<c:url value='/resources/js/angular-xeditable-0.1.8/css/xeditable.css'  />" rel="stylesheet" type="text/css"/>			
@@ -23,7 +26,7 @@
 		
 		<script type="text/javascript">
 
-			var app = angular.module("app", []);
+			var app = angular.module("app", ['ui.bootstrap']);
 					
 		</script>
 	                    

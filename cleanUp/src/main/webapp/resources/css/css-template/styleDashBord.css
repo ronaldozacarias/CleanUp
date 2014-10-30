@@ -81,10 +81,9 @@ Bootstrap Admin Template by EGrappler.com
   	width: 192px;
 }
 
-.input-append .add-on, .input-append .btn{
+/*.input-append .add-on, .input-append .btn{
 	margin-top: -6px !important;
-}
-
+}*/
 
 .ui-autocomplete-input {
   border: none; 
@@ -153,11 +152,6 @@ Bootstrap Admin Template by EGrappler.com
       -moz-border-radius: 0px;
       background-image: none;
 }
-
-.txtEndereco{
-	width: 475px !important;
-}
-
 
 body {
 	background: #f9f6f1;

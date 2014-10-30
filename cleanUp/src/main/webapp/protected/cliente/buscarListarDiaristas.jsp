@@ -16,14 +16,17 @@
 		<form name="servicoForm" method="post">
 			<div class="modal-body">
 				<input type="hidden" required ng-model="diarista.codigo" name="id"
-					value="{{diarista.codigo}}" />
+					value="{{diarista.codigo}}" />				
 
 				<div class="pull-left">
 					<div class="inputsCliente">
 						<div class="form-group">
-							<label for="date">Data do Serviço</label> <input ng-model="data"
-								type="date" id="date" name="input" placeholder="dd-MM-yyyy"
-								min="10-07-2014" required />
+				       			<label for="desc">Data do serviço</label>
+				       			<div class="input-prepend input-append">
+				                     <input min="{{minDate}}" type="date" class="span2" id="appendedPrependedInput" name="input" ng-model="data"
+				       				 placeholder="yyyy-MM-dd" required />	
+				                     <span class="add-on"><i class="icon-large icon-calendar"></i></span>
+				                </div>		
 						</div>
 
 						<div class="form-group">
@@ -31,17 +34,22 @@
 								cômodos e espaço físico.</label>
 							<textarea id="desc" ng-model="descricao" required></textarea>
 						</div>
-
-						<label for="desc">Endereço</label>
-						<div class="enderecos input-append">
+						
+						<div class="form-group">
+						<label for="desc">Endereço</label>						
+						<div class="input-append">
 							<p class="campoEnde">
-								<input ng-model="logradouro"
+								<input id="txtEndereco" ng-model="logradouro"
 									placeholder="Digite um endereço e confirme no botão (+)"
-									class="txtEndereco span2 m-wrap" type="text">
-								<button class=" btn btn-success" ng-click="addEndereco()"
-									type="button">+</button>
+									class="span5 m-wrap" type="text">									
+								<span class="input-group-btn">
+					               	<button type="button" class="btn btn-success" ng-click="addEndereco()">
+					               		<i class="icon-large icon-plus-sign"></i>
+					               	</button>
+				           		</span>
 							</p>
-						</div>
+						</div>	
+						</div>				
 
 						<div ng-show="enderecos.length > 0" class="input-group">
 							<table style="width: 520px;"
@@ -61,7 +69,6 @@
 						<input type="hidden" ng-model="lat" id="txtLatitude"
 							name="txtLatitude" /> <input type="hidden" ng-model="lng"
 							id="txtLongitude" name="txtLongitude" />
-
 					</div>
 				</div>
 
@@ -114,8 +121,7 @@
 									</div>
 									<div class="news-item-date">
 										<input type="hidden" value="{{diarista.codigo}}" /> <a
-											href="#modal" class="btn btn-small btn-success"
-											data-toggle="modal" data-target="#myModal"><i
+											href="" class="btn btn-small btn-success"><i
 											class="btn-icon-only icon-ok"
 											ng-click="selectedDiarista(diarista);"> </i></a> <span
 											class="news-item-month">Selecionar</span>
@@ -177,11 +183,6 @@
 	</div>
 	<!-- /main-inner -->
 </div>
-
-
-
-
-
 
 <!-- /main -->
 <div class="extra">
