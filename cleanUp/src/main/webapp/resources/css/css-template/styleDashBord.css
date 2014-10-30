@@ -9,6 +9,29 @@ Bootstrap Admin Template by EGrappler.com
 */
 
 /* =============== Estilos do autocomplete =============== */
+.pagination a:hover, .pagination .active a {
+	background-color: #E4F4E6 !important;
+}
+
+.tom input[type="text"]{
+	border: none solid !important;
+    background-color: transparent !important;
+    border-color:transparent !important;
+    box-shadow:none !important;
+    outline:none !important;
+}
+
+#searchSpan{
+	top:-4px;
+	position: relative;
+}
+
+#searchInput {
+	top: 4px;
+	position: absolute;
+	left: 63%;
+}
+
 #serviceButton{
 	margin: 10px;
 }

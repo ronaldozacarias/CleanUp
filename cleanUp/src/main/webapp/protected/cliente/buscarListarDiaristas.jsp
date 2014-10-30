@@ -95,11 +95,27 @@
 						<div class="widget-header">
 							<i class="icon-list-alt"></i>
 							<h3>Diaristas</h3>
+<!-- 							ut type="text" class="form-control span3" id="searchInput" placeholder="Digite o termo da busca"> -->
+							
+<!-- 							<div id="searchInput" class="input-group"> -->
+<!-- 						      <span class="add-on"><i class="icon-search"></i></span> -->
+<!-- 						      <input class="span3" id="appendedPrependedInput" placeholder="Digite o termo da busca" type="text"> -->
+<!-- 						    </div> -->
+						    
+						    <div id="searchInput" class="form-group">
+				       			<div class="input-prepend input-append tom">
+				                     <span id="searchSpan"><i class="icon-search"></i></span>
+				                     <input type="text" ng-model="searchDiarista" class="span2" name="input"
+				       				 placeholder="Digite o termo da busca" />				                     
+				                </div>		
+							</div>
+							
 						</div>
 						<!-- /widget-header -->
 						<div class="widget-content">
 							<ul class="news-items">
-								<li ng-repeat="diarista in diaristas">
+								<li ng-repeat="diarista in filtered = (diaristas | filter:searchDiarista | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+											   
 									<div class="news-item-date">
 										<a href="#" class="avatar"><img
 											src="<c:url value='/resources/img/message_avatar1.png'  />" /></a>
@@ -128,7 +144,18 @@
 									</div>
 								</li>
 							</ul>
+							
 						</div>
+						<div class="col-md-12" ng-show="filteredItems == 0">
+				            <div class="col-md-12">
+				                <h4>No customers found</h4>
+				            </div>
+				        </div>
+				        <div class="col-md-12" ng-show="filteredItems > 0">    
+				            <pagination page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
+							items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
+							max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+				        </div>	
 
 						<!-- /widget-content -->
 					</div>

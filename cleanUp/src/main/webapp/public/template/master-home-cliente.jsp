@@ -24,11 +24,7 @@
 		<link href="<c:url value='/resources/css/css-template/styleDashBord.css' />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/pages/dashboard.css' />" rel="stylesheet" type="text/css"/>
 		
-		<script type="text/javascript">
-
-			var app = angular.module("app", ['ui.bootstrap']);
-					
-		</script>
+	
 	                    
     </head>
     <body>

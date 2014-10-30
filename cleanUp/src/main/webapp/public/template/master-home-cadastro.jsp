@@ -25,12 +25,6 @@
 		<!--[if lt IE 9]>
 		      <script src="<c:url value='http://html5shim.googlecode.com/svn/trunk/html5.js' />"></script>
 		    <![endif]-->
-		    
-		<script type="text/javascript">
-
-			var app = angular.module("app", ["checklist-model"]);
-
-		</script>	
 	                    
     </head>
     <body>

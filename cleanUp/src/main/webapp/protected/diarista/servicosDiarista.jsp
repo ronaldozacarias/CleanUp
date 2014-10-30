@@ -62,11 +62,19 @@
 				                                   	Endereço: {{servico.endereco.logradouro}}
 				                                </div>	                                			
 	                                		</td>
-	                                		<td>
-	                                			<div id="serviceButton">	                                			
-	                                				<button class="btn btn-danger" ng-click="cancelarServico(servico)">Cancelar</button>
-	                                			</div>	
+	                                		<td class="td-actions">
+	                                			<a href="javascript:;" class="btn btn-small btn-success">
+	                                				<i class="btn-icon-only icon-ok"> </i>
+	                                			</a>
+	                                			<a href="" ng-click="cancelarServico(servico)" class="btn btn-danger btn-small">
+	                                				<i class="btn-icon-only icon-remove"> </i>
+	                                			</a>
 	                                		</td>
+<!-- 	                                		<td> -->
+<!-- 	                                			<div id="serviceButton">	                                			 -->
+<!-- 	                                				<button class="btn btn-danger" ng-click="cancelarServico(servico)">Cancelar</button> -->
+<!-- 	                                			</div>	 -->
+<!-- 	                                		</td> -->
 	                                	</tr>
 	                                </table>
 	                                

@@ -57,7 +57,7 @@ public class NotificacaoController {
 
 		Cliente cliente = clienteService.findByIdUsuario(usuario.getId());
 
-		List<Notificacao> listaDeNotificacoes = notificacoesService.todasNotificacoesDiaristaList(cliente.getCodigo());
+		List<Notificacao> listaDeNotificacoes = notificacoesService.todasNotificacoesClientList(cliente.getCodigo());
 
 		return listaDeNotificacoes;
 

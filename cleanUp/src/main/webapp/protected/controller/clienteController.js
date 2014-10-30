@@ -1,4 +1,16 @@
-function clienteController($scope, $filter, $http) {
+var app = angular.module("app", ['ui.bootstrap']);
+
+app.filter('startFrom', function() {
+    return function(input, start) {
+        if(input) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+        return [];
+    }
+});
+
+function clienteController($scope, $filter, $http, $timeout) {
 	
 	$scope.url = "/cleanUp/protected/servico/add";
 	$scope.enderecos = [];
@@ -8,6 +20,7 @@ function clienteController($scope, $filter, $http) {
 	listarNotificacoes();
 	$scope.data = 0;
 	$scope.minDate = '';
+	$scope.searchDiarista = '';
 	
 	var hoje = new Date();
 
@@ -77,6 +90,8 @@ function clienteController($scope, $filter, $http) {
 	
 	/*---------  SENDING SERVICO  -----------------------------------------*/
 	$scope.enviarServico = function(servicoForm) {
+		
+		hideModal();
 		
 		var url = $scope.url;
 		
@@ -170,6 +185,13 @@ function clienteController($scope, $filter, $http) {
     })
     .success(function (data, status, headers, config) {    	
     	$scope.diaristas = data;    	
+    	/* Pagination Part 1*/
+        $scope.currentPage = 1; //current page
+        $scope.entryLimit = 4; //max no of items to display in a page
+        $scope.maxSize = 5;
+        $scope.filteredItems = $scope.diaristas.length; //Initially for no filter  
+        $scope.totalItems = $scope.diaristas.length;
+        /* END - Pagnation Part 2*/
     })
     .error(function (data, status, headers, config) {
     	bootbox.dialog({
@@ -177,6 +199,21 @@ function clienteController($scope, $filter, $http) {
             message: data
         });
     });
+	
+	/*Pagination Part 2*/
+    $scope.setPage = function(pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.filter = function() {
+        $timeout(function() { 
+            $scope.filteredItems = $scope.filtered.length;
+        }, 10);
+    };
+    $scope.sort_by = function(predicate) {
+        $scope.predicate = predicate;
+        $scope.reverse = !$scope.reverse;
+    };
+    /*END*/
 	
 /*---------  END LIST DIARISTAS FROM DATABASE  ------------------------------*/
 	

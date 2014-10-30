@@ -1,3 +1,5 @@
+var app = angular.module("app", ["checklist-model"]);
+
 function cadastroController($scope, $http) {
 	
 	$scope.especialidades = new Array();
