@@ -67,6 +67,9 @@ public class Servico {
 	@JoinColumn(name = "ID_NOTIFICACAO", insertable = true, updatable = true, nullable = false)
 	private Notificacao notificacao;
 	
+	@Column(name="NOTADOSERVICO")
+	private int notaDoServico;
+	
 	public  Servico() {
 		this.diarista = new Diarista();
 		this.cliente = new Cliente();
@@ -166,5 +169,12 @@ public class Servico {
 	public void setNotificacao(Notificacao notificacao) {
 		this.notificacao = notificacao;
 	}
-	
+
+	public int getNotaDoServico() {
+		return notaDoServico;
+	}
+
+	public void setNotaDoServico(int notaDoServico) {
+		this.notaDoServico = notaDoServico;
+	}
 }

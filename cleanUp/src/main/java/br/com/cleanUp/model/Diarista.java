@@ -60,6 +60,9 @@ public class Diarista {
 	@JoinColumn(name = "ID_AGENDA")
 	private AgendaDiarista agenda;
 	
+	@Column(name="MEDIADIARISTA")
+	private float mediaDiarista;
+	
 	public Diarista(){
 		this.usuario = new Usuario();
 		this.cidade = new Cidade();
@@ -146,5 +149,13 @@ public class Diarista {
 
 	public void setAgenda(AgendaDiarista agenda) {
 		this.agenda = agenda;
+	}
+
+	public float getMediaDiarista() {
+		return mediaDiarista;
+	}
+
+	public void setMediaDiarista(float mediaDiarista) {
+		this.mediaDiarista = mediaDiarista;
 	}
 }
