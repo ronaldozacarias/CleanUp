@@ -2,7 +2,6 @@ package br.com.cleanUp.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
-import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.HistorioServico;
 import br.com.cleanUp.model.Notificacao;
