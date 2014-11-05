@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,15 +83,14 @@ public class ServicoService {
 		Servico serv = new Servico();
 		serv = this.findById(s);
 		
-		GregorianCalendar calendar = new GregorianCalendar();
-		int diaDoCancelamento = calendar.get(GregorianCalendar.DAY_OF_MONTH);
-		GregorianCalendar calendar2 = new GregorianCalendar();
-		calendar2.setTime(serv.getDataServico());
-		int diaDoServico = calendar2.get(GregorianCalendar.DAY_OF_MONTH);
+		Date dataCancelamento = new Date();
+		long millisCancelamento = dataCancelamento.getTime();
+		Date dataSevico = serv.getDataServico();
+		long millisServico = dataSevico.getTime();
 		
 		HistorioServico hs = new HistorioServico();
 //		try {
-			if ((diaDoServico - diaDoCancelamento) <= 2) {
+			if ((millisServico - millisCancelamento) <= 172800000) {
 				serv.setStatus(StatusServico.ATIVO);
 				throw new NegocioException("Cancelamento não pode ser Realizado");
 			}else{
@@ -150,15 +150,74 @@ public class ServicoService {
 	public List<Servico> findByServicosPorCliente(int codigoCliente, Integer codigoDiarista)throws NegocioException {
 		
 		List<Servico> servicosPorCliente = servicoRepository.listarServicoPorClienteEDiarista(codigoCliente, codigoDiarista);
-		
-		return servicosPorCliente;
+		List<Servico> retornoServico = new ArrayList<Servico>();
+		Servico s;
+		try {
+			for (int i = 0; i < servicosPorCliente.size(); i++) {
+				s = new Servico();
+				Hibernate.initialize(servicosPorCliente.get(i).getDiarista().getAgenda().getDatasAgenda());
+				s.setDiarista(servicosPorCliente.get(i).getDiarista());
+				s.setCliente(servicosPorCliente.get(i).getCliente());
+				s.setCodServico(servicosPorCliente.get(i).getCodServico());
+				s.setDataServico(servicosPorCliente.get(i).getDataServico());
+				s.setDescricao(servicosPorCliente.get(i).getDescricao());
+				s.setEndereco(servicosPorCliente.get(i).getEndereco());
+				s.setNotificacao(servicosPorCliente.get(i).getNotificacao());
+				s.setStatus(servicosPorCliente.get(i).getStatus());
+				s.setTipoServico(servicosPorCliente.get(i).getTipoServico());
+				s.setValor(servicosPorCliente.get(i).getValor());
+				retornoServico.add(s);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		int cont = 0;
+		for (int i = 0; i < retornoServico.size(); i++) {
+			if (retornoServico.get(i).getDiarista().getAgenda().getDatasAgenda() != null) {
+				cont++;
+			}
+		}
+		if(cont > 0){
+			return retornoServico;
+		}else{
+			return servicosPorCliente;
+		}
 	}
 
 	public List<Servico> listServicosDiarista(Integer codigoDiarista) {
 		
 		List<Servico> servicosPorDiarista = servicoRepository.listarServicoPorDiarista(codigoDiarista);
-		
-		return servicosPorDiarista;
+		List<Servico> retornoServico = new ArrayList<Servico>();
+		Servico s;
+		try {
+			for (int i = 0; i < servicosPorDiarista.size(); i++) {
+				s = new Servico();
+				Hibernate.initialize(servicosPorDiarista.get(i).getDiarista().getAgenda().getDatasAgenda());
+				s.setDiarista(servicosPorDiarista.get(i).getDiarista());
+				s.setCliente(servicosPorDiarista.get(i).getCliente());
+				s.setCodServico(servicosPorDiarista.get(i).getCodServico());
+				s.setDataServico(servicosPorDiarista.get(i).getDataServico());
+				s.setDescricao(servicosPorDiarista.get(i).getDescricao());
+				s.setEndereco(servicosPorDiarista.get(i).getEndereco());
+				s.setNotificacao(servicosPorDiarista.get(i).getNotificacao());
+				s.setStatus(servicosPorDiarista.get(i).getStatus());
+				s.setTipoServico(servicosPorDiarista.get(i).getTipoServico());
+				s.setValor(servicosPorDiarista.get(i).getValor());
+				retornoServico.add(s);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		int cont = 0;
+		for (int i = 0; i < retornoServico.size(); i++) {
+			if (retornoServico.get(i).getDiarista().getAgenda().getDatasAgenda() != null) {
+				cont++;
+			}
+		}
+		if(cont > 0){
+			return retornoServico;
+		}else{
+			return servicosPorDiarista;
+		}
 	}
-	
 }

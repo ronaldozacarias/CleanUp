@@ -56,11 +56,16 @@ public class Diarista {
 			inverseJoinColumns=@JoinColumn(name="ID_ESPECIALIDADE"))
 	private List<Especialidade> especialidades;
 	
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_AGENDA")
+	private AgendaDiarista agenda;
+	
 	public Diarista(){
 		this.usuario = new Usuario();
 		this.cidade = new Cidade();
 		this.especialidades = new ArrayList<Especialidade>();		
 		this.endereco = new Endereco();
+		this.agenda = new AgendaDiarista();
 	}
 
 	public Integer getCodigo() {
@@ -134,5 +139,12 @@ public class Diarista {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-	
+
+	public AgendaDiarista getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(AgendaDiarista agenda) {
+		this.agenda = agenda;
+	}
 }

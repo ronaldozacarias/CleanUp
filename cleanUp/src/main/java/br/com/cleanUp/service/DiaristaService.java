@@ -3,6 +3,7 @@ package br.com.cleanUp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +50,7 @@ public class DiaristaService {
 		}
 	}
 
-	public List<Diarista> listToDiarista() throws NegocioException{
+	/*public List<Diarista> listToDiarista() throws NegocioException{
 		// return (List<Diarista>) diaristaRepository.findAll();
 		List<Diarista> retorno;
 		retorno = (List<Diarista>) diaristaRepository.findAll();
@@ -61,7 +62,7 @@ public class DiaristaService {
 			throw new NegocioException("Erro ao Listar os Diarista");
 		}
 		return retorno;
-	}
+	}*/
 
 	public Diarista findByCpf(String cpf) throws NegocioException {
 		try {
@@ -72,10 +73,29 @@ public class DiaristaService {
 	}
 	
 	public Diarista findByUsuario(Usuario usuario) throws NegocioException {
+		Diarista diarista = new Diarista();
+		Diarista retorno = new Diarista();
 		try {
-			return diaristaRepository.findByUsuario(usuario);
+			retorno = diaristaRepository.findByUsuario(usuario);
+			Hibernate.initialize(retorno.getAgenda().getDatasAgenda());
+			diarista.setAgenda(retorno.getAgenda());
+			diarista.setCidade(retorno.getCidade());
+			diarista.setCodigo(retorno.getCodigo());
+			diarista.setCpf(retorno.getCpf());
+			diarista.setEndereco(retorno.getEndereco());
+			diarista.setEspecialidades(retorno.getEspecialidades());
+			diarista.setNome(retorno.getNome());
+			diarista.setTelefone(retorno.getTelefone());
+			diarista.setUsuario(retorno.getUsuario());
+			diarista.setValor(retorno.getValor());
+			
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao tentar buscar diarista.");
+		}
+		if(diarista.getAgenda().getDatasAgenda() == null){
+			return retorno;
+		}else{
+			return diarista;
 		}
 	}
 	
@@ -109,5 +129,39 @@ public class DiaristaService {
 			throw new NegocioException("Erro ao buscar Diarista Por Cidade");
 		}
 		return listaD;
+	}
+	
+	public List<Diarista> listToDiarista() throws NegocioException{
+		// return (List<Diarista>) diaristaRepository.findAll();
+		List<Diarista> retorno = new ArrayList<Diarista>();
+		ArrayList<Diarista> retorno2 = new ArrayList<Diarista>();
+		Diarista d;
+		try {
+			retorno = (List<Diarista>) diaristaRepository.findAll();
+			for (int i = 0; i < retorno.size(); i++) {
+				d = new Diarista();
+				Hibernate.initialize(retorno.get(i).getAgenda().getDatasAgenda());
+				d.setAgenda(retorno.get(i).getAgenda());
+				d.setCidade(retorno.get(i).getCidade());
+				d.setCodigo(retorno.get(i).getCodigo());
+				d.setCpf(retorno.get(i).getCpf());
+				d.setEndereco(retorno.get(i).getEndereco());
+				d.setEspecialidades(retorno.get(i).getEspecialidades());
+				d.setNome(retorno.get(i).getNome());
+				d.setTelefone(retorno.get(i).getTelefone());
+				d.setUsuario(retorno.get(i).getUsuario());
+				d.setValor(retorno.get(i).getValor());
+				retorno2.add(d);
+			}
+			if (retorno != null) {
+				System.out.println("Lista Retornado");
+				for (int i = 0; i < retorno2.size(); i++) {
+					System.out.println(retorno2.get(i).getNome());
+				}
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Listar os Diarista");
+		}
+		return retorno2;
 	}
 }
