@@ -1,5 +1,5 @@
 package br.com.cleanUp.model;
 
 public enum StatusServico {
-	PENDENTE,ATIVO,INATIVO
+	PENDENTE,ATIVO,INATIVO,CONCLUIDO
 }
