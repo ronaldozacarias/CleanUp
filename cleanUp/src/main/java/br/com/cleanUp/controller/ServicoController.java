@@ -136,7 +136,7 @@ public class ServicoController {
 		
 	}
 	
-	@RequestMapping(value = "listarServicosPorDiarista", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "listarServicosPorDiarista", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Servico> servicosPorDiarista() throws NegocioException {
 		
@@ -145,7 +145,7 @@ public class ServicoController {
 
 		Diarista diarista = diaristaService.findByUsuario(usuario);
 		
-		List<Servico> servicosPorCliente = servicoService.listServicosDiarista(diarista.getCodigo());
+		List<Servico> servicosPorCliente = servicoService.listServicosDiarista(/*diarista.getCodigo()*/1);
 		
 		return servicosPorCliente;
 		
