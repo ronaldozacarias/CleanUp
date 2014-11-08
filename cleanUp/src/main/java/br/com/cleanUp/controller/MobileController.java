@@ -17,6 +17,7 @@ import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.ServicoService;
+import br.com.cleanUp.vo.ServicoVO;
 
 @Controller
 @RequestMapping(value = "/mobile")
@@ -30,6 +31,9 @@ public class MobileController {
 
 	@Autowired
 	private ServicoService servicoService;
+	
+	@Autowired
+	private ServicoController servicoController;
 
 	@Autowired
 	private ClienteService clienteService;
@@ -74,5 +78,29 @@ public class MobileController {
 
 		return listaServicos;
 	}
+	/*
+	@RequestMapping(value = "/servico/confirmar", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void confirmaServico(ServicoVO servico) throws NegocioException {
+
+		diaristaController.confirmaServico(servico);
+
+	}*/
+	
+	@RequestMapping(value = "/servico/cancelar", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void cancelarServico(ServicoVO servico) throws NegocioException {
+
+		servicoController.cancelarServico(servico);
+
+	}
+	/*
+	@RequestMapping(value = "/servico/classifica", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void classificaServico(ServicoVO servico) throws NegocioException {
+
+		servicoController.classificaServico(servico);
+
+	}*/
 
 }
