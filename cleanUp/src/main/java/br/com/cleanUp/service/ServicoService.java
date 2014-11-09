@@ -272,23 +272,23 @@ public class ServicoService {
 		float somaM = 0.0f;
 		int cont = 0;
 		List<Servico> listaServico = new ArrayList<Servico>();
-		Diarista diarista = new Diarista();
+		//Diarista diarista = new Diarista();
 		try { 
-			diarista = this.diaristaServico.findByCpf(s.getDiarista().getCpf());
-			listaServico = this.listServiceToDiarista(diarista.getCodigo());
-			if(diarista.getMediaDiarista() >= 0){
+			//diarista = this.diaristaServico.findByCpf(s.getDiarista().getCpf());
+			listaServico = this.listServiceToDiarista(s.getDiarista().getCodigo());
+			if(s.getDiarista().getMediaDiarista() <= 0){
 				media = s.getNotaDoServico();
 			}else{
 				for (int i = 0; i < listaServico.size(); i++) {
-					if(listaServico.get(i).getStatus() == StatusServico.CONCLUIDO){
+					if(listaServico.get(i).getStatus() == StatusServico.CONCLUIDO && listaServico.get(i).getNotaDoServico() > 0){
 						somaM = somaM + listaServico.get(i).getNotaDoServico();
 						cont++;
 					}
 				}
 				media = somaM/cont;
 			}
-			diarista.setMediaDiarista(media);
-			this.diaristaServico.editDiarista(diarista);
+			s.getDiarista().setMediaDiarista(media);
+			this.diaristaServico.editDiarista(s.getDiarista());
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Calcular Média da Diarista");
 		}

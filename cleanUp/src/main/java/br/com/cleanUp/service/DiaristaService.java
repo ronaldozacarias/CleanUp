@@ -12,6 +12,7 @@ import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Especialidade;
+import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.repository.DiaristaRepository;
 
@@ -32,7 +33,7 @@ public class DiaristaService {
 	}
 
 	public void editDiarista(Diarista d) throws NegocioException {
-		diaristaRepository.delete(diaristaRepository.findOne(d.getCodigo()));
+		//diaristaRepository.delete(diaristaRepository.findOne(d.getCodigo()));
 		// diaristaRepository.save(d);
 			try {
 				diaristaRepository.save(d);
@@ -163,5 +164,33 @@ public class DiaristaService {
 			throw new NegocioException("Erro ao Listar os Diarista");
 		}
 		return retorno2;
+	}
+	
+	public List<Diarista> listaDiaristaPorRanqueamento()throws NegocioException{
+		List<Diarista> listaDiarista = new ArrayList<Diarista>();
+		List<Diarista> listaRetorno = new ArrayList<Diarista>();
+		Diarista d;
+		try {
+			listaDiarista = diaristaRepository.findByRanqueamento();
+			for (int i = 0; i < listaDiarista.size(); i++) {
+				Hibernate.initialize(listaDiarista.get(i).getAgenda().getDatasAgenda());
+				d = new Diarista();
+				d.setAgenda(listaDiarista.get(i).getAgenda());
+				d.setCidade(listaDiarista.get(i).getCidade());
+				d.setCodigo(listaDiarista.get(i).getCodigo());
+				d.setCpf(listaDiarista.get(i).getCpf());
+				d.setEndereco(listaDiarista.get(i).getEndereco());
+				d.setEspecialidades(listaDiarista.get(i).getEspecialidades());
+				d.setMediaDiarista(listaDiarista.get(i).getMediaDiarista());
+				d.setNome(listaDiarista.get(i).getNome());
+				d.setTelefone(listaDiarista.get(i).getTelefone());
+				d.setUsuario(listaDiarista.get(i).getUsuario());
+				d.setValor(listaDiarista.get(i).getValor());
+				listaRetorno.add(d);
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Ranquiar Diarista!!");
+		}
+			return listaRetorno;
 	}
 }

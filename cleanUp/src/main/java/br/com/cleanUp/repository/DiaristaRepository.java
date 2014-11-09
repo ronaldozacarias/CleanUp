@@ -15,5 +15,8 @@ public interface DiaristaRepository extends CrudRepository<Diarista, Integer>{
 	@Query("FROM Diarista d where d.cidade.codigoCidade =:codCidade")
 	List<Diarista> findByCidade(@Param("codCidade") Integer codCidade);
 	
+	@Query("FROM Diarista d ORDER BY d.mediaDiarista desc")
+	List<Diarista> findByRanqueamento();
+	
 	Diarista findByUsuario(Usuario usuario);
 }

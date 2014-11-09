@@ -1,5 +1,6 @@
 package br.com.cleanUp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,13 +52,15 @@ public class NotificacaoController {
 	@RequestMapping(value = "/getNotificacoesPorCliente", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Notificacao> notificacoesPorCliente() throws NegocioException {
+		Cliente cliente = new Cliente();
+		List<Notificacao> listaDeNotificacoes = new ArrayList<Notificacao>();
 		
 		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
 				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
 
-		Cliente cliente = clienteService.findByIdUsuario(usuario.getId());
+		cliente = clienteService.findByIdUsuario(usuario.getId());
 
-		List<Notificacao> listaDeNotificacoes = notificacoesService.todasNotificacoesClientList(cliente.getCodigo());
+		listaDeNotificacoes = notificacoesService.todasNotificacoesClientList(cliente.getCodigo());
 
 		return listaDeNotificacoes;
 

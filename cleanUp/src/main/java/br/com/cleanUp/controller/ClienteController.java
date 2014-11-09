@@ -20,10 +20,15 @@ import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusNotificacao;
+import br.com.cleanUp.model.StatusServico;
+import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.ServicoService;
+import br.com.cleanUp.vo.AceitarServicoVO;
+import br.com.cleanUp.vo.AvaliarServicoVO;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
@@ -43,6 +48,9 @@ public class ClienteController {
 	
 	@Autowired
 	private DiaristaService diaristaServico;
+	
+	@Autowired
+	private ServicoService servicoService;
 	
 	@RequestMapping(value = "diaristas", method = RequestMethod.GET)
 	public ModelAndView registrar() {
@@ -153,5 +161,28 @@ public class ClienteController {
 
 	public Cliente findByCpf(String cpf) throws NegocioException {
 		return clienteService.findByCpf(cpf);
+	}
+	
+	@RequestMapping(value = "avaliarServico", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public void avaliacaoDeServico(/*@RequestBody AvaliarServicoVO avaliarServicoVO*/) throws NegocioException{
+		AvaliarServicoVO avaliarServicoVO = new AvaliarServicoVO();
+		Servico s = new Servico();
+		s.setCodServico(26);
+		s = servicoService.findById(s);
+		ArrayList<Servico> lista = new ArrayList<Servico>();
+		lista.add(s);
+		avaliarServicoVO.setServicosVO(lista);
+		try {
+			for (int i = 0; i < avaliarServicoVO.getServicosVO().size(); i++) {
+				avaliarServicoVO.getServicosVO().get(i).setStatus(StatusServico.CONCLUIDO);
+				avaliarServicoVO.getServicosVO().get(i).getNotificacao().setStatus(StatusNotificacao.CONCLUIDA);
+				avaliarServicoVO.getServicosVO().get(i).getNotificacao().setDescricaoNotificacao(TipoNotificacao.CONFIRMACAO_DE_SOLICITACAO.getTipoNotificacao());
+				avaliarServicoVO.getServicosVO().get(i).setNotaDoServico(1);
+			}
+			this.servicoService.avaliarServico(avaliarServicoVO.getServicosVO());
+		} catch (NegocioException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

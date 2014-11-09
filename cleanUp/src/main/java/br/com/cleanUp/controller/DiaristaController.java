@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -236,5 +235,17 @@ public class DiaristaController {
 			System.out.println(e.getMessage());
 		}
 		return listaD;
+	}
+	
+	@RequestMapping(value = "ranqueamentoDiarista", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Diarista> ranqueamentoDiarista()throws NegocioException{
+		ArrayList<Diarista> listaRDiarista = new ArrayList<Diarista>();
+		try {
+			listaRDiarista = (ArrayList<Diarista>) diaristaService.listaDiaristaPorRanqueamento();
+		} catch (NegocioException e) {
+			throw new NegocioException(e.getMessage());
+		}
+		return listaRDiarista;
 	}
 }

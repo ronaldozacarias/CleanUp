@@ -136,7 +136,7 @@ public class ServicoController {
 		
 	}
 	
-	@RequestMapping(value = "listarServicosPorDiarista", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "listarServicosPorDiarista", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<Servico> servicosPorDiarista() throws NegocioException {
 		
