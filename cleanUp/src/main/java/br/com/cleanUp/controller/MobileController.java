@@ -1,6 +1,9 @@
 package br.com.cleanUp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.print.attribute.standard.Severity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,13 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.cleanUp.exception.NegocioException;
+import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
+import br.com.cleanUp.model.Endereco;
+import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.Usuario;
+import br.com.cleanUp.service.CidadeService;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
+import br.com.cleanUp.service.EspecialidadeService;
 import br.com.cleanUp.service.ServicoService;
+import br.com.cleanUp.vo.AceitarServicoVO;
 import br.com.cleanUp.vo.ServicoVO;
 
 @Controller
@@ -37,6 +46,12 @@ public class MobileController {
 
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private EspecialidadeService especialidadeService;
+	
+	@Autowired
+	private CidadeService cidadeService;
 
 	@RequestMapping(value = "/cliente/listDiaristas", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
@@ -78,22 +93,33 @@ public class MobileController {
 
 		return listaServicos;
 	}
-	/*
+	
 	@RequestMapping(value = "/servico/confirmar", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void confirmaServico(ServicoVO servico) throws NegocioException {
+	public void confirmaServico(Servico servico) throws NegocioException {
+		
+		AceitarServicoVO asvo  = new AceitarServicoVO();
+		asvo.getServicosVO().add(servico);
+		diaristaController.confirmacaoDeServico(asvo);
 
-		diaristaController.confirmaServico(servico);
-
-	}*/
+	}
 	
 	@RequestMapping(value = "/servico/cancelar", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void cancelarServico(ServicoVO servico) throws NegocioException {
-
-		servicoController.cancelarServico(servico);
+	public void cancelarServico(Servico servico) throws NegocioException {
+		ServicoVO serv = new ServicoVO();
+		ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
+		enderecos.add(servico.getEndereco());
+		serv.setCliente(servico.getCliente());
+		serv.setDiarista(servico.getDiarista());
+		serv.setDescricao(servico.getDescricao());
+		serv.setEnderecos(enderecos);
+		serv.setCodigo(servico.getCodServico());
+		serv.setData(servico.getDataServico());
+		servicoController.cancelarServico(serv);
 
 	}
+	
 	/*
 	@RequestMapping(value = "/servico/classifica", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -102,5 +128,17 @@ public class MobileController {
 		servicoController.classificaServico(servico);
 
 	}*/
+	
+	@RequestMapping(value = "/listar/especialidades", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Especialidade> listarEspecialidades() throws NegocioException {
+		return especialidadeService.todasEspecialidadesList();
+	}
+	
+	@RequestMapping(value = "/listar/cidades", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Cidade> listarCidades() throws NegocioException {
+		return cidadeService.todasCidadesList();
+	}
 
 }
