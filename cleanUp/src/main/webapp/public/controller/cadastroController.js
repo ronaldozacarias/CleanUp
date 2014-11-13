@@ -1,6 +1,6 @@
-var app = angular.module("app", ["checklist-model"]);
+var app = angular.module("app", ['checklist-model','ui.bootstrap','ngSanitize','ui.select']);
 
-function cadastroController($scope, $http) {
+function cadastroController($scope, $http, $filter, $timeout) {
 	
 	$scope.especialidades = new Array();
 	$scope.especialidadesDiarista = [];
@@ -9,6 +9,7 @@ function cadastroController($scope, $http) {
 	$scope.values = false;
 	$scope.termos = false;
 	$scope.pessoa = {};
+	$scope.selected = undefined;
 	
 	//Trazer especialidades do banco
 	$http({
@@ -18,7 +19,6 @@ function cadastroController($scope, $http) {
     })
     .success(function (data, status, headers, config) {
     	$scope.especialidades = data;
-    	console.log($scope.especialidades);
     })
     .error(function (data, status, headers, config) {
     	exibirMensagemErro(data);
@@ -31,8 +31,7 @@ function cadastroController($scope, $http) {
         headers: {'Content-Type': 'application/json'}
     })
     .success(function (data, status, headers, config) {
-    	$scope.cidades = data;
-    	console.log($scope.cidades);
+    	$scope.cidades = data;    	
     })
     .error(function (data, status, headers, config) {
     	exibirMensagemErro(data);
@@ -42,12 +41,14 @@ function cadastroController($scope, $http) {
 		if($scope.values){
 			especialidadesDiarista.push();
 		}
-	}	
+	}
 	
 	$scope.message = "Cadastro realizado com sucesso!";
 
 	// Essa função cria um contato
 	$scope.createPeople = function(newPeopleForm) {
+		
+		$scope.pessoa.cidade = $scope.selected.codigoCidade + "";
 		
 		var cpf = $scope.pessoa.cpf;
 		cpf = cpf.replace('.','').replace('.','').replace('-','');
@@ -67,7 +68,8 @@ function cadastroController($scope, $http) {
 			
 			if($scope.mostrar){
 					$scope.pessoa.tipo = 0;
-					$scope.pessoa.especialidades = $scope.especialidadesDiarista;					
+					$scope.pessoa.especialidades = $scope.especialidadesDiarista;
+					
 					
 					if($scope.pessoa.endereco != null){
 						var url = $scope.url;

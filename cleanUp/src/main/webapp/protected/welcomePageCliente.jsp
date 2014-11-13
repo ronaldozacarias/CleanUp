@@ -3,10 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<div ng-controller="clienteController">
+
+
+
 <div class="main">
   <div class="main-inner">
     <div class="container">
-
       <div class="row">
         <div class="span6">
           <div class="widget widget-nopad">
@@ -83,11 +86,14 @@
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-              <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span
-                                        class="shortcut-label">Apps</span> </a><a href="javascript:;" class="shortcut"><i
-                                            class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span
-                                                class="shortcut-label">Users</span> </a><a href="javascript:;" class="shortcut"><i
-                                                    class="shortcut-icon icon-file"></i><span class="shortcut-label">Notes</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i> <span class="shortcut-label">Photos</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span> </a> </div>
+	              <div class="shortcuts"> 
+	              		<a href="/cleanUp/protected/cliente/diaristas" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Diaristas</span> </a>
+	              		<a href="/cleanUp/protected/cliente/servicosCliente" class="shortcut"><i class="shortcut-icon icon-tasks"></i><span class="shortcut-label">Serviços</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-star"></i> <span class="shortcut-label">Favoritos</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Perfil</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-cogs"></i><span class="shortcut-label">Configurações</span> </a> 
+	              </div>
               <!-- /shortcuts --> 
             </div>
             <!-- /widget-content --> 
@@ -224,26 +230,13 @@
 <!-- /footer --> 
 <!-- Le javascript
 ================================================== --> 
+</div>
 <!-- Placed at the end of the document so the pages load faster --> 
 <!-- jQuery Version 1.11.0 -->    
-<script src="<c:url value='/resources/js/js-template/jquery-1.7.2.min.js' />"></script>
+<script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/excanvas.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/chart.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/bootstrap.js' />"></script>
 <script src="<c:url value='/resources/js/full-calendar/fullcalendar.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/base.js' />"></script>
-	
-	<!-- Maps API Javascript -->
-<%--     <script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script> --%>
-        
-    <!-- Caixa de informação -->
-    <script src="<c:url value='/resources/js/js-template/infobox.js' />"></script>
-		
-    <!-- Agrupamento dos marcadores -->
-    <script src="<c:url value='/resources/js/js-template/markerclusterer.js' />"></script>
-    
-    <!-- Arquivo de inicialização do mapa -->
-	<script src="<c:url value='/resources/js/js-template/mapa.js' />"></script>    
-    
-    
-    <script src="<c:url value='/protected/controller/clienteController.js' />"></script> 
+<script src="<c:url value='/protected/controller/clienteController.js' />"></script> 

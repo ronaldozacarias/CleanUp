@@ -10,28 +10,36 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		
+		<script src="<c:url value='/resources/js/jquery-1.7.2.min.js' />"></script>
+		<script src="<c:url value='/resources/js/jquery-ui.custom.mim.js' />"></script>
+		
 		<script src="<c:url value='/resources/js/angular.min.js' />"></script>
 		<script src="<c:url value='/resources/js/angular-locale_pt-br.js' />"></script>
-		<script src="<c:url value='/resources/js/ui-bootstrap-tpls-0.11.2.min.js' />"></script>
+		<script src="<c:url value='/resources/js/ui-bootstrap-tpls-0.11.2.min.js' />"></script>		
 				
-		<script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
-		
-		<link href="<c:url value='/resources/js/angular-xeditable-0.1.8/css/xeditable.css'  />" rel="stylesheet" type="text/css"/>			
 		<link href="<c:url value='/resources/css/css-template/bootstrap.min.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/css-template/bootstrap-responsive.min.css'  />" rel="stylesheet" type="text/css"/>
+		
 		<link href="<c:url value='/resources/css/font-awesome.css' />" rel="stylesheet" type="text/css"/>
-    	<link href="<c:url value='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' />" rel="stylesheet" type="text/css"/>   
+    	<link href="<c:url value='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' />" rel="stylesheet" type="text/css"/>
+    
 		<link href="<c:url value='/resources/css/css-template/styleDashBord.css' />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/pages/dashboard.css' />" rel="stylesheet" type="text/css"/>
+		<script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
 		
-	
-	                    
+			                    
+		    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+				<!--[if lt IE 9]>
+		      <script src="<c:url value='http://html5shim.googlecode.com/svn/trunk/html5.js' />"></script>
+		    <![endif]-->
+    
     </head>
     <body>
             <tiles:insertAttribute name="header" />
 
             <tiles:insertAttribute name="body" />
-<!--         </div> -->
+
+			
 
 <%--         	<tiles:insertAttribute name="footer" /> --%>
     </body>

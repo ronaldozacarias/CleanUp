@@ -13,6 +13,11 @@ Bootstrap Admin Template by EGrappler.com
 	background-color: #E4F4E6 !important;
 }
 
+.notaDiarista{
+	font-weight: 400 !important;
+	font-size: 30px !important;
+}
+
 .tom input[type="text"]{
 	border: none solid !important;
     background-color: transparent !important;
@@ -79,6 +84,10 @@ Bootstrap Admin Template by EGrappler.com
 	height: 700px !importante;	
 }
 
+#myModalAvaliacao{
+	height: 300px !importante;
+}
+
 .accordion-group{
 	margin-bottom: 10px;
 }
@@ -99,9 +108,6 @@ Bootstrap Admin Template by EGrappler.com
 		
 .notify{
 	max-height: 274px;
-	max-width: 200px;
-
-  	width: 192px;
 }
 
 /*.input-append .add-on, .input-append .btn{

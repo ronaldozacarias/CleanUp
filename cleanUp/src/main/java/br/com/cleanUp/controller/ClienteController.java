@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.exception.NegocioException;
@@ -22,13 +24,12 @@ import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
 import br.com.cleanUp.model.StatusServico;
-import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.ServicoService;
-import br.com.cleanUp.vo.AceitarServicoVO;
-import br.com.cleanUp.vo.AvaliarServicoVO;
+import br.com.cleanUp.util.AtributoDeSessao;
+import br.com.cleanUp.vo.ClassificacaoVO;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
@@ -56,6 +57,54 @@ public class ClienteController {
 	public ModelAndView registrar() {
 		return new ModelAndView("diaristas");
 	}
+	
+	@RequestMapping(value = "/notificacoesCliente", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGet() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			return new ModelAndView("notificacoesCliente");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
+	@RequestMapping(value = "/servicosCliente", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetService() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			return new ModelAndView("servicosCliente");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
+	@RequestMapping(value = "/classificacao", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetClassificationService() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			return new ModelAndView("classificacao");
+		} 
+		
+		return new ModelAndView("error");
+    }
 
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -163,26 +212,17 @@ public class ClienteController {
 		return clienteService.findByCpf(cpf);
 	}
 	
-	@RequestMapping(value = "avaliarServico", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/avaliarServico", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void avaliacaoDeServico(/*@RequestBody AvaliarServicoVO avaliarServicoVO*/) throws NegocioException{
-		AvaliarServicoVO avaliarServicoVO = new AvaliarServicoVO();
-		Servico s = new Servico();
-		s.setCodServico(26);
-		s = servicoService.findById(s);
-		ArrayList<Servico> lista = new ArrayList<Servico>();
-		lista.add(s);
-		avaliarServicoVO.setServicosVO(lista);
-		try {
-			for (int i = 0; i < avaliarServicoVO.getServicosVO().size(); i++) {
-				avaliarServicoVO.getServicosVO().get(i).setStatus(StatusServico.CONCLUIDO);
-				avaliarServicoVO.getServicosVO().get(i).getNotificacao().setStatus(StatusNotificacao.CONCLUIDA);
-				avaliarServicoVO.getServicosVO().get(i).getNotificacao().setDescricaoNotificacao(TipoNotificacao.CONFIRMACAO_DE_SOLICITACAO.getTipoNotificacao());
-				avaliarServicoVO.getServicosVO().get(i).setNotaDoServico(1);
-			}
-			this.servicoService.avaliarServico(avaliarServicoVO.getServicosVO());
-		} catch (NegocioException e) {
-			System.out.println(e.getMessage());
-		}
+	public void avaliacaoDeServico(@RequestBody ClassificacaoVO classificacaoVO) throws NegocioException{
+		
+		Servico servico = classificacaoVO.getServico();
+		servico.setAvaliacao(classificacaoVO.getPontuacao());
+		servico.setComentario(classificacaoVO.getComentario());
+		servico.setStatus(StatusServico.CONCLUIDO);
+		servico.getNotificacao().setStatus(StatusNotificacao.ENCERRADA);
+		
+		servicoService.avaliarServico(servico);
+		
 	}
 }

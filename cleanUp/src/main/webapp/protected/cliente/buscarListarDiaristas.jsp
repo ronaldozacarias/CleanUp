@@ -64,7 +64,7 @@
 							</table>
 						</div>
 
-						<div hidden id="mapa" style="height: 400px; width: 400px"></div>
+						<div hidden id="mapa"></div>
 
 						<input type="hidden" ng-model="lat" id="txtLatitude"
 							name="txtLatitude" /> <input type="hidden" ng-model="lng"
@@ -135,6 +135,14 @@
 											<span>{{esp.nomeEspecialidade}}</span>
 										</div>
 									</div>
+									<div ng-show="diarista.mediaDiarista > 0" class="news-item-date">
+										<span class="news-item-title notaDiarista">{{diarista.mediaDiarista | number:1}}</span>
+										<span
+											class="news-item-month">Nota</span>
+									</div>
+									<div ng-show="diarista.mediaDiarista == 0" class="news-item-date">
+										<span class="news-item-month">Não Avaliada</span>
+									</div>
 									<div class="news-item-date">
 										<input type="hidden" value="{{diarista.codigo}}" /> <a
 											href="" class="btn btn-small btn-success"><i
@@ -151,7 +159,7 @@
 				                <h4>No customers found</h4>
 				            </div>
 				        </div>
-				        <div class="col-md-12" ng-show="filteredItems > 0">    
+				        <div class="col-md-12" ng-show="filteredItems > 4">    
 				            <pagination page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
 							items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
 							max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
@@ -166,38 +174,23 @@
 				<!-- /span6 -->
 				<div class="span6">
 					<div class="widget">
-						<div class="widget-header">
-							<i class="icon-bookmark"></i>
-							<h3>Funcionalidades</h3>
-						</div>
-						<!-- /widget-header -->
-						<div class="widget-content">
-							<div class="shortcuts">
-								<a href="javascript:;" class="shortcut"><i
-									class="shortcut-icon icon-list-alt"></i><span
-									class="shortcut-label">Apps</span> </a><a href="javascript:;"
-									class="shortcut"><i class="shortcut-icon icon-bookmark"></i><span
-									class="shortcut-label">Bookmarks</span> </a><a href="javascript:;"
-									class="shortcut"><i class="shortcut-icon icon-signal"></i>
-									<span class="shortcut-label">Reports</span> </a><a
-									href="javascript:;" class="shortcut"> <i
-									class="shortcut-icon icon-comment"></i><span
-									class="shortcut-label">Comments</span>
-								</a><a href="javascript:;" class="shortcut"><i
-									class="shortcut-icon icon-user"></i><span
-									class="shortcut-label">Users</span> </a><a href="javascript:;"
-									class="shortcut"><i class="shortcut-icon icon-file"></i><span
-									class="shortcut-label">Notes</span> </a><a href="javascript:;"
-									class="shortcut"><i class="shortcut-icon icon-picture"></i>
-									<span class="shortcut-label">Photos</span> </a><a
-									href="javascript:;" class="shortcut"> <i
-									class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span>
-								</a>
-							</div>
-							<!-- /shortcuts -->
-						</div>
-						<!-- /widget-content -->
-					</div>
+            <div class="widget-header"> <i class="icon-bookmark"></i>
+              <h3>Funcionalidades</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+	              <div class="shortcuts"> 
+	              		<a href="/cleanUp/protected/cliente/diaristas" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Diaristas</span> </a>
+	              		<a href="/cleanUp/protected/cliente/servicosCliente" class="shortcut"><i class="shortcut-icon icon-tasks"></i><span class="shortcut-label">Serviços</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-star"></i> <span class="shortcut-label">Favoritos</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Perfil</span> </a>
+	                    <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-cogs"></i><span class="shortcut-label">Configurações</span> </a> 
+	              </div>
+              <!-- /shortcuts --> 
+            </div>
+            <!-- /widget-content --> 
+          </div>
 
 
 					<!-- /widget -->
@@ -308,8 +301,7 @@
 	src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>
 <script src="<c:url value='/resources/js/checklist-model.js' />"></script>
-<script
-	src="<c:url value='/protected/controller/clienteController.js' />"></script>
+<script src="<c:url value='/protected/controller/clienteController.js' />"></script>
 <script
 	src="<c:url value='/resources/js/angular-xeditable-0.1.8/js/xeditable.min.js' />"></script>
 <script

@@ -38,6 +38,9 @@ public class Diarista {
 	@Column(name = "VALOR")
 	private float valor;
 	
+	@Column(name="MEDIA_DIARISTA")
+	private float mediaDiarista;
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_ENDERECO")
 	private Endereco endereco;
@@ -56,21 +59,19 @@ public class Diarista {
 			inverseJoinColumns=@JoinColumn(name="ID_ESPECIALIDADE"))
 	private List<Especialidade> especialidades;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_AGENDA")
-	private AgendaDiarista agenda;
-	
-	@Column(name="MEDIADIARISTA")
-	private float mediaDiarista;
-	
 	public Diarista(){
 		this.usuario = new Usuario();
 		this.cidade = new Cidade();
 		this.especialidades = new ArrayList<Especialidade>();		
 		this.endereco = new Endereco();
-		this.agenda = new AgendaDiarista();
 	}
-
+		
+	public float getMediaDiarista() {
+		return mediaDiarista;
+	}
+	public void setMediaDiarista(float mediaDiarista) {
+		this.mediaDiarista = mediaDiarista;
+	}
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -142,20 +143,5 @@ public class Diarista {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-
-	public AgendaDiarista getAgenda() {
-		return agenda;
-	}
-
-	public void setAgenda(AgendaDiarista agenda) {
-		this.agenda = agenda;
-	}
-
-	public float getMediaDiarista() {
-		return mediaDiarista;
-	}
-
-	public void setMediaDiarista(float mediaDiarista) {
-		this.mediaDiarista = mediaDiarista;
-	}
+	
 }

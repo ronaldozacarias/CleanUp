@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div ng-controller="diaristaController">
+<div ng-controller="clienteController">
     
 <div class="main">
 	
@@ -18,7 +18,7 @@
 					
 					<div class="widget-content">
 						
-						<h2>Todos os serviços.</h2>	
+						<h2>Selecione uma notificação para poder acessar os serviços.</h2>	
 						
 						
 					</div> <!-- /widget-content -->
@@ -38,52 +38,25 @@
 						
 					<div class="widget-header">
 						<i class="icon-warning-sign"></i>
-						<h3>Serviços</h3>
+						<h3>Todas notificações</h3>
 					</div> <!-- /widget-header -->
 					
 					<div class="widget-content">
 					
-						<div class="accordion-group" ng-repeat="servico in servicosList">
+						<div class="accordion-group" ng-repeat="notificacao in notificacoes">
 	                          <div class="accordion-heading">
 	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
-	                               	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-	                                    Cliente: {{servico.cliente.nome}}
+	                               	<a class="accordion-toggle" data-toggle="modal" data-target="#myModal2" 
+	                               	   data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" 
+	                               	   ng-click="selectedCliente(notificacao.cliente);">
+	                                    Cliente: {{notificacao.diarista.nome}}
 	                                </a>
 	                          </div>
 	                          <div class="accordion-body collapse in">
-	                                <table style="width: 100%;">
-	                                	<tr>
-	                                		<td width="85%">
-		                                		<div class="accordion-inner">
-				                                   	Descrição do Serviço: {{servico.descricao}} </br>
-				                                   	Data: {{servico.dataServico | date:'dd/MM/yyyy'}} </br>
-				                                   	Endereço: {{servico.endereco.logradouro}} </br>
-				                                   	Status: {{servico.status}}
-				                                </div>	                                			
-	                                		</td>
-	                                		<td class="td-actions">
-	                                			<input type="hidden" value="{{servico.cliente.codigo}}" />
-				                               	<a ng-show="servico.status != 'CONCLUIDO'" class="btn btn-small btn-success" data-toggle="modal" data-target="#myModal2" 
-				                               	   ng-click="selectedCliente(servico.cliente);">
-				                                    <i class="btn-icon-only icon-ok"> </i>
-				                                </a>
-	                                			
-<!-- 	                                			<a ng-show="servico.status != 'CONCLUIDO'" href="" ng-click="selectedCliente(servico.cliente);" class="btn btn-small btn-success"> -->
-<!-- 	                                				<i class="btn-icon-only icon-ok"> </i> -->
-<!-- 	                                			</a> -->
-	                                			<a ng-show="servico.status != 'CONCLUIDO'" href="" ng-click="cancelarServico(servico)" class="btn btn-danger btn-small">
-	                                				<i class="btn-icon-only icon-remove"> </i>
-	                                			</a>
-	                                		</td>
-<!-- 	                                		<td> -->
-<!-- 	                                			<div id="serviceButton">	                                			 -->
-<!-- 	                                				<button class="btn btn-danger" ng-click="cancelarServico(servico)">Cancelar</button> -->
-<!-- 	                                			</div>	 -->
-<!-- 	                                		</td> -->
-	                                	</tr>
-	                                </table>
-	                                
-	                               
+	                                <div class="accordion-inner">
+	                                   	{{notificacao.descricaoNotificacao}} em 
+	                                   	{{notificacao.dataEnvioNotificacao | date:'longDate'}} por {{notificacao.diarista.nome}}
+	                                </div>
 	                          </div>
 	                     </div>					
 						
@@ -102,9 +75,11 @@
     
 	</div> <!-- /main-inner -->
 	
-<!-- 	MODAL -->
 	
-	<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog"
+	
+	<!-- MODAL -->
+
+<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
@@ -113,8 +88,8 @@
 		</div>
 		<form name="servicoForm" method="post">
 			<div class="modal-body">
-				<input type="hidden" required ng-model="servico.cliente.codigo" name="id"
-					value="{{servico.cliente.codigo}}" />
+				<input type="hidden" required ng-model="notificacao.cliente.codigo" name="id"
+					value="{{notificacao.cliente.codigo}}" />
 					
 					<table class="span6 tableservicos">
 					<tr>
@@ -123,10 +98,10 @@
 						<div class="scroll-container">
 						<div class="accordion-group" ng-repeat="servico in servicos">
 	                          <div class="accordion-heading">
-	                          		<input type="hidden" value="{{servico.cliente.codigo}}" />
+	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
 	                               	<a class="accordion-toggle"
 	                               	   data-toggle="collapse" data-parent="#accordion2">
-	                                   Data para realização do serviço: {{servico.dataServico | date:'longDate'}}
+	                                   Data: {{servico.dataServico | date:'longDate'}}
 	                                </a>
 	                          </div>
 	                          <div class="accordion-body collapse in">
@@ -280,4 +255,4 @@
 <script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>
 <script src="<c:url value='/resources/js/checklist-model.js' />"></script>
 
-<script src="<c:url value='/protected/controller/diaristaController.js' />"></script>
+<script src="<c:url value='/protected/controller/clienteController.js' />"></script>

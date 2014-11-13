@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.exception.NegocioException;
@@ -26,6 +29,7 @@ import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.EspecialidadeService;
 import br.com.cleanUp.service.ServicoService;
+import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.AceitarServicoVO;
 import br.com.cleanUp.vo.PessoaVO;
 
@@ -37,8 +41,7 @@ public class DiaristaController {
 	Usuario usuario;
 	Cidade cidade;
 	Endereco endereco;
-	Integer idDiarista;
-	static ArrayList<Servico> SERVICO = new ArrayList<Servico>();	
+	Integer idDiarista;	
 	ArrayList<Servico> listaDeServicoPorDiarista = new ArrayList<Servico>();
 
 	@Autowired
@@ -52,8 +55,18 @@ public class DiaristaController {
 	
 	@RequestMapping(value = "/notificacoes", method = {RequestMethod.GET})
     @ResponseBody
-    public ModelAndView doGet() {
-        return new ModelAndView("notificacoes");
+    public ModelAndView doGetDiarista() {
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_DIARIST)) {
+			return new ModelAndView("notificacoes");
+		} 
+		
+		return new ModelAndView("error");
     }
 	
 	@RequestMapping(value = "/servicos", method = {RequestMethod.GET})
@@ -124,7 +137,7 @@ public class DiaristaController {
 		diarista.setTelefone(pessoa.getTelefone());
 		diarista.setUsuario(usuario);
 
-		diaristaService.editDiarista(diarista);
+		diaristaService.saveDiarista(diarista);
 
 	}
 
@@ -159,17 +172,7 @@ public class DiaristaController {
 	public Diarista findByCpf(String cpf) throws NegocioException {
 		return diaristaService.findByCpf(cpf);
 	}
-	
-	public void solicitacaoDeServico(ArrayList<Servico> s){
-		this.SERVICO = s;
-	}
-	
-	@RequestMapping(value = "getSolicitacaoDeServico", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public ArrayList<Servico> getSolicitacaoDeServico(){
-		return this.SERVICO;
-	}
-	
+		
 	@RequestMapping(value = "/confirmacao", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void confirmacaoDeServico(@RequestBody AceitarServicoVO aceitarServicoVO){
@@ -186,42 +189,6 @@ public class DiaristaController {
 		}
 	}
 	
-//Alex teles alterei aki 
-//		@RequestMapping(value = "servicopordiarista", method = RequestMethod.GET, produces = "application/json")
-//		@ResponseBody
-//		public ArrayList<Servico> buscaServicoPorDiarista( Id da Diarista ) {
-//			idDiarista = 1;//id Fake aqui vai ter que pergar o id da diarista logada
-//			new Thread() {
-//				public void run() {
-//					for (int i = 0; i < 2; i++) {
-//						i = i - 1;
-//						try {
-//							try {
-//								listaDeServicoPorDiarista = servicoService.listServiceToDiarista(idDiarista);
-//								if(listaDeServicoPorDiarista != null){
-//									//teste no consolle traz aquantidade de servisso da diarista com id 1
-//									System.err.println("Metodo de alex Retornou a quntidade de:  "+  listaDeServicoPorDiarista.size());
-//									Thread.sleep(10000);
-//								}else{
-//									System.out.println("Remova as diarista null");
-//								}
-//							} catch (InterruptedException e) {
-//								e.printStackTrace();
-//							}	
-//						} catch (NegocioException e) {
-//							try {
-//								Thread.sleep(10000);
-//							} catch (InterruptedException e1) {
-//								// TODO Auto-generated catch block
-//								e1.printStackTrace();
-//							}
-//							System.out.println("A thread parou");
-//						}
-//					}
-//				}
-//			}.start();
-//			return listaDeServicoPorDiarista;
-//		}
 	
 	@RequestMapping(value = "listaDiaristaPorCidade", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
@@ -237,7 +204,7 @@ public class DiaristaController {
 		return listaD;
 	}
 	
-	@RequestMapping(value = "ranqueamentoDiarista", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/ranqueamentoDiarista", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Diarista> ranqueamentoDiarista()throws NegocioException{
 		ArrayList<Diarista> listaRDiarista = new ArrayList<Diarista>();

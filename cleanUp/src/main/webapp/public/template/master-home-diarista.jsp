@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
-<html lang="pt-BR" id="ng-app" ng-app="">
+<html lang="pt-BR" id="ng-app" ng-app="app">
 <head>
         <title><spring:message  code="project.title" /></title>
             
@@ -22,6 +22,9 @@
 		<link href="<c:url value='/resources/css/css-template/styleDashBord.css' />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/pages/dashboard.css' />" rel="stylesheet" type="text/css"/>
 		<script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
+		
+		<link href="<c:url value='http://fonts.googleapis.com/css?family=Francois+One' />" rel="stylesheet" type="text/css"/>
+
 
 	    
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -34,10 +37,8 @@
 			
 			<tiles:insertAttribute name="header" />
 			
-            <tiles:insertAttribute name="body">         	
+            <tiles:insertAttribute name="body"/>
             
-            
-            </tiles:insertAttribute>
 
 <%--         	<tiles:insertAttribute name="footer" /> --%>
     </body>

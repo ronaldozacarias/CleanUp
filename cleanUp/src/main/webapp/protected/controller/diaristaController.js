@@ -1,3 +1,5 @@
+var app = angular.module("app", []);
+
 function diaristaController($scope, $filter, $http) {
 	
 	/*---------  LIST NOTIFICATIONS DIARISTAS FROM DATABASE  ------------------------------*/  
@@ -36,7 +38,7 @@ function diaristaController($scope, $filter, $http) {
 
 	function listarNotificacoes(){
 		$http({
-	        url: '/cleanUp/protected/notificacoes/getNotificacoes',
+	        url: '/cleanUp/protected/notificacao/getNotificacoes',
 	        method: "GET",
 	        headers: {'Content-Type': 'application/json'}
 	    })
@@ -65,7 +67,7 @@ function diaristaController($scope, $filter, $http) {
 			
 			listarNotificacoes();
 			
-	}, 10000);
+	}, 30000);
 	
 	$scope.enviarServicos = function(servicoForm){
 		
@@ -86,6 +88,7 @@ function diaristaController($scope, $filter, $http) {
         		message: "Para cancelar o serviço clique neste <a href='/cleanUp/protected/diarista/servicos'>link</a>"
             });
 	    	listarNotificacoes();
+	    	listarServicos();
 			$scope.aceitarServicoVO = null;
 	    })
 	    .error(function (data, status, headers, config) {
@@ -115,9 +118,10 @@ function diaristaController($scope, $filter, $http) {
 	    .success(function (data, status, headers, config) {   	    	
 	    	hideModal();
 	    	bootbox.dialog({
-        		title:"Serviço enviado com sucesso!",
-        		message: "Para cancelar o serviço clique neste <a href='/cleanUp/protected/diarista/servicos'>link</a>"
+        		title:"Serviço cancelado com sucesso!",
+        		message: "Obrigado por sua preferência"
             });
+	    	listarServicos();
 	    	listarNotificacoes();
 			$scope.aceitarServicoVO = null;
 	    })

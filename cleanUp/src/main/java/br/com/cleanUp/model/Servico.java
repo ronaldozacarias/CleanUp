@@ -67,8 +67,11 @@ public class Servico {
 	@JoinColumn(name = "ID_NOTIFICACAO", insertable = true, updatable = true, nullable = false)
 	private Notificacao notificacao;
 	
-	@Column(name="NOTADOSERVICO")
-	private int notaDoServico;
+	@Column(name = "AVALIACAO", nullable = true)
+	private int avaliacao;
+	
+	@Column(name = "COMENTARIO_AVALIACAO")
+	private String comentario;
 	
 	public  Servico() {
 		this.diarista = new Diarista();
@@ -88,6 +91,23 @@ public class Servico {
 		this.diarista = codDiarista;
 		this.dataServico = dataServico;
 		this.valor = valor;
+	}
+	
+	
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public int getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(int avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	public Integer getCodServico() {
@@ -169,12 +189,5 @@ public class Servico {
 	public void setNotificacao(Notificacao notificacao) {
 		this.notificacao = notificacao;
 	}
-
-	public int getNotaDoServico() {
-		return notaDoServico;
-	}
-
-	public void setNotaDoServico(int notaDoServico) {
-		this.notaDoServico = notaDoServico;
-	}
+	
 }

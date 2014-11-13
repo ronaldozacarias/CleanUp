@@ -43,13 +43,6 @@ public class CadastroController {
 		return new ModelAndView("cadastro");
 	}
 
-//	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-//	@ResponseBody
-//	public List<Contact> listAll() {
-//		
-//		return clienteService.findAllContacts();
-//	}
-
 	@RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void create(@RequestBody PessoaVO pessoa) throws NegocioException {

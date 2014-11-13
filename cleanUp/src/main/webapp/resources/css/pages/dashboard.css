@@ -9,6 +9,10 @@ Bootstrap Admin Template by EGrappler.com
 */
 
 .shortcuts {
+	text-align: left;	
+}
+
+.shortcuts a{
 	text-align: center;	
 }
 

@@ -2,9 +2,9 @@ package br.com.cleanUp.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +40,6 @@ public class ServicoService {
 	private DiaristaService diaristaServico;
 
 	public void save(Servico s, List<Endereco> listaE, Notificacao noti) throws NegocioException{
-		DiaristaController dc = new DiaristaController();
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
 		try {
 			for (int i = 0; i < listaE.size(); i++) {
@@ -64,7 +63,6 @@ public class ServicoService {
 				servicoRepository.save(serv);
 				listaServ.add(serv);
 			}
-			dc.solicitacaoDeServico(listaServ);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
 		}
@@ -81,18 +79,27 @@ public class ServicoService {
 		}
 	}
 	
+	public void singleEdit(Servico servico) throws NegocioException{
+		try {
+			servicoRepository.save(servico);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Salvar Servico");
+		}
+	}
+	
 	public void cancelarServico(Servico s)throws NegocioException{
 		Servico serv = new Servico();
 		serv = this.findById(s);
 		
-		Date dataCancelamento = new Date();
-		long millisCancelamento = dataCancelamento.getTime();
-		Date dataSevico = serv.getDataServico();
-		long millisServico = dataSevico.getTime();
+		GregorianCalendar calendar = new GregorianCalendar();
+		int diaDoCancelamento = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+		GregorianCalendar calendar2 = new GregorianCalendar();
+		calendar2.setTime(serv.getDataServico());
+		int diaDoServico = calendar2.get(GregorianCalendar.DAY_OF_MONTH);
 		
 		HistorioServico hs = new HistorioServico();
 //		try {
-			if ((millisServico - millisCancelamento) <= 172800000) {
+			if ((diaDoServico - diaDoCancelamento) <= 2) {
 				serv.setStatus(StatusServico.ATIVO);
 				throw new NegocioException("Cancelamento não pode ser Realizado");
 			}else{
@@ -132,39 +139,8 @@ public class ServicoService {
 	}
 	
 	public List<Servico> listServiceToDiarista(Integer codDiarista) throws NegocioException{
-		ArrayList<Servico> retornoServico = new ArrayList<Servico>();
-		ArrayList<Servico> servicoDiarista = new ArrayList<Servico>();
-		servicoDiarista = servicoRepository.listarServicosPorDiarista(codDiarista);;
-		Servico s;
 		try {
-			for (int i = 0; i < servicoDiarista.size(); i++) {
-				s = new Servico();
-				Hibernate.initialize(servicoDiarista.get(i).getDiarista().getAgenda().getDatasAgenda());
-				s.setDiarista(servicoDiarista.get(i).getDiarista());
-				s.setCliente(servicoDiarista.get(i).getCliente());
-				s.setCodServico(servicoDiarista.get(i).getCodServico());
-				s.setDataServico(servicoDiarista.get(i).getDataServico());
-				s.setDescricao(servicoDiarista.get(i).getDescricao());
-				s.setEndereco(servicoDiarista.get(i).getEndereco());
-				s.setNotaDoServico(servicoDiarista.get(i).getNotaDoServico());
-				s.setNotificacao(servicoDiarista.get(i).getNotificacao());
-				s.setStatus(servicoDiarista.get(i).getStatus());
-				s.setTipoServico(servicoDiarista.get(i).getTipoServico());
-				s.setValor(servicoDiarista.get(i).getValor());
-				retornoServico.add(s);
-			}
-			/*int cont = 0;
-			for (int i = 0; i < retornoServico.size(); i++) {
-				if(retornoServico.get(i).getDiarista().getAgenda().getDatasAgenda() != null){
-					cont++;
-				}
-			}
-			if(cont > 0){
-				return retornoServico;
-			}else{
-				return servicoDiarista;
-			}*/
-			return retornoServico;
+			return servicoRepository.listarServicosPorDiarista(codDiarista);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Listar os Servico");
 		}
@@ -180,117 +156,99 @@ public class ServicoService {
 		return listaServico;
 	}
 
-	public List<Servico> findByServicosPorCliente(int codigoCliente, Integer codigoDiarista)throws NegocioException {
+	public List<Servico> findByServicosPorCliente(int codigoCliente, int codigoDiarista )throws NegocioException {
 		
 		List<Servico> servicosPorCliente = servicoRepository.listarServicoPorClienteEDiarista(codigoCliente, codigoDiarista);
-		List<Servico> retornoServico = new ArrayList<Servico>();
-		Servico s;
-		try {
-			for (int i = 0; i < servicosPorCliente.size(); i++) {
-				s = new Servico();
-				Hibernate.initialize(servicosPorCliente.get(i).getDiarista().getAgenda().getDatasAgenda());
-				s.setDiarista(servicosPorCliente.get(i).getDiarista());
-				s.setCliente(servicosPorCliente.get(i).getCliente());
-				s.setCodServico(servicosPorCliente.get(i).getCodServico());
-				s.setDataServico(servicosPorCliente.get(i).getDataServico());
-				s.setDescricao(servicosPorCliente.get(i).getDescricao());
-				s.setEndereco(servicosPorCliente.get(i).getEndereco());
-				s.setNotificacao(servicosPorCliente.get(i).getNotificacao());
-				s.setStatus(servicosPorCliente.get(i).getStatus());
-				s.setTipoServico(servicosPorCliente.get(i).getTipoServico());
-				s.setValor(servicosPorCliente.get(i).getValor());
-				retornoServico.add(s);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		/*int cont = 0;
-		for (int i = 0; i < retornoServico.size(); i++) {
-			if (retornoServico.get(i).getDiarista().getAgenda().getDatasAgenda() != null) {
-				cont++;
-			}
-		}
-		if(cont > 0){
-			return retornoServico;
-		}else{
-			return servicosPorCliente;
-		}*/
-		return retornoServico;
+		
+		return servicosPorCliente;
+	}
+	
+	public List<Servico> findByServicosPorClienteCli(Integer codigo) {
+		
+		List<Servico> servicosPorCliente = servicoRepository.listarServicoPorCliente(codigo);
+		
+		return servicosPorCliente;
+		
 	}
 
 	public List<Servico> listServicosDiarista(Integer codigoDiarista) {
 		
 		List<Servico> servicosPorDiarista = servicoRepository.listarServicoPorDiarista(codigoDiarista);
-		List<Servico> retornoServico = new ArrayList<Servico>();
-		Servico s;
-		try {
-			for (int i = 0; i < servicosPorDiarista.size(); i++) {
-				s = new Servico();
-				Hibernate.initialize(servicosPorDiarista.get(i).getDiarista().getAgenda().getDatasAgenda());
-				s.setDiarista(servicosPorDiarista.get(i).getDiarista());
-				s.setCliente(servicosPorDiarista.get(i).getCliente());
-				s.setCodServico(servicosPorDiarista.get(i).getCodServico());
-				s.setDataServico(servicosPorDiarista.get(i).getDataServico());
-				s.setDescricao(servicosPorDiarista.get(i).getDescricao());
-				s.setEndereco(servicosPorDiarista.get(i).getEndereco());
-				s.setNotificacao(servicosPorDiarista.get(i).getNotificacao());
-				s.setStatus(servicosPorDiarista.get(i).getStatus());
-				s.setTipoServico(servicosPorDiarista.get(i).getTipoServico());
-				s.setValor(servicosPorDiarista.get(i).getValor());
-				retornoServico.add(s);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		/*int cont = 0;
-		for (int i = 0; i < retornoServico.size(); i++) {
-			if (retornoServico.get(i).getDiarista().getAgenda().getDatasAgenda() != null) {
-				cont++;
-			}
-		}
-		if(cont > 0){
-			return retornoServico;
-		}else{
-			return servicosPorDiarista;
-		}*/
-		return retornoServico;
+		
+		return servicosPorDiarista;
 	}
 	
-	public void avaliarServico(List<Servico> listaS)throws NegocioException{
-		try {
-			this.edit((ArrayList<Servico>) listaS);
-			for (int i = 0; i < listaS.size(); i++) {
-				this.mediaDiarista(listaS.get(i));
+	public void avaliarServico(Servico servico)throws NegocioException{
+		
+		singleEdit(servico);
+		
+		//mediaDiarista(servico);
+		
+		List<Servico> servicos = listServicosDiarista(servico.getDiarista().getCodigo());
+		
+		calcularMediaDiarista(servicos);
+		/*try {
+			for (int i = 0; i < servicos.size(); i++) {
+				mediaDiarista(servicos.get(i));
 			}
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao avaliar Servico");
-		}
+		}*/
 	}
 	
-	private void mediaDiarista(Servico s)throws NegocioException{
+	public void calcularMediaDiarista(List<Servico> servicos) throws NegocioException{
+		
 		float media = 0.0f;
 		float somaM = 0.0f;
 		int cont = 0;
-		List<Servico> listaServico = new ArrayList<Servico>();
-		//Diarista diarista = new Diarista();
-		try { 
-			//diarista = this.diaristaServico.findByCpf(s.getDiarista().getCpf());
-			listaServico = this.listServiceToDiarista(s.getDiarista().getCodigo());
-			if(s.getDiarista().getMediaDiarista() <= 0){
-				media = s.getNotaDoServico();
+		
+		for(Servico servico : servicos){
+			
+			if(servico.getDiarista().getMediaDiarista() <= 0){
+				media = servico.getAvaliacao();				
 			}else{
-				for (int i = 0; i < listaServico.size(); i++) {
-					if(listaServico.get(i).getStatus() == StatusServico.CONCLUIDO && listaServico.get(i).getNotaDoServico() > 0){
-						somaM = somaM + listaServico.get(i).getNotaDoServico();
+				for (int i = 0; i < servicos.size(); i++) {
+					if(servicos.get(i).getStatus() == StatusServico.CONCLUIDO && servicos.get(i).getAvaliacao() > 0){
+						somaM = somaM + servicos.get(i).getAvaliacao();
 						cont++;
 					}
 				}
-				media = somaM/cont;
+				
+				media = somaM/cont;				
 			}
-			s.getDiarista().setMediaDiarista(media);
-			this.diaristaServico.editDiarista(s.getDiarista());
-		} catch (Exception e) {
-			throw new NegocioException("Erro ao Calcular Média da Diarista");
+			
+			servico.getDiarista().setMediaDiarista(media);
+			diaristaServico.saveDiarista(servico.getDiarista());
+			
 		}
+			
 	}
+	
+//	private void mediaDiarista(Servico servico)throws NegocioException{
+//		
+//		float media = 0.0f;
+//		float somaM = 0.0f;
+//		int cont = 0;
+//		List<Servico> listaServico = new ArrayList<Servico>();
+//		try {
+//			listaServico = this.listServiceToDiarista(servico.getDiarista().getCodigo());
+//			if(servico.getDiarista().getMediaDiarista() <= 0){
+//				media = servico.getAvaliacao();
+//			}else{
+//				for (int i = 0; i < listaServico.size(); i++) {
+//					if(listaServico.get(i).getStatus() == StatusServico.CONCLUIDO && listaServico.get(i).getAvaliacao() > 0){
+//						somaM = somaM + listaServico.get(i).getAvaliacao();
+//						cont++;
+//					}
+//				}
+//				media = somaM/cont;
+//			}
+//			servico.getDiarista().setMediaDiarista(media);
+//			this.diaristaServico.editDiarista(servico.getDiarista());
+//		} catch (Exception e) {
+//			throw new NegocioException("Erro ao Calcular M�dia da Diarista");
+//		}
+//	}
+	
+	
 }

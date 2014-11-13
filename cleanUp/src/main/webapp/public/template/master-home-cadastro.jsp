@@ -11,6 +11,11 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		
 		<script src="<c:url value='/resources/js/angular.min.js' />"></script>
+		<script src="<c:url value='/resources/js/angular-sanitize.js' />"></script>		
+		<script src="<c:url value='/resources/js/angular-locale_pt-br.js' />"></script>
+		<script src="<c:url value='/resources/js/ui-bootstrap-tpls-0.11.2.min.js' />"></script>
+		<script src="<c:url value='/resources/js/select.js' />"></script>
+		<script src="<c:url value='/resources/css/select.css' />"></script>
 		<script src="<c:url value='/public/util.js' />"></script>
 		<link href="<c:url value='/resources/css/css-template/bootstrap.min.css'  />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/css-template/bootstrap-responsive.min.css'  />" rel="stylesheet" type="text/css"/>
@@ -20,11 +25,28 @@
 		<link href="<c:url value='/resources/css/css-template/stylelogin.css' />" rel="stylesheet" type="text/css"/>
     	<link href="<c:url value='/resources/css/css-template/styleDashBord.css' />" rel="stylesheet" type="text/css"/>
 		<link href="<c:url value='/resources/css/pages/signin.css' />" rel="stylesheet" type="text/css"/>
-	    
+		
+		<link href="<c:url value='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css' />" rel="stylesheet" type="text/css"/>
+		<link href="<c:url value='http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css' />" rel="stylesheet" type="text/css"/>
+		<link href="<c:url value='http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css' />" rel="stylesheet" type="text/css"/>
+			    
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		      <script src="<c:url value='http://html5shim.googlecode.com/svn/trunk/html5.js' />"></script>
 		    <![endif]-->
+		    
+		    
+		<style>
+		
+		    .select2 > .select2-choice.ui-select-match {
+		      /* Because of the inclusion of Bootstrap */
+		      height: 29px;
+		    }
+		
+		    .selectize-control > .selectize-dropdown {
+		      top: 36px;
+		    }
+		  </style>
 	                    
     </head>
     <body>

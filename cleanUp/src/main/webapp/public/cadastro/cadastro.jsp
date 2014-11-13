@@ -89,11 +89,13 @@
 				
 				<div class="field">
 					<label for="select">Cidade:</label>
-<!-- 					<input type="text" id="firstname" name="firstname" value="" placeholder="Exp: logradouro, numero - bairro" class="login" /> -->
-					<select ng-model="pessoa.cidade" id="select" name="select" class="login" required>
-					  <option value="" disabled selected>Sua Cidade</option>
-					  <option ng-repeat="cidade in cidades" value={{cidade.codigoCidade}}>{{cidade.nomeCidade}}</option>
-					</select>
+<!-- 					<pre>Model: {{selected | json}}</pre> -->
+					<input type="text" ng-model="selected" placeholder="Digite sua Cidade" typeahead="cidade as cidade.nomeCidade for cidade in cidades | filter:$viewValue | limitTo:8" class="login">
+					
+<!-- 					<select ng-model="pessoa.cidade" id="select" name="select" class="login" required> -->
+<!-- 					  <option value="" disabled selected>Sua Cidade</option> -->
+<!-- 					  <option ng-repeat="cidade in cidades" value={{cidade.codigoCidade}}>{{cidade.nomeCidade}}</option> -->
+<!-- 					</select> -->
 					
 					
 				</div> <!-- /field -->
@@ -105,6 +107,7 @@
 				</div> <!-- /field -->
 				
 				<p>Especialidades:</p>
+				
 				<table>
 				  <tr ng-repeat="especialidade in especialidades">
 				    <td>{{especialidade.nomeEspecialidade}}</td>
@@ -166,3 +169,4 @@
     <script src="<c:url value='/public/controller/cadastroController.js' />"></script>
     <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
     <script src="<c:url value='/resources/js/checklist-model.js' />"></script>
+    

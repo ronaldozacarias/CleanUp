@@ -96,16 +96,13 @@ public class ServicoController {
 		servico.setCodServico(servicoVO.getCodigo());
 		servico.setDataServico(new Date());
 
-//		try {
-			servicoService.cancelarServico(servico);
-//		} catch (NegocioException e) {
-//			System.out.println(e.getMessage());
-//		}
+		servicoService.cancelarServico(servico);
+
 	}
 	
-//	@RequestMapping(value="listarServicosPorCliente", method = RequestMethod.POST, produces = "application/json")
+//	@RequestMapping(value="listarServicosPorClienteCli", method = RequestMethod.POST, produces = "application/json")
 //	@ResponseBody
-//	public List<Servico> servicosPorCliente(@RequestBody PessoaVO pessoa)throws NegocioException {
+//	public List<Servico> servicosPorCliente()throws NegocioException {
 //		
 //		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
 //				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
@@ -135,6 +132,22 @@ public class ServicoController {
 		return servicosPorCliente;
 		
 	}
+
+	
+	@RequestMapping(value = "listarServicosPorClienteCli", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Servico> servicosPorCliente() throws NegocioException {
+		
+		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
+
+		Cliente cliente = clienteService.findByIdUsuario(usuario.getId());
+		
+		List<Servico> servicosPorCliente = servicoService.findByServicosPorClienteCli(cliente.getCodigo());
+		
+		return servicosPorCliente;
+		
+	}
 	
 	@RequestMapping(value = "listarServicosPorDiarista", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -145,7 +158,7 @@ public class ServicoController {
 
 		Diarista diarista = diaristaService.findByUsuario(usuario);
 		
-		List<Servico> servicosPorCliente = servicoService.listServicosDiarista(/*diarista.getCodigo()*/1);
+		List<Servico> servicosPorCliente = servicoService.listServicosDiarista(diarista.getCodigo());
 		
 		return servicosPorCliente;
 		

@@ -18,7 +18,7 @@
 					
 					<div class="widget-content">
 						
-						<h2>Selecione uma notificação para ser acessar os serviços.</h2>	
+						<h2>Selecione uma notificação para poder acessar os serviços.</h2>	
 						
 						
 					</div> <!-- /widget-content -->
@@ -54,8 +54,8 @@
 	                          </div>
 	                          <div class="accordion-body collapse in">
 	                                <div class="accordion-inner">
-	                                   	{{notificacao.cliente.nome}} {{notificacao.descricaoNotificacao}} em 
-	                                   	{{notificacao.dataEnvioNotificacao | date:'longDate'}}
+	                                   	{{notificacao.cliente.nome}} {{notificacao.descricaoNotificacao}} </br>
+	                                   	Data de envio da solicitação: {{notificacao.dataEnvioNotificacao | date:'longDate'}}
 	                                </div>
 	                          </div>
 	                     </div>					
@@ -101,7 +101,7 @@
 	                          		<input type="hidden" value="{{notificacao.cliente.codigo}}" />
 	                               	<a class="accordion-toggle"
 	                               	   data-toggle="collapse" data-parent="#accordion2">
-	                                   Data: {{servico.dataServico | date:'longDate'}}
+	                                   Data para realização do serviço: {{servico.dataServico | date:'longDate'}}
 	                                </a>
 	                          </div>
 	                          <div class="accordion-body collapse in">

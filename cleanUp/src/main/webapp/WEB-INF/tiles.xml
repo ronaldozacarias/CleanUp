@@ -70,8 +70,14 @@
     <definition name="notificacoes" extends="master-home-diarista.page">
         <put-attribute name="body" value="/protected/diarista/notificacoes.jsp"/>
     </definition>
+    <definition name="notificacoesCliente" extends="master-home-cliente.page">
+        <put-attribute name="body" value="/protected/cliente/notificacoesCliente.jsp"/>
+    </definition>
     <definition name="servicosDiarista" extends="master-home-diarista.page">
     	<put-attribute name="body" value="/protected/diarista/servicosDiarista.jsp"/>
+    </definition>
+    <definition name="servicosCliente" extends="master-home-cliente.page">
+    	<put-attribute name="body" value="/protected/cliente/servicosCliente.jsp"/>
     </definition>
     
     <definition name="customError" template="/public/error/customError.jsp">
