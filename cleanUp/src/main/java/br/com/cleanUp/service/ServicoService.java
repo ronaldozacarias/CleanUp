@@ -91,17 +91,16 @@ public class ServicoService {
 		Servico serv = new Servico();
 		serv = this.findById(s);
 		
-		GregorianCalendar calendar = new GregorianCalendar();
-		int diaDoCancelamento = calendar.get(GregorianCalendar.DAY_OF_MONTH);
-		GregorianCalendar calendar2 = new GregorianCalendar();
-		calendar2.setTime(serv.getDataServico());
-		int diaDoServico = calendar2.get(GregorianCalendar.DAY_OF_MONTH);
+		Date dataCancelamento = new Date();
+		long millisCancelamento = dataCancelamento.getTime();
+		Date dataSevico = serv.getDataServico();
+		long millisServico = dataSevico.getTime();
 		
 		HistorioServico hs = new HistorioServico();
 //		try {
-			if ((diaDoServico - diaDoCancelamento) <= 2) {
+			if ((millisServico - millisCancelamento) <= 172800000) {
 				serv.setStatus(StatusServico.ATIVO);
-				throw new NegocioException("Cancelamento nÃ£o pode ser Realizado");
+				throw new NegocioException("Cancelamento não pode ser Realizado");
 			}else{
 				hs.setCodServico(serv.getCodServico());
 				hs.setCliente(serv.getCliente());
