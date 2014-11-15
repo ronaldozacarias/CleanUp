@@ -13,7 +13,7 @@ import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
-import br.com.cleanUp.model.HistorioServico;
+import br.com.cleanUp.model.HistoricoServico;
 import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
@@ -38,6 +38,9 @@ public class ServicoService {
 	
 	@Autowired
 	private DiaristaService diaristaServico;
+	
+	@Autowired
+	private HistoricoServicoService historioServicoController;
 
 	public void save(Servico s, List<Endereco> listaE, Notificacao noti) throws NegocioException{
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
@@ -61,7 +64,7 @@ public class ServicoService {
 				enderecoRepository.save(listaE.get(i));
 				serv.setEndereco(listaE.get(i));
 				servicoRepository.save(serv);
-				listaServ.add(serv);
+				this.historioServicoController.salvarHistorioDeServico(serv);
 			}
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
@@ -71,8 +74,9 @@ public class ServicoService {
 	public void edit(ArrayList<Servico> s)throws NegocioException{
 		try {
 			for (int i = 0; i < s.size(); i++) {
-				servicoRepository.delete(s.get(i).getCodServico());
+				//servicoRepository.delete(s.get(i).getCodServico());
 				servicoRepository.save(s.get(i));
+				historioServicoController.salvarHistorioDeServico(s.get(i));
 			}
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
@@ -82,6 +86,7 @@ public class ServicoService {
 	public void singleEdit(Servico servico) throws NegocioException{
 		try {
 			servicoRepository.save(servico);
+			historioServicoController.salvarHistorioDeServico(servico);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
 		}
@@ -96,27 +101,19 @@ public class ServicoService {
 		Date dataSevico = serv.getDataServico();
 		long millisServico = dataSevico.getTime();
 		
-		HistorioServico hs = new HistorioServico();
-//		try {
+//		HistorioServico hs = new HistorioServico();
+		try {
 			if ((millisServico - millisCancelamento) <= 172800000) {
-				serv.setStatus(StatusServico.ATIVO);
+				serv.setStatus(StatusServico.ACEITO);
 				throw new NegocioException("Cancelamento não pode ser Realizado");
-			}else{
-				hs.setCodServico(serv.getCodServico());
-				hs.setCliente(serv.getCliente());
-				hs.setDataServico(serv.getDataServico());
-				hs.setDescricao(serv.getDescricao());
-				hs.setDiarista(serv.getDiarista());
-				hs.setEndereco(serv.getEndereco());				
-				hs.setStatus(StatusServico.INATIVO);
-				hs.setTipoServico(serv.getTipoServico());
-				hs.setValor(serv.getValor());
-				this.historicoServico.save(hs);
+			}else{			
+				serv.setStatus(StatusServico.CANCELAR);
+				this.historioServicoController.salvarHistorioDeServico(serv);
 				this.removeServico(serv);
 			}
-//		} catch (Exception e) {
-//			throw new NegocioException("Erro ao Cancelar Servico!!");
-//		}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Cancelar Servico!!");
+	}
 	}
 	
 	public Servico findById(Servico s) throws NegocioException{
@@ -181,18 +178,9 @@ public class ServicoService {
 		
 		singleEdit(servico);
 		
-		//mediaDiarista(servico);
-		
 		List<Servico> servicos = listServicosDiarista(servico.getDiarista().getCodigo());
 		
 		calcularMediaDiarista(servicos);
-		/*try {
-			for (int i = 0; i < servicos.size(); i++) {
-				mediaDiarista(servicos.get(i));
-			}
-		} catch (Exception e) {
-			throw new NegocioException("Erro ao avaliar Servico");
-		}*/
 	}
 	
 	public void calcularMediaDiarista(List<Servico> servicos) throws NegocioException{
@@ -248,6 +236,4 @@ public class ServicoService {
 //			throw new NegocioException("Erro ao Calcular Média da Diarista");
 //		}
 //	}
-	
-	
 }

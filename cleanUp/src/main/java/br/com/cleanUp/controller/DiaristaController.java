@@ -179,7 +179,7 @@ public class DiaristaController {
 
 		try {
 			for (int i = 0; i < aceitarServicoVO.getServicosVO().size(); i++) {
-				aceitarServicoVO.getServicosVO().get(i).setStatus(StatusServico.ATIVO);
+				aceitarServicoVO.getServicosVO().get(i).setStatus(StatusServico.ACEITO);
 				aceitarServicoVO.getServicosVO().get(i).getNotificacao().setStatus(StatusNotificacao.CONCLUIDA);
 				aceitarServicoVO.getServicosVO().get(i).getNotificacao().setDescricaoNotificacao(TipoNotificacao.CONFIRMACAO_DE_SOLICITACAO.getTipoNotificacao());
 			}
