@@ -1,17 +1,17 @@
 package br.com.cleanUp.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,9 +21,13 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="TB_HISTORICOSERVICO")
-public class HistorioServico {
+public class HistoricoServico {
 
 	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID_HISTORIOCO")
+	private Integer codigo;
+	
 	@Column(name = "ID_SERVICO")
 	private Integer codServico;
 	
@@ -56,15 +60,18 @@ public class HistorioServico {
 	@Column(name="VALOR",length = 10, nullable = false)
 	private double valor;
 	
-//	@OneToMany(mappedBy="servico", fetch = FetchType.LAZY)
-//	private List<ServicoTipoNotificacao> servicoTipoNotificacoes;
-	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")
 	private StatusServico status;
 
-	public HistorioServico() {
+	@Column(name = "DATAALERACAO", length = 10, nullable = false) 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAlteracao;
+	
+	public HistoricoServico() {
 		super();
+		this.diarista = new Diarista();
+		this.cliente = new Cliente();
 	}
 
 	public Integer getCodServico() {
@@ -147,6 +154,12 @@ public class HistorioServico {
 	public void setStatus(StatusServico status) {
 		this.status = status;
 	}
-	
-	
+
+	public Date getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(Date dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
 }
