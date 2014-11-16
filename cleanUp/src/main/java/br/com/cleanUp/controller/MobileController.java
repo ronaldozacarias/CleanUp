@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.print.attribute.standard.Severity;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,10 +49,13 @@ public class MobileController {
 	private ServicoService servicoService;
 	
 	@Autowired
-	private ServicoController servicoController;
+	private ServicoService servicoController;
 
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private ClienteController clienteController;
 	
 	@Autowired
 	private EspecialidadeService especialidadeService;
@@ -62,7 +67,7 @@ public class MobileController {
 	@ResponseBody
 	public List<Diarista> getDiaristas() throws NegocioException {
 
-		return diaristaController.ranqueamentoDiarista();
+		return diaristaController.getAll();
 
 	}
 
@@ -104,7 +109,7 @@ public class MobileController {
 	public String saved(@RequestBody ServicoVO servicoVO)throws NegocioException {
 		
 		List<Endereco> listaE = servicoVO.getEnderecos();
-		Cliente cliente = clienteService.findByIdUsuario(servicoVO.getUsuario().getId());
+		Cliente cliente = clienteService.findByIdUsuario(servicoVO.getCliente().getUsuario().getId());
 		
 		Servico servico = new Servico();		
 		Notificacao notificacao = new Notificacao();
@@ -128,7 +133,6 @@ public class MobileController {
 			System.out.println(e2.getMessage());
 			return Util.constructJSON("register", false, "Erro ao cadastrar.");
 		}
-		
 	}
 	
 	@RequestMapping(value = "/servico/confirmar", method = RequestMethod.POST, produces = "application/json")
@@ -138,13 +142,12 @@ public class MobileController {
 		AceitarServicoVO asvo  = new AceitarServicoVO();
 		asvo.getServicosVO().add(servico);
 		diaristaController.confirmacaoDeServico(asvo);
-
 	}
 	
 	@RequestMapping(value = "/servico/cancelar", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void cancelarServico(Servico servico) throws NegocioException {
-		ServicoVO serv = new ServicoVO();
+		/*ServicoVO serv = new ServicoVO();
 		ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
 		enderecos.add(servico.getEndereco());
 		serv.setCliente(servico.getCliente());
@@ -152,17 +155,19 @@ public class MobileController {
 		serv.setDescricao(servico.getDescricao());
 		serv.setEnderecos(enderecos);
 		serv.setCodigo(servico.getCodServico());
-		serv.setData(servico.getDataServico());
-		servicoController.cancelarServico(serv);
+		serv.setData(servico.getDataServico());*/
+		servicoService.cancelarServico(servico);
 
 	}
 	
-	/*
+	
 	@RequestMapping(value = "/servico/classifica", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void classificaServico(ServicoVO servico) throws NegocioException {
-		servicoController.classificaServico(servico);
-	}*/
+
+		//clienteController.avaliacaoDeServico(servico);
+
+	}
 	
 	@RequestMapping(value = "/listar/especialidades", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
