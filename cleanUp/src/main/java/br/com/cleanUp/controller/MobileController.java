@@ -1,11 +1,13 @@
 package br.com.cleanUp.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,13 +18,18 @@ import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
+import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusNotificacao;
+import br.com.cleanUp.model.StatusServico;
+import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.CidadeService;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.EspecialidadeService;
 import br.com.cleanUp.service.ServicoService;
+import br.com.cleanUp.util.Util;
 import br.com.cleanUp.vo.AceitarServicoVO;
 import br.com.cleanUp.vo.ServicoVO;
 
@@ -55,7 +62,7 @@ public class MobileController {
 	@ResponseBody
 	public List<Diarista> getDiaristas() throws NegocioException {
 
-		return diaristaController.getAll();
+		return diaristaController.ranqueamentoDiarista();
 
 	}
 
@@ -90,6 +97,38 @@ public class MobileController {
 		}
 
 		return listaServicos;
+	}
+	
+	@RequestMapping(value = "/servico/add", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public String saved(@RequestBody ServicoVO servicoVO)throws NegocioException {
+		
+		List<Endereco> listaE = servicoVO.getEnderecos();
+		Cliente cliente = clienteService.findByIdUsuario(servicoVO.getUsuario().getId());
+		
+		Servico servico = new Servico();		
+		Notificacao notificacao = new Notificacao();
+		notificacao.setCliente(cliente);
+		notificacao.setDiarista(servicoVO.getDiarista());
+		notificacao.setDataEnvioNotificacao(new Date());
+		notificacao.setDescricaoNotificacao(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
+		notificacao.setStatus(StatusNotificacao.PENDENTE);
+		
+		servico.setStatus(StatusServico.PENDENTE);
+		servico.setNotificacao(notificacao);
+		servico.setCliente(cliente);
+		servico.setDiarista(servicoVO.getDiarista());
+		servico.setDataServico(servicoVO.getData());
+		servico.setDescricao(servicoVO.getDescricao());
+		
+		try {
+			servicoService.save(servico, listaE, notificacao);
+			return Util.constructJSON("register", true);
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+			return Util.constructJSON("register", false, "Erro ao cadastrar.");
+		}
+		
 	}
 	
 	@RequestMapping(value = "/servico/confirmar", method = RequestMethod.POST, produces = "application/json")
