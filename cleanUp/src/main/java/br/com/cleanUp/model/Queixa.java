@@ -1,7 +1,11 @@
 package br.com.cleanUp.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,11 +28,19 @@ public class Queixa {
 	@JoinColumn(name="ID_DIARISTA")
 	private Diarista diarista;
 	
-	@Column(name="MENSAGEM")
-	private String mensagem;
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="ID_CLIENTE")
+	private Cliente cliente;
+	
+	@ElementCollection(fetch=FetchType.LAZY)
+	@CollectionTable(name="MENSAGENS_QUEIXAS", joinColumns=@JoinColumn(name="ID_QUEIXA"))
+	@Column(name="MENSAGENS")
+	private List<String> mensagem;
 
 	public Queixa() {
 		super();
+		this.cliente = new Cliente();
+		this.diarista = new Diarista();
 	}
 
 	public int getCodigo() {
@@ -47,11 +59,19 @@ public class Queixa {
 		this.diarista = diarista;
 	}
 
-	public String getMensagem() {
+	public List<String> getMensagem() {
 		return mensagem;
 	}
 
-	public void setMensagem(String mensagem) {
+	public void setMensagem(List<String> mensagem) {
 		this.mensagem = mensagem;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 }
