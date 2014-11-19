@@ -41,7 +41,7 @@
         <property name="useCodeAsDefaultMessage" value="true"/>
     </bean>
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
-        <property name="defaultLocale" value="en"/>
+        <property name="defaultLocale" value="pt_BR"/>
     </bean>
 
     <!-- View Handler -->

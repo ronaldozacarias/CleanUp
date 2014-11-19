@@ -1,29 +1,39 @@
 var app = angular.module("app", ['ui.bootstrap']);
 
-app.filter('startFrom', function() {
-    return function(input, start) {
-        if(input) {
-            start = +start; //parse to int
-            return input.slice(start);
-        }
-        return [];
-    };
-});
+	   app.filter('startFrom', function() {
+	       return function(input, start) {
+	           if(input) {
+	               start = +start; //parse to int
+	               return input.slice(start);
+	           }
+	           return [];
+	       };
+	   });
 
-function clienteController($scope, $filter, $http, $timeout) {
+function clienteController($scope, $filter, $http, $timeout, $location) {
     
+	console.log('[ClienteController Iniciado]');
+	
     $scope.url = "/cleanUp/protected/servico/add";
     $scope.enderecos = [];
     $scope.arrayEnd = false;
     $scope.msg = '';
     listarNotificacoes();
     listarServicosCli();
-    $scope.data = 0;
+    listarDiaristas();
+    $scope.data;
     $scope.minDate = '';
     $scope.searchDiarista = '';
+    $scope.searchService = ''; 
     $scope.score;
     $scope.showAvaliacao = false;
     $scope.showServicos = true;
+    $scope.diaristas = null;
+    $scope.servicosList = null;
+    $scope.filtered = null;
+    
+    $scope.countServPendente = 0;
+    $scope.countServCancel = 0;
 
     var hoje = new Date();
 
@@ -65,7 +75,18 @@ function clienteController($scope, $filter, $http, $timeout) {
       };
 
       $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-      $scope.format = $scope.formats[0];      
+      $scope.format = $scope.formats[0];
+      
+      
+      $http({
+          url: '/cleanUp/protected/menu/getMenu',
+          method: "POST",
+          headers: {'Content-Type': 'application/json'}
+      }).success(function(data) {
+          $scope.menus = data;
+      }).error(function(data) {
+          exibirMensagemErro(data);
+     }); 
     
     function listarNotificacoes(){
         $http({
@@ -101,18 +122,20 @@ function clienteController($scope, $filter, $http, $timeout) {
     }, 30000);  
     
     /*---------  SENDING SERVICO  -----------------------------------------*/
-    $scope.enviarServico = function(servicoForm) {
-        
-        hideModal();
+    $scope.enviarServico = function(servicoForm) {        
         
         var url = $scope.url;
         
-        var time = new Date($scope.data);
-        var d1 = time.getTime() + 10800000;
+        var param = $('#dp').val();
+        var pattern = /(\d{2})\/(\d{2})\/(\d{4})/;
+        var dt = new Date(param.replace(pattern,'$3-$2-$1'));
+        var dateVO = dt.getTime() + 10800000; 
+        
+        $scope.data = dateVO;
         
         $scope.servicoVO = {
                 descricao: $scope.descricao,
-                data: d1,
+                data: $scope.data,
                 enderecos: $scope.enderecos,
                 diarista:$scope.diarista
         };
@@ -126,8 +149,10 @@ function clienteController($scope, $filter, $http, $timeout) {
         }
         
         if($scope.descricao != '' &&
-           $scope.data != '' && $scope.enderecos.length > 0){           
+           $scope.data != '' && $scope.enderecos.length > ""){           
             
+        	hideModal();
+        	
             console.log("INTO");
             
             $http({
@@ -189,48 +214,67 @@ function clienteController($scope, $filter, $http, $timeout) {
          
 
  /*---------  LIST DIARISTAS FROM DATABASE  ------------------------------*/    
-    $http({
-        url: '/cleanUp/protected/diarista/ranqueamentoDiarista',
-        method: "GET",
-        headers: {'Content-Type': 'application/json'}
-    })
-    .success(function (data, status, headers, config) {     
-        $scope.diaristas = data;        
-        /* Pagination Part 1*/
-        $scope.currentPage = 1; //current page
-        $scope.entryLimit = 4; //max no of items to display in a page
-        $scope.maxSize = 5;
-        $scope.filteredItems = $scope.diaristas.length; //Initially for no filter  
-        $scope.totalItems = $scope.diaristas.length;
-        /* END - Pagnation Part 2*/
-    })
-    .error(function (data, status, headers, config) {
-        bootbox.dialog({
-            title:"Erro inesperado!",
-            message: data
-        });
-    });
+  function listarDiaristas(){
+	  
+	  	var url = "" + $location.$$absUrl;
+  	
+  		if(url == "http://localhost:8080/cleanUp/protected/home"){
+  	
+			$http({
+				url : '/cleanUp/protected/diarista/ranqueamentoDiarista',
+				method : "GET",
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).success(function(data, status, headers, config) {
+				$scope.diaristas = data;
+				$scope.MasterDiarista = data[0];
+				doPaginationDiarist($scope.diaristas);
+			}).error(function(data, status, headers, config) {
+				bootbox.dialog({
+					title : "Erro inesperado!",
+					message : data
+				});
+			});
+  		}  
+  }
     
-    /*Pagination Part 2*/
+    function doPaginationCli(data){
+    	$scope.currentPage = 1; //current page
+        $scope.entryLimit = 3; //max no of items to display in a page
+        $scope.maxSize = 5;
+        $scope.filteredItems = data.length; //Initially for no filter  
+        $scope.totalItems = data.length;
+    };
+    
+    function doPaginationDiarist(data){
+    	$scope.currentPage = 1; //current page
+        $scope.entryLimit = 3; //max no of items to display in a page
+        $scope.maxSize = 5;
+        $scope.filteredItems = data.length; //Initially for no filter  
+        $scope.totalItems = data.length;
+    };    
+    
     $scope.setPage = function(pageNo) {
         $scope.currentPage = pageNo;
     };
     $scope.filter = function() {
-        $timeout(function() { 
-            $scope.filteredItems = $scope.filtered.length;
-        }, 10);
+    	$scope.filteredItems = $scope.filtered.length;
     };
-    $scope.sort_by = function(predicate) {
-        $scope.predicate = predicate;
-        $scope.reverse = !$scope.reverse;
-    };
+    
+    
     /*END*/
     
 /*---------  END LIST DIARISTAS FROM DATABASE  ------------------------------*/
     
  /*---------  SET DIARISTA IN MODAL  ------------------------------*/
     $scope.selectedDiarista = function (diarista) {
-        $scope.minDate = datamin;
+    	initialize();
+    	
+    	$scope.minDate = datamin;
+        
+        $('#datePicker').data("DateTimePicker").setMinDate(datamin);
+        
         var selectedDiarista = angular.copy(diarista);
         $scope.diarista = selectedDiarista;
         $('#myModal').modal({
@@ -243,8 +287,9 @@ function clienteController($scope, $filter, $http, $timeout) {
     $scope.selectedServicoAlaviacao = function (servico) {
         var selectedServicoAlaviacao = angular.copy(servico);
         $scope.servico = selectedServicoAlaviacao; 
+        
         $scope.showAvaliacao = true;
-        $scope.showServicos = false;        
+        $scope.showServicos = false;
     };
     
     
@@ -271,6 +316,11 @@ $scope.salvarClassificacao = function(servico){
                     message: "<div class='loginbootbox'>Obrigado por nos dar sua opinião!</div>"
                 });
                 listarServicosCli();
+                
+                $scope.classificacaoVO = "";
+                
+                document.getElementById("comentario").value = "";
+                
                 $scope.showAvaliacao = false;
                 $scope.showServicos = true;
             })
@@ -291,6 +341,10 @@ $scope.salvarClassificacao = function(servico){
         
         $scope.score;
         
+        $scope.classificacaoVO = "";
+        
+        document.getElementById("comentario").value = "";
+        
         $('#starclassification').raty({
               score : 0
         });
@@ -306,6 +360,11 @@ $scope.salvarClassificacao = function(servico){
     $('.modal').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
         $scope.reset();
+    });
+    
+    $('.modal').on('hidden.bs.modal', function(){
+        $(this).find('form')[0].reset();
+        $scope.$digest();
     });
     
     function hideModal(){
@@ -426,27 +485,54 @@ $scope.salvarClassificacao = function(servico){
     
     
     function listarServicosCli(){
-        $http({         
-            url: '/cleanUp/protected/servico/listarServicosPorClienteCli',
-            method: "POST",
-            headers: {'Content-Type': 'application/json'}
-        })
-        .success(function (data, status, headers, config) {                 
-            $scope.servicosList = data;
-            $('#starclassification').raty({
-                  click: function(score, evt) {
-                    $scope.score = score;
-                    console.log( $scope.score);
-                  }
+    	
+    	var url = "" + $location.$$absUrl;
+    	
+    	if(url == "http://localhost:8080/cleanUp/protected/cliente/servicosCliente"){
+    		
+    		$scope.currentPage = null;
+    	    $scope.entryLimit = null;
+    	    $scope.maxSize = null;
+    	    $scope.filteredItems = null;  
+    	    $scope.totalItems = null;
+    		
+    		$http({         
+                url: '/cleanUp/protected/servico/listarServicosPorClienteCli',
+                method: "POST",
+                headers: {'Content-Type': 'application/json'}
+            })
+            .success(function (data, status, headers, config) {                 
+                $scope.servicosList = data;
+                
+                for(var i = 0 ; i < $scope.servicosList.length ; i++){
+                	if($scope.servicosList[i].status == 'PENDENTE'){
+                		$scope.countServPendente++;
+                	}
+                	if($scope.servicosList[i].status == 'INATIVO'){
+                		$scope.countServCancel++;
+                	}
+                	
+                }
+                
+                doPaginationCli($scope.servicosList);
+                
+                
+                
+                $('#starclassification').raty({
+                      click: function(score, evt) {
+                        $scope.score = score;
+                        console.log( $scope.score);
+                      }
+                });
+        
+            })
+            .error(function (data, status, headers, config) {
+                bootbox.dialog({
+                    title:"Erro inesperado!",
+                    message: data
+                });
             });
-    
-        })
-        .error(function (data, status, headers, config) {
-            bootbox.dialog({
-                title:"Erro inesperado!",
-                message: data
-            });
-        });
+    	}
     };
         
 }

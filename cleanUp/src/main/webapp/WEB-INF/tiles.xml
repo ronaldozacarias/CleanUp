@@ -4,9 +4,15 @@
 <tiles-definitions>
 
     <!-- Master -->
-    <definition name="master.page" template="/public/template/master.jsp">
-<!--         <put-attribute name="header" value="/public/template/header.jsp"/> -->
+    <definition name="masterCli.page" template="/public/template/masterCli.jsp">
+        <put-attribute name="header" value="/public/template/header.jsp"/>
+        <put-attribute name="sidebar" value="/public/template/sidebar-cli.jsp"/>
 <!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
+    </definition>
+    
+    <definition name="masterDia.page" template="/public/template/masterDia.jsp">
+        <put-attribute name="header" value="/public/template/header.jsp"/>
+        <put-attribute name="sidebar" value="/public/template/sidebar-cli.jsp"/>
     </definition>
     
     <definition name="master-welcome.page" template="/public/template/master-welcome.jsp">
@@ -30,31 +36,28 @@
     </definition>
     
     <definition name="master-login.page" template="/public/template/master-login.jsp">
-        <put-attribute name="header" value="/public/template/headerLogin.jsp"/>
+<!--         <put-attribute name="header" value="/public/template/headerLogin.jsp"/> -->
     </definition>
 
 <!--  Pages #############################################################################################-->
     
-    <definition name="welcomePage" extends="master-welcome.page">
-        <put-attribute name="body" value="/protected/welcomePageCliente.jsp"/>
-    </definition>
+<!--     <definition name="welcomePage" extends="master.page"> -->
+<!--         <put-attribute name="body" value="/protected/welcomePageCliente.jsp"/> -->
+<!--     </definition> -->
     <definition name="registrar" extends="master-welcome.page">
         <put-attribute name="body" value="/public/registrar/registro.jsp"/>
     </definition>
     <definition name="welcome" extends="master-welcome.page">
         <put-attribute name="body" value="/public/welcome.jsp"/>
     </definition>
-    <definition name="welcomeClient" extends="master-home-cliente.page">
+    <definition name="welcomeClient" extends="masterCli.page">
         <put-attribute name="body" value="/protected/welcomePageCliente.jsp"/>
     </definition>
     <definition name="diaristas" extends="master-home-cliente.page">
         <put-attribute name="body" value="/protected/cliente/buscarListarDiaristas.jsp"/>
     </definition>    
-    <definition name="welcomeDiarist" extends="master-home-diarista.page">
+    <definition name="welcomeDiarist" extends="masterDia.page">
         <put-attribute name="body" value="/protected/welcomePageDiarista.jsp"/>
-    </definition>
-    <definition name="contactsList" extends="master.page">
-        <put-attribute name="body" value="/protected/contacts/contacts.jsp"/>
     </definition>
     <definition name="login" extends="master-login.page">
         <put-attribute name="body" value="/public/login.jsp"/>
@@ -73,10 +76,10 @@
     <definition name="notificacoesCliente" extends="master-home-cliente.page">
         <put-attribute name="body" value="/protected/cliente/notificacoesCliente.jsp"/>
     </definition>
-    <definition name="servicosDiarista" extends="master-home-diarista.page">
+    <definition name="servicosDiarista" extends="masterDia.page">
     	<put-attribute name="body" value="/protected/diarista/servicosDiarista.jsp"/>
     </definition>
-    <definition name="servicosCliente" extends="master-home-cliente.page">
+    <definition name="servicosCliente" extends="masterCli.page">
     	<put-attribute name="body" value="/protected/cliente/servicosCliente.jsp"/>
     </definition>
     

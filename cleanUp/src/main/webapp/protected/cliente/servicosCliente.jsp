@@ -3,269 +3,237 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div ng-controller="clienteController">
-    
-<div class="main">
-	
-	<div class="main-inner">
+<!-- START Main section-->
+      <section ng-controller="clienteController">
+         
+         <!-- START Page content-->
+         <div class="main-content">        
+               
+         	<button type="button" class="btn btn-oval btn-green pull-right">
+         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</button>
+            
+            <h3><spring:message code="service.client" />
+               <br>
+               <small>Realizadas por você</small>              
 
-	    <div class="container">
-	
-    	<div class="row">
-    	<div class="span8 mainTitleNotification">
-						
-				<div class="widget widget-plain">
-					
-					<div class="widget-content">
-						
-						<h2 ng-show="showServicos">Todos os serviços.</h2>
-						<h2 ng-show="showAvaliacao">Avaliação de serviço.</h2>	
-						
-						
-					</div> <!-- /widget-content -->
-						
-				</div> <!-- /widget -->
-				
-				
-				
-			</div> <!-- /span12 -->
-         </div>	
-    
-	      <div class="row" ng-show="showServicos">
-	      	
-	      	<div class="span8 mainNotification">
-	      		
-	      		<div class="widget">
-						
-					<div class="widget-header">
-						<i class="icon-warning-sign"></i>
-						<h3>Serviços</h3>
-					</div> <!-- /widget-header -->
-					
-					<div class="widget-content"> 
-						<div class="accordion-group" ng-repeat="servico in servicosList">
-	                          <div class="accordion-heading">
-	                          		<input type="hidden" value="{{servico.codigo}}" />
-	                               	<a class="accordion-toggle" data-toggle="modal" data-target="" 
-	                               	   data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-	                                    Diarista: {{servico.diarista.nome}}
-	                                </a>
-	                          </div>
-	                          <div class="accordion-body collapse in">
-	                                <table style="width: 100%;">
-	                                	<tr>
-	                                		<td width="85%">
-		                                		<div class="accordion-inner">
-				                                   	Descrição do Serviço: {{servico.descricao}} </br>
-				                                   	Data: {{servico.dataServico | date:'longDate'}} </br>
-				                                   	Endereço: {{servico.endereco.logradouro}} </br>
-				                                   	Status: {{servico.status}}
-				                                </div>                                			
-	                                		</td>
-	                                		<td class="td-actions">
-	                                			<a href="" ng-show="servico.status != 'CONCLUIDO'" ng-click="selectedServicoAlaviacao(servico);" class="btn btn-small btn-warning">
-	                                				<i class="btn-icon-only icon-star"> </i>
-	                                			</a>
-	                                			<a href="" ng-show="servico.status != 'CONCLUIDO'" ng-click="cancelarServico(servico)" class="btn btn-danger btn-small">
-	                                				<i class="btn-icon-only icon-remove"> </i>
-	                                			</a>
-	                                		</td>
-<!-- 	                                		<td> -->
-<!-- 	                                			<div id="serviceButton">	                                			 -->
-<!-- 	                                				<button class="btn btn-danger" ng-click="cancelarServico(servico)">Cancelar</button> -->
-<!-- 	                                			</div>	 -->
-<!-- 	                                		</td> -->
-	                                	</tr>
-	                                </table>
-	                                
-	                               
-	                          </div>
-	                     </div>					
-						
-					</div> <!-- /widget-content -->
-						
-				</div> <!-- /widget -->	
-				
-		    </div> <!-- /spa12 -->
-		    
-	      	
-	      	
-	      	
-	      </div> <!-- /row -->
-	      
-<!-- 	      AVALIAÇÃO -->
+            </h3>
+            
+            <div class="row">
+               <!-- START dashboard main content-->
+               <section class="col-md-13">
+                  <div ng-show="showServicos">
+                    <div class="col-lg-4">
+	                  <!-- START widget-->
+	                  <div class="panel widget">
+	                     <div class="row row-table row-flush">
+	                        <div class="col-xs-4 bg-info text-center">
+	                           <em class="fa fa-share-square-o fa-2x"></em>
+	                        </div>
+	                        <div class="col-xs-8">
+	                           <div class="panel-body text-center">
+	                              <h4 class="mt0">{{servicosList.length}}</h4>
+	                              <p class="mb0 text-muted">SOLICITAÇÕES</p>
+	                           </div>
+	                        </div>
+	                     </div>
+	                  </div>
+	                  <!-- END widget-->
+	               </div>
+	               
+	               <div class="col-lg-4">
+	                  <!-- START widget-->
+	                  <div class="panel widget">
+	                     <div class="row row-table row-flush">
+	                        <div class="col-xs-4 bg-warning text-center">
+	                           <em class="fa fa-exclamation-triangle fa-2x"></em>
+	                        </div>
+	                        <div class="col-xs-8">
+	                           <div class="panel-body text-center">
+	                              <h4 class="mt0">{{countServPendente}}</h4>
+	                              <p class="mb0 text-muted">PENDENTES</p>
+	                           </div>
+	                        </div>
+	                     </div>
+	                  </div>
+	                  <!-- END widget-->
+	               </div>
+	               
+	               <div class="col-lg-4">
+	                  <!-- START widget-->
+	                  <div class="panel widget">
+	                     <div class="row row-table row-flush">
+	                        <div class="col-xs-4 bg-danger text-center">
+	                           <em class="fa fa-times fa-2x"></em>
+	                        </div>
+	                        <div class="col-xs-8">
+	                           <div class="panel-body text-center">
+	                              <h4 class="mt0">{{countServCancel}}</h4>
+	                              <p class="mb0 text-muted">CANCELADOS</p>
+	                           </div>
+	                        </div>
+	                     </div>
+	                  </div>
+	                  <!-- END widget-->
+	               </div>
+	               
+	               <div class="col-lg-13 searchDiarist">
+	               	   <em class="fa fa-search sd"></em>
+		               <div class="form-group has-feedback">
+		                     <input ng-model="searchService" ng-change="filter()" id="exampleInputPassword1" type="text" placeholder="Digite o termo da busca" class="form-control">
+		               </div>
+	               </div>
+	               
+	               <div class="panel widget col-lg-12" ng-repeat="servico in filtered = (servicosList | filter:searchService) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+		               <div class="panel-body listDiarista">
+		               			<input type="hidden" value="{{servico.codigo}}" />
+		                        <div class="media mt0">
+		                           <div class="pull-left">
+		                              <img src="/cleanUp/resources/assets/img/user/05.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+		                           </div>
+		                           <div class="media-body">
+		                              <div class="media-heading masterdiarista">
+		                                 <h3 class="mt0 ng-binding"> Cliente: {{servico.diarista.nome}}</h3>
+		                                 <ul class="list-unstyled">
+		                                    <li class="mb-sm ng-binding">
+		                                       <em class="fa fa-list fa-fw"></em> Descrição do Serviço: {{servico.descricao}}</li>
+		                                    
+		                                    <li class="mb-sm ng-binding">
+		                                       <em class="fa fa-calendar fa-fw"></em> Data: {{servico.dataServico | date:'longDate'}}</li>
+		                                    <li class="mb-sm ng-binding">
+		                                       <em class="fa fa-map-marker fa-fw"></em> Endereço: {{servico.endereco.logradouro}}</li>
+		                                 </ul>
+		                              </div>
+		                           	  
+		                           	   <div class="media-heading masterdiarista">
+		                                 <ul class="list-unstyled">
+		                                 	<li class="mb-sm ng-binding">
+		                                       <em class="fa fa-info fa-fw"></em> Status: {{servico.status}}</li>	                                    	
+		                                 </ul>
+		                                 <div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
+		                                 	<input type="hidden" value="{{servico.codigo}}" />
+												<i class="fa fa-times"></i>
+										 </div>
+		                                 <div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-warning pull-right" ng-click="selectedServicoAlaviacao(servico);">
+		                                 	<input type="hidden" value="{{diarista.codigo}}" />
+												<i class="fa fa-star"></i>
+										 </div>
+										 
+		                              </div>
+		                           </div>
+		                        </div>
+		                 </div>
+	               </div>
+	               
+	               <div class="col-md-12" ng-show="filteredItems > 4">    
+				            <pagination class="pagination" page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
+							items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
+							max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+				   </div>
+				   </div>
+				   
+				   <div class="col-lg-13" ng-show="showAvaliacao">
+	                  <!-- START widget-->
+	                  <div class="panel widget">
+		                 <div class="panel-body bg-inverse">
+		                        <div class="row row-table text-center">
+		                           <div class="col-xs-6">
+		                              <p class="m0 h3">Avalie o serviço prestado por</p>
+		                           </div>		                           
+		                        </div>
+	                     </div>
+	                     <div class="panel-body">
+	                        <div class="media p mt0">
+	                           <div class="pull-left">
+	                              <img src="<c:url value='/resources/assets/img/user/05.jpg'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
+	                           </div>
+	                           <div class="media-body">
+	                              <div class="media-heading masterdiarista">
+	                                 <h3 class="mt0"> {{servico.diarista.nome}}</h3>
+	                                 <ul class="list-unstyled">
+	                                    <li class="mb-sm">
+	                                       <em class="fa fa-list fa-fw"></em> {{servico.descricao}}</li>
+	                                    <li class="mb-sm">
+	                                       <em class="fa fa-calendar fa-fw"></em> {{servico.dataServico | date:'longDate'}}</li>
+	                                    <li class="mb-sm">
+	                                       <em class="fa fa-map-marker fa-fw"></em> {{servico.endereco.logradouro}}</li>	                                       
+	                                       
+	                                 </ul>
+	                              </div>
+	                           	  <div class="media-heading">
+	                           	  <div class="col-md-4">
+	                                 <div id="starclassification"></div>
+	                                 <label for="desc">Deixe um comentário.</label>									 
+										 <textarea id="comentario" ng-model="comentario" required class="form-control" rows="3"></textarea>
+	                                 </div>                           
+	                              </div>
+	                              <div class="media-heading">
+	                              		<div style="width:101px;" class="mb-sm btn btn-oval btn-primary" ng-click="salvarClassificacao(servico)">
+												<i class="fa fa-check"></i>Salvar
+										 </div>
+	                              		<div style="width:101px;" class="mb-sm btn btn-oval btn-danger" ng-click="cancelarClassificacao()">
+												<i class="fa fa-times"></i>Cancelar
+										 </div>		                                 
+	                              </div>
+	                           </div>
+	                        </div>
+	                     </div>
+	                     
+	                  </div>
+	                  <!-- END widget-->
+                  </div>               
+               
+               </section>
+               
+            </div>
+         </div>
+         <!-- END Page content-->
+         <!-- START Page footer-->
+         <footer>&copy; 2014 - Wintermin</footer>
+         <!-- END Page Footer-->
+      </section>
+      <!-- END Main section-->     
+   
 
+   <!-- Main vendor Scripts-->
+   <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/bootstrap/js/bootstrap.min.js' />"></script>
+   <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
+   
+   <!-- Plugins-->
+   <script src="<c:url value='/resources/assets/chosen/chosen.jquery.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/slider/js/bootstrap-slider.js' />"></script>
+   <script src="<c:url value='/resources/assets/filestyle/bootstrap-filestyle.min.js' />"></script>
+   
+   
+   <!-- Animo-->
+   <script src="<c:url value='/resources/assets/animo/animo.min.js' />"></script>
+   
+   <!-- Sparklines-->
+   <script src="<c:url value='/resources/assets/sparklines/jquery.sparkline.min.js' />"></script>
+   
+   <!-- Slimscroll-->
+   <script src="<c:url value='/resources/assets/slimscroll/jquery.slimscroll.min.js' />"></script>
+   
+   <!-- Store + JSON-->
+   <script src="<c:url value='/resources/assets/store/store+json2.min.js' />"></script>
+   
+   <!-- Classyloader-->
+   <script src="<c:url value='/resources/assets/classyloader/js/jquery.classyloader.min.js' />"></script>
+   
+   <!-- START Page Custom Script-->
+   <!--  Flot Charts-->
+   <script src="<c:url value='/resources/assets/flot/jquery.flot.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/flot/jquery.flot.tooltip.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/flot/jquery.flot.resize.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/flot/jquery.flot.pie.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/flot/jquery.flot.time.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/flot/jquery.flot.categories.min.js' />"></script>
+   <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
+   <!-- END Page Custom Script-->
+   
+   <script src="<c:url value='/resources/rate/jquery.raty.js' />"></script>
+   <!-- App Main-->
+   <script src="<c:url value='/resources/assets/js/app.js' />"></script>
+   <!-- END Scripts-->      
 
-
-		<div class="row" ng-show="showAvaliacao">
-	      	
-	      	<div class="span8 mainNotification">
-	      		
-	      		<div class="widget">
-						
-					<div class="widget-header">
-						<i class="icon-warning-sign"></i>
-						<h3>Serviço</h3>
-					</div> <!-- /widget-header -->
-					
-					<div class="widget-content">						 
-						<div class="accordion-group">
-	                          <div class="accordion-heading">
-	                               	<a class="accordion-toggle" data-toggle="modal" data-target="" 
-	                               	   data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-	                                    Diarista: {{servico.diarista.nome}}
-	                                </a>
-	                          </div>
-	                          <div class="accordion-body collapse in">
-	                          		<div class="accordion-inner">
-				                      	Descrição do Serviço: {{servico.descricao}} </br>
-				                       	Data: {{servico.dataServico | date:'longDate'}} </br>
-				                       	Endereço: {{servico.endereco.logradouro}} </br>
-				                       	Status: {{servico.status}}
-				                    </div>
-				                    
-				                    <div class="accordion-inner">
-				                    
-				                    	<div id="starclassification"></div>
-				                    	</br>
-				                    	<div class="form-group">
-											<label for="desc">Comentário.</label>
-											<textarea id="desc" ng-model="comentario"></textarea>
-										</div>										
-										<button type="submit" class="btn btn-primary" ng-click="salvarClassificacao(servico)">Salvar</button>
-										<button type="submit" class="btn btn-danger" ng-click="cancelarClassificacao()">Cancelar</button>
-				                    
-				                    </div>
-	                          </div>
-	                     </div>					
-						
-					</div> <!-- /widget-content -->
-						
-				</div> <!-- /widget -->	
-				
-		    </div> <!-- /spa12 -->
-		    
-	      	
-	      	
-	      	
-	      </div> <!-- /row -->
-
-
-
-
-<!-- END AVALIAÇÃO       -->
-	      
-	
-	    </div> <!-- /container -->
-    
-	</div> <!-- /main-inner -->
-    
-</div> <!-- /main -->
-    
-
-
-<div class="extra">
-
-	<div class="extra-inner">
-
-		<div class="container">
-
-			<div class="row">
-                    <div class="span3">
-                        <h4>
-                            About Free Admin Template</h4>
-                        <ul>
-                            <li><a href="javascript:;">EGrappler.com</a></li>
-                            <li><a href="javascript:;">Web Development Resources</a></li>
-                            <li><a href="javascript:;">Responsive HTML5 Portfolio Templates</a></li>
-                            <li><a href="javascript:;">Free Resources and Scripts</a></li>
-                        </ul>
-                    </div>
-                    <!-- /span3 -->
-                    <div class="span3">
-                        <h4>
-                            Support</h4>
-                        <ul>
-                            <li><a href="javascript:;">Frequently Asked Questions</a></li>
-                            <li><a href="javascript:;">Ask a Question</a></li>
-                            <li><a href="javascript:;">Video Tutorial</a></li>
-                            <li><a href="javascript:;">Feedback</a></li>
-                        </ul>
-                    </div>
-                    <!-- /span3 -->
-                    <div class="span3">
-                        <h4>
-                            Something Legal</h4>
-                        <ul>
-                            <li><a href="javascript:;">Read License</a></li>
-                            <li><a href="javascript:;">Terms of Use</a></li>
-                            <li><a href="javascript:;">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-                    <!-- /span3 -->
-                    <div class="span3">
-                        <h4>
-                            Open Source jQuery Plugins</h4>
-                        <ul>
-                            <li><a href="http://www.egrappler.com">Open Source jQuery Plugins</a></li>
-                            <li><a href="http://www.egrappler.com;">HTML5 Responsive Tempaltes</a></li>
-                            <li><a href="http://www.egrappler.com;">Free Contact Form Plugin</a></li>
-                            <li><a href="http://www.egrappler.com;">Flat UI PSD</a></li>
-                        </ul>
-                    </div>
-                    <!-- /span3 -->
-                </div> <!-- /row -->
-
-		</div> <!-- /container -->
-
-	</div> <!-- /extra-inner -->
-
-</div> <!-- /extra -->    
-    
-<div class="footer">
-	
-	<div class="footer-inner">
-		
-		<div class="container">
-			
-			<div class="row">
-				
-    			<div class="span12">
-    				&copy; 2013 <a href="http://www.egrappler.com/">Bootstrap Responsive Admin Template</a>.
-    			</div> <!-- /span12 -->
-    			
-    		</div> <!-- /row -->
-    		
-		</div> <!-- /container -->
-		
-	</div> <!-- /footer-inner -->
-	
-</div> <!-- /footer -->
-
-</div>
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!-- jQuery Version 1.11.0 -->
-<%-- <script src="<c:url value='/resources/js/jquery.min.js' />"></script> --%>
-<script
-	src="<c:url value='/resources/js/js-template/excanvas.min.js' />"></script>
-<script src="<c:url value='/resources/js/js-template/chart.min.js' />"></script>
-
-<!-- Caixa de informação -->
-<script src="<c:url value='/resources/js/js-template/infobox.js' />"></script>
-
-<!-- Agrupamento dos marcadores -->
-<script
-	src="<c:url value='/resources/js/js-template/markerclusterer.js' />"></script>
-
-<script src="<c:url value='/resources/js/js-template/bootstrap.js' />"></script>
-<script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
-<script src="<c:url value='/resources/js/js-template/signin.js' />"></script>
-<script
-	src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
-<script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>
-<script src="<c:url value='/resources/js/checklist-model.js' />"></script>
-<script src="<c:url value='/resources/rate/jquery.raty.js' />"></script>
-<script src="<c:url value='/protected/controller/clienteController.js' />"></script>
+   <script src="<c:url value='/protected/controller/clienteController.js' />"></script>   

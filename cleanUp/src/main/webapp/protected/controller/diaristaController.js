@@ -1,6 +1,16 @@
-var app = angular.module("app", []);
+var app = angular.module("app", ['ui.bootstrap']);
 
-function diaristaController($scope, $filter, $http) {
+	   app.filter('startFrom', function() {
+	       return function(input, start) {
+	           if(input) {
+	               start = +start; //parse to int
+	               return input.slice(start);
+	           }
+	           return [];
+	       };
+	   });
+
+function diaristaController($scope, $filter, $http, $timeout, $location) {
 	
 	/*---------  LIST NOTIFICATIONS DIARISTAS FROM DATABASE  ------------------------------*/  
 	listarNotificacoes();
@@ -13,9 +23,14 @@ function diaristaController($scope, $filter, $http) {
 	$scope.see = true;
 	$scope.feedback = true;
 	var infowindow;
+	$scope.servicosList = null;
+    $scope.filtered = null;
+	
+	$scope.countServPendente = 0;
+    $scope.countServCancel = 0;
 	
 	function hideModal(){
-    	$('#myModal2').modal('hide');
+    	$('#myModal').modal('hide');
     }
 	
 	function listarServicos(){
@@ -26,6 +41,17 @@ function diaristaController($scope, $filter, $http) {
 	    })
 	    .success(function (data, status, headers, config) {     	    	
 		    $scope.servicosList = data;
+		    
+		    for(var i = 0 ; i < $scope.servicosList.length ; i++){
+            	if($scope.servicosList[i].status == 'PENDENTE'){
+            		$scope.countServPendente++;
+            	}
+            	if($scope.servicosList[i].status == 'INATIVO'){
+            		$scope.countServCancel++;
+            	}            	
+            }
+		    
+		    doPagination($scope.servicosList);
 	
 	    })
 	    .error(function (data, status, headers, config) {
@@ -35,6 +61,31 @@ function diaristaController($scope, $filter, $http) {
 	        });
 	    });
 	};
+	
+	function doPagination(data){
+    	$scope.currentPage = 1; //current page
+        $scope.entryLimit = 3; //max no of items to display in a page
+        $scope.maxSize = 5;
+        $scope.filteredItems = data.length; //Initially for no filter  
+        $scope.totalItems = data.length;
+    };
+    
+    $scope.setPage = function(pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.filter = function() {
+    	$scope.filteredItems = $scope.filtered.length;
+    };
+	
+	$http({
+        url: '/cleanUp/protected/menu/getMenu',
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    }).success(function(data) {
+        $scope.menus = data;
+    }).error(function(data) {
+        exibirMensagemErro(data);
+    }); 
 
 	function listarNotificacoes(){
 		$http({
@@ -174,13 +225,17 @@ function diaristaController($scope, $filter, $http) {
 	        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 	    })
 	    .success(function (data, status, headers, config) {    	
-	    	$scope.servicos = data;
+	    	$scope.servicos = data;	    	
 	    	
 	    	initialize();
 	    	
+	    	$('#myModal').modal({
+	            show: 'true'
+	        });
+	    	
 	    	//RESIZE EM MAPA (CORRIGUE MAPA DO GOOGLE NO MODAL DO BOOTSTRAP)
 	        $(function () {
-	            $("#myModal2").on('shown.bs.modal', function () {
+	            $("#myModal").on('shown.bs.modal', function () {
 	                google.maps.event.trigger(map, 'resize');
 //	                map.setCenter(myLatlng);
 	                var bounds = new google.maps.LatLngBounds();

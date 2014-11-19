@@ -3,609 +3,462 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<!-- Header -->
-    <header>
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-lead-in">Encontrando diarista de maneira</div>
-                <div class="intro-heading">inteligente</div>
-                <a href="#services" class="page-scroll btn btn-xl">conheça-nos</a>
-            </div>
-        </div>
-    </header>
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie ie6 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie ie7 lt-ie9 lt-ie8"        lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie ie8 lt-ie9"               lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="ie ie9"                      lang="en"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-ie">
+<!--<![endif]-->
 
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Como funciona</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">E-Commerce</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Responsive Design</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<head>
+   <!-- Meta-->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+   <meta name="description" content="">
+   <meta name="keywords" content="">
+   <meta name="author" content="">
+   <title>CleanUp - Encontrando diaristas de maneira inteligente.</title>
+   
+   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+   <!-- Bootstrap CSS-->
+   
+   <link href="<c:url value='/resources/assets/bootstrap/css/bootstrap.css'  />" rel="stylesheet"/>
+   
+   <!-- Vendor CSS-->
+   <link href="<c:url value='/resources/assets/fontawesome/css/font-awesome.min.css'  />" rel="stylesheet"/>
+   <link href="<c:url value='/resources/assets/animo/animate+animo.css'  />" rel="stylesheet"/>
+   
+   <!-- App CSS-->
+   <link href="<c:url value='/resources/assets/css/app.css'  />" rel="stylesheet"/>
+   <link href="<c:url value='/resources/assets/css/common.css'  />" rel="stylesheet"/>
+   
+   <!-- Modernizr JS Script-->
+   <script src="<c:url value='/resources/assets/modernizr/modernizr.js' />" type="application/javascript"></script>
+   
+   <!-- FastClick for mobiles-->
+   <script src="<c:url value='/resources/assets/fastclick/fastclick.js' />" type="application/javascript"></script>
+   
+   <link href="<c:url value='/resources/assets/css/landing.css'  />" rel="stylesheet"/>
+</head>
 
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
+<body>
+   <!-- START wrapper-->
+   <header>
+      <div class="container">
+         <nav class="row">
+            <div class="col-md-2 app-logo">
+               <a href="#" class="logo-wrapper">
+                  <img src="<c:url value='/resources/assets/img/logo.png'  />" alt="App Name" class="img-responsive"/>
+               </a>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<c:url value='/resources/img/portfolio/roundicons.png'  />" class="img-responsive" alt=""/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Round Icons</h4>
-                        <p class="text-muted">Graphic Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<c:url value='/resources/img/portfolio/startup-framework.png'  />" class="img-responsive" alt=""/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Startup Framework</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<c:url value='/resources/img/portfolio/treehouse.png'  />" class="img-responsive" alt=""/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Treehouse</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<c:url value='/resources/img/portfolio/golden.png'  />" class="img-responsive" alt=""/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Golden</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<c:url value='/resources/img/portfolio/escape.png'  />" class="img-responsive" alt=""/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Escape</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                         <img src="<c:url value='/resources/img/portfolio/dreams.png'  />" class="img-responsive" alt=""/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Dreams</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
+            <div class="col-md-10">
+               <ul class="list-inline menuapp-buttons">
+                  <li class="mr-lg">                  	
+                     <a href="#">
+                        <strong>Demo</strong>
+                     </a>
+                  </li>
+                  <li class="mr-lg">
+                     <a href="#">
+                        <strong>Features</strong>
+                     </a>
+                  </li>
+                  <li>
+                  	 <a href="login">
+	                  	 <button type="button" class="btn btn-labeled btn-default">Entrar
+	                           <span class="btn-label btn-label-right tom-rigth"><i class="fa fa-sign-in"></i>
+	                           </span>	                    
+	                     </button>
+                     </a>
+                     
+                  </li>
+               </ul>
             </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
+         </nav>
+         <div class="header-content">
+            <div class="row row-flush row-table">
+               <div class="col-xs-12 col-lg-6 align-middle">
+                  <div data-toggle="play-animation" data-play="fadeInLeft" data-offset="0" class="app-presentation">
+                     <img src="<c:url value='/resources/assets/img/landing/app-mobile.png'  />" alt="App Name" class="img-responsive"/>
+                  </div>
+               </div>
+               <div class="col-xs-12 col-lg-6 align-middle">
+                  <div class="side-presentation">
+                     <div class="h1 header-title">Elegant &amp; Clean Bootstrap Admin</div>
+                     <br>
+                     <p class="header-subtitle">Get your app frontend done fast with this complete bootstrap theme.</p>
+                     <br>
+                     <div class="header-button">
+                        <a href="#" class="btn btn-primary btn-lg btn-fw">
+                           <strong>Discover Now</strong>
+                        </a>
+                     </div>
+                     <br>
+                     <br>
+                     <p>Available on</p>
+                     <ul class="list-inline store-list">
                         <li>
-                            <div class="timeline-image">
-                                <img src="<c:url value='/resources/img/about/1.jpg'  />" class="img-circle img-responsive"/>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img src="<c:url value='/resources/img/about/2.jpg'  />" class="img-circle img-responsive"/>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
+                           <a href="#">
+                              <img src="<c:url value='/resources/assets/img/landing/store-apple.png'  />" alt="App Name" class="img-responsive"/>
+                           </a>
                         </li>
                         <li>
-                            <div class="timeline-image">
-                            	<img src="<c:url value='/resources/img/about/3.jpg'  />" class="img-circle img-responsive"/>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
+                           <a href="#">
+                              <img src="<c:url value='/resources/assets/img/landing/store-google.png'  />" alt="App Name" class="img-responsive"/>
+                           </a>
                         </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img src="<c:url value='/resources/img/about/4.jpg'  />" class="img-circle img-responsive"/>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                     </ul>
+                  </div>
+               </div>
             </div>
-        </div>
-    </section>
+         </div>
+      </div>
+   </header>
+   <section>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-6">
+               <h2 class="page-header">Multipurpose admin app</h2>
+               <p>Find the perfect solution for most of your proyect. Get covered by the features that this app provides.</p>
+               <p>Make
+                  <strong>Wintermin</strong>the starpoint of your next web app.</p>
+               <p>Try out the demo</p>
+               <br>
+               <p>
+                  <a href="#" class="btn btn-success">
+                     <strong>Start Demo Now</strong>
+                  </a>
+               </p>
+            </div>
+            <div data-toggle="play-animation" data-play="fadeInRight" data-offset="-250" class="col-lg-6">
+               <img src="<c:url value='/resources/assets/img/landing/app-multi.png'  />" alt="App Name" class="img-responsive"/>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="bg-white">
+      <div class="container">
+         <div class="row">
+            <div data-toggle="play-animation" data-play="fadeInLeft" data-offset="-250" class="col-lg-6">
+               <img src="<c:url value='/resources/assets/img/landing/app-chart.png'  />" alt="App Name" class="img-responsive"/>
+            </div>
+            <div class="col-lg-6">
+               <h2 class="page-header">Awesome Charts</h2>
+               <p class="text-md">Present your app information in a simple and easy to understand way. Display any data set with Flot Charts.</p>
+               <p>Wintermin includes Area Charts, Simple and Stacked Bar Charts, Line Charts and Pie and Donuts Charts.</p>
+               <p>Customize the chart by simpli editing a PHP file or provide a json file on every request.</p>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-6">
+               <h2 class="page-header">Widgetized App</h2>
+               <p>Wintermin comes with a full set of utility classes ready to create widgets for your app.</p>
+               <p>Compress your user information in a single panel y customize the elements inside.</p>
+               <p>All components are responsive and ready for mobile devices.</p>
+               <br>
+               <p>
+                  <a href="#" class="btn btn-green">
+                     <strong>Watch Now</strong>
+                  </a>
+               </p>
+            </div>
+            <div data-toggle="play-animation" data-play="fadeInRight" data-offset="-250" class="col-lg-6">
+               <img src="<c:url value='/resources/assets/img/landing/app-widget.png'  />" alt="App Name" class="img-responsive"/>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section id="testimonial" class="bg-primary">
+      <div class="container">
+         <div id="carousel-testimonial" data-ride="carousel" class="carousel slide">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+               <li data-target="#carousel-testimonial" data-slide-to="0" class="active"></li>
+               <li data-target="#carousel-testimonial" data-slide-to="1"></li>
+               <li data-target="#carousel-testimonial" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+               <div class="item active">
+                  <div class="row">
+                     <div class="col-xs-8 col-xs-offset-2">
+                        <h4>
+                           <em>Etiam id nunc felis. Quisque quam turpis, viverra sit amet auctor laoreet, aliquam vitae neque. Integer sagittis ultricies neque vitae suscipit. Integer ut convallis dui. Praesent vel nisi nibh. Nunc lacinia, sem ac laoreet
+                              egestas, risus lacus vulputate dui, quis pellentesque eros est id nisi.</em>
+                        </h4>
+                        <p>
+                           <strong>- John Titor</strong>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="item">
+                  <div class="row">
+                     <div class="col-xs-8 col-xs-offset-2">
+                        <h4>
+                           <em>Etiam id nunc felis. Quisque quam turpis, viverra sit amet auctor laoreet, aliquam vitae neque. Integer sagittis ultricies neque vitae suscipit. Integer ut convallis dui. Praesent vel nisi nibh. Nunc lacinia, sem ac laoreet
+                              egestas, risus lacus vulputate dui, quis pellentesque eros est id nisi.</em>
+                        </h4>
+                        <p>
+                           <strong>- Mary Mayer</strong>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="item">
+                  <div class="row">
+                     <div class="col-xs-8 col-xs-offset-2">
+                        <h4>
+                           <em>Quisque non lacinia lacus. Pellentesque odio purus, egestas ac luctus gravida, rutrum ut quam. Quisque quam turpis, viverra sit amet auctor laoreet, aliquam vitae neque. Curabitur nec congue erat. Aliquam erat volutpat. Phasellus
+                              ullamcorper rhoncus sagittis. Sed vestibulum quam ut arcu tempus sed placerat nibh venenatis.</em>
+                        </h4>
+                        <p>
+                           <strong>- John Mayer</strong>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- Controls -->
+            <a href="#carousel-testimonial" data-slide="prev" class="left carousel-control">
+               <em class="fa fa-chevron-circle-left"></em>
+            </a>
+            <a href="#carousel-testimonial" data-slide="next" class="right carousel-control">
+               <em class="fa fa-chevron-circle-right"></em>
+            </a>
+         </div>
+      </div>
+   </section>
+   <section id="clients" class="bg-white">
+      <div class="container">
+         <h2 class="section-header">Working with the best
+            <br>
+            <small class="text-muted text-center">Wintermin makes your life easier. The best choice for your next project.</small>
+         </h2>
+         <div class="row">
+            <div class="col-lg-2 col-md-4 col-xs-6">
+               <img src="<c:url value='/resources/assets/img/landing/clients/jquery.png'  />"  alt="client" class="img-responsive"/>
+            </div>
+            <div class="col-lg-2 col-md-4 col-xs-6">
+               <img src="<c:url value='/resources/assets/img/landing/clients/node.png'  />"  alt="client" class="img-responsive"/>
+            </div>
+            <div class="col-lg-2 col-md-4 col-xs-6">
+               <img src="<c:url value='/resources/assets/img/landing/clients/gulp.png'  />"  alt="client" class="img-responsive"/>
+            </div>
+            <div class="col-lg-2 col-md-4 col-xs-6">
+               <img src="<c:url value='/resources/assets/img/landing/clients/jade.png'  />"  alt="client" class="img-responsive"/>
+            </div>
+            <div class="col-lg-2 col-md-4 col-xs-6">
+               <img src="<c:url value='/resources/assets/img/landing/clients/less.png'  />"  alt="client" class="img-responsive"/>
+            </div>
+            <div class="col-lg-2 col-md-4 col-xs-6">
+               <img src="<c:url value='/resources/assets/img/landing/clients/bootstrap.png'  />"  alt="client" class="img-responsive"/>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="bg-purple">
+      <div class="container">
+         <h2 data-toggle="play-animation" data-play="fadeInUp" data-offset="0" class="section-header">Tons of features
+            <br>
+            <small class="text-white text-center">Wintermin comes packed with tons of feature ready to use.</small>
+         </h2>
+         <div class="row">
+            <div class="col-lg-3">
+               <ul class="feature-list">
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>Data Tables</h4>
+                     <p>Quisque luctus vehicula massa quis ultrices. Nunc et magna in metus pharetra ultricies ac sit amet justo.</p>
+                  </li>
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>Form Validation</h4>
+                     <p>Cras dolor ligula, laoreet ac vestibulum sed, molestie id odio. Donec convallis arcu sit amet tortor sagittis in convallis metus facilisis.</p>
+                  </li>
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>Portlets</h4>
+                     <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In ante nisi, mollis nec egestas eget, viverra in mi.</p>
+                  </li>
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>Masonry Grid</h4>
+                     <p>Quisque et nulla in tortor posuere accumsan eget non magna. Vestibulum a ipsum lectus, ac congue sapien.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="col-lg-6">
+               <img src="<c:url value='/resources/assets/img/landing/iphone.png'  />"  alt="App Name" class="img-responsive center-block"/>
+            </div>
+            <div class="col-lg-3">
+               <ul class="feature-list">
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>CSS3 Animations</h4>
+                     <p>Quisque luctus vehicula massa quis ultrices. Nunc et magna in metus pharetra ultricies ac sit amet justo.</p>
+                  </li>
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>Charts</h4>
+                     <p>Cras dolor ligula, laoreet ac vestibulum sed, molestie id odio. Donec convallis arcu sit amet tortor sagittis in convallis metus facilisis.</p>
+                  </li>
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>Google Maps</h4>
+                     <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In ante nisi, mollis nec egestas eget, viverra in mi.</p>
+                  </li>
+                  <li data-toggle="play-animation" data-play="fadeInUp" data-offset="0">
+                     <h4>
+                        <span class="point point-primary point-lg"></span>Full Calendar</h4>
+                     <p>Quisque et nulla in tortor posuere accumsan eget non magna. Vestibulum a ipsum lectus, ac congue sapien.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section id="callout">
+      <div data-toggle="play-animation" data-play="fadeInLeftBig" data-offset="-200" class="container text-center">
+         <h1>Ready to start? Try this App today</h1>
+         <h4>And see why people around the world choose this APP to create great cross-platform websites</h4>
+         <ul class="list-inline store-list">
+            <li>
+               <a href="#">
+                  <img src="<c:url value='/resources/assets/img/landing/store-apple.png'  />"  alt="App Name" class="img-responsive"/>
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <img src="<c:url value='/resources/assets/img/landing/store-google.png'  />"  alt="App Name" class="img-responsive"/>
+               </a>
+            </li>
+         </ul>
+         <p>
+            <br>
+            <a href="#" class="btn btn-primary btn-lg btn-oval btn-fw">
+               <strong>Join Now!</strong>
+            </a>
+         </p>
+      </div>
+   </section>
+   <footer class="footer-1 bg-inverse">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-2 col-xs-6">
+               <nav>
+                  <h5>PRODUCT</h5>
+                  <ul class="list-unstyled">
+                     <li><a href="#">Documentation</a>
+                     </li>
+                     <li><a href="#">Customers</a>
+                     </li>
+                     <li><a href="#">Tour</a>
+                     </li>
+                     <li><a href="#">Pricing</a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <div class="col-sm-2 col-xs-6">
+               <nav>
+                  <h5>CONTACT</h5>
+                  <ul class="list-unstyled">
+                     <li><a href="#">Support</a>
+                     </li>
+                     <li><a href="#">Sales</a>
+                     </li>
+                     <li><a href="#">Forum</a>
+                     </li>
+                     <li><a href="#">Blog</a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <div class="col-sm-2 col-xs-6">
+               <nav>
+                  <h5>COMPANY</h5>
+                  <ul class="list-unstyled">
+                     <li><a href="#">About</a>
+                     </li>
+                     <li><a href="#">Press Kit</a>
+                     </li>
+                     <li><a href="#">Education</a>
+                     </li>
+                     <li><a href="#">Non-profits</a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <div class="col-sm-2 col-xs-6">
+               <nav>
+                  <h5>Say HI</h5>
+                  <ul class="list-unstyled">
+                     <li><a href="#">Twitter</a>
+                     </li>
+                     <li><a href="#">Facebook</a>
+                     </li>
+                     <li><a href="#">Google+</a>
+                     </li>
+                     <li><a href="#">Blog</a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+               <form action="#" method="post">
+                  <h5>SUBSCRIBE TO OUR NEWSLETTER!</h5>
+                  <div class="input-group">
+                     <input type="email" name="email" placeholder="mail@example.com" required="" class="form-control">
+                     <span class="input-group-btn">
+                        <button type="submit" class="btn btn-info">Join</button>
+                     </span>
+                  </div>
+                  <!--/input-group -->
+               </form>
+               <p class="text-muted">
+                  <small>We will never send spam and you can unsubscribe any time</small>
+               </p>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <footer class="footer-2">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-4">
+               <p>Copyright 2014 | <a href="#">Terms of Service </a>| <a href="#">Privacy Policy</a>
+               </p>
+            </div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+               <p>Crafted with
+                  <em class="fa fa-heart text-danger fa-fw"></em>
+                  <span>from BA, Argentina.</span>
+               </p>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- END wrapper-->
+   <!-- START Scripts-->
+   <!-- Main vendor Scripts-->
+   <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />" ></script>
+   <script src="<c:url value='/resources/assets/bootstrap/js/bootstrap.min.js' />" ></script>
+   
+   <!-- Animo-->
+   <script src="<c:url value='/resources/assets/animo/animo.min.js' />" ></script>
+   
+   <!-- Custom script for pages-->
+   <script src="<c:url value='/resources/assets/js/pages.js' />" ></script>
+   <!-- END Scripts-->
+</body>
 
-    <!-- Team Section -->
-    <section id="team" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="<c:url value='/resources/img/team/1.jpg'  />" class="img-responsive img-circle" alt=""/>
-                        <h4>Kay Garland</h4>
-                        <p class="text-muted">Lead Designer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">                        
-                        <img src="<c:url value='/resources/img/team/2.jpg'  />" class="img-responsive img-circle" alt=""/>
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="<c:url value='/resources/img/team/3.jpg'  />" class="img-responsive img-circle" alt=""/>
-                        <h4>Diana Pertersen</h4>
-                        <p class="text-muted">Lead Developer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Clients Aside -->
-    <aside class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="<c:url value='/resources/img/logos/envato.jpg'  />" class="img-responsive img-centered" alt=""/>
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="<c:url value='/resources/img/logos/designmodo.jpg'  />" class="img-responsive img-centered" alt=""/>
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">                        
-                        <img src="<c:url value='/resources/img/logos/themeforest.jpg'  />" class="img-responsive img-centered" alt=""/>
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="<c:url value='/resources/img/logos/creative-market.jpg'  />" class="img-responsive img-centered" alt=""/>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-<!--     <section id="contact"> -->
-<!--         <div class="container" ng-controller="testeController"> -->
-<!--             <div class="row"> -->
-<!--                 <div class="col-lg-12 text-center"> -->
-<!--                     <h2 class="section-heading">Cadastrar</h2> -->
-<!--                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--             <div class="row"> -->
-<!--                 <div class="col-lg-12"> -->
-<!--                     <form name="newPeopleForm" id="contactForm" novalidate> -->
-<!--                         <div class="row"> -->
-<!--                             <div class="col-md-6"> -->
-                            
-<!--                             	<div class="form-group"> -->
-<!--                                     <span class="tomwel">Dados Pessoais</span> -->
-<!--                                 </div> -->
-                            
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="text" ng-model="cliente.nome" class="form-control" placeholder="Seu nome *" id="name" required data-validation-required-message="Por favor preencha o nome."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-                               
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="number" ng-model="cliente.rg" class="form-control" placeholder="Seu rg *" id="name" required data-validation-required-message="Por favor preencha o rg."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-                                
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="number" ng-model="cliente.cpf" class="form-control" placeholder="Seu cpf *" id="name" required data-validation-required-message="Por favor preencha o rg."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-                                
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="tel" ng-model="cliente.telefone" class="form-control" placeholder="Seu telefone *" id="phone" required data-validation-required-message="Por favor preencha o telefone."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div>                             -->
-                                
-<!--                             </div> -->
-<!--                             <div class="col-md-6"> -->
-                            
-<!--                             	<div class="form-group"> -->
-<!--                                     <span class="tomwel">Login</span> -->
-<!--                                 </div> -->
-                            
-<!--                             	<div class="form-group"> -->
-<!--                                     <input type="email" ng-model="cliente.email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Por favor preencha o email."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-                                
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="password" ng-model="cliente.senha" class="form-control" placeholder="Sua senha" id="email" required data-validation-required-message="PPor favor preencha a senha."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div>  -->
-<!-- <!--                            <div class="form-group"> -->
-<!-- <!--                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea> -->
-<!-- <!--                                <p class="help-block text-danger"></p> -->
-<!-- <!--                            </div> -->
-<!--                             </div> -->
-<!--                              <div class="col-md-6"> -->
-                            
-<!--                             	<div class="form-group"> -->
-<!--                                     <span class="tomwel">Endereço</span> -->
-<!--                                 </div> -->
-                            
-<!--                             	<div class="form-group"> -->
-<!--                                     <input type="text" ng-model="cliente.rua" class="form-control" placeholder="Seu logradouro *" id="name" required data-validation-required-message="Por favor preencha o logradouro."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="text" ng-model="cliente.cep" class="form-control" placeholder="Seu CEP *" id="name" required data-validation-required-message="Por favor preencha o CEP."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="text" ng-model="cliente.numero" class="form-control" placeholder="Seu número *" id="name" required data-validation-required-message="Por favor preencha o número."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="text" ng-model="cliente.cidade" class="form-control" placeholder="Sua cidade *" id="name" required data-validation-required-message="Por favor preencha a cidade."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-<!--                                 <div class="form-group"> -->
-<!--                                     <input type="text" ng-model="cliente.bairro" class="form-control" placeholder="Seu bairro *" id="name" required data-validation-required-message="Por favor preencha o bairro."> -->
-<!--                                     <p class="help-block text-danger"></p> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-                            
-<!--                             <div class="clearfix"></div> -->
-<!--                             <div class="col-lg-12 text-center"> -->
-<!--                                 <div id="success"></div> -->
-<!--                                 <button type="button" class="btn btn-xl" ng-click="createPeople(newPeopleForm)">cadastrar</button> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </form> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </section> -->
-
-    <!-- Portfolio Modals -->
-    <!-- Use the modals below to showcase details about your portfolio projects! -->
-
-    <!-- Portfolio Modal 1 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>                            
-							<img src="<c:url value='/resources/img/portfolio/roundicons-free.png'  />" class="img-responsive" alt=""/>
-                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                            <p>
-                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
-                            <ul class="list-inline">
-                                <li>Date: July 2014</li>
-                                <li>Client: Round Icons</li>
-                                <li>Category: Graphic Design</li>
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 2 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Heading</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>                      
-                            <img src="<c:url value='/resources/img/portfolio/startup-framework-preview.png'  />" class="img-responsive img-centered" alt=""/>
-                            <p><a href="http://designmodo.com/startup/?u=787">Startup Framework</a> is a website builder for professionals. Startup Framework contains components and complex blocks (PSD+HTML Bootstrap themes and templates) which can easily be integrated into almost any design. All of these components are made in the same style, and can easily be integrated into projects, allowing you to create hundreds of solutions for your future projects.</p>
-                            <p>You can preview Startup Framework <a href="http://designmodo.com/startup/?u=787">here</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 3 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img src="<c:url value='/resources/img/portfolio/treehouse-preview.png'  />" class="img-responsive img-centered" alt=""/>
-                            <p>Treehouse is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. This is bright and spacious design perfect for people or startup companies looking to showcase their apps or other projects.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/treehouse-free-psd-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 4 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img src="<c:url value='/resources/img/portfolio/golden-preview.png'  />" class="img-responsive img-centered" alt=""/>
-                            <p>Start Bootstrap's Agency theme is based on Golden, a free PSD website template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Golden is a modern and clean one page web template that was made exclusively for Best PSD Freebies. This template has a great portfolio, timeline, and meet your team sections that can be easily modified to fit your needs.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/golden-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 5 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img src="<c:url value='/resources/img/portfolio/escape-preview.png'  />" class="img-responsive img-centered" alt=""/>
-                            <p>Escape is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Escape is a one page web template that was designed with agencies in mind. This template is ideal for those looking for a simple one page solution to describe your business and offer your services.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/escape-one-page-psd-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 6 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img src="<c:url value='/resources/img/portfolio/dreams-preview.png'  />" class="img-responsive img-centered" alt=""/>
-                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- jQuery Version 1.11.0 -->    
-    <script src="<c:url value='/resources/js/jquery-1.11.0.js' />"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<c:url value='/resources/js/js-home/bootstrap.min.js' />"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="<c:url value='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js' />"></script>
-    <script src="<c:url value='/resources/js/js-home/classie.js' />"></script>
-    <script src="<c:url value='/resources/js/js-home/cbpAnimatedHeader.js' />"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="<c:url value='/resources/js/js-home/jqBootstrapValidation.js' />"></script>
-    <script src="<c:url value='/resources/js/js-home/contact_me.js' />"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="<c:url value='/resources/js/js-home/agency.js' />"></script>
+</html>
