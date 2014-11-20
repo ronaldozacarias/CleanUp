@@ -1,4 +1,4 @@
-var app = angular.module("app", ['checklist-model','ui.bootstrap','ngSanitize','ui.select']);
+var app = angular.module("app", ['checklist-model','ui.bootstrap']);
 
 function cadastroController($scope, $http, $filter, $timeout) {
 	
@@ -10,6 +10,14 @@ function cadastroController($scope, $http, $filter, $timeout) {
 	$scope.termos = false;
 	$scope.pessoa = {};
 	$scope.selected = undefined;
+	
+	
+	function checkList(){
+		if($scope.values){
+			especialidadesDiarista.push();
+		}
+	}
+	
 	
 	//Trazer especialidades do banco
 	$http({
@@ -36,12 +44,6 @@ function cadastroController($scope, $http, $filter, $timeout) {
     .error(function (data, status, headers, config) {
     	exibirMensagemErro(data);
     });	
-	
-	function checkList(){
-		if($scope.values){
-			especialidadesDiarista.push();
-		}
-	}
 	
 	$scope.message = "Cadastro realizado com sucesso!";
 

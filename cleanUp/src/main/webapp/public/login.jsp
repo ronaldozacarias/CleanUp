@@ -8,7 +8,7 @@
          <!-- START panel-->
          <div data-toggle="play-animation" data-play="fadeIn" data-offset="0" class="panel panel-dark panel-flat">
             <div class="panel-heading text-center">
-               <a href="#">
+               <a href="/cleanUp/">
                   <img src="<c:url value='/resources/assets/img/logo.png'  />" alt="Image" class="block-center img-rounded"/>
                </a>
                <p class="text-center mt-lg">
@@ -17,7 +17,7 @@
             </div>
             <div class="panel-body">
                <form role="form" class="mb-lg" action="j_spring_security_check" method="post">
-                  <div class="text-right mb-sm"><a href="#" class="text-muted">Need to Signup?</a>
+                  <div class="text-right mb-sm"><a href="/cleanUp/public/cadastro" class="text-muted">Não possui cadastro?</a>
                   </div>
                   
                   <div class="form-group has-feedback">
@@ -44,7 +44,8 @@
                            <input type="checkbox" value="">
                            <span class="fa fa-check"></span>Remember Me</label>
                      </div>
-                     <div class="pull-right"><a href="#" class="text-muted">Forgot your password?</a>
+                     <div class="pull-right">
+<!--                      	<a href="#" class="text-muted">Forgot your password?</a> -->
                      </div>
                   </div>
                   <button type="submit" class="btn btn-block btn-success">Login</button>

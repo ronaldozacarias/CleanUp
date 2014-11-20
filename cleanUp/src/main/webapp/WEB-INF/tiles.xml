@@ -30,7 +30,7 @@
         <put-attribute name="footer" value="/public/template/footer.jsp"/>
     </definition>
     
-    <definition name="master-home-cadastro.page" template="/public/template/master-home-cadastro.jsp">
+    <definition name="master-cadastro.page" template="/public/template/master-cadastro.jsp">
 <!--         <put-attribute name="header" value="/public/template/headerClient.jsp"/> -->
 <!--         <put-attribute name="footer" value="/public/template/footer.jsp"/> -->
     </definition>
@@ -67,7 +67,7 @@
         <put-attribute name="footer" value=""/>
         <put-attribute name="body" value="/public/forgot.jsp"/>
     </definition>
-    <definition name="cadastro" extends="master-home-cadastro.page">
+    <definition name="cadastro" extends="master-cadastro.page">
         <put-attribute name="body" value="/public/cadastro/cadastro.jsp"/>
     </definition>
     <definition name="notificacoes" extends="master-home-diarista.page">

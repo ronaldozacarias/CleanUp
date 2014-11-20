@@ -30,7 +30,6 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     $scope.showServicos = true;
     $scope.diaristas = null;
     $scope.servicosList = null;
-    $scope.filtered = null;
     
     $scope.countServPendente = 0;
     $scope.countServCancel = 0;

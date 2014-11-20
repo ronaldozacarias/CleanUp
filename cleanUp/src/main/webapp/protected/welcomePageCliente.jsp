@@ -35,10 +35,13 @@
                                  <ul class="list-unstyled">
                                     <li class="mb-sm">
                                        <em class="fa fa-map-marker fa-fw"></em> {{MasterDiarista.cidade.nomeCidade}}</li>
-                                    <li class="mb-sm">
-                                       <em class="fa fa-phone fa-fw"></em> {{MasterDiarista.telefone}}</li>
+                                    
                                     <li class="mb-sm">
                                        <em class="fa fa-envelope fa-fw"></em> {{MasterDiarista.usuario.email}}</li>
+                                       
+                                    <li class="mb-sm ng-binding">
+	                                       <a href="" class="has-submenu">
+	                                       <em class="fa fa-star fa-2x"></em></a></li>
                                  </ul>
                               </div>
                            	  <div class="media-heading pull-right">
@@ -110,7 +113,8 @@
 	                                       <em class="fa fa-map-marker fa-fw"></em> {{diarista.cidade.nomeCidade}}</li>
 	                                    
 	                                    <li class="mb-sm ng-binding">
-	                                       <em class="fa fa-envelope fa-fw"></em> decidindo</li>
+	                                       <a href="" class="has-submenu">
+	                                       <em class="fa fa-star fa-2x"></em></a></li>	                                    
 	                                 </ul>
 	                              </div>
 	                           	  
