@@ -82,6 +82,9 @@
     <definition name="servicosCliente" extends="masterCli.page">
     	<put-attribute name="body" value="/protected/cliente/servicosCliente.jsp"/>
     </definition>
+    <definition name="favoritos" extends="masterCli.page">
+    	<put-attribute name="body" value="/protected/cliente/favoritos.jsp"/>
+    </definition>
     
     <definition name="customError" template="/public/error/customError.jsp">
     

@@ -20,6 +20,7 @@ import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
+import br.com.cleanUp.model.Favorito;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
@@ -27,6 +28,7 @@ import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
+import br.com.cleanUp.service.FavoritoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.ClassificacaoVO;
@@ -52,6 +54,9 @@ public class ClienteController {
 	
 	@Autowired
 	private ServicoService servicoService;
+	
+	@Autowired
+	private FavoritoService favoritoService;
 	
 	@RequestMapping(value = "diaristas", method = RequestMethod.GET)
 	public ModelAndView registrar() {
@@ -85,6 +90,22 @@ public class ClienteController {
 
 		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
 			return new ModelAndView("servicosCliente");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
+	@RequestMapping(value = "/favoritos", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetFavoritos() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			return new ModelAndView("favoritos");
 		} 
 		
 		return new ModelAndView("error");
@@ -224,5 +245,45 @@ public class ClienteController {
 		
 		servicoService.avaliarServico(servico);
 		
+	}
+	
+	@RequestMapping(value = "/salvarFavoritos", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public void salvarFavoritos(@RequestBody Diarista diarista)throws NegocioException{
+		
+		Favorito favorito = new Favorito();
+		Cliente cliente = new Cliente();
+		Diarista d = new Diarista(); 
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+		try {
+			cliente = clienteService.findByIdUsuario(usuarioLogado.getId());
+			d = diaristaServico.findByUsuario(diarista.getUsuario());
+			favorito.setCliente(cliente);
+			favorito.setDiarista(d);
+			favoritoService.savad(favorito);
+		} catch (NegocioException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/listaDeFavoritos", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Favorito> listaDeFavoritosPorCliente()throws NegocioException{
+		Cliente c = new Cliente();
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+		try {
+			c = clienteService.findByIdUsuario(usuarioLogado.getId());
+			return favoritoService.listaFavoritoPorCliente(c);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Listar Favoritos");
+		}
 	}
 }

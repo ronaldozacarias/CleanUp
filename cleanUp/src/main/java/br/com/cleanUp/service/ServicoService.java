@@ -38,6 +38,9 @@ public class ServicoService {
 	
 	@Autowired
 	private DiaristaService diaristaServico;
+	
+	@Autowired
+	private HistoricoServicoService historioServicoController;
 
 	public void save(Servico s, List<Endereco> listaE, Notificacao noti) throws NegocioException{
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
@@ -91,33 +94,24 @@ public class ServicoService {
 		Servico serv = new Servico();
 		serv = this.findById(s);
 		
-		GregorianCalendar calendar = new GregorianCalendar();
-		int diaDoCancelamento = calendar.get(GregorianCalendar.DAY_OF_MONTH);
-		GregorianCalendar calendar2 = new GregorianCalendar();
-		calendar2.setTime(serv.getDataServico());
-		int diaDoServico = calendar2.get(GregorianCalendar.DAY_OF_MONTH);
+		Date dataCancelamento = new Date();
+		long millisCancelamento = dataCancelamento.getTime();
+		Date dataSevico = serv.getDataServico();
+		long millisServico = dataSevico.getTime();
 		
-		HistorioServico hs = new HistorioServico();
-//		try {
-			if ((diaDoServico - diaDoCancelamento) <= 2) {
-				serv.setStatus(StatusServico.ATIVO);
+//		HistorioServico hs = new HistorioServico();
+		try {
+			if ((millisServico - millisCancelamento) <= 172800000) {
+				serv.setStatus(StatusServico.ACEITO);
 				throw new NegocioException("Cancelamento nÃ£o pode ser Realizado");
-			}else{
-				hs.setCodServico(serv.getCodServico());
-				hs.setCliente(serv.getCliente());
-				hs.setDataServico(serv.getDataServico());
-				hs.setDescricao(serv.getDescricao());
-				hs.setDiarista(serv.getDiarista());
-				hs.setEndereco(serv.getEndereco());				
-				hs.setStatus(StatusServico.INATIVO);
-				hs.setTipoServico(serv.getTipoServico());
-				hs.setValor(serv.getValor());
-				this.historicoServico.save(hs);
+			}else{			
+				serv.setStatus(StatusServico.CANCELAR);
+				this.historioServicoController.salvarHistorioDeServico(serv);
 				this.removeServico(serv);
 			}
-//		} catch (Exception e) {
-//			throw new NegocioException("Erro ao Cancelar Servico!!");
-//		}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Cancelar Servico!!");
+		}
 	}
 	
 	public Servico findById(Servico s) throws NegocioException{
@@ -182,18 +176,9 @@ public class ServicoService {
 		
 		singleEdit(servico);
 		
-		//mediaDiarista(servico);
-		
 		List<Servico> servicos = listServicosDiarista(servico.getDiarista().getCodigo());
 		
 		calcularMediaDiarista(servicos);
-		/*try {
-			for (int i = 0; i < servicos.size(); i++) {
-				mediaDiarista(servicos.get(i));
-			}
-		} catch (Exception e) {
-			throw new NegocioException("Erro ao avaliar Servico");
-		}*/
 	}
 	
 	public void calcularMediaDiarista(List<Servico> servicos) throws NegocioException{
@@ -223,32 +208,5 @@ public class ServicoService {
 		}
 			
 	}
-	
-//	private void mediaDiarista(Servico servico)throws NegocioException{
-//		
-//		float media = 0.0f;
-//		float somaM = 0.0f;
-//		int cont = 0;
-//		List<Servico> listaServico = new ArrayList<Servico>();
-//		try {
-//			listaServico = this.listServiceToDiarista(servico.getDiarista().getCodigo());
-//			if(servico.getDiarista().getMediaDiarista() <= 0){
-//				media = servico.getAvaliacao();
-//			}else{
-//				for (int i = 0; i < listaServico.size(); i++) {
-//					if(listaServico.get(i).getStatus() == StatusServico.CONCLUIDO && listaServico.get(i).getAvaliacao() > 0){
-//						somaM = somaM + listaServico.get(i).getAvaliacao();
-//						cont++;
-//					}
-//				}
-//				media = somaM/cont;
-//			}
-//			servico.getDiarista().setMediaDiarista(media);
-//			this.diaristaServico.editDiarista(servico.getDiarista());
-//		} catch (Exception e) {
-//			throw new NegocioException("Erro ao Calcular Média da Diarista");
-//		}
-//	}
-	
 	
 }

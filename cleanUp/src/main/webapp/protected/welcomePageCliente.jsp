@@ -113,7 +113,7 @@
 	                                       <em class="fa fa-map-marker fa-fw"></em> {{diarista.cidade.nomeCidade}}</li>
 	                                    
 	                                    <li class="mb-sm ng-binding">
-	                                       <a href="" class="has-submenu">
+	                                       <a href="" ng-click="salvarFavoritos(diarista)" class="has-submenu">
 	                                       <em class="fa fa-star fa-2x"></em></a></li>	                                    
 	                                 </ul>
 	                              </div>

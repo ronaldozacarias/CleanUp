@@ -51,20 +51,7 @@
                   <div ng-show="mostrar" class="form-group has-feedback">
                      <input id="signupInputRePassword1" type="text" placeholder="Endereço" class="form-control" ng-model="pessoa.endereco" required="required" pattern=".{4,}">
                      <span class="fa fa-map-marker form-control-feedback text-muted"></span>
-                  </div>
-                  <div ng-show="mostrar" class="form-group has-feedback">
-                     <label for="check" class="text-muted">Especialidades</label>
-                     <div class="form-group has-feedback">
-	                     <div class="clearfix col-md-4" ng-repeat="especialidade in especialidades" >
-		                     <div class="checkbox c-checkbox pull-left mt0">
-		                        <label>
-		                           <input type="checkbox" checklist-model="especialidadesDiarista" checklist-value="especialidade.codigoEspecialidade"/></td>
-		                           <span class="fa fa-check"></span>{{especialidade.nomeEspecialidade}}
-		                        </label>
-		                     </div>
-		                  </div>
-	                  </div>
-                  </div>
+                  </div>                 
                   
 <!-- 				<select ng-model="bla" ng-options="esp.codigoEspecialidade as esp.nomeEspecialidade for esp in especialidades" class="chosen-select input-md form-control"> -->
 <!-- 				</select>				 -->
@@ -78,6 +65,20 @@
                      <span class="fa fa-lock form-control-feedback text-muted"></span>
                   </div>
                   
+                  <div ng-show="mostrar" class="form-group has-feedback">
+                     <label for="check" class="text-muted">Especialidades</label>
+                     <div class="form-group has-feedback">
+	                     <div class="clearfix col-md-4 zindex" ng-repeat="especialidade in especialidades" >
+		                     <div class="checkbox c-checkbox pull-left mt0">
+		                        <label>
+		                           <input type="checkbox" checklist-model="especialidadesDiarista" checklist-value="especialidade.codigoEspecialidade"/></td>
+		                           <span class="fa fa-check"></span>{{especialidade.nomeEspecialidade}}
+		                        </label>
+		                     </div>
+		                  </div>
+	                  </div>	                 
+                  </div>              
+                  
                   <div class="clearfix">
                      <div class="checkbox c-checkbox pull-left mt0">
                         <label>
@@ -86,6 +87,7 @@
                         </label>
                      </div>
                   </div>
+                  
                   <button type="submit" class="btn btn-block btn-success" ng-click="createPeople(newPeopleForm)">Cadastrar</button>
                </form>
             </div>

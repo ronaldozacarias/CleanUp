@@ -120,6 +120,33 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             
     }, 30000);  
     
+    
+        
+    $scope.salvarFavoritos = function(diarista) {
+    	
+    	$scope.diarista = angular.copy(diarista);
+        
+    	 var url = "/cleanUp/protected/cliente/salvarFavoritos";
+    	 
+    	 $http({
+             url: url,
+             data: $scope.diarista,
+             method: "POST",
+             headers: {'Content-Type': 'application/json'}
+         }).success(function(data) {
+             hideModal();
+             bootbox.dialog({
+                 title:"Diarista salva em favoritos!",
+                 message: "<div class='loginbootbox'>Obrigado por sua preferencia</div>"
+             });
+             $scope.pessoa = null;
+         }).error(function(data) {
+             exibirMensagemErro(data);
+        });
+    	
+    };
+    
+    
     /*---------  SENDING SERVICO  -----------------------------------------*/
     $scope.enviarServico = function(servicoForm) {        
         
