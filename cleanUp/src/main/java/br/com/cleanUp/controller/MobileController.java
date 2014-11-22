@@ -109,7 +109,7 @@ public class MobileController {
 	public String saved(@RequestBody ServicoVO servicoVO)throws NegocioException {
 		
 		List<Endereco> listaE = servicoVO.getEnderecos();
-		Cliente cliente = clienteService.findByIdUsuario(servicoVO.getCliente().getUsuario().getId());
+		Cliente cliente = clienteService.findByIdUsuario(servicoVO.getUsuario().getId());
 		
 		Servico servico = new Servico();		
 		Notificacao notificacao = new Notificacao();
