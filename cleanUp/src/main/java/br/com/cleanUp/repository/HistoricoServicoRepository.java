@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import br.com.cleanUp.model.HistoricoServico;
+import br.com.cleanUp.model.StatusServico;
 
 public interface HistoricoServicoRepository extends CrudRepository<HistoricoServico, Integer> {
 
@@ -15,4 +16,5 @@ public interface HistoricoServicoRepository extends CrudRepository<HistoricoServ
 	
 	@Query("FROM HistoricoServico hs where hs.cliente.codigo=:codigoCliente")
 	List<HistoricoServico> listarHistoricoServicoPorCliente(@Param("codigoCliente") int codigoCliente);
+	
 }

@@ -68,6 +68,12 @@ public class HistoricoServico {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
 	
+	@Column(name = "AVALIACAO", nullable = true)
+	private int avaliacao;
+	
+	@Column(name = "COMENTARIO_AVALIACAO")
+	private String comentario;
+	
 	public HistoricoServico() {
 		super();
 		this.diarista = new Diarista();
@@ -138,15 +144,6 @@ public class HistoricoServico {
 		this.valor = valor;
 	}
 
-//	public List<ServicoTipoNotificacao> getServicoTipoNotificacoes() {
-//		return servicoTipoNotificacoes;
-//	}
-//
-//	public void setServicoTipoNotificacoes(
-//			List<ServicoTipoNotificacao> servicoTipoNotificacoes) {
-//		this.servicoTipoNotificacoes = servicoTipoNotificacoes;
-//	}
-
 	public StatusServico getStatus() {
 		return status;
 	}
@@ -161,5 +158,29 @@ public class HistoricoServico {
 
 	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
+	}
+
+	public Integer getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+
+	public int getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(int avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 }

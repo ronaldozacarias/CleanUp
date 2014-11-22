@@ -106,7 +106,7 @@ public class DiaristaService {
 		try {
 			return diaristaRepository.findByRanqueamento();
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Ranquiar Diarista!!");
+			throw new NegocioException(e.getMessage());
 		}
 	}
 }

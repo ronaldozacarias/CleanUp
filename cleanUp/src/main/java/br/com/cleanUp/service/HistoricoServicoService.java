@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Status;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.HistoricoServico;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.repository.HistoricoServicoRepository;
 
 @Service
@@ -35,6 +38,7 @@ public class HistoricoServicoService {
 			hs.setTipoServico(servico.getTipoServico());
 			hs.setValor(servico.getValor());
 			hs.setDataAlteracao(new Date());
+			hs.setAvaliacao(servico.getAvaliacao());
 			historicoServico.save(hs);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Historico");
@@ -63,5 +67,81 @@ public class HistoricoServicoService {
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Lista Historico de Serviço Por Cliente");
 		}
+	}
+	
+	public List<HistoricoServico> listaHistoricoServicoConcluidosPorCliente(Cliente c)throws NegocioException{
+		List<HistoricoServico> listaHistorico = new ArrayList<HistoricoServico>();
+		List<HistoricoServico> listaRetorno = new ArrayList<HistoricoServico>();
+		HistoricoServico hs;
+		try {
+			listaHistorico = (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorCliente(c.getCodigo());
+			for (int i = 0; i < listaHistorico.size(); i++) {
+				hs = new HistoricoServico();
+				if (listaHistorico.get(i).getStatus() == StatusServico.CONCLUIDO) {
+					hs = listaHistorico.get(i);
+					listaRetorno.add(hs);
+				}
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao listar serviços concluidos");
+		}
+		return listaRetorno;
+	}
+	
+	public List<HistoricoServico> listaHistoricoServicoConcluidosPorDiarista(Diarista d)throws NegocioException{
+		List<HistoricoServico> listaHistorico = new ArrayList<HistoricoServico>();
+		List<HistoricoServico> listaRetorno = new ArrayList<HistoricoServico>();
+		HistoricoServico hs;
+		try {
+			listaHistorico = (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorDiarista(d.getCodigo());
+			for (int i = 0; i < listaHistorico.size(); i++) {
+				hs = new HistoricoServico();
+				if (listaHistorico.get(i).getStatus() == StatusServico.CONCLUIDO) {
+					hs = listaHistorico.get(i);
+					listaRetorno.add(hs);
+				}
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao listar serviços concluidos");
+		}
+		return listaRetorno;
+	}
+	
+	public List<HistoricoServico> listaHistoricoServicoCanceladoPorCliente(Cliente c)throws NegocioException{
+		List<HistoricoServico> listaHistorico = new ArrayList<HistoricoServico>();
+		List<HistoricoServico> listaRetorno = new ArrayList<HistoricoServico>();
+		HistoricoServico hs;
+		try {
+			listaHistorico = (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorCliente(c.getCodigo());
+			for (int i = 0; i < listaHistorico.size(); i++) {
+				hs = new HistoricoServico();
+				if (listaHistorico.get(i).getStatus() == StatusServico.CANCELAR) {
+					hs = listaHistorico.get(i);
+					listaRetorno.add(hs);
+				}
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao listar serviços cancelados");
+		}
+		return listaRetorno;
+	}
+	
+	public List<HistoricoServico> listaHistoricoServicoCanceladoPorDiarista(Diarista d)throws NegocioException{
+		List<HistoricoServico> listaHistorico = new ArrayList<HistoricoServico>();
+		List<HistoricoServico> listaRetorno = new ArrayList<HistoricoServico>();
+		HistoricoServico hs;
+		try {
+			listaHistorico = (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorDiarista(d.getCodigo());
+			for (int i = 0; i < listaHistorico.size(); i++) {
+				hs = new HistoricoServico();
+				if (listaHistorico.get(i).getStatus() == StatusServico.CANCELAR) {
+					hs = listaHistorico.get(i);
+					listaRetorno.add(hs);
+				}
+			}
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao listar serviços cancelados");
+		}
+		return listaRetorno;
 	}
 }
