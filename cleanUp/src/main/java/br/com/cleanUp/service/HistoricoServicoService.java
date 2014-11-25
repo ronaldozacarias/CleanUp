@@ -54,7 +54,7 @@ public class HistoricoServicoService {
 		try {
 			return (List<HistoricoServico>) historicoServico.findAll();
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Lista Historico de Servi�o");
+			throw new NegocioException("Erro ao Lista Historico de Serviço");
 		}
 	}
 	
@@ -62,7 +62,15 @@ public class HistoricoServicoService {
 		try {
 			return (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorDiarista(diarista.getCodigo());
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Lista Historico de Servi�o Por Diarista");
+			throw new NegocioException("Erro ao Lista Historico de Serviço Por Diarista");
+		}
+	}
+	
+	public List<HistoricoServico> listaHistoricoServicoPorDiaristaEStatus(Diarista diarista)throws NegocioException{
+		try {
+			return (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorDiaristaEStatus(diarista.getCodigo());
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Lista Historico de Serviço Por Diarista");
 		}
 	}
 	
@@ -71,7 +79,7 @@ public class HistoricoServicoService {
 			List<HistoricoServico> list = historicoServico.listarHistoricoServicoPorCliente(cliente.getCodigo());
 			return list;
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Lista Historico de Servi�o Por Cliente");
+			throw new NegocioException("Erro ao Lista Historico de Serviço Por Cliente");
 		}
 	}
 }

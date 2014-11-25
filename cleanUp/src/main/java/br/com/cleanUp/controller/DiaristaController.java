@@ -17,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
+import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
+import br.com.cleanUp.model.HistoricoServico;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
@@ -28,6 +30,7 @@ import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.EspecialidadeService;
+import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.AceitarServicoVO;
@@ -52,6 +55,9 @@ public class DiaristaController {
 	
 	@Autowired
 	private ServicoService servicoService;
+	
+	@Autowired
+	private HistoricoServicoService historicoServicoService;
 	
 	@RequestMapping(value = "/notificacoes", method = {RequestMethod.GET})
     @ResponseBody
@@ -164,6 +170,22 @@ public class DiaristaController {
 
 		diaristaService.removeDiarista(id);
 
+	}
+	
+	@RequestMapping(value = "/listaHistoricoDiarista", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<HistoricoServico> listaHistorico() throws NegocioException{
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);		
+
+		Diarista diarista = diaristaService.findByUsuario(usuarioLogado);
+		
+		List<HistoricoServico> listaHistorico = historicoServicoService.listaHistoricoServicoPorDiaristaEStatus(diarista);
+		
+		return listaHistorico;
 	}
 
 	@RequestMapping(value = "listarDiaristas", method = RequestMethod.GET, produces = "application/json")

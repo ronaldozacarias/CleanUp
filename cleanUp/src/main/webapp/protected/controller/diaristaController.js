@@ -28,10 +28,28 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	
 	$scope.countServPendente = 0;
     $scope.countServCancel = 0;
+    $scope.countServConcluido = 0;
 	
 	function hideModal(){
     	$('#myModal').modal('hide');
     }
+	
+	function listarServicosCancelados(){
+		$http({         
+            url: '/cleanUp/protected/diarista/listaHistoricoDiarista',
+            method: "GET",
+            headers: {'Content-Type': 'application/json'}
+        })
+        .success(function (data, status, headers, config) {                 
+            $scope.countServCancel = data.length;                
+        })
+        .error(function (data, status, headers, config) {
+            bootbox.dialog({
+                title:"Erro inesperado!",
+                message: data
+            });
+        });
+	}
 	
 	function listarServicos(){
 		$http({
@@ -45,11 +63,13 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		    for(var i = 0 ; i < $scope.servicosList.length ; i++){
             	if($scope.servicosList[i].status == 'PENDENTE'){
             		$scope.countServPendente++;
-            	}
-            	if($scope.servicosList[i].status == 'INATIVO'){
-            		$scope.countServCancel++;
+            	} 
+            	if($scope.servicosList[i].status == 'CONCLUIDO'){
+            		$scope.countServConcluido++;
             	}            	
             }
+		    
+		    listarServicosCancelados();
 		    
 		    doPagination($scope.servicosList);
 	
