@@ -18,7 +18,7 @@
             
             <!-- START timeline-->
             <ul class="timeline" ng-show="historico.length > 0">
-<!--                <li data-datetime="Timeline" class="timeline-separator"></li> -->
+               <li data-datetime="Aceitos e Concluidos &nbsp &nbsp &nbsp &nbsp &nbsp | &nbsp &nbsp Pendentes e Cancelados" class="timeline-separator"></li>
                <!-- START timeline item-->
                <li ng-repeat="hist in historico" class="{{hist.classeTimeline}}" id="{{hist.codServico}}">
                   

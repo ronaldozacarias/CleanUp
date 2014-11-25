@@ -2155,7 +2155,7 @@ x:-o-prefocus,
 .timeline > li.timeline-separator:before {
   content: attr(data-datetime);
   display: inline-block;
-  width: 120px;
+  width: 380px;
   text-align: center;
   padding: 0 20px;
   line-height: 30px;
