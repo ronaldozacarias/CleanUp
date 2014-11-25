@@ -10,7 +10,8 @@
          <div class="main-content">        
                
          	<button type="button" class="btn btn-oval btn-green pull-right">
-         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</button>
+         	<a style="text-decoration: none; color:#fff" href="/cleanUp/protected/cliente/historicoServicosCliente">
+         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</a></button>
             
             <h3><spring:message code="service.client" />
                <br>
@@ -21,6 +22,16 @@
             <div class="row">
                <!-- START dashboard main content-->
                <section class="col-md-13">
+               
+               	  <!-- START Page content-->
+	         <div class="main-content">
+	         	  
+	         	  <div class="alert alert-info" ng-show="servicosList.length == 0">
+	              		<h3>Não há serviços<br>
+						     <h5>Você não realizou nenhuma solicitação de serviço</h5>
+					    </h3>
+	              </div> 
+               		
                   <div ng-show="showServicos">
                     <div class="col-lg-4">
 	                  <!-- START widget-->
@@ -76,7 +87,7 @@
 	                  <!-- END widget-->
 	               </div>
 	               
-	               <div class="col-lg-13 searchDiarist">
+	               <div class="col-lg-13 searchDiarist" ng-show="servicoList.length > 0">
 	               	   <em class="fa fa-search sd"></em>
 		               <div class="form-group has-feedback">
 		                     <input ng-model="searchService" ng-change="filter()" id="exampleInputPassword1" type="text" placeholder="Digite o termo da busca" class="form-control">

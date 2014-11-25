@@ -21,6 +21,7 @@ import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Favorito;
+import br.com.cleanUp.model.HistoricoServico;
 import br.com.cleanUp.model.Perfil;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
@@ -29,6 +30,7 @@ import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.FavoritoService;
+import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.ClassificacaoVO;
@@ -57,6 +59,9 @@ public class ClienteController {
 	
 	@Autowired
 	private FavoritoService favoritoService;
+	
+	@Autowired
+	private HistoricoServicoService historicoServicoService;
 	
 	@RequestMapping(value = "diaristas", method = RequestMethod.GET)
 	public ModelAndView registrar() {
@@ -94,6 +99,22 @@ public class ClienteController {
 		
 		return new ModelAndView("error");
     }
+	
+	@RequestMapping(value = "/historicoServicosCliente", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetHistorico() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			return new ModelAndView("historicoServico");
+		} 
+		
+		return new ModelAndView("error");
+    }	
 	
 	@RequestMapping(value = "/favoritos", method = {RequestMethod.GET})
     @ResponseBody
@@ -215,6 +236,22 @@ public class ClienteController {
 		return listaS;
 	}
 	
+	@RequestMapping(value = "/listaHistorico", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<HistoricoServico> listaHistorico() throws NegocioException{
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);		
+
+		Cliente cliente = clienteService.findByIdUsuario(usuarioLogado.getId());
+		
+		List<HistoricoServico> listaHistorico = historicoServicoService.listaHistoricoServicoPorCliente(cliente);
+		
+		return listaHistorico;
+	}
+	
 	@RequestMapping(value = "listaDeDiaristaPorEspecialidade", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Diarista> listarDiaristaPorEspecialidade(/*Especialidade e*/){
@@ -247,24 +284,34 @@ public class ClienteController {
 		
 	}
 	
-	@RequestMapping(value = "/salvarFavoritos", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/salvarFavoritos", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void salvarFavoritos(@RequestBody Diarista diarista)throws NegocioException{
 		
 		Favorito favorito = new Favorito();
 		Cliente cliente = new Cliente();
-		Diarista d = new Diarista(); 
 		
 		Usuario usuarioLogado = (Usuario) RequestContextHolder
 				.currentRequestAttributes().getAttribute(
 						AtributoDeSessao.LOGGED_USER,
 						RequestAttributes.SCOPE_SESSION);
-		try {
+
 			cliente = clienteService.findByIdUsuario(usuarioLogado.getId());
-			d = diaristaServico.findByUsuario(diarista.getUsuario());
 			favorito.setCliente(cliente);
-			favorito.setDiarista(d);
+			favorito.setDiarista(diarista);
 			favoritoService.savad(favorito);
+
+	}
+	
+	@RequestMapping(value = "/removeFavoritos", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void removerFavoritos(@RequestBody Favorito favorito)throws NegocioException{
+		
+		Favorito fav = favorito;
+	
+		try {
+			
+			favoritoService.remove(fav);
 		} catch (NegocioException e) {
 			System.out.println(e.getMessage());
 		}

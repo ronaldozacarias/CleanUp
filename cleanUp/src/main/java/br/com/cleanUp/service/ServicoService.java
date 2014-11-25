@@ -2,18 +2,14 @@ package br.com.cleanUp.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.cleanUp.controller.DiaristaController;
 import br.com.cleanUp.exception.NegocioException;
-import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
-import br.com.cleanUp.model.HistorioServico;
 import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
@@ -40,7 +36,7 @@ public class ServicoService {
 	private DiaristaService diaristaServico;
 	
 	@Autowired
-	private HistoricoServicoService historioServicoController;
+	private HistoricoServicoService historioServicoService;
 
 	public void save(Servico s, List<Endereco> listaE, Notificacao noti) throws NegocioException{
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
@@ -64,7 +60,7 @@ public class ServicoService {
 				enderecoRepository.save(listaE.get(i));
 				serv.setEndereco(listaE.get(i));
 				servicoRepository.save(serv);
-				listaServ.add(serv);
+				historioServicoService.salvarHistorioDeServico(serv);
 			}
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
@@ -76,6 +72,7 @@ public class ServicoService {
 			for (int i = 0; i < s.size(); i++) {
 				servicoRepository.delete(s.get(i).getCodServico());
 				servicoRepository.save(s.get(i));
+				historioServicoService.salvarHistorioDeServico(s.get(i));
 			}
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
@@ -84,7 +81,8 @@ public class ServicoService {
 	
 	public void singleEdit(Servico servico) throws NegocioException{
 		try {
-			servicoRepository.save(servico);
+			historioServicoService.salvarHistorioDeServico(servico);
+			servicoRepository.save(servico);			
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Servico");
 		}
@@ -100,18 +98,14 @@ public class ServicoService {
 		long millisServico = dataSevico.getTime();
 		
 //		HistorioServico hs = new HistorioServico();
-		try {
-			if ((millisServico - millisCancelamento) <= 172800000) {
+			if ((millisServico - millisCancelamento) <= 172800000 && serv.getStatus().equals(StatusServico.ACEITO)) {
 				serv.setStatus(StatusServico.ACEITO);
-				throw new NegocioException("Cancelamento não pode ser Realizado");
+				throw new NegocioException("O cancelamento não pode ser Realizado: Só é permitido a exclusão com dois dias de antecedência");
 			}else{			
 				serv.setStatus(StatusServico.CANCELAR);
-				this.historioServicoController.salvarHistorioDeServico(serv);
+				this.historioServicoService.salvarHistorioDeServico(serv);				
 				this.removeServico(serv);
 			}
-		} catch (Exception e) {
-			throw new NegocioException("Erro ao Cancelar Servico!!");
-		}
 	}
 	
 	public Servico findById(Servico s) throws NegocioException{

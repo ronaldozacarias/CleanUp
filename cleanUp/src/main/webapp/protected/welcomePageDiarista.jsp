@@ -21,59 +21,7 @@
                <!-- START dashboard main content-->
                <section class="col-md-13">
                
-	                <div class="col-lg-4">
-		                  <!-- START widget-->
-		                  <div class="panel widget">
-		                     <div class="row row-table row-flush">
-		                        <div class="col-xs-4 bg-info text-center">
-		                           <em class="fa fa-reply-all fa-2x"></em>
-		                        </div>
-		                        <div class="col-xs-8">
-		                           <div class="panel-body text-center">
-		                              <h4 class="mt0">{{servicosList.length}}</h4>
-		                              <p class="mb0 text-muted">SOLICITAÇÕES</p>
-		                           </div>
-		                        </div>
-		                     </div>
-		                  </div>
-		                  <!-- END widget-->
-		               </div>
-		               
-		               <div class="col-lg-4">
-		                  <!-- START widget-->
-		                  <div class="panel widget">
-		                     <div class="row row-table row-flush">
-		                        <div class="col-xs-4 bg-warning text-center">
-		                           <em class="fa fa-exclamation-triangle fa-2x"></em>
-		                        </div>
-		                        <div class="col-xs-8">
-		                           <div class="panel-body text-center">
-		                              <h4 class="mt0">{{countServPendente}}</h4>
-		                              <p class="mb0 text-muted">PENDENTES</p>
-		                           </div>
-		                        </div>
-		                     </div>
-		                  </div>
-		                  <!-- END widget-->
-		               </div>
-		               
-		               <div class="col-lg-4">
-		                  <!-- START widget-->
-		                  <div class="panel widget">
-		                     <div class="row row-table row-flush">
-		                        <div class="col-xs-4 bg-danger text-center">
-		                           <em class="fa fa-times fa-2x"></em>
-		                        </div>
-		                        <div class="col-xs-8">
-		                           <div class="panel-body text-center">
-		                              <h4 class="mt0">{{countServCancel}}</h4>
-		                              <p class="mb0 text-muted">CANCELADOS</p>
-		                           </div>
-		                        </div>
-		                     </div>
-		                  </div>
-		                  <!-- END widget-->
-		               </div>          
+	                          
                
                
                </section>

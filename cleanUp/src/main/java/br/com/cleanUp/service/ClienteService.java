@@ -39,12 +39,12 @@ public class ClienteService {
 			if(usu == null){
 				clienteRepository.save(cli);
 			}else{
-				throw new NegocioException(messageSource.getMessage("error.login.exist", 
+				throw new NegocioException(messageSource.getMessage("Esse email já esta sendo utilizado por outro usuário", 
 					  new Object[]{cli.getNome()}, 
 						  LocaleContextHolder.getLocale()));
 			}
 		} catch (NoSuchMessageException e) {
-			throw new NegocioException(messageSource.getMessage("error.insert.client", 
+			throw new NegocioException(messageSource.getMessage("Erro ao inserir cliente: " + e.getMessage(), 
 					  new Object[]{cli.getNome()}, 
 						  LocaleContextHolder.getLocale()));
 		}

@@ -4,184 +4,64 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!-- START Main section-->
-      <section ng-controller="clienteController">
+      <section>
          
          <!-- START Page content-->
          <div class="main-content">        
-               
-         	<button type="button" class="btn btn-oval btn-green pull-right">
-         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</button>
             
-            <h3><spring:message code="service.client" />
+            <h3>Diaritas favoritas
                <br>
-               <small>Realizadas por você</small>              
+               <small>Elegidas por você</small>              
 
             </h3>
             
             <div class="row">
                <!-- START dashboard main content-->
                <section class="col-md-13">
+               
+               	<div class="alert alert-info" ng-show="favoritos.length == 0">
+	              		<h3>Sem favoritos<br>
+						     <h5>Você não adicionou nenhuma diarista como favorito.</h5>
+					    </h3>
+	              </div> 
+               
                   <div ng-show="showServicos">
-                    <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-info text-center">
-	                           <em class="fa fa-share-square-o fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{servicosList.length}}</h4>
-	                              <p class="mb0 text-muted">SOLICITAÇÕES</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
-	               
-	               <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-warning text-center">
-	                           <em class="fa fa-exclamation-triangle fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{countServPendente}}</h4>
-	                              <p class="mb0 text-muted">PENDENTES</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
-	               
-	               <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-danger text-center">
-	                           <em class="fa fa-times fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{countServCancel}}</h4>
-	                              <p class="mb0 text-muted">CANCELADOS</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
-	               
-	               <div class="col-lg-13 searchDiarist">
-	               	   <em class="fa fa-search sd"></em>
-		               <div class="form-group has-feedback">
-		                     <input ng-model="searchService" ng-change="filter()" id="exampleInputPassword1" type="text" placeholder="Digite o termo da busca" class="form-control">
-		               </div>
-	               </div>
-	               
-	               <div class="panel widget col-lg-12" ng-repeat="servico in filtered = (servicosList | filter:searchService) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-		               <div class="panel-body listDiarista">
-		               			<input type="hidden" value="{{servico.codigo}}" />
-		                        <div class="media mt0">
-		                           <div class="pull-left">
-		                              <img src="/cleanUp/resources/assets/img/user/05.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
-		                           </div>
-		                           <div class="media-body">
-		                              <div class="media-heading masterdiarista">
-		                                 <h3 class="mt0 ng-binding"> Cliente: {{servico.diarista.nome}}</h3>
-		                                 <ul class="list-unstyled">
-		                                    <li class="mb-sm ng-binding">
-		                                       <em class="fa fa-list fa-fw"></em> Descrição do Serviço: {{servico.descricao}}</li>
-		                                    
-		                                    <li class="mb-sm ng-binding">
-		                                       <em class="fa fa-calendar fa-fw"></em> Data: {{servico.dataServico | date:'longDate'}}</li>
-		                                    <li class="mb-sm ng-binding">
-		                                       <em class="fa fa-map-marker fa-fw"></em> Endereço: {{servico.endereco.logradouro}}</li>
-		                                 </ul>
-		                              </div>
-		                           	  
-		                           	   <div class="media-heading masterdiarista">
-		                                 <ul class="list-unstyled">
-		                                 	<li class="mb-sm ng-binding">
-		                                       <em class="fa fa-info fa-fw"></em> Status: {{servico.status}}</li>	                                    	
-		                                 </ul>
-		                                 <div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
-		                                 	<input type="hidden" value="{{servico.codigo}}" />
-												<i class="fa fa-times"></i>
-										 </div>
-		                                 <div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-warning pull-right" ng-click="selectedServicoAlaviacao(servico);">
-		                                 	<input type="hidden" value="{{diarista.codigo}}" />
-												<i class="fa fa-star"></i>
-										 </div>
-										 
-		                              </div>
-		                           </div>
-		                        </div>
-		                 </div>
-	               </div>
-	               
-	               <div class="col-md-12" ng-show="filteredItems > 4">    
-				            <pagination class="pagination" page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
-							items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
-							max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
-				   </div>
-				   </div>
-				   
-				   <div class="col-lg-13" ng-show="showAvaliacao">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-		                 <div class="panel-body bg-inverse">
-		                        <div class="row row-table text-center">
-		                           <div class="col-xs-6">
-		                              <p class="m0 h3">Avalie o serviço prestado por</p>
-		                           </div>		                           
-		                        </div>
-	                     </div>
+                    
+<!--                    <div class="col-lg-4" ng-repeat="fav in filtered = (favoritos | filter:searchService) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit"> -->
+	               <div class="col-lg-4" ng-repeat="fav in favoritos | filter:searchService">   
+	                  <!-- START panel-->
+	                  <div class="panel panel-default">
+	                     <div class="panel-heading">{{fav.diarista.nome}}
+	                        
+	                        <a style="position:absolute; right:10px" ng-click="removerFavorito(fav)" href="javascript:void(0);" class="pull-right" data-original-title="Close Panel">
+	                           <em class="fa fa-times"></em>
+	                        </a>
+	                        
+	                        <a style="position:relative; right:20px" ng-click="selectedDiaristaFav(fav)" href="javascript:void(0);" class="pull-right">
+	                           <em class="fa fa-check"></em>
+	                        </a>
+	                                                
+	                     </div>                    
+	                     
 	                     <div class="panel-body">
-	                        <div class="media p mt0">
-	                           <div class="pull-left">
-	                              <img src="<c:url value='/resources/assets/img/user/05.jpg'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
-	                           </div>
-	                           <div class="media-body">
-	                              <div class="media-heading masterdiarista">
-	                                 <h3 class="mt0"> {{servico.diarista.nome}}</h3>
+	                     	<ul class="list-unstyled">
+	                        	<li class="mb-sm ng-binding">
+	                                       <em class="fa fa-map-marker fa-fw"></em> {{fav.diarista.cidade.nomeCidade}}</li>
+	                        </ul>
+	                        <div class="media-heading">
 	                                 <ul class="list-unstyled">
-	                                    <li class="mb-sm">
-	                                       <em class="fa fa-list fa-fw"></em> {{servico.descricao}}</li>
-	                                    <li class="mb-sm">
-	                                       <em class="fa fa-calendar fa-fw"></em> {{servico.dataServico | date:'longDate'}}</li>
-	                                    <li class="mb-sm">
-	                                       <em class="fa fa-map-marker fa-fw"></em> {{servico.endereco.logradouro}}</li>	                                       
-	                                       
+	                                    <li class="mb-sm ng-binding espec" ng-repeat="especialidade in fav.diarista.especialidades">
+	                                       <em class="fa fa-wrench fa-fw"></em>{{especialidade.nomeEspecialidade}}
+	                                    </li>	                                    	
 	                                 </ul>
 	                              </div>
-	                           	  <div class="media-heading">
-	                           	  <div class="col-md-4">
-	                                 <div id="starclassification"></div>
-	                                 <label for="desc">Deixe um comentário.</label>									 
-										 <textarea id="comentario" ng-model="comentario" required class="form-control" rows="3"></textarea>
-	                                 </div>                           
-	                              </div>
-	                              <div class="media-heading">
-	                              		<div style="width:101px;" class="mb-sm btn btn-oval btn-primary" ng-click="salvarClassificacao(servico)">
-												<i class="fa fa-check"></i>Salvar
-										 </div>
-	                              		<div style="width:101px;" class="mb-sm btn btn-oval btn-danger" ng-click="cancelarClassificacao()">
-												<i class="fa fa-times"></i>Cancelar
-										 </div>		                                 
-	                              </div>
-	                           </div>
-	                        </div>
 	                     </div>
-	                     
 	                  </div>
-	                  <!-- END widget-->
-                  </div>               
-               
+	                  <!-- END panel-->
+	               </div>
+	               
+				   </div>
+				                 
                </section>
                
             </div>
@@ -193,17 +73,91 @@
       </section>
       <!-- END Main section-->     
    
+   <!-- START modal-->
+		<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myMapModalLabel" aria-hidden="true" class="modal fade">
+		      <div class="modal-dialog">
+		         <div class="modal-content">
+		            <div class="modal-header">
+		               <button ng-click="reset()" type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+		               <div class="pull-left">
+	                              <img src="/cleanUp/resources/assets/img/user/05.jpg" alt="Avatar" width="30" height="30" class="img-thumbnail img-circle">
+	                           </div>
+		               <h4 id="myMapModalLabel" class="modal-title">&nbsp Contactar {{diarista.nome}}</h4>
+		            </div>
+		            <form name="servicoForm" method="post">
+		            <div class="modal-body">		               
+		               <input type="hidden" required ng-model="diarista.codigo" name="id"
+						value="{{diarista.codigo}}" />				
 
+						<div class="modalBody">
+							<div class="inputsCliente">
+								<div class="form-group ">
+								       	<label for="datePicker">Data do serviço</label>
+								       	<div id="datePicker" data-pick-time="false" class="datetimepicker input-group date mb-lg">
+					                    	<input id="dp" placeholder="dd/MM/yyyy" ng-model="data" type="text" class="form-control" required>
+					                        <span class="input-group-addon">
+					                        	<span class="fa-calendar fa"></span>
+					                        </span>
+					                	</div>		
+								</div>		
+								<div class="form-group">
+										<label for="desc">Descrição do serviço, quantidade de
+											cômodos e espaço físico.</label>
+										<textarea ng-model="descricao" required class="form-control" rows="3"></textarea>
+								</div>
+								
+								<div class="input-group">
+	                                 <input id="txtEndereco" type="text" class="form-control" ng-model="logradouro" placeholder="Digite um endereço e confirme no botão (+)">
+	                                 <span class="input-group-btn">
+	                                    <button type="button" class="btn btn-success" ng-click="addEndereco()"><i class="fa fa-plus"></i></button>
+	                                 </span>
+                              	</div>
+																									
+									<div class="input-group" ng-show="enderecos.length > 0" ng-repeat="endereco in enderecos" class="item-unchecked">
+		                                 <input disabled type="text" class="form-control" value="{{endereco.logradouro}}">
+		                                 <span class="input-group-btn">
+		                                    <button type="button" class="btn btn-danger" ng-click="removeEndereco($index)"><i class="fa fa-times"></i></button>
+		                                 </span>
+                              		</div>
+		
+								<div hidden id="mapa"></div>
+		
+								<input type="hidden" ng-model="lat" id="txtLatitude"
+									name="txtLatitude" /> <input type="hidden" ng-model="lng"
+									id="txtLongitude" name="txtLongitude" />
+							</div>
+						</div>
+						
+		            </div>
+		            <div class="modal-footer">
+			            <div class="alert" ng-show="arrayEnd">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>Obrigatório!</strong>{{msg}}
+						</div>
+						<button type="submit" class="btn btn-primary"
+							ng-click="enviarServico(servicoForm)">Enviar
+						</button>
+		            </div>		            
+		            </form>
+		         </div>
+		      </div>
+		   </div>		   
+   <!-- END modal-->
+   
    <!-- Main vendor Scripts-->
    <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />"></script>
    <script src="<c:url value='/resources/assets/bootstrap/js/bootstrap.min.js' />"></script>
    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
+   <script src="<c:url value='/resources/js/jquery-ui.custom.mim.js' />"></script>
    
    <!-- Plugins-->
    <script src="<c:url value='/resources/assets/chosen/chosen.jquery.min.js' />"></script>
    <script src="<c:url value='/resources/assets/slider/js/bootstrap-slider.js' />"></script>
    <script src="<c:url value='/resources/assets/filestyle/bootstrap-filestyle.min.js' />"></script>
    
+   <!-- BootstrapDatepicker-->
+   <script src="<c:url value='/resources/assets/moment/min/moment-with-langs.min.js' />"></script>
+   <script src="<c:url value='/resources/assets/datetimepicker/js/bootstrap-datetimepicker.min.js' />"></script>
    
    <!-- Animo-->
    <script src="<c:url value='/resources/assets/animo/animo.min.js' />"></script>

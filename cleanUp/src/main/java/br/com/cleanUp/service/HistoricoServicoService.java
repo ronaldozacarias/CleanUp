@@ -13,6 +13,7 @@ import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.HistoricoServico;
 import br.com.cleanUp.model.Servico;
+import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.repository.HistoricoServicoRepository;
 
 @Service
@@ -35,6 +36,14 @@ public class HistoricoServicoService {
 			hs.setTipoServico(servico.getTipoServico());
 			hs.setValor(servico.getValor());
 			hs.setDataAlteracao(new Date());
+			hs.setAvaliacao(servico.getAvaliacao());
+			if(servico.getStatus().equals(StatusServico.ACEITO) || servico.getStatus().equals(StatusServico.CONCLUIDO)){
+				hs.setClasseTimeline("");
+				hs.setClassePopover("popover left");
+			}else{
+				hs.setClasseTimeline("timeline-inverted");
+				hs.setClassePopover("popover right");
+			}
 			historicoServico.save(hs);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Salvar Historico");
@@ -45,7 +54,7 @@ public class HistoricoServicoService {
 		try {
 			return (List<HistoricoServico>) historicoServico.findAll();
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Lista Historico de Serviço");
+			throw new NegocioException("Erro ao Lista Historico de Serviï¿½o");
 		}
 	}
 	
@@ -53,15 +62,16 @@ public class HistoricoServicoService {
 		try {
 			return (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorDiarista(diarista.getCodigo());
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Lista Historico de Serviço Por Diarista");
+			throw new NegocioException("Erro ao Lista Historico de Serviï¿½o Por Diarista");
 		}
 	}
 	
 	public List<HistoricoServico> listaHistoricoServicoPorCliente(Cliente cliente)throws NegocioException{
 		try {
-			return (List<HistoricoServico>) historicoServico.listarHistoricoServicoPorCliente(cliente.getCodigo());
+			List<HistoricoServico> list = historicoServico.listarHistoricoServicoPorCliente(cliente.getCodigo());
+			return list;
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Lista Historico de Serviço Por Cliente");
+			throw new NegocioException("Erro ao Lista Historico de Serviï¿½o Por Cliente");
 		}
 	}
 }

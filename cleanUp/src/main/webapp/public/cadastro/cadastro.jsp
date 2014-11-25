@@ -108,6 +108,7 @@
    <script src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
 	<script src="<c:url value='/resources/js/js-template/jquery.mask.js' />"></script>
    <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>
+   <script src="<c:url value='/resources/js/util.js' />"></script>
 
    <script src="<c:url value='/public/controller/cadastroController.js' />"></script>
     

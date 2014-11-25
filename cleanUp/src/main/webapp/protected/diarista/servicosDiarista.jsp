@@ -30,7 +30,7 @@
                <section class="col-md-13">
                   <div>
                     
-                    <div class="col-lg-8">
+                    <div class="col-lg-13">
 	                  <!-- START panel-->
 	                  <div class="panel panel-default">
 	                     <div class="panel-heading">Form Wizard Vertical (no validation)</div>
@@ -45,7 +45,7 @@
 				                                 	<input type="hidden" value="{{servico.codigo}}" />
 														<i class="fa fa-times"></i>
 												 </div>
-				                                 <div ng-show="servico.status != 'CONCLUIDO' && servico.status != 'ATIVO'" class="btn btn-oval btn-success pull-right" ng-click="selectedCliente(servico.cliente);">
+				                                 <div ng-show="servico.status == 'PENDENTE'" class="btn btn-oval btn-success pull-right" ng-click="selectedCliente(servico.cliente);">
 				                                 	<input type="hidden" value="{{diarista.codigo}}" />
 														<i class="fa fa-check"></i>
 												 </div>				                           
@@ -79,59 +79,59 @@
 	               </div>
                     
                     
-                    <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-info text-center">
-	                           <em class="fa fa-share-square-o fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{servicosList.length}}</h4>
-	                              <p class="mb0 text-muted">SOLICITAÇÕES</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
+<!--                     <div class="col-lg-4"> -->
+<!-- 	                  START widget -->
+<!-- 	                  <div class="panel widget"> -->
+<!-- 	                     <div class="row row-table row-flush"> -->
+<!-- 	                        <div class="col-xs-4 bg-info text-center"> -->
+<!-- 	                           <em class="fa fa-share-square-o fa-2x"></em> -->
+<!-- 	                        </div> -->
+<!-- 	                        <div class="col-xs-8"> -->
+<!-- 	                           <div class="panel-body text-center"> -->
+<!-- 	                              <h4 class="mt0">{{servicosList.length}}</h4> -->
+<!-- 	                              <p class="mb0 text-muted">SOLICITAÇÕES</p> -->
+<!-- 	                           </div> -->
+<!-- 	                        </div> -->
+<!-- 	                     </div> -->
+<!-- 	                  </div> -->
+<!-- 	                  END widget -->
+<!-- 	               </div> -->
 	               
-	               <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-warning text-center">
-	                           <em class="fa fa-exclamation-triangle fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{countServPendente}}</h4>
-	                              <p class="mb0 text-muted">PENDENTES</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
+<!-- 	               <div class="col-lg-4"> -->
+<!-- 	                  START widget -->
+<!-- 	                  <div class="panel widget"> -->
+<!-- 	                     <div class="row row-table row-flush"> -->
+<!-- 	                        <div class="col-xs-4 bg-warning text-center"> -->
+<!-- 	                           <em class="fa fa-exclamation-triangle fa-2x"></em> -->
+<!-- 	                        </div> -->
+<!-- 	                        <div class="col-xs-8"> -->
+<!-- 	                           <div class="panel-body text-center"> -->
+<!-- 	                              <h4 class="mt0">{{countServPendente}}</h4> -->
+<!-- 	                              <p class="mb0 text-muted">PENDENTES</p> -->
+<!-- 	                           </div> -->
+<!-- 	                        </div> -->
+<!-- 	                     </div> -->
+<!-- 	                  </div> -->
+<!-- 	                  END widget -->
+<!-- 	               </div> -->
 	               
-	               <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-danger text-center">
-	                           <em class="fa fa-times fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{countServCancel}}</h4>
-	                              <p class="mb0 text-muted">CANCELADOS</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>                          
+<!-- 	               <div class="col-lg-4"> -->
+<!-- 	                  START widget -->
+<!-- 	                  <div class="panel widget"> -->
+<!-- 	                     <div class="row row-table row-flush"> -->
+<!-- 	                        <div class="col-xs-4 bg-danger text-center"> -->
+<!-- 	                           <em class="fa fa-times fa-2x"></em> -->
+<!-- 	                        </div> -->
+<!-- 	                        <div class="col-xs-8"> -->
+<!-- 	                           <div class="panel-body text-center"> -->
+<!-- 	                              <h4 class="mt0">{{countServCancel}}</h4> -->
+<!-- 	                              <p class="mb0 text-muted">CANCELADOS</p> -->
+<!-- 	                           </div> -->
+<!-- 	                        </div> -->
+<!-- 	                     </div> -->
+<!-- 	                  </div> -->
+<!-- 	                  END widget -->
+<!-- 	               </div>                           -->
 	               
 				   </div>               
                </section>              
@@ -158,7 +158,7 @@
 		               <input type="hidden" required ng-model="servico.codigo" name="id"
 						value="{{servico.codigo}}" />				
 
-						<table class="col-lg-7">
+						<table class="col-lg-7 maxHeigth">
 							<tr>
 							
 								<td>
@@ -168,7 +168,7 @@
 				                  <!-- START panel-->
 				                  <div class="panel panel-default">
 				                     <div class="panel-heading"><em class="fa fa-calendar fa-fw"></em>Data: {{servico.dataServico | date:'longDate'}}
-				                        <a href="javascript:void(0);" data-perform="panel-dismiss" data-toggle="tooltip" title="" class="pull-right" data-original-title="Close Panel">
+				                        <a href="javascript:void(0);"  title="" class="pull-right" data-original-title="Close Panel" ng-click="cancelarServico(servico)">
 				                           <em class="fa fa-times"></em>
 				                        </a>
 				                     </div>

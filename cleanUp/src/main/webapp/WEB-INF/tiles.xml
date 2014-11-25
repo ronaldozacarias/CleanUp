@@ -85,6 +85,12 @@
     <definition name="favoritos" extends="masterCli.page">
     	<put-attribute name="body" value="/protected/cliente/favoritos.jsp"/>
     </definition>
+    <definition name="historicoServico" extends="masterCli.page">
+    	<put-attribute name="body" value="/protected/cliente/historicoServicos.jsp"/>
+    </definition>
+    <definition name="resumoDiarista" extends="masterDia.page">
+    	<put-attribute name="body" value="/protected/diarista/resumoDiarista.jsp"/>
+    </definition>
     
     <definition name="customError" template="/public/error/customError.jsp">
     

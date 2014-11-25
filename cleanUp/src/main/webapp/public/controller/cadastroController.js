@@ -118,10 +118,7 @@ function cadastroController($scope, $http, $filter, $timeout) {
 			            });
 						$scope.pessoa = null;
 			        }).error(function(data) {
-			        	bootbox.dialog({
-			        		title:"Erro ao tentar cadastrar!",
-			                message: data
-			            });
+			        	exibirMensagemErro(data);
 			       });				
 					
 			}	

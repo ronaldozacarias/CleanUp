@@ -78,6 +78,31 @@
 /* ========================================================================
    Component: bootstrap-reset.less
  ========================================================================== */
+ .avPos{
+ 	color: #7bbf62;
+ 	margin-right: 5px;
+ }
+ 
+ .avNeg{
+ 	color: #f35839;
+ 	margin-right: 5px;
+ }
+ 
+ .avReg{
+ 	color: #ff902b;
+ 	margin-right: 5px;
+ }
+ 
+ .avSol{
+ 	color: #3babc8;
+ 	margin-right: 5px;
+ }
+ 
+ .errorBootbox{
+ 	color:red;
+ 	margin-right: 5px;
+ }
+ 
  .tom-rigth{
  	right: -13px !important;
  }
@@ -143,9 +168,15 @@
       background-image: none;
 }
  
- .modalBody{
-	
- }
+.scroll-container{
+	max-height: 370px;
+	overflow-y: hidden;
+}
+
+.scroll-container:hover{
+	max-height: 370px;
+	overflow-y: auto;
+}
  
  .sd {
 	position: relative;

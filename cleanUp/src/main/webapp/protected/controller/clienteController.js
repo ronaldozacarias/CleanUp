@@ -21,6 +21,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     listarNotificacoes();
     listarServicosCli();
     listarDiaristas();
+    listarFavoritosCli();
+    listarHistoricoServicos();
     $scope.data;
     $scope.minDate = '';
     $scope.searchDiarista = '';
@@ -124,29 +126,67 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
         
     $scope.salvarFavoritos = function(diarista) {
     	
-    	$scope.diarista = angular.copy(diarista);
-        
-    	 var url = "/cleanUp/protected/cliente/salvarFavoritos";
-    	 
-    	 $http({
-             url: url,
-             data: $scope.diarista,
-             method: "POST",
-             headers: {'Content-Type': 'application/json'}
-         }).success(function(data) {
-             hideModal();
-             bootbox.dialog({
-                 title:"Diarista salva em favoritos!",
-                 message: "<div class='loginbootbox'>Obrigado por sua preferencia</div>"
-             });
-             $scope.pessoa = null;
-         }).error(function(data) {
-             exibirMensagemErro(data);
-        });
+    	bootbox.confirm("Deseja adicionar " + diarista.nome + " nos favoritos?" , function(result) {
+    		  if(result == true){
+    			  favoritos(diarista);
+    		  }
+    	});   	
     	
     };
     
+    $scope.removerFavorito = function(favorito) {
+    	
+    	var selectedFav = angular.copy(favorito);
+    	
+    	$scope.favorito = selectedFav;
+    	
+    	bootbox.confirm("Deseja remover " + favorito.diarista.nome + " dos favoritos?" , function(result) {
+    		  if(result == true){
+    			    			  
+    			  var url = "/cleanUp/protected/cliente/removeFavoritos";
+ 		    	 
+    		    	$http({
+    		    	      url: url,
+    		    	      data: $scope.favorito,
+    		    	      method: "POST",
+    		    	      headers: {'Content-Type': 'application/json'}
+    		    	}).success(function(data) {
+    		    	      bootbox.dialog({
+    		   		         title:"Diarista removida dos favoritos!",
+    		    		     message: "<div class='loginbootbox'>Obrigado por sua preferencia</div>"
+    		    	      });
+    		    	      listarFavoritosCli();
+    		         }).error(function(data) {
+    		    	       exibirMensagemErro(data);
+    		    	 });  			  
+    			  
+    		  }
+    	});   	
+    	
+    };
     
+    function favoritos(diarista){
+
+		$scope.diarista = angular.copy(diarista);
+    		        
+    	var url = "/cleanUp/protected/cliente/salvarFavoritos";
+    		    	 
+    	$http({
+    	      url: url,
+    	      data: $scope.diarista,
+    	      method: "POST",
+    	      headers: {'Content-Type': 'application/json'}
+    	}).success(function(data) {
+    	      bootbox.dialog({
+   		         title:"Diarista salva em favoritos!",
+    		     message: "<div class='loginbootbox'>Obrigado por sua preferencia</div>"
+    	      });
+         }).error(function(data) {
+    	       exibirMensagemErro(data);
+    	 });
+
+    }
+        
     /*---------  SENDING SERVICO  -----------------------------------------*/
     $scope.enviarServico = function(servicoForm) {        
         
@@ -199,8 +239,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             
         }   
         
-    };
-    
+    };    
 
     /*---------  ADD ENDERECO IN LIST  -----------------------------------------*/
     $scope.addEndereco = function () {
@@ -308,6 +347,21 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
         });
     };
     
+    $scope.selectedDiaristaFav = function (favorito) {
+    	initialize();
+    	
+    	$scope.minDate = datamin;
+        
+        $('#datePicker').data("DateTimePicker").setMinDate(datamin);
+        
+        var selectedFav = angular.copy(favorito);
+        $scope.diarista = selectedFav.diarista;
+        
+        $('#myModal').modal({
+            show: 'true'
+        });
+    };
+    
     
     /*---------  SET CLIENT IN MODAL  ------------------------------*/
     $scope.selectedServicoAlaviacao = function (servico) {
@@ -319,7 +373,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     };
     
     
-$scope.salvarClassificacao = function(servico){
+    $scope.salvarClassificacao = function(servico){
         
         if($scope.score != 0){
             
@@ -380,7 +434,40 @@ $scope.salvarClassificacao = function(servico){
     };
     
  /*---------  END SET DIARISTA IN MODAL  ------------------------------*/
-        
+  
+    function listarHistoricoServicos(){
+    	
+    	var url = "" + $location.$$absUrl;
+    	    	
+    	if(url == "http://localhost:8080/cleanUp/protected/cliente/historicoServicosCliente"){
+    		
+    		$scope.currentPage = null;
+    	    $scope.entryLimit = null;
+    	    $scope.maxSize = null;
+    	    $scope.filteredItems = null;  
+    	    $scope.totalItems = null;
+    	    
+    	    $http({         
+                url: '/cleanUp/protected/cliente/listaHistorico',
+                method: "GET",
+                headers: {'Content-Type': 'application/json'}
+            })
+            .success(function (data, status, headers, config) {                 
+                $scope.historico = data;
+                console.log($scope.historico);
+                //doPagination($scope.favoritos);                 
+            })
+            .error(function (data, status, headers, config) {
+                bootbox.dialog({
+                    title:"Erro inesperado!",
+                    message: data
+                });
+            });
+    		
+    	};
+    	
+    }
+    
     
  /*---------  RESET MODAL BOOTSTRAP  ------------------------------*/
     $('.modal').on('hidden.bs.modal', function(){
@@ -508,7 +595,39 @@ $scope.salvarClassificacao = function(servico){
     });
 
  /*---------  END GOOGLE MAPS API  ------------------------------*/   
-    
+    function listarFavoritosCli(){
+    	
+    	var url = "" + $location.$$absUrl;
+    	
+    	if(url == "http://localhost:8080/cleanUp/protected/cliente/favoritos"){
+    		
+    		$scope.currentPage = null;
+    	    $scope.entryLimit = null;
+    	    $scope.maxSize = null;
+    	    $scope.filteredItems = null;  
+    	    $scope.totalItems = null;
+    	    
+    	    $http({         
+                url: '/cleanUp/protected/cliente/listaDeFavoritos',
+                method: "GET",
+                headers: {'Content-Type': 'application/json'}
+            })
+            .success(function (data, status, headers, config) {                 
+                $scope.favoritos = data;
+                           
+                //doPagination($scope.favoritos);
+                        
+            })
+            .error(function (data, status, headers, config) {
+                bootbox.dialog({
+                    title:"Erro inesperado!",
+                    message: data
+                });
+            });
+    		
+    	}
+   	
+    }
     
     function listarServicosCli(){
     	

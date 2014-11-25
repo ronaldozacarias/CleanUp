@@ -69,6 +69,22 @@ public class DiaristaController {
 		return new ModelAndView("error");
     }
 	
+	@RequestMapping(value = "/resumoDiarista", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetResumoDiarista() {
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_DIARIST)) {
+			return new ModelAndView("resumoDiarista");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
 	@RequestMapping(value = "/servicos", method = {RequestMethod.GET})
     @ResponseBody
     public ModelAndView doGetServicos() {

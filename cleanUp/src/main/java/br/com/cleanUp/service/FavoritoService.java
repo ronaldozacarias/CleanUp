@@ -1,9 +1,7 @@
 package br.com.cleanUp.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +19,13 @@ public class FavoritoService {
 	private FavoritoRepository favoritoRepository;
 	
 	public void savad(Favorito f)throws NegocioException{
-		try {
-			favoritoRepository.save(f);
-		} catch (Exception e) {
-			throw new NegocioException(e.getMessage());
-		}
+
+			Favorito favorito = favoritoRepository.favoritoPorDiarista(f.getDiarista().getCodigo(), f.getCliente().getCodigo());
+			if(favorito == null){
+				favoritoRepository.save(f);
+			}else{
+				throw new NegocioException("Diarista já foi adicionada aos favoritos");
+			}
 	}
 	
 	public void remove(Favorito f)throws NegocioException{

@@ -151,10 +151,17 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		
 	};
 	
-	
 	$scope.cancelarServico = function(servico){
-
-//		$scope.servicoVO = new Object();
+		
+		bootbox.confirm("Você deseja realmente cancelar este serviço?" , function(result) {
+	  		  if(result == true){
+	  			  $scope.cancelarServicoDiarista(servico);
+	  		  }
+		}); 
+		
+	};
+	
+	$scope.cancelarServicoDiarista = function(servico){
 		
 		$scope.servicoVO = {
 			codigo:servico.codServico
@@ -164,7 +171,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	        url: '/cleanUp/protected/servico/cancelar',
 	        data: $scope.servicoVO,
 	        method: "POST",
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json; charset=utf-8'}
 	    })
 	    .success(function (data, status, headers, config) {   	    	
 	    	hideModal();
@@ -184,7 +191,6 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	    });
 		
 	};
-	
 	
 	/*---------  ADD SERVICE IN LIST  -----------------------------------------*/
     $scope.addService = function (servico, index) {
