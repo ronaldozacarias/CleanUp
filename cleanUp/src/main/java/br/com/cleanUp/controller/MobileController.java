@@ -47,19 +47,19 @@ public class MobileController {
 
 	@Autowired
 	private ServicoService servicoService;
-	
+
 	@Autowired
 	private ServicoService servicoController;
 
 	@Autowired
 	private ClienteService clienteService;
-	
+
 	@Autowired
 	private ClienteController clienteController;
-	
+
 	@Autowired
 	private EspecialidadeService especialidadeService;
-	
+
 	@Autowired
 	private CidadeService cidadeService;
 
@@ -103,29 +103,33 @@ public class MobileController {
 
 		return listaServicos;
 	}
-	
+
 	@RequestMapping(value = "/servico/add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String saved(@RequestBody ServicoVO servicoVO)throws NegocioException {
-		
+	public String saved(@RequestBody ServicoVO servicoVO)
+			throws NegocioException {
+
 		List<Endereco> listaE = servicoVO.getEnderecos();
-		Cliente cliente = clienteService.findByIdUsuario(servicoVO.getUsuario().getId());
-		
-		Servico servico = new Servico();		
+		Cliente cliente = clienteService.findByIdUsuario(servicoVO.getUsuario()
+				.getId());
+
+		Servico servico = new Servico();
 		Notificacao notificacao = new Notificacao();
 		notificacao.setCliente(cliente);
 		notificacao.setDiarista(servicoVO.getDiarista());
 		notificacao.setDataEnvioNotificacao(new Date());
-		notificacao.setDescricaoNotificacao(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
+		notificacao
+				.setDescricaoNotificacao(TipoNotificacao.SOLICITACAO_DO_CLIENTE
+						.getTipoNotificacao());
 		notificacao.setStatus(StatusNotificacao.PENDENTE);
-		
+
 		servico.setStatus(StatusServico.PENDENTE);
 		servico.setNotificacao(notificacao);
 		servico.setCliente(cliente);
 		servico.setDiarista(servicoVO.getDiarista());
 		servico.setDataServico(servicoVO.getData());
 		servico.setDescricao(servicoVO.getDescricao());
-		
+
 		try {
 			servicoService.save(servico, listaE, notificacao);
 			return Util.constructJSON("register", true);
@@ -134,47 +138,66 @@ public class MobileController {
 			return Util.constructJSON("register", false, "Erro ao cadastrar.");
 		}
 	}
-	
-	@RequestMapping(value = "/servico/confirmar", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
-	public void confirmaServico(Servico servico) throws NegocioException {
-		
-		AceitarServicoVO asvo  = new AceitarServicoVO();
-		asvo.getServicosVO().add(servico);
-		diaristaController.confirmacaoDeServico(asvo);
-	}
-	
-	@RequestMapping(value = "/servico/cancelar", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
-	public void cancelarServico(Servico servico) throws NegocioException {
-		/*ServicoVO serv = new ServicoVO();
-		ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
-		enderecos.add(servico.getEndereco());
-		serv.setCliente(servico.getCliente());
-		serv.setDiarista(servico.getDiarista());
-		serv.setDescricao(servico.getDescricao());
-		serv.setEnderecos(enderecos);
-		serv.setCodigo(servico.getCodServico());
-		serv.setData(servico.getDataServico());*/
-		servicoService.cancelarServico(servico);
 
-	}
-	
-	
-	@RequestMapping(value = "/servico/classifica", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/servico/atualizacao/{acao}/{codigoServico}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void classificaServico(ServicoVO servico) throws NegocioException {
+	public void confirmacaoServico(@PathVariable String acao, @PathVariable Integer codigoServico)
+			throws NegocioException {
 
-		//clienteController.avaliacaoDeServico(servico);
+		 if (acao.equals("aceitar")) {
+			
+			AceitarServicoVO aceitarServicoVO = new AceitarServicoVO();
+			Servico servico = new Servico();
+			ArrayList<Servico> listaServico = new ArrayList<Servico>();
+			
+			servico.setCodServico(codigoServico);
+			listaServico.add(servico);
+			
+			aceitarServicoVO.setServicosVO(listaServico);
+			
+			try {
+				for (int i = 0; i < aceitarServicoVO.getServicosVO().size(); i++) {
+					aceitarServicoVO.getServicosVO().get(i).setStatus(StatusServico.ACEITO);
+					aceitarServicoVO.getServicosVO().get(i).getNotificacao().setStatus(StatusNotificacao.CONCLUIDA);
+					aceitarServicoVO.getServicosVO().get(i).getNotificacao().setDescricaoNotificacao(TipoNotificacao.CONFIRMACAO_DE_SOLICITACAO.getTipoNotificacao());
+				}
+				this.servicoService.edit(aceitarServicoVO.getServicosVO());
+				
+				Util.constructJSON("atualizar", true,
+						"Informações atualizada.");
+			} catch (NegocioException e) {
+//				System.out.println(e.getMessage());
+				Util.constructJSON("atualizar", false,
+						"Erro ao atualizar");
+			}
 
+		} else if (acao.equals("recusar") || acao.equals("cancelar") ) {
+
+			try {
+
+				Servico servico = new Servico();
+
+				servico.setCodServico(codigoServico);
+				servico.setDataServico(new Date());
+
+				servicoService.cancelarServico(servico);
+				Util.constructJSON("atualizar", true,
+						"Informações atualizada.");
+
+			} catch (Exception e) {
+				Util.constructJSON("atualizar", false,
+						"Erro ao atualizar");
+			}
+		}
 	}
-	
+
+
 	@RequestMapping(value = "/listar/especialidades", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Especialidade> listarEspecialidades() throws NegocioException {
 		return especialidadeService.todasEspecialidadesList();
 	}
-	
+
 	@RequestMapping(value = "/listar/cidades", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Cidade> listarCidades() throws NegocioException {
