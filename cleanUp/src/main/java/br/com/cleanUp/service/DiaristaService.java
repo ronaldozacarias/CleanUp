@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
+import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Usuario;
@@ -19,15 +23,38 @@ import br.com.cleanUp.repository.DiaristaRepository;
 public class DiaristaService {
 
 	@Autowired
+    private MessageSource messageSource;
+	
+	@Autowired
 	private DiaristaRepository diaristaRepository;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	public void saveDiarista(Diarista d) throws NegocioException {
-		// diaristaRepository.save(d);
+		
+		Usuario usu = usuarioService.findByEmail(d.getUsuario().getEmail());
+		
+		Diarista diarista = findByCpf(d.getCpf());
+	
 		try {
-			diaristaRepository.save(d);
-		} catch (Exception e) {
-			throw new NegocioException("Erro ao tenta salvar Diarista");
+			if(diarista != null){
+				throw new NegocioException(messageSource.getMessage("Este CPF já esta sendo utilizado por outro usuário", 
+						  new Object[]{d.getNome()}, 
+							  LocaleContextHolder.getLocale()));
+			}else if(usu == null){
+				diaristaRepository.save(d);
+			}else{
+				throw new NegocioException(messageSource.getMessage("Esse email já esta sendo utilizado por outro usuário", 
+					  new Object[]{d.getNome()}, 
+						  LocaleContextHolder.getLocale()));
+			}
+		} catch (NoSuchMessageException e) {
+			throw new NegocioException(messageSource.getMessage("Erro ao inserir cliente: " + e.getMessage(), 
+					  new Object[]{d.getNome()}, 
+						  LocaleContextHolder.getLocale()));
 		}
+				
 	}
 
 	public void removeDiarista(Diarista d) throws NegocioException {

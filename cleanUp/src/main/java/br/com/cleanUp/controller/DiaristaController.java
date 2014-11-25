@@ -118,6 +118,7 @@ public class DiaristaController {
 		usuario = new Usuario();
 		usuario.isAtivo();
 		usuario.setEmail(pessoa.getEmail());
+		usuario.setApelido(pessoa.getNome());
 		usuario.setPerfil(Perfil.ROLE_DIARIST);
 		usuario.setSenha(pessoa.getSenha());
 

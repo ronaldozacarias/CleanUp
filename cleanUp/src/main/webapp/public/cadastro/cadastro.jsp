@@ -96,6 +96,29 @@
       </div>
    </div>
    <!-- END wrapper-->
+   
+   <!-- START modal-->
+		<div id="myModalTermos" tabindex="-1" role="dialog" aria-labelledby="myMapModalLabel" aria-hidden="true" class="modal fade">
+		      <div class="modal-dialog">
+		         <div class="modal-content">
+		            <div class="modal-header">
+		               <button ng-click="reset()" type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+		               <div class="pull-left">
+	                              <img src="/cleanUp/resources/assets/img/logo2.jpg" alt="Avatar" width="30" height="30" class="img-thumbnail img-circle">
+	                           </div>
+		               <h4 id="myMapModalLabel" class="modal-title">&nbsp Termos de uso do sistema</h4>
+		            </div>
+		            <div class="modal-body">		               
+		                 <div>		              
+		             	 </div>						
+		            </div>
+		            <div class="modal-footer">
+			            
+		            </div>
+		         </div>
+		      </div>
+		   </div>		   
+   <!-- END modal-->
 	
 	
    <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />"></script>

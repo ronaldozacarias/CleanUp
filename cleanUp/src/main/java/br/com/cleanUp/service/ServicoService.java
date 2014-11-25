@@ -15,6 +15,7 @@ import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
 import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.model.TipoNotificacao;
+import br.com.cleanUp.repository.DiaristaRepository;
 import br.com.cleanUp.repository.EnderecoRepository;
 import br.com.cleanUp.repository.HistoricoServicoRepository;
 import br.com.cleanUp.repository.ServicoRepository;
@@ -33,7 +34,7 @@ public class ServicoService {
 	private HistoricoServicoRepository historicoServico;
 	
 	@Autowired
-	private DiaristaService diaristaServico;
+	private DiaristaRepository diaristaRepository;
 	
 	@Autowired
 	private HistoricoServicoService historioServicoService;
@@ -104,7 +105,7 @@ public class ServicoService {
 			}else{			
 				serv.setStatus(StatusServico.CANCELAR);
 				this.historioServicoService.salvarHistorioDeServico(serv);				
-				this.removeServico(serv);
+				this.singleEdit(serv);
 			}
 	}
 	
@@ -197,7 +198,7 @@ public class ServicoService {
 			}
 			
 			servico.getDiarista().setMediaDiarista(media);
-			diaristaServico.saveDiarista(servico.getDiarista());
+			diaristaRepository.save(servico.getDiarista());
 			
 		}
 			

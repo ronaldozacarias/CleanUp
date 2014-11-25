@@ -44,7 +44,7 @@
 					                        </div>
 					                        <div class="col-xs-8">
 					                           <div class="panel-body text-center">
-					                              <h4 class="mt0">{{servicosList.length}}</h4>
+					                              <h4 class="mt0">{{countSolicitacoes}}</h4>
 					                           </div>
 					                        </div>
 					                     </div>
@@ -109,30 +109,27 @@
                   <div class="panel panel-default">
 		               <div class="panel-heading">
 							<div class="form-inline">
-			                  		<small class="avPos"><em class="fa fa-dot-circle-o"></em> Avaliações positivas.</small>
-			                  		<small class="avReg"><em class="fa fa-dot-circle-o"></em> Avaliações regulares.</small>
-					                <small class="avNeg"><em class="fa fa-dot-circle-o"></em> Avaliações negativas.</small>					                
+			                  		Veja aqui suas avaliações de forma prática e objetiva				                
 			                 </div>					   
 					   </div>
 		               <div class="panel-body">
-		                  <div class="form-inline">
-		                  		
-		                  		<div class="row">
-		                           <div class="col-md-3">
-		                              <div data-label="20%" class="radial-bar radial-bar-20 radial-bar-lg radial-bar-success"></div>
-		                           </div>
-		                           <div class="col-md-3">
-		                              <div data-label="35%" class="radial-bar radial-bar-35 radial-bar-lg radial-bar-danger"></div>
-		                           </div>
-		                           <div class="col-md-3">
-		                              <div data-label="50%" class="radial-bar radial-bar-50 radial-bar-lg radial-bar-warning"></div>
-		                           </div>
-		                           <div class="col-md-3">
-		                              <div data-label="100%" class="radial-bar radial-bar-100 radial-bar-lg radial-bar-info"></div>
-		                           </div>
-		                        </div>
+		                  <div class="form-inline col-md-5">		                  		
+		                  		<div>
+									<div id="canvas-holder">
+										<canvas id="chart-area">
+										</canvas>
+									</div>									
+		                        </div>  
 		                  </div>
-		               </div>
+		                  
+		                 <div style="left:50px;" class="panel-body col-md-5">
+	                        <div class="alert alert-success">Avaliações positivas.</div>           
+	                        <div class="alert alert-warning">Avaliações regulares. </div>
+	                        <div class="alert alert-danger">Avaliações ruins.</div>
+	                     </div>
+		                  
+		               </div>        
+		               
 		            </div>
                                  
                </section>              
@@ -171,6 +168,8 @@
    
    <!-- Classyloader-->
    <script src="<c:url value='/resources/assets/classyloader/js/jquery.classyloader.min.js' />"></script>
+   
+   <script src="<c:url value='/resources/assets/charts/Chart.js' />"></script>  
    
    <!-- START Page Custom Script-->
    <!--  Flot Charts-->

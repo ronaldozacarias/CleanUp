@@ -9,9 +9,11 @@
          <!-- START Page content-->
          <div class="main-content">        
                
-         	<button type="button" class="btn btn-oval btn-green pull-right">
+         	
          	<a style="text-decoration: none; color:#fff" href="/cleanUp/protected/cliente/historicoServicosCliente">
-         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</a></button>
+         	<button type="button" class="btn btn-oval btn-green pull-right">
+         	
+         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</button></a>
             
             <h3><spring:message code="service.client" />
                <br>

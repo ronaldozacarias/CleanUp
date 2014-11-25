@@ -15,6 +15,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	/*---------  LIST NOTIFICATIONS DIARISTAS FROM DATABASE  ------------------------------*/  
 	listarNotificacoes();
 	listarServicos();
+	gerarResumoDiarista();
 	var myLatlng;
 	$scope.servicos = [];
 	$scope.servicosVO = [];
@@ -23,33 +24,96 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	$scope.see = true;
 	$scope.feedback = true;
 	var infowindow;
-	$scope.servicosList = null;
+	$scope.servicosList = new Array();
     $scope.filtered = null;
+    $scope.resumo = new Object();
+    $scope.totalAval = 0;
+    $scope.avalBom = 0;
+    $scope.avalRegu = 0;
+    $scope.avalRuim = 0;
 	
 	$scope.countServPendente = 0;
     $scope.countServCancel = 0;
     $scope.countServConcluido = 0;
+    $scope.countSolicitacoes = 0;
 	
 	function hideModal(){
     	$('#myModal').modal('hide');
     }
 	
-	function listarServicosCancelados(){
-		$http({         
-            url: '/cleanUp/protected/diarista/listaHistoricoDiarista',
-            method: "GET",
-            headers: {'Content-Type': 'application/json'}
-        })
-        .success(function (data, status, headers, config) {                 
-            $scope.countServCancel = data.length;                
-        })
-        .error(function (data, status, headers, config) {
-            bootbox.dialog({
-                title:"Erro inesperado!",
-                message: data
-            });
-        });
-	}
+	function gerarResumoDiarista(){
+		  
+		 $http({         
+	          url: '/cleanUp/protected/relatorios/gerarRelatorioDiarista',
+	          method: "GET",
+	          headers: {'Content-Type': 'application/json'}
+	      })
+	      .success(function (data, status, headers, config) {                 
+	          $scope.resumo = data;
+	          
+	          $scope.totalAval = $scope.resumo.numeroBons + $scope.resumo.numeroRuins + $scope.resumo.numeroRegulares;
+	          
+	          var bom = ( $scope.resumo.numeroBons * 100 ) / $scope.totalAval;
+	          $scope.avalBom = Math.round( bom );
+	          
+	          var regular = ( $scope.resumo.numeroRegulares * 100 ) / $scope.totalAval;
+	          $scope.avalRegu = Math.round( regular );
+	          
+	          var ruim = ( $scope.resumo.numeroRuins * 100 ) / $scope.totalAval;
+	          $scope.avalRuim = Math.round( ruim );
+	          
+	          
+	          var doughnutData = [
+	      	    				
+	                            {
+									value: $scope.avalRegu,
+									color: "#ff902b",
+									highlight: "#FF732B",
+									label: "Avaliações regulares"
+								},
+	      	    				{
+	      	    					value: $scope.avalRuim,
+	      	    					color: "#f35839",
+	      	    					highlight: "#A50505",
+	      	    					label: "Avaliações Ruíns"
+	      	    				},
+	      	    				{
+	      	    					value: $scope.avalBom,
+	      	    					color:"#7bbf62",
+	      	    					highlight: "#006400",
+	      	    					label: "Avaliações positivas"
+	      	    				}
+	      	    			];
+
+	      	var ctx = document.getElementById("chart-area").getContext("2d");
+	      	window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+	          
+	          
+	          
+	          var loader1 = $('.aBo').ClassyLoader({
+	        	    animate: true,
+	        	    percentage: $scope.avalBom
+	          });
+	          
+	          var loader2 = $('.aRe').ClassyLoader({
+	        	    animate: true,
+	        	    percentage: $scope.avalRegu
+	          });
+	          
+	          var loader3 = $('.aRu').ClassyLoader({
+	        	    animate: true,
+	        	    percentage: $scope.avalRuim
+	          });
+	          
+	          
+	      })
+	      .error(function (data, status, headers, config) {
+	          bootbox.dialog({
+	              title:"Erro inesperado!",
+	              message: data
+	          });
+	      });
+	};
 	
 	function listarServicos(){
 		$http({
@@ -57,19 +121,27 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	        method: "POST",
 	        headers: {'Content-Type': 'application/json'}
 	    })
-	    .success(function (data, status, headers, config) {     	    	
-		    $scope.servicosList = data;
+	    .success(function (data, status, headers, config) { 
+	    	
+	    	for(var i = 0 ; i < data.length; i++){
+	    		if(data[i].status != 'CANCELAR'){
+	    			$scope.servicosList.push(data[i]);
+	    		}
+	    	}
+	    	
+	    	$scope.countSolicitacoes = data.length;
 		    
-		    for(var i = 0 ; i < $scope.servicosList.length ; i++){
-            	if($scope.servicosList[i].status == 'PENDENTE'){
+		    for(var i = 0 ; i < data.length ; i++){
+            	if(data[i].status == 'PENDENTE'){
             		$scope.countServPendente++;
             	} 
-            	if($scope.servicosList[i].status == 'CONCLUIDO'){
+            	if(data[i].status == 'CONCLUIDO'){
             		$scope.countServConcluido++;
-            	}            	
+            	}
+            	if(data[i].status == 'CANCELAR'){
+            		$scope.countServCancel++;
+            	}
             }
-		    
-		    listarServicosCancelados();
 		    
 		    doPagination($scope.servicosList);
 	

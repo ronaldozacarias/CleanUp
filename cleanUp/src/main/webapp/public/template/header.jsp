@@ -194,25 +194,25 @@
                   </a>
                   <!-- START Dropdown menu-->
                   <ul class="dropdown-menu">
-                     <li>
-                        <div class="p">
-                           <p>Overall progress</p>
-                           <div class="progress progress-striped progress-xs m0">
-                              <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success progress-70">
-                                 <span class="sr-only">70% Complete</span>
-                              </div>
-                           </div>
-                        </div>
+<!--                      <li> -->
+<!--                         <div class="p"> -->
+<!--                            <p>Overall progress</p> -->
+<!--                            <div class="progress progress-striped progress-xs m0"> -->
+<!--                               <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success progress-70"> -->
+<!--                                  <span class="sr-only">70% Complete</span> -->
+<!--                               </div> -->
+<!--                            </div> -->
+<!--                         </div> -->
+<!--                      </li> -->
+<!--                      <li class="divider"></li> -->
+                     <li><a href="#">Perfil</a>
                      </li>
-                     <li class="divider"></li>
-                     <li><a href="#">Profile</a>
-                     </li>
-                     <li><a href="#">Settings</a>
-                     </li>
-                     <li><a href="#">Notifications<div class="label label-info pull-right">5</div></a>
-                     </li>
-                     <li><a href="#">Messages<div class="label label-danger pull-right">10</div></a>
-                     </li>
+<!--                      <li><a href="#">Settings</a> -->
+<!--                      </li> -->
+<!--                      <li><a href="#">Notifications<div class="label label-info pull-right">5</div></a> -->
+<!--                      </li> -->
+<!--                      <li><a href="#">Messages<div class="label label-danger pull-right">10</div></a> -->
+<!--                      </li> -->
                      <li><a href="<c:url value='/logout' />">Sair</a>
                      </li>
                   </ul>

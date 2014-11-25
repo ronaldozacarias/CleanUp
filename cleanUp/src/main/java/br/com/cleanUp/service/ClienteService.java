@@ -35,8 +35,14 @@ public class ClienteService {
 		
 		Usuario usu = usuarioService.findByEmail(cli.getUsuario().getEmail());
 		
+		Cliente cliente = findByCpf(cli.getCpf());
+		
 		try {
-			if(usu == null){
+			if(cliente != null){
+				throw new NegocioException(messageSource.getMessage("Este CPF já esta sendo utilizado por outro usuário", 
+						  new Object[]{cli.getNome()}, 
+							  LocaleContextHolder.getLocale()));
+			}else if(usu == null){
 				clienteRepository.save(cli);
 			}else{
 				throw new NegocioException(messageSource.getMessage("Esse email já esta sendo utilizado por outro usuário", 

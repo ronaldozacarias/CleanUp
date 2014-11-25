@@ -43,7 +43,7 @@
                   </div>
                   
                   <div class="timeline-date">
-                     <time datetime="{{hist.dataAlteracao | date:'dd/MM/yyyy - hh:mm'}}"></time></br>
+                     <time datetime="{{hist.dataAlteracao | date:'dd/MM/yyyy - HH:mm'}}"></time></br>
                      <small>Data / Hora de alteração</small>
                   </div>
                   <div class="timeline-panel">

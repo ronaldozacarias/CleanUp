@@ -31,7 +31,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     $scope.showAvaliacao = false;
     $scope.showServicos = true;
     $scope.diaristas = null;
-    $scope.servicosList = null;
+    $scope.servicosList = new Array();
+    $scope.historico = new Array();
     
     $scope.countServPendente = 0;
     $scope.countServCancel = 0;
@@ -452,9 +453,11 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
                 method: "GET",
                 headers: {'Content-Type': 'application/json'}
             })
-            .success(function (data, status, headers, config) {                 
-                $scope.historico = data;
-                console.log($scope.historico);
+            .success(function (data, status, headers, config) {
+            	
+            	for(var i = 0 ; i < data.length; i++){
+            		$scope.historico.unshift(data[i]);
+            	}
                 //doPagination($scope.favoritos);                 
             })
             .error(function (data, status, headers, config) {
@@ -647,7 +650,12 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
                 headers: {'Content-Type': 'application/json'}
             })
             .success(function (data, status, headers, config) {                 
-                $scope.servicosList = data;
+                
+                for(var i = 0 ; i < data.length; i++){
+    	    		if(data[i].status != 'CANCELAR'){
+    	    			$scope.servicosList.push(data[i]);
+    	    		}
+    	    	}
                 
                 for(var i = 0 ; i < $scope.servicosList.length ; i++){
                 	if($scope.servicosList[i].status == 'PENDENTE'){

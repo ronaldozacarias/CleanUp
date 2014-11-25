@@ -93,6 +93,11 @@
  	margin-right: 5px;
  }
  
+ #canvas-holder{
+ 	width: 400px;
+ 	height: 180px
+ }
+  
  .avSol{
  	color: #3babc8;
  	margin-right: 5px;

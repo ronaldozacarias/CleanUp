@@ -67,7 +67,7 @@
 				                 </div>
 			               </div>
 			               
-			               <div class="col-md-12" ng-show="filteredItems > 3">    
+			               <div class="col-md-12" ng-show="filteredItems > 2">    
 						            <pagination class="pagination" page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
 									items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
 									max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>

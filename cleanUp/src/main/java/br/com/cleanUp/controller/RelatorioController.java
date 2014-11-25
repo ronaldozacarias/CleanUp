@@ -21,6 +21,7 @@ import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.RelatoriosService;
 import br.com.cleanUp.util.AtributoDeSessao;
+import br.com.cleanUp.vo.ResumoVO;
 
 @Controller
 @RequestMapping(value = "/protected/relatorios")
@@ -46,19 +47,23 @@ public class RelatorioController {
 	
 	@RequestMapping(value = "/gerarRelatorioDiarista", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public RelatorioDiarista gerarRelatorioDiarista()throws NegocioException{
+	public ResumoVO gerarRelatorioDiarista()throws NegocioException{
 		RelatorioDiarista relatorio = new RelatorioDiarista();
+		
+		ResumoVO resumoVO = new ResumoVO();
 		
 		Usuario usuarioLogado = (Usuario) RequestContextHolder
 				.currentRequestAttributes().getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
 		
 		Diarista d = new Diarista();
 		d = diaristaServico.findByUsuario(usuarioLogado);	
-		try {
+
 			relatorio = relatoriosServico.relatorioDiarista(d);
-		} catch (NegocioException e) {
-			System.out.println(e.getMessage());
-		}
-		return relatorio;
+			
+			resumoVO.setNumeroBons(relatorio.getNumeroBons());
+			resumoVO.setNumeroRegulares(relatorio.getNumeroRegulares());
+			resumoVO.setNumeroRuins(relatorio.getNumeroRuins());
+
+		return resumoVO;
 	}
 }
