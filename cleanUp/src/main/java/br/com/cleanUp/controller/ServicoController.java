@@ -21,6 +21,7 @@ import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
+import br.com.cleanUp.model.HistoricoServico;
 import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
@@ -30,6 +31,7 @@ import br.com.cleanUp.model.TipoServico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
+import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.PessoaVO;
@@ -47,6 +49,9 @@ public class ServicoController {
 	
 	@Autowired
 	private DiaristaService diaristaService;
+	
+	@Autowired
+	private HistoricoServicoService historicoService;
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -162,5 +167,33 @@ public class ServicoController {
 		
 		return servicosPorCliente;
 		
+	}
+	
+	@RequestMapping(value = "listarHistoricoServicosPorDiarista", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<HistoricoServico> listaHistoricoServicoPorDiarista()throws NegocioException{
+		
+		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION); 
+		
+		Diarista diarista = diaristaService.findByUsuario(usuario);
+		
+		List<HistoricoServico> listaHistorico = historicoService.listaHistoricoServicoPorDiarista(diarista);
+		
+		return listaHistorico; 
+	}
+	
+	@RequestMapping(value = "listarHistoricoServicosPorCliente", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<HistoricoServico> listaHistoricoServicoPorCliente()throws NegocioException{
+		
+		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
+				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION); 
+		
+		Cliente cliente = clienteService.findByIdUsuario(usuario.getId());
+		
+		List<HistoricoServico> listaHistorico = historicoService.listaHistoricoServicoPorCliente(cliente);
+		
+		return listaHistorico; 
 	}
 }

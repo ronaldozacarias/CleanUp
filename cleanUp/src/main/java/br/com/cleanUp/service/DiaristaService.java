@@ -3,6 +3,7 @@ package br.com.cleanUp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
@@ -132,8 +133,7 @@ public class DiaristaService {
 		try {
 			return diaristaRepository.findByRanqueamento();
 		} catch (Exception e) {
-			throw new NegocioException("Erro ao Ranquiar Diarista!!");
+			throw new NegocioException(e.getMessage());
 		}
-		
 	}
 }

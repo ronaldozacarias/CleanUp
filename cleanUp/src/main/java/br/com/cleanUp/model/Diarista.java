@@ -143,5 +143,4 @@ public class Diarista {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-	
 }

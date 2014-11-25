@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
+import br.com.cleanUp.model.Usuario;
 
 public class ServicoVO {
 	
@@ -14,7 +15,8 @@ public class ServicoVO {
 	private List<Endereco> enderecos;
 	private Date data;
 	private Diarista diarista;
-	private Cliente cliente;	
+	private Cliente cliente;
+	private Usuario usuario;
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -51,6 +53,12 @@ public class ServicoVO {
 	}
 	public void setDiarista(Diarista diarista) {
 		this.diarista = diarista;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 
