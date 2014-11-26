@@ -140,7 +140,7 @@ public class MobileController {
 		}
 	}
 
-	@RequestMapping(value = "/servico/atualizacao/{acao}/{codigoServico}", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/servico/atualizacao/{acao}/{codigoServico}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public void confirmacaoServico(@PathVariable String acao, @PathVariable Integer codigoServico)
 			throws NegocioException {
@@ -167,7 +167,7 @@ public class MobileController {
 				Util.constructJSON("atualizar", true,
 						"Informações atualizada.");
 			} catch (NegocioException e) {
-//				System.out.println(e.getMessage());
+				System.out.println(e.getMessage());
 				Util.constructJSON("atualizar", false,
 						"Erro ao atualizar");
 			}
