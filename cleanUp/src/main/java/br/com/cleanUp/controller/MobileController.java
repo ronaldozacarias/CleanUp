@@ -33,6 +33,7 @@ import br.com.cleanUp.service.EspecialidadeService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.Util;
 import br.com.cleanUp.vo.AceitarServicoVO;
+import br.com.cleanUp.vo.ClassificacaoVO;
 import br.com.cleanUp.vo.ServicoVO;
 
 @Controller
@@ -191,6 +192,23 @@ public class MobileController {
 		}
 	}
 
+	@RequestMapping(value = "servico/avaliarServico", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public String avaliacaoDeServico(@RequestBody ClassificacaoVO classificacaoVO) throws NegocioException{
+		
+		Servico servico = classificacaoVO.getServico();
+		servico.setAvaliacao(classificacaoVO.getPontuacao());
+		servico.setComentario(classificacaoVO.getComentario());
+		servico.setStatus(StatusServico.CONCLUIDO);
+		servico.getNotificacao().setStatus(StatusNotificacao.ENCERRADA);
+		try{
+		servicoService.avaliarServico(servico);
+		return Util.constructJSON("register", true);
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+			return Util.constructJSON("register", false, "Erro ao cadastrar avaliacao.");
+		}
+	}
 
 	@RequestMapping(value = "/listar/especialidades", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
