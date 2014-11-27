@@ -142,8 +142,7 @@ public class MobileController {
 
 	@RequestMapping(value = "/servico/atualizacao/{acao}/{codigoServico}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public void confirmacaoServico(@PathVariable String acao, @PathVariable Integer codigoServico)
-			throws NegocioException {
+	public String confirmacaoServico(@PathVariable String acao, @PathVariable Integer codigoServico) {
 
 		 if (acao.equals("aceitar")) {
 			
@@ -151,12 +150,17 @@ public class MobileController {
 			Servico servico = new Servico();
 			ArrayList<Servico> listaServico = new ArrayList<Servico>();
 			
-			servico.setCodServico(codigoServico);
-			listaServico.add(servico);
+			Servico servicoTemp = new Servico();
+			servicoTemp.setCodServico(codigoServico);
 			
-			aceitarServicoVO.setServicosVO(listaServico);
 			
 			try {
+
+				servico  = servicoService.findById(servicoTemp);
+				listaServico.add(servico);
+				
+				aceitarServicoVO.setServicosVO(listaServico);
+				
 				for (int i = 0; i < aceitarServicoVO.getServicosVO().size(); i++) {
 					aceitarServicoVO.getServicosVO().get(i).setStatus(StatusServico.ACEITO);
 					aceitarServicoVO.getServicosVO().get(i).getNotificacao().setStatus(StatusNotificacao.CONCLUIDA);
@@ -164,11 +168,11 @@ public class MobileController {
 				}
 				this.servicoService.edit(aceitarServicoVO.getServicosVO());
 				
-				Util.constructJSON("atualizar", true,
+				return Util.constructJSON("atualizar", true,
 						"Informações atualizada.");
 			} catch (NegocioException e) {
 				System.out.println(e.getMessage());
-				Util.constructJSON("atualizar", false,
+				return Util.constructJSON("atualizar", false,
 						"Erro ao atualizar");
 			}
 
@@ -182,14 +186,16 @@ public class MobileController {
 				servico.setDataServico(new Date());
 
 				servicoService.cancelarServico(servico);
-				Util.constructJSON("atualizar", true,
+				return Util.constructJSON("atualizar", true,
 						"Informações atualizada.");
 
 			} catch (Exception e) {
-				Util.constructJSON("atualizar", false,
+				return Util.constructJSON("atualizar", false,
 						"Erro ao atualizar");
 			}
 		}
+			return Util.constructJSON("atualizar", false,
+					"Erro ao atualizar");
 	}
 
 	@RequestMapping(value = "servico/avaliarServico", method = RequestMethod.POST, produces = "application/json")
