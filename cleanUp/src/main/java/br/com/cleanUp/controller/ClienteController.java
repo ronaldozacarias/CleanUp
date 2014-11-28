@@ -233,11 +233,15 @@ public class ClienteController {
 	@RequestMapping(value = "/atualizarPerfil", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
 	public void editCliente(@RequestBody ClienteVO clienteVO) throws NegocioException {		
-
-			Cliente cliente = clienteService.findByIdUsuario(clienteVO.getCodigo());
-			Cidade cidade = clienteVO.getCidade();
 			
-			cliente.setCidade(cidade);
+			Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+					
+			Cliente cliente = clienteService.findByIdUsuario(usuarioLogado.getId());
+			
+			cliente.setCidade(clienteVO.getCidade());
 			cliente.setCpf(clienteVO.getCpf());
 			cliente.setFotoUsuario(clienteVO.getFotoUsuario());
 			cliente.setNome(clienteVO.getNome());

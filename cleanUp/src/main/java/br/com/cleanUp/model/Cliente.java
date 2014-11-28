@@ -33,7 +33,7 @@ public class Cliente {
 	@Column(name = "TELEFONE_CLIENTE", length = 11, nullable = false)
 	private String telefone;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_CIDADE")
 	private Cidade cidade;
 
