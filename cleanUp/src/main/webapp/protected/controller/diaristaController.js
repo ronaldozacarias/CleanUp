@@ -16,6 +16,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	listarNotificacoes();
 	listarServicos();
 	gerarResumoDiarista();
+	listarHistoricoServicos();
 	var myLatlng;
 	$scope.servicos = [];
 	$scope.servicosVO = [];
@@ -31,6 +32,10 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     $scope.avalBom = 0;
     $scope.avalRegu = 0;
     $scope.avalRuim = 0;
+    $scope.linkNotificacoes = '/cleanUp/protected/diarista/notificacoes';
+    $scope.linkPerfil = '/cleanUp/protected/diarista/perfilCliente';
+    $scope.profile = 'ROLE_DIARIST';
+    $scope.historico = new Array();
 	
 	$scope.countServPendente = 0;
     $scope.countServCancel = 0;
@@ -42,116 +47,179 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     }
 	
 	function gerarResumoDiarista(){
-		  
-		 $http({         
-	          url: '/cleanUp/protected/relatorios/gerarRelatorioDiarista',
-	          method: "GET",
-	          headers: {'Content-Type': 'application/json'}
-	      })
-	      .success(function (data, status, headers, config) {                 
-	          $scope.resumo = data;
-	          
-	          $scope.totalAval = $scope.resumo.numeroBons + $scope.resumo.numeroRuins + $scope.resumo.numeroRegulares;
-	          
-	          var bom = ( $scope.resumo.numeroBons * 100 ) / $scope.totalAval;
-	          $scope.avalBom = Math.round( bom );
-	          
-	          var regular = ( $scope.resumo.numeroRegulares * 100 ) / $scope.totalAval;
-	          $scope.avalRegu = Math.round( regular );
-	          
-	          var ruim = ( $scope.resumo.numeroRuins * 100 ) / $scope.totalAval;
-	          $scope.avalRuim = Math.round( ruim );
-	          
-	          
-	          var doughnutData = [
-	      	    				
-	                            {
-									value: $scope.avalRegu,
-									color: "#ff902b",
-									highlight: "#FF732B",
-									label: "Avaliações regulares"
-								},
-	      	    				{
-	      	    					value: $scope.avalRuim,
-	      	    					color: "#f35839",
-	      	    					highlight: "#A50505",
-	      	    					label: "Avaliações Ruíns"
-	      	    				},
-	      	    				{
-	      	    					value: $scope.avalBom,
-	      	    					color:"#7bbf62",
-	      	    					highlight: "#006400",
-	      	    					label: "Avaliações positivas"
-	      	    				}
-	      	    			];
+		
+		var url = "" + $location.$$absUrl;
+		
+		if(url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" || 
+		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
+			
+			 $http({         
+		          url: '/cleanUp/protected/relatorios/gerarRelatorioDiarista',
+		          method: "GET",
+		          headers: {'Content-Type': 'application/json'}
+		      })
+		      .success(function (data, status, headers, config) {                 
+		          $scope.resumo = data;
+		          
+		          $scope.totalAval = $scope.resumo.numeroBons + $scope.resumo.numeroRuins + $scope.resumo.numeroRegulares;
+		          
+		          var bom = ( $scope.resumo.numeroBons * 100 ) / $scope.totalAval;
+		          $scope.avalBom = Math.round( bom );
+		          
+		          var regular = ( $scope.resumo.numeroRegulares * 100 ) / $scope.totalAval;
+		          $scope.avalRegu = Math.round( regular );
+		          
+		          var ruim = ( $scope.resumo.numeroRuins * 100 ) / $scope.totalAval;
+		          $scope.avalRuim = Math.round( ruim );
+		          
+		          
+		          var doughnutData = [
+		      	    				
+		                            {
+										value: $scope.avalRegu,
+										color: "#ff902b",
+										highlight: "#FF732B",
+										label: "Avaliações regulares"
+									},
+		      	    				{
+		      	    					value: $scope.avalRuim,
+		      	    					color: "#f35839",
+		      	    					highlight: "#A50505",
+		      	    					label: "Avaliações Ruíns"
+		      	    				},
+		      	    				{
+		      	    					value: $scope.avalBom,
+		      	    					color:"#7bbf62",
+		      	    					highlight: "#006400",
+		      	    					label: "Avaliações positivas"
+		      	    				}
+		      	    			];
 
-	      	var ctx = document.getElementById("chart-area").getContext("2d");
-	      	window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
-	          
-	          
-	          
-	          var loader1 = $('.aBo').ClassyLoader({
-	        	    animate: true,
-	        	    percentage: $scope.avalBom
-	          });
-	          
-	          var loader2 = $('.aRe').ClassyLoader({
-	        	    animate: true,
-	        	    percentage: $scope.avalRegu
-	          });
-	          
-	          var loader3 = $('.aRu').ClassyLoader({
-	        	    animate: true,
-	        	    percentage: $scope.avalRuim
-	          });
-	          
-	          
-	      })
-	      .error(function (data, status, headers, config) {
-	          bootbox.dialog({
-	              title:"Erro inesperado!",
-	              message: data
-	          });
-	      });
+		      	var ctx = document.getElementById("chart-area").getContext("2d");
+		      	window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+		          
+		          
+		          
+		          var loader1 = $('.aBo').ClassyLoader({
+		        	    animate: true,
+		        	    percentage: $scope.avalBom
+		          });
+		          
+		          var loader2 = $('.aRe').ClassyLoader({
+		        	    animate: true,
+		        	    percentage: $scope.avalRegu
+		          });
+		          
+		          var loader3 = $('.aRu').ClassyLoader({
+		        	    animate: true,
+		        	    percentage: $scope.avalRuim
+		          });
+		          
+		          
+		      })
+		      .error(function (data, status, headers, config) {
+		          bootbox.dialog({
+		              title:"Erro inesperado!",
+		              message: data
+		          });
+		      });
+			
+		}
+		
 	};
 	
-	function listarServicos(){
-		$http({
-	        url: '/cleanUp/protected/servico/listarServicosPorDiarista',
-	        method: "POST",
-	        headers: {'Content-Type': 'application/json'}
-	    })
-	    .success(function (data, status, headers, config) { 
-	    	
-	    	for(var i = 0 ; i < data.length; i++){
-	    		if(data[i].status != 'CANCELAR'){
-	    			$scope.servicosList.push(data[i]);
-	    		}
-	    	}
-	    	
-	    	$scope.countSolicitacoes = data.length;
-		    
-		    for(var i = 0 ; i < data.length ; i++){
-            	if(data[i].status == 'PENDENTE'){
-            		$scope.countServPendente++;
-            	} 
-            	if(data[i].status == 'CONCLUIDO'){
-            		$scope.countServConcluido++;
+	function listarHistoricoServicos(){
+    	
+    	var url = "" + $location.$$absUrl;
+    	    	
+    	if(url == "http://localhost:8080/cleanUp/protected/diarista/historicoServicosDir" ||
+    	   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/historicoServicosDir"){
+    		
+    		$scope.currentPage = null;
+    	    $scope.entryLimit = null;
+    	    $scope.maxSize = null;
+    	    $scope.filteredItems = null;  
+    	    $scope.totalItems = null;
+    	    
+    	    $http({         
+                url: '/cleanUp/protected/diarista/listaAllHistoricoDiarista',
+                method: "GET",
+                headers: {'Content-Type': 'application/json'}
+            })
+            .success(function (data, status, headers, config) {
+            	
+            	for(var i = 0 ; i < data.length; i++){
+            		$scope.historico.unshift(data[i]);
             	}
-            	if(data[i].status == 'CANCELAR'){
-            		$scope.countServCancel++;
-            	}
-            }
-		    
-		    doPagination($scope.servicosList);
+                //doPagination($scope.favoritos);                 
+            })
+            .error(function (data, status, headers, config) {
+                bootbox.dialog({
+                    title:"Erro inesperado!",
+                    message: data
+                });
+            });
+    		
+    	};
+    	
+    }
 	
-	    })
-	    .error(function (data, status, headers, config) {
-	    	bootbox.dialog({
-	    		title:"Erro inesperado!",
-	            message: data
-	        });
-	    });
+	function listarServicos(){
+		
+		var url = "" + $location.$$absUrl;
+    	
+		if(url == "http://localhost:8080/cleanUp/protected/home" || 
+		   url == "http://localhost:8080/cleanUp/protected/diarista/servicos" ||
+		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
+		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
+		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
+		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
+    		
+    		$scope.currentPage = null;
+        	$scope.entryLimit = null;
+        	$scope.maxSize = null;
+        	$scope.filteredItems = null;  
+        	$scope.totalItems = null;
+    		
+    		$http({
+    	        url: '/cleanUp/protected/servico/listarServicosPorDiarista',
+    	        method: "POST",
+    	        headers: {'Content-Type': 'application/json'}
+    	    })
+    	    .success(function (data, status, headers, config) { 
+    	    	
+    	    	for(var i = 0 ; i < data.length; i++){
+    	    		if(data[i].status != 'CANCELAR'){
+    	    			$scope.servicosList.unshift(data[i]);
+    	    		}
+    	    	}
+    	    	
+    	    	$scope.countSolicitacoes = data.length;
+    		    
+    		    for(var i = 0 ; i < data.length ; i++){
+                	if(data[i].status == 'PENDENTE'){
+                		$scope.countServPendente++;
+                	} 
+                	if(data[i].status == 'CONCLUIDO'){
+                		$scope.countServConcluido++;
+                	}
+                	if(data[i].status == 'CANCELAR'){
+                		$scope.countServCancel++;
+                	}
+                }
+    		    
+    		    doPagination($scope.servicosList);
+    	
+    	    })
+    	    .error(function (data, status, headers, config) {
+    	    	bootbox.dialog({
+    	    		title:"Erro inesperado!",
+    	            message: data
+    	        });
+    	    });
+    		
+    	}  		
+    	
 	};
 	
 	function doPagination(data){
@@ -180,30 +248,44 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     }); 
 
 	function listarNotificacoes(){
-		$http({
-	        url: '/cleanUp/protected/notificacao/getNotificacoes',
-	        method: "GET",
-	        headers: {'Content-Type': 'application/json'}
-	    })
-	    .success(function (data, status, headers, config) {
-	    	$scope.notificacoes = [];
-	    	$scope.note = data;
-	    	$scope.count = data.length;
-	    	
-	    	if(data.length > 0){
-		    	for(var i = 0; i < 10 ; i++){
-		    		if($scope.note[i]){
-		    			$scope.notificacoes.push($scope.note[i]);
-		    		};		    		
+		
+		var url = "" + $location.$$absUrl;
+    	
+		if(url == "http://localhost:8080/cleanUp/protected/home" || 
+		   url == "http://localhost:8080/cleanUp/protected/diarista/servicos" ||
+		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
+		   url == "http://localhost:8080/cleanUp/protected/diarista/notificacoes" ||		   
+		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
+		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
+		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/notificacoes" ||
+		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
+			
+			$http({
+		        url: '/cleanUp/protected/notificacao/getNotificacoes',
+		        method: "GET",
+		        headers: {'Content-Type': 'application/json'}
+		    })
+		    .success(function (data, status, headers, config) {
+		    	$scope.notificacoes = [];
+		    	$scope.note = data;
+		    	$scope.count = data.length;
+		    	
+		    	if(data.length > 0){
+			    	for(var i = 0; i < 10 ; i++){
+			    		if($scope.note[i]){
+			    			$scope.notificacoes.push($scope.note[i]);
+			    		};		    		
+			    	};
 		    	};
-	    	};
-	    })
-	    .error(function (data, status, headers, config) {
-	    	bootbox.dialog({
-	    		title:"Erro inesperado!",
-	            message: data
-	        });
-	    });		
+		    })
+		    .error(function (data, status, headers, config) {
+		    	bootbox.dialog({
+		    		title:"Erro inesperado!",
+		            message: data
+		        });
+		    });			
+		}	
+				
 	}
 	
 	var thread = setInterval(function() {
@@ -266,7 +348,6 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
             headers: {'Content-Type': 'application/json; charset=utf-8'}
 	    })
 	    .success(function (data, status, headers, config) {   	    	
-	    	hideModal();
 	    	bootbox.dialog({
         		title:"Serviço cancelado com sucesso!",
         		message: "Obrigado por sua preferência"

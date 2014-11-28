@@ -78,6 +78,34 @@
 /* ========================================================================
    Component: bootstrap-reset.less
  ========================================================================== */
+ 
+.cropArea {	
+  background: #fafafa;
+  padding: 20px;
+  border: 1px dashed #dddddd;
+  color: #444444;
+  overflow: hidden;
+  width:500px;
+  height:320px;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+ 
+ .box-placeholder {
+	margin-bottom: 15px;
+	padding: 20px;
+	border: 1px dashed #dddddd;
+	background: #fafafa;
+	color: #444444;
+}
+ 
+ 
+ 
+ .ng-isolate-scope{
+	max-height: 300px;
+	overflow: auto; 
+ }
+ 
  .avPos{
  	color: #7bbf62;
  	margin-right: 5px;

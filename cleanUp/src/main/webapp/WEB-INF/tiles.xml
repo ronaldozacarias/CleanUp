@@ -70,10 +70,10 @@
     <definition name="cadastro" extends="master-cadastro.page">
         <put-attribute name="body" value="/public/cadastro/cadastro.jsp"/>
     </definition>
-    <definition name="notificacoes" extends="master-home-diarista.page">
+    <definition name="notificacoes" extends="masterDia.page">
         <put-attribute name="body" value="/protected/diarista/notificacoes.jsp"/>
     </definition>
-    <definition name="notificacoesCliente" extends="master-home-cliente.page">
+    <definition name="notificacoesCliente" extends="masterCli.page">
         <put-attribute name="body" value="/protected/cliente/notificacoesCliente.jsp"/>
     </definition>
     <definition name="servicosDiarista" extends="masterDia.page">
@@ -88,8 +88,17 @@
     <definition name="historicoServico" extends="masterCli.page">
     	<put-attribute name="body" value="/protected/cliente/historicoServicos.jsp"/>
     </definition>
+    <definition name="historicoServicoDir" extends="masterDia.page">
+    	<put-attribute name="body" value="/protected/diarista/historicoServicosDir.jsp"/>
+    </definition>
     <definition name="resumoDiarista" extends="masterDia.page">
     	<put-attribute name="body" value="/protected/diarista/resumoDiarista.jsp"/>
+    </definition>
+    <definition name="resumoCliente" extends="masterCli.page">
+    	<put-attribute name="body" value="/protected/cliente/resumoCliente.jsp"/>
+    </definition>
+    <definition name="perfilCliente" extends="masterCli.page">
+    	<put-attribute name="body" value="/protected/cliente/perfilCliente.jsp"/>
     </definition>
     
     <definition name="customError" template="/public/error/customError.jsp">

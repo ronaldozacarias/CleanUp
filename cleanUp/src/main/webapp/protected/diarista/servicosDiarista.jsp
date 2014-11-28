@@ -9,21 +9,16 @@
          <!-- START Page content-->
          <div class="main-content">        
                
+         	<a style="text-decoration: none; color:#fff" href="/cleanUp/protected/diarista/historicoServicosDir">
          	<button type="button" class="btn btn-oval btn-green pull-right">
-         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</button>
+         	
+         	<em class="fa fa-clock-o fa-fw mr-sm"></em>Histórico de serviços</button></a>
             
             <h3><spring:message code="service.client" />
                <br>
                <small>Realizadas por você</small>              
 
             </h3>
-            
-            <div class="col-lg-13 searchDiarist">
-	               	   <em class="fa fa-search sd"></em>
-		               <div class="form-group has-feedback">
-		                     <input ng-model="searchService" ng-change="filter()" id="exampleInputPassword1" type="text" placeholder="Digite o termo da busca" class="form-control">
-		               </div>
-	        </div>
             
             <div class="row">
                <!-- START dashboard main content-->
@@ -36,7 +31,7 @@
 	                     <div class="panel-heading">Form Wizard Vertical (no validation)</div>
 	                     <div class="panel-body">
 	                        
-	                        <div class="panel widget col-lg-12" ng-repeat="servico in filtered = (servicosList | filter:searchService) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+	                        <div class="panel widget col-lg-12" ng-repeat="servico in filtered = (servicosList | filter:searchString) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 				               <div class="panel-body">
 				               			<input type="hidden" value="{{servico.codigo}}" />
 				                        <div class="media mt0">
@@ -214,6 +209,8 @@
 		      </div>
 		   </div>		   
    <!-- END modal-->
+   
+   
 
    <!-- Main vendor Scripts-->
    <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />"></script>

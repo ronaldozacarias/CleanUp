@@ -14,7 +14,7 @@ public interface NotificacaoRepository extends CrudRepository<Notificacao, Integ
 	@Query("SELECT n FROM Notificacao n WHERE n.diarista.codigo = :idDiarista AND n.status = 'PENDENTE' order by n.dataEnvioNotificacao desc")
 	List<Notificacao> findByTopTenNotifications(@Param("idDiarista") int idDiarista/*, Pageable pageable*/);
 
-	@Query("SELECT n FROM Notificacao n WHERE n.cliente.codigo = :idCliente AND n.status = 'CONCLUIDA' order by n.dataEnvioNotificacao desc")
+	@Query("SELECT n FROM Notificacao n WHERE n.cliente.codigo = :idCliente AND n.status = 'CONCLUIDA' order by n.dataEnvioNotificacao asc")
 	List<Notificacao> findNotificacoesCliente(@Param("idCliente") int idCliente);
 
 }

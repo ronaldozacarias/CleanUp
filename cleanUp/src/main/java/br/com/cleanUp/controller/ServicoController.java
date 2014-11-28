@@ -75,7 +75,7 @@ public class ServicoController {
 		notificacao.setCliente(cliente);
 		notificacao.setDiarista(servicoVO.getDiarista());
 		notificacao.setDataEnvioNotificacao(new Date());
-		notificacao.setDescricaoNotificacao(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
+		notificacao.setDescricaoNotificacao(cliente.getNome() + " "+ TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
 		notificacao.setStatus(StatusNotificacao.PENDENTE);
 		
 		servico.setStatus(StatusServico.PENDENTE);
@@ -100,28 +100,11 @@ public class ServicoController {
 		
 		servico.setCodServico(servicoVO.getCodigo());
 		servico.setDataServico(new Date());
+		servico.getNotificacao().setStatus(StatusNotificacao.ENCERRADA);
 
 		servicoService.cancelarServico(servico);
 
-	}
-	
-//	@RequestMapping(value="listarServicosPorClienteCli", method = RequestMethod.POST, produces = "application/json")
-//	@ResponseBody
-//	public List<Servico> servicosPorCliente()throws NegocioException {
-//		
-//		Usuario usuario = (Usuario) RequestContextHolder.currentRequestAttributes()
-//				.getAttribute(AtributoDeSessao.LOGGED_USER, RequestAttributes.SCOPE_SESSION);
-//
-//		Diarista diarista = diaristaService.findByUsuario(usuario);
-//		
-//		List<Servico> servicosPorCliente = servicoService.findByServicosPorCliente(pessoa.getCodigo(), diarista.getCodigo());
-//
-//		System.out.print(pessoa.getCodigo() + "#########################");
-//		
-//		return servicosPorCliente;
-//		
-//	}	
-	
+	}	
 	
 	@RequestMapping(value = "listarServicosPorCliente", method = RequestMethod.POST)
 	@ResponseBody

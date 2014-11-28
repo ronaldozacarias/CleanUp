@@ -10,6 +10,8 @@ function cadastroController($scope, $http, $filter, $timeout) {
 	$scope.termos = false;
 	$scope.pessoa = {};
 	$scope.selected = undefined;
+	$scope.asyncSelected = null;
+	$scope.pessoa.cidade = null;
 	
 	
 	function checkList(){
@@ -18,6 +20,21 @@ function cadastroController($scope, $http, $filter, $timeout) {
 		}
 	}
 	
+	$scope.getLocation = function(val) {
+	    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
+	      params: {
+	        address: val,
+	        sensor: false
+	      }
+	    }).then(function(response){
+	      return response.data.results.map(function(item){
+	        return {
+	          location: item.geometry.location,
+	          formatted_address: item.formatted_address
+	        }
+	      });
+	    });
+	 };
 	
 	//Trazer especialidades do banco
 	$http({
@@ -51,15 +68,7 @@ function cadastroController($scope, $http, $filter, $timeout) {
 	$scope.createPeople = function(newPeopleForm) {
 		
 		$scope.pessoa.cidade = $scope.selected.codigoCidade + "";
-		
-		var cpf = $scope.pessoa.cpf;
-		cpf = cpf.replace('.','').replace('.','').replace('-','');
-		$scope.pessoa.cpf = cpf;
-		
-		var tel = $scope.pessoa.telefone;
-		tel = tel.replace('(','').replace(')','').replace(' ','').replace('-','');
-		$scope.pessoa.telefone = tel;
-
+			
 		if ($scope.termos == true &&
 		    $scope.pessoa.nome != null &&
 		    $scope.pessoa.cpf != null &&
@@ -67,10 +76,25 @@ function cadastroController($scope, $http, $filter, $timeout) {
 		    $scope.pessoa.email != null &&
 		    $scope.pessoa.senha != null &&
 		    $scope.pessoa.telefone != null) {
+					
+			var cpf = $scope.pessoa.cpf;
+			cpf = cpf.replace('.','').replace('.','').replace('-','');
+			$scope.pessoa.cpf = cpf;
+			
+			var tel = $scope.pessoa.telefone;
+			tel = tel.replace('(','').replace(')','').replace(' ','').replace('-','');
+			$scope.pessoa.telefone = tel;
+			
 			
 			if($scope.mostrar){
+				if($scope.especialidadesDiarista.length > 0){
+					
 					$scope.pessoa.tipo = 0;
 					$scope.pessoa.especialidades = $scope.especialidadesDiarista;
+					
+					$scope.pessoa.lat = $scope.asyncSelected.location.lat;
+					$scope.pessoa.lng = $scope.asyncSelected.location.lng;
+					$scope.pessoa.endereco = $scope.asyncSelected.formatted_address;
 					
 					
 					if($scope.pessoa.endereco != null){
@@ -84,16 +108,14 @@ function cadastroController($scope, $http, $filter, $timeout) {
 				            method: "POST",
 				            headers: {'Content-Type': 'application/json'}
 				        }).success(function(data) {
-				        	bootbox.dialog({
-				        		title:"Cadastro realizado com sucesso!",
-				        		message: "<div class='loginbootbox'><a href='/cleanUp/login'>Clique aqui e realize o login</a></div>"
-				            });
-							$scope.pessoa = null;
+				        	bootbox.alert("Cadastro realizado com sucesso!", function() {
+				        		location.reload();
+				        	});
 				        }).error(function(data) {
 				        	exibirMensagemErro(data);
 				       });
 					}					
-					
+				  }
 					
 				}else{
 					
@@ -109,14 +131,12 @@ function cadastroController($scope, $http, $filter, $timeout) {
 			            data: $scope.pessoa,
 			            method: "POST",
 			            headers: {'Content-Type': 'application/json'}
-			        }).success(function(data) {
-			        	bootbox.dialog({
-			        		title:"Cadastro realizado com sucesso!",
-			        		message: "<div class='loginbootbox'>" +
-			        					"<a href='/cleanUp/login'>Clique aqui e realize o login</a>" +
-			        				 "</div>"
-			            });
-						$scope.pessoa = null;
+			        }).success(function(data) {			        	
+			        	
+			        	bootbox.alert("Cadastro realizado com sucesso!", function() {
+			        		location.reload();
+			        	});
+			        	
 			        }).error(function(data) {
 			        	exibirMensagemErro(data);
 			       });				

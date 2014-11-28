@@ -21,8 +21,14 @@
                <!-- START dashboard main content-->
                <section class="col-md-13">
                
-	                          
-               
+	           <div class="col-md-6">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">Classic Map</div>
+                     <div class="panel-body">
+                        <div></div>
+                     </div>
+                  </div>
+                </div>              
                
                </section>
                <!-- END dashboard main content-->

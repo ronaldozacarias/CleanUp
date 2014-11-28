@@ -34,6 +34,7 @@ import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.ClassificacaoVO;
+import br.com.cleanUp.vo.ClienteVO;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
@@ -70,7 +71,7 @@ public class ClienteController {
 	
 	@RequestMapping(value = "/notificacoesCliente", method = {RequestMethod.GET})
     @ResponseBody
-    public ModelAndView doGet() {
+    public ModelAndView doGetNoteCli() {
                 
         Usuario usuarioLogado = (Usuario) RequestContextHolder
 				.currentRequestAttributes().getAttribute(
@@ -79,6 +80,38 @@ public class ClienteController {
 
 		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
 			return new ModelAndView("notificacoesCliente");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
+	@RequestMapping(value = "/perfilCliente", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetPerfilCli() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			return new ModelAndView("perfilCliente");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
+	@RequestMapping(value = "/resumoCliente", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetResumoCli() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			return new ModelAndView("resumoCliente");
 		} 
 		
 		return new ModelAndView("error");
@@ -114,7 +147,7 @@ public class ClienteController {
 		} 
 		
 		return new ModelAndView("error");
-    }	
+    }
 	
 	@RequestMapping(value = "/favoritos", method = {RequestMethod.GET})
     @ResponseBody
@@ -194,6 +227,46 @@ public class ClienteController {
 		cliente.setUsuario(usuario);
 
 		clienteService.editarCliente(cliente);
+
+	}
+	
+//	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
+//	@ResponseBody
+//	public void editCliente(@ModelAttribute("clienteVO") ClienteVO clienteVO)
+//			throws NegocioException {
+//
+//	
+//
+//	}
+	
+	@RequestMapping(value = "/clienteLogado", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public ClienteVO getCliente() throws NegocioException {
+
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_CLIENT)) {
+			
+			Cliente cliente = clienteService.findByIdUsuario(usuarioLogado.getId());		
+			
+			ClienteVO clienteVOLogado = new ClienteVO();
+			
+			clienteVOLogado.setCidade(cliente.getCidade());
+			clienteVOLogado.setCodigo(cliente.getCodigo());
+			clienteVOLogado.setCpf(cliente.getCpf());
+			clienteVOLogado.setNome(cliente.getNome());
+			clienteVOLogado.setEmail(cliente.getUsuario().getEmail());
+			clienteVOLogado.setSenha(cliente.getUsuario().getSenha());
+			clienteVOLogado.setTelefone(cliente.getTelefone());
+			clienteVOLogado.setFotoUsuario(cliente.getFotoUsuario());
+			
+			return clienteVOLogado;
+		}else{
+			throw new NegocioException("Você não tem acesso a essa funcionalidade");
+		}		
 
 	}
 

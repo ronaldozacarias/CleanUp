@@ -152,7 +152,7 @@
                </li>
                <!-- START Alert menu-->
                <li class="dropdown dropdown-list">
-                  <a href="#" data-toggle="dropdown" data-play="fadeIn" class="dropdown-toggle">
+                  <a href="#" data-play="fadeIn" class="dropdown-toggle">
                      <em class="fa fa-bell-o"></em>
                      <div class="label label-info" ng-show="count > 0">{{count}}</div>
                   </a>
@@ -162,23 +162,50 @@
                         <!-- START list group-->
                         <div class="list-group">
                            <!-- list item-->
-                           <a href="#" class="list-group-item" ng-repeat="notificacao in notificacoes">
-                              <div class="media">
+                           <a ng-show="profile == 'ROLE_DIARIST'" href="{{linkNotificacoes}}" class="list-group-item" ng-repeat="notificacao in notificacoes">
+                              <div class="media" ng-show="notificacao.status == 'PENDENTE'" ng-click="abriModal()">
                                  <div class="pull-left">
-                                    <em class="fa fa-envelope-o fa-2x text-success"></em>
+                                    <em class="fa fa-question fa-2x text-info"></em>
                                  </div>
                                  <div class="media-body clearfix">
                                     <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
-                                    <p class="m0">
-                                       <small>por {{notificacao.diarista.nome}}</small>
-                                    </p>
+                                 </div>
+                              </div>
+                              
+                              <div class="media" ng-show="notificacao.status == 'ENCERRADA'" ng-click="setarnotificaaoConcluida()">
+                                 <div class="pull-left">
+                                    <em class="fa fa-times fa-2x text-danger"></em>
+                                 </div>
+                                 <div class="media-body clearfix">
+                                    <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
+                                 </div>
+                              </div>
+                           </a>
+                           <a ng-show="profile == 'ROLE_CLIENT'" href="{{linkNotificacoes}}" class="list-group-item" ng-repeat="notificacao in notificacoes">
+                              <div class="media" ng-show="notificacao.status == 'CONCLUIDA'" ng-click="abriModal()">
+                                 <div class="pull-left">
+                                    <em class="fa fa-check fa-2x text-success"></em>
+                                 </div>
+                                 <div class="media-body clearfix">
+                                    <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
+                                 </div>
+                              </div>
+                              
+                              <div class="media" ng-show="notificacao.status == 'CANCELADA'" ng-click="setarnotificaaoConcluida()">
+                                 <div class="pull-left">
+                                    <em class="fa fa-times fa-2x text-danger"></em>
+                                 </div>
+                                 <div class="media-body clearfix">
+                                    <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
                                  </div>
                               </div>
                            </a>                           
                            <!-- last list item -->
-                           <a href="#" class="list-group-item">
-                              <small>Unread notifications</small>
-                              <span class="badge">14</span>
+                           <a href="{{linkNotificacoes}}" class="list-group-item">
+                           	  <em class="fa fa-mail-forward"></em>
+                              <small>Todas notificações...</small>
+                              
+<!--                               <span class="badge">14</span> -->
                            </a>
                         </div>
                         <!-- END list group-->
@@ -189,7 +216,7 @@
                <!-- END Alert menu-->
                <!-- START User menu-->
                <li class="dropdown">
-                  <a href="#" data-toggle="dropdown" data-play="fadeIn" class="dropdown-toggle">
+                  <a href="#" data-play="fadeIn" class="dropdown-toggle">
                      <em class="fa fa-gear"></em>
                   </a>
                   <!-- START Dropdown menu-->
@@ -205,7 +232,7 @@
 <!--                         </div> -->
 <!--                      </li> -->
 <!--                      <li class="divider"></li> -->
-                     <li><a href="#">Perfil</a>
+                     <li><a href="{{linkPerfil}}"><em class="fa fa-user">&nbsp&nbsp</em>Perfil</a>
                      </li>
 <!--                      <li><a href="#">Settings</a> -->
 <!--                      </li> -->
@@ -213,7 +240,7 @@
 <!--                      </li> -->
 <!--                      <li><a href="#">Messages<div class="label label-danger pull-right">10</div></a> -->
 <!--                      </li> -->
-                     <li><a href="<c:url value='/logout' />">Sair</a>
+                     <li><a href="<c:url value='/logout' />"><em class="fa fa-sign-out">&nbsp&nbsp</em>Sair</a>
                      </li>
                   </ul>
                   <!-- END Dropdown menu-->
@@ -228,7 +255,7 @@
          <!-- START Search form-->
          <form role="search" class="navbar-form">
             <div class="form-group has-feedback">
-               <input ng-model="searchDiarista" type="text" placeholder="Type and hit Enter.." class="form-control">
+               <input ng-model="searchString" ng-change="filter()" type="text" placeholder="Informe o termo da busca.." class="form-control">
                <div data-toggle="navbar-search-dismiss" class="fa fa-times form-control-feedback"></div>
             </div>
             <button type="submit" class="hidden btn btn-default">Submit</button>

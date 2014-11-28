@@ -12,7 +12,7 @@
                   <img src="<c:url value='/resources/assets/img/logo.png'  />" alt="Image" class="block-center img-rounded"/>
                </a>
                <p class="text-center mt-lg">
-                  <strong>SIGN IN TO CONTINUE.</strong>
+                  <strong>Realize o login para continuar.</strong>
                </p>
             </div>
             <div class="panel-body">
@@ -39,11 +39,11 @@
                   </div>                    
                   
                   <div class="clearfix">
-                     <div class="checkbox c-checkbox pull-left mt0">
-                        <label>
-                           <input type="checkbox" value="">
-                           <span class="fa fa-check"></span>Remember Me</label>
-                     </div>
+<!--                      <div class="checkbox c-checkbox pull-left mt0"> -->
+<!--                         <label> -->
+<!--                            <input type="checkbox" value=""> -->
+<!--                            <span class="fa fa-check"></span>Remember Me</label> -->
+<!--                      </div> -->
                      <div class="pull-right">
 <!--                      	<a href="#" class="text-muted">Forgot your password?</a> -->
                      </div>

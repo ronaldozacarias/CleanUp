@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ui.bootstrap']);
+var app = angular.module("app", ['ui.bootstrap', 'elif', 'ngImgCrop', 'xeditable']);
 
 	   app.filter('startFrom', function() {
 	       return function(input, start) {
@@ -9,11 +9,16 @@ var app = angular.module("app", ['ui.bootstrap']);
 	           return [];
 	       };
 	   });
+	   
+	   app.run(function(editableOptions) {
+		   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+	   });
 
 function clienteController($scope, $filter, $http, $timeout, $location) {
     
 	console.log('[ClienteController Iniciado]');
 	
+	$scope.edit = false;
     $scope.url = "/cleanUp/protected/servico/add";
     $scope.enderecos = [];
     $scope.arrayEnd = false;
@@ -32,7 +37,13 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     $scope.showServicos = true;
     $scope.diaristas = null;
     $scope.servicosList = new Array();
-    $scope.historico = new Array();
+    $scope.historico = new Array();    
+    $scope.linkNotificacoes = '/cleanUp/protected/cliente/notificacoesCliente';
+    $scope.linkPerfil = '/cleanUp/protected/cliente/perfilCliente';
+    $scope.profile = 'ROLE_CLIENT';
+    $scope.selected = undefined;
+    $scope.clienteVO = new Object();
+    $scope.cidades = new Array();
     
     $scope.countServPendente = 0;
     $scope.countServCancel = 0;
@@ -79,6 +90,47 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
       $scope.formats = ['dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
       
+      $http({
+          url: '/cleanUp/protected/cliente/clienteLogado',
+          method: "GET",
+          headers: {'Content-Type': 'application/json'}
+      }).success(function(data) {
+          $scope.clienteVO = data;
+      }).error(function(data) {
+          exibirMensagemErro(data);
+      });
+      
+      $scope.salvarAlteracoes = function(editPerfil){
+    	  
+    	  if($scope.clienteVO.nome != '' &&
+    	     $scope.clienteVO.cpf != '' &&
+    	     $scope.clienteVO.telefone != '' &&
+    	     $scope.clienteVO.email != '' &&
+    	     $scope.clienteVO.senha != '' &&
+    	     $scope.selected != undefined){
+    		  
+    		 $scope.clienteVO.cidade = $scope.selected;
+    		 $scope.clienteVO.img = $scope.imgTom;
+    		 
+    		 $http({
+    	          url: '/cleanUp/protected/cliente/getMenu',
+    	          data: $scope.notificacaoVO,
+    	          method: "POST",
+    	          headers: {'Content-Type': 'application/json'}
+    	      }).success(function(data) {
+    	          $scope.menus = data;
+    	          
+    	          bootbox.alert("Perfil atualizado com sucesso!", function() {
+		        		location.reload();
+		          });   	          
+    	          
+    	      }).error(function(data) {
+    	          exibirMensagemErro(data);
+    	     });
+    		 
+    	  }    	  
+    	  
+      };
       
       $http({
           url: '/cleanUp/protected/menu/getMenu',
@@ -88,7 +140,40 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
           $scope.menus = data;
       }).error(function(data) {
           exibirMensagemErro(data);
-     }); 
+     });
+      
+    /*CROP IMG*/
+    
+      $scope.myImage='';
+      $scope.imgTom ='/cleanUp/resources/assets/img/user/09.jpg';
+      $scope.myCroppedImage='';
+      
+        $scope.cortar = function(){
+            if($scope.myImage != ''){            	
+            	$scope.imgTom = $scope.myCroppedImage;    
+                $scope.myImage='';
+                console.log($scope.imgTom);
+                var nomeDoArquivo = document.getElementById('fileInput').value;
+                $scope.nomeArquivo = nomeDoArquivo.slice(12);
+                console.log($scope.nomeArquivo);
+            }  
+            
+        };      
+        
+      var handleFileSelect=function(evt) {
+        var file=evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+          $scope.$apply(function($scope){
+            $scope.myImage=evt.target.result;
+          });
+        };
+        reader.readAsDataURL(file);
+      };
+      angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+    
+    /*END CROP*/
+    
     
     function listarNotificacoes(){
         $http({
@@ -104,7 +189,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             if(data.length > 0){
                 for(var i = 0; i < 10 ; i++){
                     if($scope.note[i]){
-                        $scope.notificacoes.push($scope.note[i]);
+                        $scope.notificacoes.unshift($scope.note[i]);
                     };                  
                 };
             };
@@ -123,7 +208,24 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             
     }, 30000);  
     
-    
+    $scope.setarComoVizualizada = function(not){
+    	
+      	$http({
+  	      url: '',
+  	      data: $scope.notificacaoVO,
+  	      method: "POST",
+  	      headers: {'Content-Type': 'application/json'}
+	  	}).success(function(data) {
+	  	      bootbox.dialog({
+	 		         title:"Diarista removida dos favoritos!",
+	  		     message: "<div class='loginbootbox'>Obrigado por sua preferencia</div>"
+	  	      });
+	  	      listarFavoritosCli();
+	       }).error(function(data) {
+	  	       exibirMensagemErro(data);
+	  	 });
+    	
+    };
         
     $scope.salvarFavoritos = function(diarista) {
     	
@@ -187,9 +289,22 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	 });
 
     }
+    
+    $scope.validaEnviarServico = function(servicoForm){
+    	
+	   	 if($scope.descricao != '' &&
+	   	           $scope.data != '' && $scope.enderecos.length > 0){ 
+	   		
+	   		 $scope.enviarServico();
+	   		 
+	   	}else{
+	   		$scope.msg = ' Para adicionar um endereço, clique no botão verde "+"';
+            $scope.arrayEnd = true;
+	   	}
+   };
         
     /*---------  SENDING SERVICO  -----------------------------------------*/
-    $scope.enviarServico = function(servicoForm) {        
+    $scope.enviarServico = function() {        
         
         var url = $scope.url;
         
@@ -208,15 +323,6 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
         };
         
         console.log($scope.servicoVO.data);
-        
-        if($scope.enderecos.length <= 0){
-            $scope.msg = ' Para adicionar um endereço, clique no botão verde "+"';
-            $scope.arrayEnd = true;
-            
-        }
-        
-        if($scope.descricao != '' &&
-           $scope.data != '' && $scope.enderecos.length > ""){           
             
         	hideModal();
         	
@@ -236,9 +342,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
                 $scope.pessoa = null;
             }).error(function(data) {
                 exibirMensagemErro(data);
-           });          
-            
-        }   
+           });  
         
     };    
 
@@ -418,6 +522,46 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     };
     
     
+    $scope.cancelarServico = function(servico){
+		
+		bootbox.confirm("Você deseja realmente cancelar este serviço?" , function(result) {
+	  		  if(result == true){
+	  			  $scope.cancelarServicoCliente(servico);
+	  		  }
+		}); 
+		
+	};
+	
+	$scope.cancelarServicoCliente = function(servico){
+		
+		$scope.servicoVO = {
+			codigo:servico.codServico
+		};
+		
+        $http({
+	        url: '/cleanUp/protected/servico/cancelar',
+	        data: $scope.servicoVO,
+	        method: "POST",
+            headers: {'Content-Type': 'application/json; charset=utf-8'}
+	    })
+	    .success(function (data, status, headers, config) { 
+	    	bootbox.dialog({
+        		title:"Serviço cancelado com sucesso!",
+        		message: "Obrigado por sua preferência"
+            });
+	    	listarServicosCli();
+	    	listarNotificacoes();
+	    })
+	    .error(function (data, status, headers, config) {
+	    	bootbox.dialog({
+	    		title:"Erro inesperado!",
+	            message: data
+	        });
+	    });
+		
+	};
+    
+    
     $scope.cancelarClassificacao = function(){
         
         $scope.score;
@@ -440,7 +584,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	
     	var url = "" + $location.$$absUrl;
     	    	
-    	if(url == "http://localhost:8080/cleanUp/protected/cliente/historicoServicosCliente"){
+    	if(url == "http://localhost:8080/cleanUp/protected/cliente/historicoServicosCliente" ||
+    	   url == "http://10.1.2.16:8080/cleanUp/protected/cliente/historicoServicosCliente"){
     		
     		$scope.currentPage = null;
     	    $scope.entryLimit = null;
@@ -602,7 +747,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	
     	var url = "" + $location.$$absUrl;
     	
-    	if(url == "http://localhost:8080/cleanUp/protected/cliente/favoritos"){
+    	if(url == "http://localhost:8080/cleanUp/protected/cliente/favoritos" ||
+    			url == "http://10.1.2.16:8080/cleanUp/protected/cliente/favoritos"){
     		
     		$scope.currentPage = null;
     	    $scope.entryLimit = null;
@@ -636,7 +782,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	
     	var url = "" + $location.$$absUrl;
     	
-    	if(url == "http://localhost:8080/cleanUp/protected/cliente/servicosCliente"){
+    	if(url == "http://localhost:8080/cleanUp/protected/cliente/servicosCliente" ||
+    			url == "http://10.1.2.16:8080/cleanUp/protected/cliente/servicosCliente"){
     		
     		$scope.currentPage = null;
     	    $scope.entryLimit = null;
@@ -651,11 +798,13 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             })
             .success(function (data, status, headers, config) {                 
                 
-                for(var i = 0 ; i < data.length; i++){
-    	    		if(data[i].status != 'CANCELAR'){
-    	    			$scope.servicosList.push(data[i]);
-    	    		}
-    	    	}
+            	$scope.servicosList = data;
+            	
+//                for(var i = 0 ; i < data.length; i++){
+//    	    		if(data[i].status != 'CANCELAR'){
+//    	    			$scope.servicosList.push(data[i]);
+//    	    		}
+//    	    	}
                 
                 for(var i = 0 ; i < $scope.servicosList.length ; i++){
                 	if($scope.servicosList[i].status == 'PENDENTE'){
@@ -687,5 +836,19 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             });
     	}
     };
+    
+    
+    //Trazer cidades do banco
+	$http({
+        url: '/cleanUp/public/cadastro/getCidades',
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .success(function (data, status, headers, config) {
+    	$scope.cidades = data;    	
+    })
+    .error(function (data, status, headers, config) {
+    	exibirMensagemErro(data);
+    });	
         
 }

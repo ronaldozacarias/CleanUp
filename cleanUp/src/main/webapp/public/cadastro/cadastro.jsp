@@ -12,11 +12,11 @@
          <!-- START panel-->
          <div data-toggle="play-animation" data-play="fadeIn" data-offset="0" class="panel panel-dark panel-flat">
             <div class="panel-heading text-center mb-lg">
-               <a href="#">
+               <a href="/cleanUp/">
                   <img src="<c:url value='/resources/assets/img/logo.png'  />" alt="Image" class="block-center img-rounded"/>
                </a>
                <p class="text-center mt-lg">
-                  <strong>SIGNUP TO GET INSTANT ACCESS.</strong>
+                  Se ja possui conta clique <strong><a href="/cleanUp/login">aqui</a></strong> para acessar
                </p>
             </div>
             <div class="panel-body">
@@ -49,7 +49,10 @@
                      <span class="fa fa-globe form-control-feedback text-muted"></span>
                   </div>
                   <div ng-show="mostrar" class="form-group has-feedback">
-                     <input id="signupInputRePassword1" type="text" placeholder="Endereço" class="form-control" ng-model="pessoa.endereco" required="required" pattern=".{4,}">
+<!--                      <input id="signupInputRePassword1" type="text" placeholder="Endereço" class="form-control" ng-model="pessoa.endereco" required="required" pattern=".{4,}"> -->
+                     <input class="form-control" id="signupInputRePassword1" type="text" placeholder="Endereço" ng-model="asyncSelected" required="required" pattern=".{4,}"
+             				typeahead="address as address.formatted_address for address in getLocation($viewValue)" typeahead-loading="loadingLocations">
+                     
                      <span class="fa fa-map-marker form-control-feedback text-muted"></span>
                   </div>                 
                   

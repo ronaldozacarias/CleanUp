@@ -9,8 +9,8 @@
          <!-- START Page content-->
          <div class="main-content">
          
-         	<button type="button" class="btn btn-oval btn-primary pull-right">
-         	<em class="fa fa-question fa-fw mr-sm"></em>Help</button>
+<!--          	<button type="button" class="btn btn-oval btn-primary pull-right"> -->
+<!--          	<em class="fa fa-question fa-fw mr-sm"></em>Help</button> -->
          	
             <h3><spring:message code="homePage" />
                <br>
@@ -52,18 +52,18 @@
                      </div>
                      <div class="panel-body bg-inverse">
                         <div class="row row-table text-center">
-                           <div class="col-xs-4">
+                           <div class="col-xs-4 pull-left" >
                               <p class="m0 h3"> {{MasterDiarista.mediaDiarista | number:1}}</p>                              
                               <p class="m0 text-muted">Nota</p>
                            </div>
-                           <div class="col-xs-4">
-                              <p class="m0 h3">1500</p>
-                              <p class="m0 text-muted">Solicitações de serviço</p>
-                           </div>
-                           <div class="col-xs-4">
-                              <p class="m0 h3">1468</p>
-                              <p class="m0 text-muted">Concluídos</p>
-                           </div>
+<!--                            <div class="col-xs-4"> -->
+<!--                               <p class="m0 h3">1500</p> -->
+<!--                               <p class="m0 text-muted">Solicitações de serviço</p> -->
+<!--                            </div> -->
+<!--                            <div class="col-xs-4"> -->
+<!--                               <p class="m0 h3">1468</p> -->
+<!--                               <p class="m0 text-muted">Concluídos</p> -->
+<!--                            </div> -->
                         </div>
                      </div>
                   </div>
@@ -105,7 +105,7 @@
 	               </div>
                </div>
                
-               <div class="panel widget col-lg-12" ng-repeat="diarista in filtered = ( diaristas | filter:searchDiarista) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+               <div class="panel widget col-lg-12" ng-repeat="diarista in filtered = ( diaristas | filter:searchString) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 	               <div class="panel-body listDiarista">
 	                        <div class="media mt0">
 	                           <div class="pull-left">
@@ -147,7 +147,7 @@
 	                 </div>
                </div>
                
-               <div class="col-md-12" ng-show="filteredItems > 4">    
+               <div class="col-md-12" ng-show="filteredItems > 3">    
 				            <pagination class="pagination" page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
 							items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
 							max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
@@ -229,7 +229,7 @@
 							<strong>Obrigatório!</strong>{{msg}}
 						</div>
 						<button type="submit" class="btn btn-primary"
-							ng-click="enviarServico(servicoForm)">Enviar
+							ng-click="validaEnviarServico(servicoForm)">Enviar
 						</button>
 		            </div>		            
 		            </form>
@@ -290,6 +290,8 @@
    
    <script src="<c:url value='/resources/js/util.js' />"></script>
    
-   <!-- END Scripts-->      
+   <!-- END Scripts-->
+   
+   <script src="<c:url value='/resources/js/elif.js' />"></script>      
 
    <script src="<c:url value='/protected/controller/clienteController.js' />"></script> 

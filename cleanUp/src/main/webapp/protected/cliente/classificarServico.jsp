@@ -176,6 +176,8 @@
 	src="<c:url value='/resources/js/js-template/excanvas.min.js' />"></script>
 <script src="<c:url value='/resources/js/js-template/chart.min.js' />"></script>
 
+<script src="<c:url value='/resources/js/elif.js' />"></script>
+
 <!-- Caixa de informação -->
 <script src="<c:url value='/resources/js/js-template/infobox.js' />"></script>
 

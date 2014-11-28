@@ -28,7 +28,7 @@
                   <div ng-show="showServicos">
                     
 <!--                    <div class="col-lg-4" ng-repeat="fav in filtered = (favoritos | filter:searchService) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit"> -->
-	               <div class="col-lg-4" ng-repeat="fav in favoritos | filter:searchService">   
+	               <div class="col-lg-4" ng-repeat="fav in favoritos | filter:searchString">   
 	                  <!-- START panel-->
 	                  <div class="panel panel-default">
 	                     <div class="panel-heading">{{fav.diarista.nome}}
@@ -135,7 +135,7 @@
 							<strong>Obrigatório!</strong>{{msg}}
 						</div>
 						<button type="submit" class="btn btn-primary"
-							ng-click="enviarServico(servicoForm)">Enviar
+							ng-click="validaEnviarServico(servicoForm)">Enviar
 						</button>
 		            </div>		            
 		            </form>
@@ -189,5 +189,7 @@
    <!-- App Main-->
    <script src="<c:url value='/resources/assets/js/app.js' />"></script>
    <!-- END Scripts-->      
+   
+   <script src="<c:url value='/resources/js/elif.js' />"></script>
 
    <script src="<c:url value='/protected/controller/clienteController.js' />"></script>   

@@ -75,6 +75,22 @@ public class DiaristaController {
 		return new ModelAndView("error");
     }
 	
+	@RequestMapping(value = "/historicoServicosDir", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetHistoricoDir() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_DIARIST)) {
+			return new ModelAndView("historicoServicoDir");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
 	@RequestMapping(value = "/resumoDiarista", method = {RequestMethod.GET})
     @ResponseBody
     public ModelAndView doGetResumoDiarista() {
@@ -105,6 +121,8 @@ public class DiaristaController {
 		Especialidade espe;
 		endereco = new Endereco();
 		endereco.setLogradouro(pessoa.getEndereco());
+		endereco.setLat(pessoa.getLat());
+		endereco.setLng(pessoa.getLng());
 		//
 		for (int i = 0; i < pessoa.getEspecialidades().length; i++) {
 			espe = new Especialidade();
@@ -188,6 +206,22 @@ public class DiaristaController {
 		
 		return listaHistorico;
 	}
+	
+	@RequestMapping(value = "/listaAllHistoricoDiarista", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<HistoricoServico> listaHistoricoAllDiarista() throws NegocioException{
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);		
+
+		Diarista diarista = diaristaService.findByUsuario(usuarioLogado);
+		
+		List<HistoricoServico> listaHistorico = historicoServicoService.listaHistoricoServicoPorDiarista(diarista);
+		
+		return listaHistorico;
+	}
 
 	@RequestMapping(value = "listarDiaristas", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
@@ -214,13 +248,20 @@ public class DiaristaController {
 		
 	@RequestMapping(value = "/confirmacao", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public void confirmacaoDeServico(@RequestBody AceitarServicoVO aceitarServicoVO){
+	public void confirmacaoDeServico(@RequestBody AceitarServicoVO aceitarServicoVO) throws NegocioException{
+		
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);		
+
+		Diarista diarista = diaristaService.findByUsuario(usuarioLogado);
 
 		try {
 			for (int i = 0; i < aceitarServicoVO.getServicosVO().size(); i++) {
 				aceitarServicoVO.getServicosVO().get(i).setStatus(StatusServico.ACEITO);
 				aceitarServicoVO.getServicosVO().get(i).getNotificacao().setStatus(StatusNotificacao.CONCLUIDA);
-				aceitarServicoVO.getServicosVO().get(i).getNotificacao().setDescricaoNotificacao(TipoNotificacao.CONFIRMACAO_DE_SOLICITACAO.getTipoNotificacao());
+				aceitarServicoVO.getServicosVO().get(i).getNotificacao().setDescricaoNotificacao(diarista.getNome() + " " + TipoNotificacao.CONFIRMACAO_DE_SOLICITACAO.getTipoNotificacao());
 			}
 			this.servicoService.edit(aceitarServicoVO.getServicosVO());
 		} catch (NegocioException e) {

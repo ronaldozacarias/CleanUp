@@ -35,60 +35,7 @@
 	              </div> 
                		
                   <div ng-show="showServicos">
-                    <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-info text-center">
-	                           <em class="fa fa-share-square-o fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{servicosList.length}}</h4>
-	                              <p class="mb0 text-muted">SOLICITAÇÕES</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
-	               
-	               <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-warning text-center">
-	                           <em class="fa fa-exclamation-triangle fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{countServPendente}}</h4>
-	                              <p class="mb0 text-muted">PENDENTES</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
-	               
-	               <div class="col-lg-4">
-	                  <!-- START widget-->
-	                  <div class="panel widget">
-	                     <div class="row row-table row-flush">
-	                        <div class="col-xs-4 bg-danger text-center">
-	                           <em class="fa fa-times fa-2x"></em>
-	                        </div>
-	                        <div class="col-xs-8">
-	                           <div class="panel-body text-center">
-	                              <h4 class="mt0">{{countServCancel}}</h4>
-	                              <p class="mb0 text-muted">CANCELADOS</p>
-	                           </div>
-	                        </div>
-	                     </div>
-	                  </div>
-	                  <!-- END widget-->
-	               </div>
-	               
+                    	               
 	               <div class="col-lg-13 searchDiarist" ng-show="servicoList.length > 0">
 	               	   <em class="fa fa-search sd"></em>
 		               <div class="form-group has-feedback">
@@ -122,11 +69,11 @@
 		                                 	<li class="mb-sm ng-binding">
 		                                       <em class="fa fa-info fa-fw"></em> Status: {{servico.status}}</li>	                                    	
 		                                 </ul>
-		                                 <div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
+		                                 <div ng-if="servico.status != 'CANCELAR' && servico.status != 'CONCLUIDO' " class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
 		                                 	<input type="hidden" value="{{servico.codigo}}" />
 												<i class="fa fa-times"></i>
 										 </div>
-		                                 <div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-warning pull-right" ng-click="selectedServicoAlaviacao(servico);">
+		                                 <div ng-show="servico.status == 'ACEITO'" class="btn btn-oval btn-warning pull-right" ng-click="selectedServicoAlaviacao(servico);">
 		                                 	<input type="hidden" value="{{diarista.codigo}}" />
 												<i class="fa fa-star"></i>
 										 </div>
@@ -137,7 +84,7 @@
 		                 </div>
 	               </div>
 	               
-	               <div class="col-md-12" ng-show="filteredItems > 4">    
+	               <div class="col-md-12" ng-show="filteredItems > 3">    
 				            <pagination class="pagination" page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
 							items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
 							max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
@@ -211,6 +158,7 @@
    <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />"></script>
    <script src="<c:url value='/resources/assets/bootstrap/js/bootstrap.min.js' />"></script>
    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
+   <script src="<c:url value='/resources/js/elif.js' />"></script>
    
    <!-- Plugins-->
    <script src="<c:url value='/resources/assets/chosen/chosen.jquery.min.js' />"></script>

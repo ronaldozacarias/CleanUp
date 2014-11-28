@@ -41,11 +41,18 @@
 	   <!-- App CSS-->
 	   <link href="<c:url value='/resources/assets/css/app.css'  />" rel="stylesheet"/>
 	   
+	   <link href="<c:url value='/resources/css/ng-img-crop.css'  />" rel="stylesheet"/>
+	   
+	   <script src="<c:url value='/resources/js/ng-img-crop.js' />"></script>
+	   
 	   <!-- Modernizr JS Script-->
 	   <script src="<c:url value='/resources/assets/modernizr/modernizr.js' />" type="application/javascript"></script>
 	   
 	   <!-- FastClick for mobiles-->
 	   <script src="<c:url value='/resources/assets/fastclick/fastclick.js' />" type="application/javascript"></script>
+	   
+	   <link href="<c:url value='/resources/assets/xeditable/css/xeditable.css'  />" rel="stylesheet"/>
+	   <script src="<c:url value='/resources/assets/xeditable/js/xeditable.js' />" ></script>
 	   
 	   <!-- Bootstrap Datepicker -->
    	   <link href="<c:url value='/resources/assets/slider/css/slider.css'  />" rel="stylesheet"/>

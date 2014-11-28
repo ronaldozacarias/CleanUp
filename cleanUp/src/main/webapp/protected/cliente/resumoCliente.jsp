@@ -26,10 +26,10 @@
                	   <div class="panel panel-default">
 		               <div class="panel-heading">
 							<div class="form-inline">
-			                  		<small class="avSol"><em class="fa fa-circle"></em> TOTAL DE SOLICITAÇÕES. </small>
-			                  		<small class="avReg"><em class="fa fa-circle"></em> SERVIÇOS PENDENTES. </small>
-					                <small class="avNeg"><em class="fa fa-circle"></em> SERVIÇOS CANCELADOS. </small>
-					                <small class="avPos"><em class="fa fa-circle"></em> TOTAL DE SERVIÇOS CONCLUÍDOS. </small>					                
+			                  		<small class="avSol"><em class="fa fa-dot-circle-o"></em> TOTAL DE SOLICITAÇÕES. </small>
+			                  		<small class="avReg"><em class="fa fa-dot-circle-o"></em> SERVIÇOS PENDENTES. </small>
+					                <small class="avNeg"><em class="fa fa-dot-circle-o"></em> SERVIÇOS CANCELADOS. </small>
+					                <small class="avPos"><em class="fa fa-dot-circle-o"></em> TOTAL DE SERVIÇOS CONCLUÍDOS. </small>					                
 			                 </div>					   
 					   </div>
 		               <div class="panel-body">
@@ -186,5 +186,6 @@
    <!-- App Main-->
    <script src="<c:url value='/resources/assets/js/app.js' />"></script>
    <!-- END Scripts-->      
+   <script src="<c:url value='/resources/js/elif.js' />"></script>
 
-   <script src="<c:url value='/protected/controller/diaristaController.js' />"></script>   
+   <script src="<c:url value='/protected/controller/clienteController.js' />"></script>   

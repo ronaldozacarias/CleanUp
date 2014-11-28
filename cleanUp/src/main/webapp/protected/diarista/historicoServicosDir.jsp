@@ -51,7 +51,7 @@
                         <div class="arrow"></div>
                         <h3 class="popover-title">Código: {{hist.codServico}}</h3>
                         <div class="popover-content">
-                           <p>Diarista: {{hist.diarista.nome}}
+                           <p>Cliente: {{hist.cliente.nome}}
                               <br>
                               <small>Endereço: {{hist.endereco.logradouro}}</small></br>
                               <small>Status: {{hist.status}}</small>
@@ -116,6 +116,5 @@
    <!-- App Main-->
    <script src="<c:url value='/resources/assets/js/app.js' />"></script>
    <!-- END Scripts-->      
-   <script src="<c:url value='/resources/js/elif.js' />"></script>
 
-   <script src="<c:url value='/protected/controller/clienteController.js' />"></script>   
+   <script src="<c:url value='/protected/controller/diaristaController.js' />"></script>   

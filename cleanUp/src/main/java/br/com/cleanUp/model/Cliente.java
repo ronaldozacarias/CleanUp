@@ -21,6 +21,9 @@ public class Cliente {
 	@Column(name = "ID_CLIENTE")
 	private Integer codigo;
 	
+	@Column(name = "FOTO")
+	private String fotoUsuario;
+	
 	@Column(name = "NOME_CLIENTE", length = 150, nullable = false)
 	private String nome;
 	
@@ -49,6 +52,14 @@ public class Cliente {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getFotoUsuario() {
+		return fotoUsuario;
+	}
+
+	public void setFotoUsuario(String fotoUsuario) {
+		this.fotoUsuario = fotoUsuario;
 	}
 
 	public String getNome() {

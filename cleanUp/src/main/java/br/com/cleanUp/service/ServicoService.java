@@ -38,6 +38,9 @@ public class ServicoService {
 	
 	@Autowired
 	private HistoricoServicoService historioServicoService;
+	
+	@Autowired
+	private NotificacaoService notificacaoService;
 
 	public void save(Servico s, List<Endereco> listaE, Notificacao noti) throws NegocioException{
 		ArrayList<Servico> listaServ = new ArrayList<Servico>();
@@ -48,7 +51,7 @@ public class ServicoService {
 				notificacao.setCliente(noti.getCliente());
 				notificacao.setDiarista(noti.getDiarista());
 				notificacao.setDataEnvioNotificacao(new Date());
-				notificacao.setDescricaoNotificacao(TipoNotificacao.SOLICITACAO_DO_CLIENTE.getTipoNotificacao());
+				notificacao.setDescricaoNotificacao(s.getNotificacao().getDescricaoNotificacao());
 				notificacao.setStatus(StatusNotificacao.PENDENTE);
 				
 				serv.setCliente(s.getCliente());

@@ -1,5 +1,7 @@
 package br.com.cleanUp.vo;
 
+import java.math.BigDecimal;
+
 public class PessoaVO {
 
 	private String nome;
@@ -7,12 +9,27 @@ public class PessoaVO {
 	private String cpf;
 	private String telefone;
 	private String endereco;
+	private BigDecimal lat;
+	private BigDecimal lng;
 	private String cidade;
 	private String email;
 	private String senha;
 	private int tipo;
 	private int codigo;
 	
+		
+	public BigDecimal getLat() {
+		return lat;
+	}
+	public void setLat(BigDecimal lat) {
+		this.lat = lat;
+	}
+	public BigDecimal getLng() {
+		return lng;
+	}
+	public void setLng(BigDecimal lng) {
+		this.lng = lng;
+	}
 	public String getNome() {
 		return nome;
 	}
