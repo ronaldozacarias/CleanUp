@@ -18,7 +18,7 @@
 	         	  	  <div class="row">
 		         	  	  <div class="col-lg-8">
 				         	  <div class="pull-left">
-		                           <img src="<c:url value='{{imgTom}}'  />" alt="Avatar" class="img-thumbnail img-circle thumb134"/>
+		                           <img src="<c:url value='{{clienteVO.fotoUsuario}}'  />" alt="Avatar"  width="132" height="132" class="img-thumbnail img-circle"/>
 
 		                      </div>
                       	  </div>
@@ -80,7 +80,7 @@
 								                  </div>
 								                  <div class="form-group has-feedback col-md-6">
 								                     <label class="control-label">Cidade</label>
-								                     <input id="signupInputRePassword1" type="text" placeholder="Cidade" class="form-control" ng-model="selected" required="required" typeahead="cidade as cidade.nomeCidade for cidade in cidades | filter:$viewValue | limitTo:8">
+								                     <input id="signupInputRePassword1" type="text" placeholder="Cidade" class="form-control" ng-model="selected" typeahead="cidade as cidade.nomeCidade for cidade in cidades | filter:$viewValue | limitTo:8">
 								                  </div>
 								                  <div class="form-group has-feedback col-md-6">
 								                  	 <label class="control-label">Email</label>
@@ -115,9 +115,9 @@
 										    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
 										  </div>
 										  										  
-										  <button ng-show="escolherArquivo" type="submit" class="btn btn-oval btn-success pull-left">         	
-		         							<em class="fa fa-pencil fa-fw mr-sm"></em>Salvar as alterações
-		         					  	  </button>
+										  <button ng-show="myImage != ''" type="submit" ng-click="salvarAlteracoes()" class="btn btn-oval btn-success pull-left">         	
+			         								<em class="fa fa-pencil fa-fw mr-sm"></em>Salvar as alterações
+			         					  </button>
 			                          </div> 
 		                              
 		                           </div>
@@ -199,6 +199,8 @@
    <!-- END Scripts-->  
    
    <script src="<c:url value='/resources/js/elif.js' />"></script>
+   
+   <script src="<c:url value='/resources/js/util.js' />"></script>
    
    <script src="<c:url value='/resources/js/js-template/jquery.mask.min.js' />"></script>
    <script src="<c:url value='/resources/js/validacaoDeCamposCadastro.js' />"></script>

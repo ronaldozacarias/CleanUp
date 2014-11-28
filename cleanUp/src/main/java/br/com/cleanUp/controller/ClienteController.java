@@ -230,14 +230,25 @@ public class ClienteController {
 
 	}
 	
-//	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
-//	@ResponseBody
-//	public void editCliente(@ModelAttribute("clienteVO") ClienteVO clienteVO)
-//			throws NegocioException {
-//
-//	
-//
-//	}
+	@RequestMapping(value = "/atualizarPerfil", method = RequestMethod.PUT, produces = "application/json")
+	@ResponseBody
+	public void editCliente(@RequestBody ClienteVO clienteVO) throws NegocioException {		
+
+			Cliente cliente = clienteService.findByIdUsuario(clienteVO.getCodigo());
+			Cidade cidade = clienteVO.getCidade();
+			
+			cliente.setCidade(cidade);
+			cliente.setCpf(clienteVO.getCpf());
+			cliente.setFotoUsuario(clienteVO.getFotoUsuario());
+			cliente.setNome(clienteVO.getNome());
+			cliente.setTelefone(clienteVO.getTelefone());
+			cliente.getUsuario().setApelido(clienteVO.getNome());
+			cliente.getUsuario().setEmail(clienteVO.getEmail());
+			cliente.getUsuario().setSenha(clienteVO.getSenha());
+			
+			clienteService.editarCliente(cliente);
+
+	}
 	
 	@RequestMapping(value = "/clienteLogado", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody

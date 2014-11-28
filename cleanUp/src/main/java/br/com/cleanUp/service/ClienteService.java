@@ -57,12 +57,11 @@ public class ClienteService {
 	}
 	
 	public void editarCliente(Cliente cli) throws NegocioException{
-		clienteRepository.delete(clienteRepository.findOne(cli.getCodigo()));
-		
+
 		try {
 			clienteRepository.save(cli);
 		} catch (Exception e) {
-			throw new NegocioException("ERRO AO TENTAR EDITAR CLIENTE");
+			throw new NegocioException("Erro ao atualizar perfil: " + e.getMessage());
 		}
 	}
 	

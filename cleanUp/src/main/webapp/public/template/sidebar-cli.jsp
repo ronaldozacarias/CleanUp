@@ -8,11 +8,12 @@
          <!-- START Sidebar (left)-->
          <nav class="sidebar">
             <!-- START user info-->
+            <a href="{{linkPerfil}}">
             <div class="item user-block">
                <!-- User picture-->
                <div class="user-block-picture">
                   <div class="user-block-status">
-                     <img src="<c:url value='/resources/assets/img/user/02.jpg'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
+                     <img src="<c:url value='{{clienteVO.fotoUsuario}}'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
                      <div class="point point-success point-lg"></div>
                   </div>
                   <!-- Status when collapsed-->
@@ -23,6 +24,7 @@
                   <span class="user-block-role"><spring:message code="header.message" /></span>
                </div>
             </div>
+            </a>
             <!-- END user info-->
             <ul class="nav">
                <!-- START Menu-->

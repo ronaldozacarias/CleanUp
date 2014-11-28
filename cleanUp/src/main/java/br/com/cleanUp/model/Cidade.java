@@ -16,20 +16,24 @@ public class Cidade {
 	@Column(name = "ID_CIDADE")
 	private int codigoCidade;
 	
-	@Column(name = "CIDADE")
-	private String cidade;
-	
+	@Column(name = "NOME_CIDADE")
+	private String nomeCidade;
+
 	public int getCodigoCidade() {
 		return codigoCidade;
 	}
+
 	public void setCodigoCidade(int codigoCidade) {
 		this.codigoCidade = codigoCidade;
 	}
+
 	public String getNomeCidade() {
-		return cidade;
+		return nomeCidade;
 	}
+
 	public void setNomeCidade(String nomeCidade) {
-		this.cidade = nomeCidade;
+		this.nomeCidade = nomeCidade;
 	}	
+	
 
 }
