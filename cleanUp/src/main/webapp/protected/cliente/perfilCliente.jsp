@@ -18,7 +18,7 @@
 	         	  	  <div class="row">
 		         	  	  <div class="col-lg-8">
 				         	  <div class="pull-left">
-		                           <img src="<c:url value='{{clienteVO.fotoUsuario}}'  />" alt="Avatar"  width="132" height="132" class="img-thumbnail img-circle"/>
+		                           <img src="<c:url value='{{fotoUsuario}}'  />" alt="Avatar"  width="132" height="132" class="img-thumbnail img-circle"/>
 
 		                      </div>
                       	  </div>
@@ -72,11 +72,11 @@
 								                  </div>
 								                  <div class="form-group has-feedback col-md-6">
 								                     <label class="control-label">CPF</label>
-								                     <input id="cpf" type="text" class="form-control" ng-model="clienteVO.cpf" required="required" pattern=".{11,}" maxlength="11">						                     
+								                     <input id="cpf" type="text" class="form-control" ng-model="clienteVO.cpf" required="required" pattern=".{14,}" maxlength="14">						                     
 								                  </div>
 								                  <div class="form-group has-feedback col-md-6">
 								                     <label class="control-label">Telefone</label>
-								                     <input id="tel" type="text" class="form-control" ng-model="clienteVO.telefone" required="required" pattern=".{10,}" maxlength="10">
+								                     <input id="tel" type="text" class="form-control" ng-model="clienteVO.telefone" required="required" pattern=".{13,}" maxlength="13">
 								                  </div>
 								                  <div class="form-group has-feedback col-md-6">
 								                     <label class="control-label">Cidade</label>
@@ -84,14 +84,14 @@
 								                  </div>
 								                  <div class="form-group has-feedback col-md-6">
 								                  	 <label class="control-label">Email</label>
-								                     <input ng-model="clienteVO.email" id="signupInputRePassword1"  type="text" class="form-control" ng-model="clienteVO.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+								                     <input id="signupInputRePassword1"  type="text" class="form-control" ng-model="clienteVO.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
 								                  </div>								                  
 								                  <div class="form-group has-feedback col-md-6">
 								                  	 <label class="control-label">Senha</label>
 								                     <input ng-model="clienteVO.senha" id="signupInputRePassword1" type="password" placeholder="Senha" class="form-control" pattern=".{8,}" maxlength="14" required>
 								                  </div>						                          
                								   </div>
-               								   <button type="submit" ng-click="salvarAlteracoes()" class="btn btn-oval btn-success pull-left">         	
+               								   <button id="sa" type="submit" ng-click="salvarAlteracoes()" class="btn btn-oval btn-success pull-left">         	
 			         								<em class="fa fa-pencil fa-fw mr-sm"></em>Salvar as alterações
 			         					  	   </button>
                								</form>
@@ -115,7 +115,7 @@
 										    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
 										  </div>
 										  										  
-										  <button ng-show="myImage != ''" type="submit" ng-click="salvarAlteracoes()" class="btn btn-oval btn-success pull-left">         	
+										  <button id="sa" ng-show="myImage != ''" type="submit" ng-click="salvarAlteracoes()" class="btn btn-oval btn-success pull-left">         	
 			         								<em class="fa fa-pencil fa-fw mr-sm"></em>Salvar as alterações
 			         					  </button>
 			                          </div> 
@@ -160,7 +160,7 @@
    <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />"></script>
    <script src="<c:url value='/resources/assets/bootstrap/js/bootstrap.min.js' />"></script>
    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
-   
+   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
    <!-- Plugins-->
    <script src="<c:url value='/resources/assets/chosen/chosen.jquery.min.js' />"></script>
    <script src="<c:url value='/resources/assets/slider/js/bootstrap-slider.js' />"></script>

@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
-import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Queixa;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;

@@ -1,12 +1,10 @@
 package br.com.cleanUp.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +15,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.exception.NegocioException;
-import br.com.cleanUp.model.Cidade;
 import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
@@ -27,14 +24,12 @@ import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
 import br.com.cleanUp.model.StatusServico;
 import br.com.cleanUp.model.TipoNotificacao;
-import br.com.cleanUp.model.TipoServico;
 import br.com.cleanUp.model.Usuario;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
-import br.com.cleanUp.vo.PessoaVO;
 import br.com.cleanUp.vo.ServicoVO;
 
 @Controller

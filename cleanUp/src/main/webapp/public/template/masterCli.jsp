@@ -52,7 +52,7 @@
 	   <script src="<c:url value='/resources/assets/fastclick/fastclick.js' />" type="application/javascript"></script>
 	   
 	   <link href="<c:url value='/resources/assets/xeditable/css/xeditable.css'  />" rel="stylesheet"/>
-	   <script src="<c:url value='/resources/assets/xeditable/js/xeditable.js' />" ></script>
+	   <script src="<c:url value='/resources/assets/xeditable/js/xeditable.js' />" ></script>   
 	   
 	   <!-- Bootstrap Datepicker -->
    	   <link href="<c:url value='/resources/assets/slider/css/slider.css'  />" rel="stylesheet"/>
@@ -71,7 +71,7 @@
 	
     <body>
 		<!-- START Main wrapper-->
-   		<div class="wrapper" ng-controller="clienteController">
+   		<div id="body" class="wrapper" ng-controller="clienteController">
             <tiles:insertAttribute name="header" />
             
             <tiles:insertAttribute name="sidebar" />

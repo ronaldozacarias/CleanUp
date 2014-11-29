@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
-import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
@@ -34,6 +32,7 @@ import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.vo.AceitarServicoVO;
+import br.com.cleanUp.vo.DiaristaVO;
 import br.com.cleanUp.vo.PessoaVO;
 
 @Controller
@@ -86,6 +85,22 @@ public class DiaristaController {
 
 		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_DIARIST)) {
 			return new ModelAndView("historicoServicoDir");
+		} 
+		
+		return new ModelAndView("error");
+    }
+	
+	@RequestMapping(value = "/perfilDiarista", method = {RequestMethod.GET})
+    @ResponseBody
+    public ModelAndView doGetPerfilDir() {
+                
+        Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_DIARIST)) {
+			return new ModelAndView("perfilDia");
 		} 
 		
 		return new ModelAndView("error");
@@ -147,40 +162,79 @@ public class DiaristaController {
 		diarista.setEspecialidades(especialidadeDiarista);
 		diarista.setTelefone(pessoa.getTelefone());
 		diarista.setUsuario(usuario);
+		diarista.setFotoUsuario("/cleanUp/resources/assets/img/avatar.jpg");
 
 		diaristaService.saveDiarista(diarista);
 
 	}
-
-	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
+	
+	@RequestMapping(value = "/atualizarPerfil", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-	public void edit(@ModelAttribute("pessoa") PessoaVO pessoa)
-			throws NegocioException {
+	public void editDiarista(@RequestBody DiaristaVO diaristaVO) throws NegocioException {		
+			
+			Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+					
+			Diarista diarista = diaristaService.findByUsuario(usuarioLogado);
+			
+			List<Especialidade> newEspecialidades = new ArrayList<Especialidade>();
 
-
-		endereco = new Endereco();
-		endereco.setLogradouro(pessoa.getEndereco());
-
-		diarista = new Diarista();
-		cidade = new Cidade();
-		cidade.setCodigoCidade(Integer.parseInt(pessoa.getCidade()));
-		usuario = new Usuario();
-		usuario.isAtivo();
-		usuario.setEmail(pessoa.getEmail());
-		usuario.setPerfil(Perfil.ROLE_DIARIST);
-		usuario.setSenha(pessoa.getSenha());
-
-		diarista.setCidade(cidade);
-		diarista.setCpf(pessoa.getCpf());
-		diarista.setEndereco(endereco);
-		diarista.setNome(pessoa.getNome());
-		// diarista.setEspecialidades(especialidadeDiarista);
-		diarista.setTelefone(pessoa.getTelefone());
-		diarista.setUsuario(usuario);
-
-		diaristaService.saveDiarista(diarista);
+			diarista.setCidade(diaristaVO.getCidade());
+			diarista.setCpf(diaristaVO.getCpf());
+			diarista.setFotoUsuario(diaristaVO.getFotoUsuario());
+			diarista.setNome(diaristaVO.getNome());
+			diarista.getEndereco().setLat(diaristaVO.getEndereco().getLat());
+			diarista.getEndereco().setLng(diaristaVO.getEndereco().getLng());
+			diarista.getEndereco().setLogradouro(diaristaVO.getEndereco().getLogradouro());
+			diarista.setTelefone(diaristaVO.getTelefone());
+			diarista.getUsuario().setApelido(diaristaVO.getNome());
+			diarista.getUsuario().setEmail(diaristaVO.getUsuario().getEmail());
+			diarista.getUsuario().setSenha(diaristaVO.getUsuario().getSenha());
+			
+			for(int i = 0 ; i < diaristaVO.getNewEspecialidade().length; i++){
+				Especialidade especialidade = especialidadeService.getEspecialidade(diaristaVO.getNewEspecialidade()[i]);
+				newEspecialidades.add(especialidade);
+			}
+			
+			diarista.setEspecialidades(newEspecialidades);
+					
+			diaristaService.editarDiarista(diarista);
 
 	}
+	
+	@RequestMapping(value = "/diaristaLogada", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public DiaristaVO getDiarista() throws NegocioException {
+
+		Usuario usuarioLogado = (Usuario) RequestContextHolder
+				.currentRequestAttributes().getAttribute(
+						AtributoDeSessao.LOGGED_USER,
+						RequestAttributes.SCOPE_SESSION);
+
+		if (usuarioLogado.getPerfil().equals(Perfil.ROLE_DIARIST)) {
+			
+			Diarista diarista = diaristaService.findByUsuario(usuarioLogado);
+			
+			DiaristaVO diaristaVO = new DiaristaVO();
+			
+			diaristaVO.setCodigo(diarista.getCodigo());
+			diaristaVO.setCidade(diarista.getCidade());
+			diaristaVO.setCpf(diarista.getCpf());
+			diaristaVO.setNome(diarista.getNome());
+			diaristaVO.setUsuario(diarista.getUsuario());
+			diaristaVO.setTelefone(diarista.getTelefone());
+			diaristaVO.setFotoUsuario(diarista.getFotoUsuario());
+			diaristaVO.setEspecialidades(diarista.getEspecialidades());
+			diaristaVO.setEndereco(diarista.getEndereco());
+		
+			return diaristaVO;
+		}else{
+			throw new NegocioException("Você não tem acesso a essa funcionalidade");
+		}		
+
+	}	
 
 	@RequestMapping(method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseBody

@@ -100,6 +100,10 @@
     <definition name="perfilCliente" extends="masterCli.page">
     	<put-attribute name="body" value="/protected/cliente/perfilCliente.jsp"/>
     </definition>
+    <definition name="perfilDia" extends="masterDia.page">
+    	<put-attribute name="body" value="/protected/diarista/perfilDiarista.jsp"/>
+    </definition>
+    
     
     <definition name="customError" template="/public/error/customError.jsp">
     

@@ -3,7 +3,6 @@ package br.com.cleanUp.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
-import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Especialidade;
 import br.com.cleanUp.model.Usuario;
@@ -56,6 +54,15 @@ public class DiaristaService {
 						  LocaleContextHolder.getLocale()));
 		}
 				
+	}
+	
+	public void editarDiarista(Diarista diarista) throws NegocioException{
+
+		try {
+			diaristaRepository.save(diarista);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao atualizar perfil: " + e.getMessage());
+		}
 	}
 
 	public void removeDiarista(Diarista d) throws NegocioException {

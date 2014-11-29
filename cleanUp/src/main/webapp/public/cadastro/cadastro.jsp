@@ -36,11 +36,11 @@
                      <span class="fa fa-user form-control-feedback text-muted"></span>
                   </div>
                   <div class="form-group has-feedback">
-                     <input id="cpf" type="text" placeholder="CPF" class="form-control" ng-model="pessoa.cpf" required="required" pattern=".{11,}" maxlength="11">
+                     <input id="cpf" type="text" placeholder="CPF" class="form-control" ng-model="pessoa.cpf" required="required" pattern=".{14,}" maxlength="14">
                      <span class="fa fa-credit-card form-control-feedback text-muted"></span>
                   </div>
                   <div class="form-group has-feedback">
-                     <input id="tel" type="text" placeholder="Telefone" class="form-control" ng-model="pessoa.telefone" required="required" pattern=".{10,}" maxlength="10">
+                     <input id="tel" type="text" placeholder="Telefone" class="form-control" ng-model="pessoa.telefone" required="required" pattern=".{13,}" maxlength="13">
                      <span class="fa fa-phone form-control-feedback text-muted"></span>
                   </div>
                   <div class="form-group has-feedback">

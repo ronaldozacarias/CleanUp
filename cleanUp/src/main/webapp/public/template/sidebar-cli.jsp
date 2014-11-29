@@ -13,7 +13,7 @@
                <!-- User picture-->
                <div class="user-block-picture">
                   <div class="user-block-status">
-                     <img src="<c:url value='{{clienteVO.fotoUsuario}}'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
+                     <img src="<c:url value='{{fotoUsuario}}'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
                      <div class="point point-success point-lg"></div>
                   </div>
                   <!-- Status when collapsed-->

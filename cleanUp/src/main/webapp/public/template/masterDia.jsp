@@ -41,6 +41,10 @@
 	   <!-- App CSS-->
 	   <link href="<c:url value='/resources/assets/css/app.css'  />" rel="stylesheet"/>
 	   
+	   <link href="<c:url value='/resources/css/ng-img-crop.css'  />" rel="stylesheet"/>
+	   
+	   <script src="<c:url value='/resources/js/ng-img-crop.js' />"></script>
+	   
 	   <!-- Modernizr JS Script-->
 	   <script src="<c:url value='/resources/assets/modernizr/modernizr.js' />" type="application/javascript"></script>
 	   
@@ -54,6 +58,8 @@
 	   
 	   <script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>
 	   
+	   <script src="<c:url value='/resources/js/checklist-model.js' />"></script>
+	   
 	   <script type="text/javascript">
 
 	   
@@ -64,7 +70,7 @@
 	
     <body>
 		<!-- START Main wrapper-->
-   		<div class="wrapper" ng-controller="diaristaController">
+   		<div id="body" class="wrapper" ng-controller="diaristaController">
             <tiles:insertAttribute name="header" />
             
             <tiles:insertAttribute name="sidebar" />

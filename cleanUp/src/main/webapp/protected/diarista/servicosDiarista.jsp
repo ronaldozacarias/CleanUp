@@ -16,119 +16,54 @@
             
             <h3><spring:message code="service.client" />
                <br>
-               <small>Realizadas por você</small>              
-
+               <small>Realizadas por você</small>
             </h3>
             
             <div class="row">
                <!-- START dashboard main content-->
                <section class="col-md-13">
-                  <div>
-                    
+
                     <div class="col-lg-13">
-	                  <!-- START panel-->
-	                  <div class="panel panel-default">
-	                     <div class="panel-heading">Form Wizard Vertical (no validation)</div>
-	                     <div class="panel-body">
-	                        
-	                        <div class="panel widget col-lg-12" ng-repeat="servico in filtered = (servicosList | filter:searchString) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-				               <div class="panel-body">
-				               			<input type="hidden" value="{{servico.codigo}}" />
-				                        <div class="media mt0">
-
-											<div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
-				                                 	<input type="hidden" value="{{servico.codigo}}" />
-														<i class="fa fa-times"></i>
-												 </div>
-				                                 <div ng-show="servico.status == 'PENDENTE'" class="btn btn-oval btn-success pull-right" ng-click="selectedCliente(servico.cliente);">
-				                                 	<input type="hidden" value="{{diarista.codigo}}" />
-														<i class="fa fa-check"></i>
-												 </div>				                           
-
-				                           <div class="media-body">
-				                              <div class="media-heading">
-				                                 <h4 class="mt0 ng-binding"> Cliente: {{servico.cliente.nome}}</h4>
-				                                 <ul class="list-unstyled">
-				                                    <li class="mb-sm ng-binding">
-				                                       <em class="fa fa-calendar fa-fw"></em> Data: {{servico.dataServico | date:'longDate'}}</li>
-				                                    <li class="mb-sm ng-binding">
-				                                       <em class="fa fa-map-marker fa-fw"></em> Endereço: {{servico.endereco.logradouro}}</li>
-				                                 	<li class="mb-sm ng-binding">
-				                                       <em class="fa fa-info fa-fw"></em> Status: {{servico.status}}</li>
-				                                 </ul>
-				                              </div>
-				                           </div>
-				                        </div>
-				                 </div>
-			               </div>
-			               
-			               <div class="col-md-12" ng-show="filteredItems > 2">    
-						            <pagination class="pagination" page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
-									items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
-									max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
-						   </div>
-	                        
-	                     </div>
+                    
+	                    	<div class="panel widget col-lg-12" ng-repeat="servico in filtered = (servicosList | filter:searchString) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+					               <div class="panel-body">
+					               			<input type="hidden" value="{{servico.codigo}}" />
+					                        <div class="media mt0">
+	
+												<div ng-show="servico.status != 'CONCLUIDO'" class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
+					                                 	<input type="hidden" value="{{servico.codigo}}" />
+															<i class="fa fa-times"></i>
+													 </div>
+					                                 <div ng-show="servico.status == 'PENDENTE'" class="btn btn-oval btn-success pull-right" ng-click="selectedCliente(servico.cliente);">
+					                                 	<input type="hidden" value="{{diarista.codigo}}" />
+															<i class="fa fa-check"></i>
+													 </div>				                           
+	
+					                           <div class="media-body">
+					                              <div class="media-heading">
+					                                 <h4 class="mt0 ng-binding"> Cliente: {{servico.cliente.nome}}</h4>
+					                                 <ul class="list-unstyled">
+					                                    <li class="mb-sm ng-binding">
+					                                       <em class="fa fa-calendar fa-fw"></em> Data: {{servico.dataServico | date:'longDate'}}</li>
+					                                    <li class="mb-sm ng-binding">
+					                                       <em class="fa fa-map-marker fa-fw"></em> Endereço: {{servico.endereco.logradouro}}</li>
+					                                 	<li class="mb-sm ng-binding">
+					                                       <em class="fa fa-info fa-fw"></em> Status: {{servico.status}}</li>
+					                                 </ul>
+					                              </div>
+					                           </div>
+					                        </div>
+					                 </div>
+				               </div>
+				               
+				               <div class="col-md-12" ng-show="filteredItems > 3">    
+							            <pagination class="pagination" page="currentPage" on-select-page="setPage(page)" total-items="filteredItems" 
+										items-per-page="entryLimit" ng-model="currentPage" ng-change="pageChanged(currentPage)" 
+										max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+							   </div>
+						   
 	                  </div>
-	                  <!-- END panel -->
-	               </div>
-                    
-                    
-<!--                     <div class="col-lg-4"> -->
-<!-- 	                  START widget -->
-<!-- 	                  <div class="panel widget"> -->
-<!-- 	                     <div class="row row-table row-flush"> -->
-<!-- 	                        <div class="col-xs-4 bg-info text-center"> -->
-<!-- 	                           <em class="fa fa-share-square-o fa-2x"></em> -->
-<!-- 	                        </div> -->
-<!-- 	                        <div class="col-xs-8"> -->
-<!-- 	                           <div class="panel-body text-center"> -->
-<!-- 	                              <h4 class="mt0">{{servicosList.length}}</h4> -->
-<!-- 	                              <p class="mb0 text-muted">SOLICITAÇÕES</p> -->
-<!-- 	                           </div> -->
-<!-- 	                        </div> -->
-<!-- 	                     </div> -->
-<!-- 	                  </div> -->
-<!-- 	                  END widget -->
-<!-- 	               </div> -->
-	               
-<!-- 	               <div class="col-lg-4"> -->
-<!-- 	                  START widget -->
-<!-- 	                  <div class="panel widget"> -->
-<!-- 	                     <div class="row row-table row-flush"> -->
-<!-- 	                        <div class="col-xs-4 bg-warning text-center"> -->
-<!-- 	                           <em class="fa fa-exclamation-triangle fa-2x"></em> -->
-<!-- 	                        </div> -->
-<!-- 	                        <div class="col-xs-8"> -->
-<!-- 	                           <div class="panel-body text-center"> -->
-<!-- 	                              <h4 class="mt0">{{countServPendente}}</h4> -->
-<!-- 	                              <p class="mb0 text-muted">PENDENTES</p> -->
-<!-- 	                           </div> -->
-<!-- 	                        </div> -->
-<!-- 	                     </div> -->
-<!-- 	                  </div> -->
-<!-- 	                  END widget -->
-<!-- 	               </div> -->
-	               
-<!-- 	               <div class="col-lg-4"> -->
-<!-- 	                  START widget -->
-<!-- 	                  <div class="panel widget"> -->
-<!-- 	                     <div class="row row-table row-flush"> -->
-<!-- 	                        <div class="col-xs-4 bg-danger text-center"> -->
-<!-- 	                           <em class="fa fa-times fa-2x"></em> -->
-<!-- 	                        </div> -->
-<!-- 	                        <div class="col-xs-8"> -->
-<!-- 	                           <div class="panel-body text-center"> -->
-<!-- 	                              <h4 class="mt0">{{countServCancel}}</h4> -->
-<!-- 	                              <p class="mb0 text-muted">CANCELADOS</p> -->
-<!-- 	                           </div> -->
-<!-- 	                        </div> -->
-<!-- 	                     </div> -->
-<!-- 	                  </div> -->
-<!-- 	                  END widget -->
-<!-- 	               </div>                           -->
-	               
-				   </div>               
+              
                </section>              
                
             </div>

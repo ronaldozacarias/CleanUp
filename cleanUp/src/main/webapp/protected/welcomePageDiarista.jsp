@@ -163,6 +163,6 @@
    <script src="<c:url value='/resources/assets/gmap/jquery.gmap.min.js' />"></script>
    <!-- App Main-->
    <script src="<c:url value='/resources/assets/js/app.js' />"></script>
-   <!-- END Scripts-->      
+   <!-- END Scripts-->     
 
    <script src="<c:url value='/protected/controller/diaristaController.js' />"></script> 

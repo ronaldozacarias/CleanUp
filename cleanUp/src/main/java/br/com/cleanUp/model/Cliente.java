@@ -27,10 +27,10 @@ public class Cliente {
 	@Column(name = "NOME_CLIENTE", length = 150, nullable = false)
 	private String nome;
 	
-	@Column(name = "CPF_CLIENTE", length = 11, nullable = false)
+	@Column(name = "CPF_CLIENTE", length = 14, nullable = false)
 	private String cpf;
 	
-	@Column(name = "TELEFONE_CLIENTE", length = 11, nullable = false)
+	@Column(name = "TELEFONE_CLIENTE", length = 13, nullable = false)
 	private String telefone;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

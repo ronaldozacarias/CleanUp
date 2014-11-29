@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ui.bootstrap']);
+var app = angular.module("app", ['ui.bootstrap', 'ngImgCrop', 'checklist-model']);
 
 	   app.filter('startFrom', function() {
 	       return function(input, start) {
@@ -12,7 +12,8 @@ var app = angular.module("app", ['ui.bootstrap']);
 
 function diaristaController($scope, $filter, $http, $timeout, $location) {
 	
-	/*---------  LIST NOTIFICATIONS DIARISTAS FROM DATABASE  ------------------------------*/  
+	/*---------  LIST NOTIFICATIONS DIARISTAS FROM DATABASE  ------------------------------*/ 
+	$scope.edit = false;
 	listarNotificacoes();
 	listarServicos();
 	gerarResumoDiarista();
@@ -21,6 +22,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	$scope.servicos = [];
 	$scope.servicosVO = [];
 	var markerLatLngs = [];
+	$scope.especialidadesDiarista = [];
 	$scope.indexNumber = -1;
 	$scope.see = true;
 	$scope.feedback = true;
@@ -33,9 +35,13 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     $scope.avalRegu = 0;
     $scope.avalRuim = 0;
     $scope.linkNotificacoes = '/cleanUp/protected/diarista/notificacoes';
-    $scope.linkPerfil = '/cleanUp/protected/diarista/perfilCliente';
+    $scope.linkPerfil = '/cleanUp/protected/diarista/perfilDiarista';
     $scope.profile = 'ROLE_DIARIST';
     $scope.historico = new Array();
+    $scope.diaristaVO = new Object();
+    $scope.cidades = new Array();
+    $scope.selected = undefined;
+	$scope.asyncSelected = null;
 	
 	$scope.countServPendente = 0;
     $scope.countServCancel = 0;
@@ -45,6 +51,29 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	function hideModal(){
     	$('#myModal').modal('hide');
     }
+	
+	function checkList(){
+		if($scope.values){
+			$scope.especialidadesDiarista.push();
+		}
+	}
+	
+	$scope.getLocation = function(val) {
+	    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
+	      params: {
+	        address: val,
+	        sensor: false
+	      }
+	    }).then(function(response){
+	      return response.data.results.map(function(item){
+	        return {
+	          location: item.geometry.location,
+	          formatted_address: item.formatted_address
+	        }
+	      });
+	    });
+	 };
+	 
 	
 	function gerarResumoDiarista(){
 		
@@ -128,6 +157,139 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		
 	};
 	
+	$scope.salvarAlteracoes = function(editPerfil){
+  	  
+  	  if($scope.diaristaVO.nome != undefined &&
+  	     $scope.diaristaVO.cpf != undefined &&
+  	     $scope.diaristaVO.telefone != undefined &&
+  	     $scope.diaristaVO.usuario.email != undefined &&
+  	     $scope.diaristaVO.endereco.logradouro != undefined &&
+  	     $scope.diaristaVO.usuario.senha != undefined &&
+		 $scope.especialidadesDiarista.length != 0 && 
+		 $scope.selected != ""){
+  		  
+  		 $('body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		 }); 
+  		  
+   	     $scope.diaristaVO.fotoUsuario = $scope.diaristaVO.fotoUsuario;
+  		  
+  		 if($scope.selected != undefined){
+  			 $scope.diaristaVO.cidade = $scope.selected;
+  		 }
+  		 
+  		 $scope.diaristaVO.newEspecialidade = $scope.especialidadesDiarista;
+  		 
+  		 if($scope.asyncSelected != null){
+  			$scope.diaristaVO.endereco.lat = $scope.asyncSelected.location.lat;
+			$scope.diaristaVO.endereco.lng = $scope.asyncSelected.location.lng;
+			$scope.diaristaVO.endereco.logradouro = $scope.asyncSelected.formatted_address;
+  		 }
+  		 
+  		 $http({
+  	          url: '/cleanUp/protected/diarista/atualizarPerfil',
+  	          data: $scope.diaristaVO,
+  	          method: "PUT",
+  	          headers: {'Content-Type': 'application/json'}
+  	      }).success(function(data) {
+  	    	    	    	  
+  	    	  $( document ).ready(function() {
+  	    		   $('body').oLoader('hide');
+  	    	  });
+  	    	  
+  	          bootbox.alert("Perfil atualizado com sucesso!", function() {
+		        		location.reload();
+		          });   	          
+  	          
+  	      }).error(function(data) {
+  	          exibirMensagemErro(data);
+  	     });
+  		 
+  	  }    	  
+  	  
+    };
+	
+	$http({
+        url: '/cleanUp/protected/diarista/diaristaLogada',
+        method: "GET",
+        headers: {'Content-Type': 'application/json'}
+    }).success(function(data) {
+        $scope.diaristaVO = data;
+        
+        $scope.fotoUsuario = $scope.diaristaVO.fotoUsuario;
+        
+        for(var i = 0 ; i < $scope.diaristaVO.especialidades.length ; i++ ){
+        	
+        	$scope.especialidadesDiarista.push($scope.diaristaVO.especialidades[i].codigoEspecialidade);
+        	
+        }
+        
+    }).error(function(data) {
+        exibirMensagemErro(data);
+    });
+	
+	//Trazer especialidades do banco
+	$http({
+        url: '/cleanUp/public/cadastro/getEspecialidades',
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .success(function (data, status, headers, config) {
+    	$scope.especialidadesBanco = data;
+    	
+    })
+    .error(function (data, status, headers, config) {
+    	exibirMensagemErro(data);
+    });
+	
+	
+	 //Trazer cidades do banco
+	$http({
+        url: '/cleanUp/public/cadastro/getCidades',
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .success(function (data, status, headers, config) {
+    	$scope.cidades = data;    	
+    })
+    .error(function (data, status, headers, config) {
+    	exibirMensagemErro(data);
+    });
+	
+	
+	/*CROP IMG*/
+    
+    $scope.myImage='';
+    $scope.imgTom = $scope.diaristaVO.fotoUsuario;
+    $scope.myCroppedImage='';
+    
+    $scope.cortar = function(){
+       if($scope.myImage != ''){
+       	  $scope.diaristaVO.fotoUsuario = $scope.myCroppedImage;
+       	  $scope.fotoUsuario = $scope.myCroppedImage;
+       }
+    };
+    
+    var handleFileSelect=function(evt) {
+        var file=evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+          $scope.$apply(function($scope){
+            $scope.myImage=evt.target.result;
+          });
+        };
+        reader.readAsDataURL(file);
+      };
+    angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+    
+    /*END CROP*/
+	
 	function listarHistoricoServicos(){
     	
     	var url = "" + $location.$$absUrl;
@@ -171,6 +333,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		if(url == "http://localhost:8080/cleanUp/protected/home" || 
 		   url == "http://localhost:8080/cleanUp/protected/diarista/servicos" ||
 		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
+		   url == "http://localhost:8080/cleanUp/protected/diarista/perfilDiarista" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
@@ -254,7 +417,8 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		if(url == "http://localhost:8080/cleanUp/protected/home" || 
 		   url == "http://localhost:8080/cleanUp/protected/diarista/servicos" ||
 		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/notificacoes" ||		   
+		   url == "http://localhost:8080/cleanUp/protected/diarista/notificacoes" ||
+		   url == "http://localhost:8080/cleanUp/protected/diarista/perfilDiarista" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/notificacoes" ||

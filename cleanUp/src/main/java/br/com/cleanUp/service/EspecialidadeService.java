@@ -16,6 +16,10 @@ public class EspecialidadeService {
 
 	public List<Especialidade> todasEspecialidadesList(){
 		return (List<Especialidade>) especialidadeRepository.findAll();
-	}		
+	}
+	
+	public Especialidade getEspecialidade(Integer codigoEspecialidade){
+		return especialidadeRepository.findOne(codigoEspecialidade);
+	}
 	
 }

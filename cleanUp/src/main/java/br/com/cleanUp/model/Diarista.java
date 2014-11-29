@@ -29,10 +29,13 @@ public class Diarista {
 	@Column(name = "NOME_DIARISTA", length = 150, nullable = false)
 	private String nome;
 	
-	@Column(name = "CPF_DIARISTA", length = 11, nullable = false)
+	@Column(name = "FOTO")
+	private String fotoUsuario;
+	
+	@Column(name = "CPF_DIARISTA", length = 14, nullable = false)
 	private String cpf;
 	
-	@Column(name = "TELEFONE_DIARISTA", length = 11, nullable = false)
+	@Column(name = "TELEFONE_DIARISTA", length = 13, nullable = false)
 	private String telefone;
 	
 	@Column(name = "VALOR")
@@ -66,6 +69,12 @@ public class Diarista {
 		this.endereco = new Endereco();
 	}
 		
+	public String getFotoUsuario() {
+		return fotoUsuario;
+	}
+	public void setFotoUsuario(String fotoUsuario) {
+		this.fotoUsuario = fotoUsuario;
+	}
 	public float getMediaDiarista() {
 		return mediaDiarista;
 	}

@@ -201,6 +201,7 @@ public class ClienteController {
 		cliente.setNome(pessoa.getNome());
 		cliente.setTelefone(pessoa.getTelefone());
 		cliente.setUsuario(usuario);
+		cliente.setFotoUsuario("/cleanUp/resources/assets/img/avatar.jpg");
 
 		clienteService.salvarCliente(cliente);
 	}

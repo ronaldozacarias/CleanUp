@@ -14,7 +14,6 @@ import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
 import br.com.cleanUp.model.StatusServico;
-import br.com.cleanUp.model.TipoNotificacao;
 import br.com.cleanUp.repository.DiaristaRepository;
 import br.com.cleanUp.repository.EnderecoRepository;
 import br.com.cleanUp.repository.HistoricoServicoRepository;
@@ -43,7 +42,6 @@ public class ServicoService {
 	private NotificacaoService notificacaoService;
 
 	public void save(Servico s, List<Endereco> listaE, Notificacao noti) throws NegocioException{
-		ArrayList<Servico> listaServ = new ArrayList<Servico>();
 		try {
 			for (int i = 0; i < listaE.size(); i++) {
 				Servico serv = new Servico();
