@@ -1,8 +1,11 @@
 package br.com.cleanUp.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -236,11 +239,17 @@ public class MobileController {
 	
 	@RequestMapping(value = "/listar/favoritos", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Favorito> listaDeFavoritosPorCliente(Usuario u)throws NegocioException{
+	public List<Diarista> listaDeFavoritosPorCliente(Usuario u)throws NegocioException{
 		Cliente c = new Cliente();
 		try {
 			c = clienteService.findByIdUsuario(u.getId());
-			return favoritoService.listaFavoritoPorCliente(c);
+			List<Diarista> diaristas = null;
+			List<Favorito> fav = favoritoService.listaFavoritoPorCliente(c);
+			for (Favorito favorito : fav) {
+				Diarista d = diaristaService.findByUsuario(favorito.getDiarista().getUsuario());
+				diaristas.add(d);
+			}
+			return diaristas;
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Listar Favoritos");
 		}
