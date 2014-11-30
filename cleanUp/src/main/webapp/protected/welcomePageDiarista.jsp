@@ -21,14 +21,51 @@
                <!-- START dashboard main content-->
                <section class="col-md-13">
                
-	           <div class="col-md-6">
-                  <div class="panel panel-default">
-                     <div class="panel-heading">Classic Map</div>
-                     <div class="panel-body">
-                        <div></div>
-                     </div>
-                  </div>
-                </div>              
+	           <div class="row">
+		               <div class="col-lg-4 scrollServices">
+		                  <div class="panel panel-default" ng-repeat="servico in servicosAceitos">		                  	  
+                              <div class="panel-heading">
+	                                 <h4 class="panel-title"><a class="">Data: &nbsp{{servico.dataServico | date:'dd/MM/yyyy'}}</a>
+	                                 </h4>
+	                              </div>
+	                              <div class="panel-collapse collapse in" style="height: auto;">
+	                                 <div class="panel-body">
+	                                 	<ul class="list-unstyled">
+		                                    <li class="mb-sm">
+		                                       <em class="fa fa-map-marker fa-fw"></em>&nbspCliente: {{servico.cliente.nome}}</li>
+		                                    
+		                                    <li class="mb-sm">
+		                                       <em class="fa fa-envelope fa-fw"></em>&nbspEndereço: {{servico.endereco.logradouro}}</li>
+		                                 </ul>
+		                                <div class="btn btn-oval btn-info pull-right" data-toggle="tooltip" data-placement="top" title="Traçar rota para trajeto de carro" ng-click="tracarRotaDeCarro(servico);">
+					                       <input type="hidden" value="{{diarista.codigo}}" /><i class="fa fa-truck"></i>
+									 	</div>
+									 	<div class="btn btn-oval btn-success pull-right" data-toggle="tooltip" data-placement="top" title="Traçar rota para trajeto a pé" ng-click="tracarRotaDePe(servico);">
+					                       <input type="hidden" value="{{diarista.codigo}}" /><i class="fa fa-male"></i>
+									 	</div>
+									 	<div class="btn btn-oval btn-warning pull-right" data-toggle="tooltip" data-placement="top" title="Traçar rota a partir do meu endereço" ng-click="meuEndereco(servico);">
+					                       <input type="hidden" value="{{diarista.codigo}}" /><i class="fa fa-map-marker"></i></div>
+					                    <div ng-show="enderecoGPS2 != ''" class="btn btn-oval btn-green pull-right" data-toggle="tooltip" data-placement="top" title="Traçar rota a partir da minha localização - padrão" ng-click="gps(servico);">
+					                       <input type="hidden" value="{{diarista.codigo}}" /><i class="fa fa-globe"></i></div>
+	                                 </div>	                                 
+	                              </div>
+	                       </div>
+		               </div>
+		               <div class="col-lg-5">
+		                  <div class="panel panel-default">
+		                     <div class="panel-heading">Últimos serviços aceitos</div>
+		                     <div class="panel-body">
+		                        <div id="map-canvas2"></div>
+		                     </div>
+		                  </div>
+		               </div>
+		               <div class="col-lg-3">
+		                  <div class="well well-sm">
+		                     <h4>Trajeto</h4>
+		                     <div id="trajeto-texto"></div>
+		                  </div>
+		               </div>
+		             </div>           
                
                </section>
                <!-- END dashboard main content-->
@@ -159,6 +196,10 @@
    <script src="<c:url value='/resources/assets/flot/jquery.flot.categories.min.js' />"></script>
    <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
    <!-- END Page Custom Script-->
+   
+   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
+   
+   <script src="<c:url value='/resources/assets/toast/toastr.js' />" ></script>
    
    <script src="<c:url value='/resources/assets/gmap/jquery.gmap.min.js' />"></script>
    <!-- App Main-->

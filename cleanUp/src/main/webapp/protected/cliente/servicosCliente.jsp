@@ -165,6 +165,7 @@
    <script src="<c:url value='/resources/assets/slider/js/bootstrap-slider.js' />"></script>
    <script src="<c:url value='/resources/assets/filestyle/bootstrap-filestyle.min.js' />"></script>
    
+   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
    
    <!-- Animo-->
    <script src="<c:url value='/resources/assets/animo/animo.min.js' />"></script>

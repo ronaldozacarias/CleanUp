@@ -116,5 +116,7 @@
    <!-- App Main-->
    <script src="<c:url value='/resources/assets/js/app.js' />"></script>
    <!-- END Scripts-->      
+   
+   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
 
    <script src="<c:url value='/protected/controller/diaristaController.js' />"></script>   

@@ -113,6 +113,9 @@
    <!-- END Page Custom Script-->
    
    <script src="<c:url value='/resources/rate/jquery.raty.js' />"></script>
+   
+   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
+   
    <!-- App Main-->
    <script src="<c:url value='/resources/assets/js/app.js' />"></script>
    <!-- END Scripts-->      

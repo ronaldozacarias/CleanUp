@@ -71,10 +71,6 @@
 								                     <input id="signupInputEmail1" type="text" class="form-control" ng-model="clienteVO.nome" required="required" pattern=".{4,}">
 								                  </div>
 								                  <div class="form-group has-feedback col-md-6">
-								                     <label class="control-label">CPF</label>
-								                     <input id="cpf" type="text" class="form-control" ng-model="clienteVO.cpf" required="required" pattern=".{14,}" maxlength="14">						                     
-								                  </div>
-								                  <div class="form-group has-feedback col-md-6">
 								                     <label class="control-label">Telefone</label>
 								                     <input id="tel" type="text" class="form-control" ng-model="clienteVO.telefone" required="required" pattern=".{13,}" maxlength="13">
 								                  </div>
@@ -91,9 +87,11 @@
 								                     <input ng-model="clienteVO.senha" id="signupInputRePassword1" type="password" placeholder="Senha" class="form-control" pattern=".{8,}" maxlength="14" required>
 								                  </div>						                          
                								   </div>
-               								   <button id="sa" type="submit" ng-click="salvarAlteracoes()" class="btn btn-oval btn-success pull-left">         	
-			         								<em class="fa fa-pencil fa-fw mr-sm"></em>Salvar as alterações
-			         					  	   </button>
+               								   <div class="col-md-9">
+	               								   <button id="sa" type="submit" ng-click="salvarAlteracoes()" class="btn btn-oval btn-success pull-left">         	
+				         								<em class="fa fa-pencil fa-fw mr-sm"></em>Salvar as alterações
+				         					  	   </button>
+			         					  	   </div>
                								</form>
                							</div>
 		                              

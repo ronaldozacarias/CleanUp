@@ -16,6 +16,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	$scope.edit = false;
 	listarNotificacoes();
 	listarServicos();
+	listarServicosAceitos();
 	gerarResumoDiarista();
 	listarHistoricoServicos();
 	var myLatlng;
@@ -40,8 +41,11 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     $scope.historico = new Array();
     $scope.diaristaVO = new Object();
     $scope.cidades = new Array();
+    $scope.servicosAceitos = new Array();
     $scope.selected = undefined;
 	$scope.asyncSelected = null;
+	$scope.enderecoGPS = '';
+	$scope.enderecoGPS2 = '';
 	
 	$scope.countServPendente = 0;
     $scope.countServCancel = 0;
@@ -291,8 +295,8 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     /*END CROP*/
 	
 	function listarHistoricoServicos(){
-    	
     	var url = "" + $location.$$absUrl;
+    	
     	    	
     	if(url == "http://localhost:8080/cleanUp/protected/diarista/historicoServicosDir" ||
     	   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/historicoServicosDir"){
@@ -313,6 +317,8 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
             	for(var i = 0 ; i < data.length; i++){
             		$scope.historico.unshift(data[i]);
             	}
+            	
+            	$('body').oLoader('hide');
                 //doPagination($scope.favoritos);                 
             })
             .error(function (data, status, headers, config) {
@@ -326,14 +332,73 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     	
     }
 	
+	function listarServicosAceitos(){
+		
+		var url = "" + $location.$$absUrl;
+		
+		$('body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		 });     	
+    		
+    		$http({
+    	        url: '/cleanUp/protected/servico/listarServicosPorDiarista',
+    	        method: "POST",
+    	        headers: {'Content-Type': 'application/json'}
+    	    })
+    	    .success(function (data, status, headers, config) {  
+    	    	
+    	    	var url = "" + $location.$$absUrl;
+    	    	
+    	    	$('body').oLoader('hide');
+    	    	
+    	    	for(var i = 0 ; i < data.length; i++){
+    	    		if(data[i].status == 'ACEITO'){
+    	    			$scope.servicosAceitos.unshift(data[i]);
+    	    		}
+    	    	}
+    	    	
+    	    	$scope.countSolicitacoes = data.length;    		    
+    		    
+    		    if(url == "http://localhost:8080/cleanUp/protected/home"){
+    		    	initialize2();
+    		    }
+    	
+    	    })
+    	    .error(function (data, status, headers, config) {
+    	    	bootbox.dialog({
+    	    		title:"Erro inesperado!",
+    	            message: data
+    	        });
+    	    });  		
+    	
+	};
+	
+	
 	function listarServicos(){
 		
 		var url = "" + $location.$$absUrl;
+		
+		$('body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		 }); 
     	
 		if(url == "http://localhost:8080/cleanUp/protected/home" || 
 		   url == "http://localhost:8080/cleanUp/protected/diarista/servicos" ||
 		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
 		   url == "http://localhost:8080/cleanUp/protected/diarista/perfilDiarista" ||
+		   url == "http://localhost:8080/cleanUp/protected/diarista/notificacoes" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
@@ -349,7 +414,11 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     	        method: "POST",
     	        headers: {'Content-Type': 'application/json'}
     	    })
-    	    .success(function (data, status, headers, config) { 
+    	    .success(function (data, status, headers, config) {  
+    	    	
+    	    	var url = "" + $location.$$absUrl;
+    	    	
+    	    	$('body').oLoader('hide');
     	    	
     	    	for(var i = 0 ; i < data.length; i++){
     	    		if(data[i].status != 'CANCELAR'){
@@ -419,6 +488,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
 		   url == "http://localhost:8080/cleanUp/protected/diarista/notificacoes" ||
 		   url == "http://localhost:8080/cleanUp/protected/diarista/perfilDiarista" ||
+		   url == "http://localhost:8080/cleanUp/protected/diarista/historicoServicosDir" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
 		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/notificacoes" ||
@@ -460,6 +530,16 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	
 	$scope.enviarServicos = function(servicoForm){
 		
+		$('body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		});
+		
 		$scope.aceitarServicoVO = {
 			servicosVO: $scope.servicosVO	
 		};
@@ -470,7 +550,8 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	        method: "POST",
             headers: {'Content-Type': 'application/json'}
 	    })
-	    .success(function (data, status, headers, config) {   	    	
+	    .success(function (data, status, headers, config) { 
+	    	$('body').oLoader('hide');
 	    	hideModal();
 	    	bootbox.dialog({
         		title:"Serviço enviado com sucesso!",
@@ -605,6 +686,8 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
         
     var map;
     var marker;
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
     
     function initialize() {
     	  myLatlng = new google.maps.LatLng(-25.363882,131.044922);
@@ -628,35 +711,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     	  infowindow = new google.maps.InfoWindow({
     	      content: '',
     	      maxWidth: 200
-    	  });     	  
-    	  
-    	  
-    	  /*
-    	  for(var i = 0 ; i < $scope.servicos.length; i++){
-    		  
-    		  var lat = $scope.servicos[i].endereco.lat;
-    		  var lng = $scope.servicos[i].endereco.lng;
-    		  
-    		  var contentString = $scope.servicos[i].endereco.logradouro;
-
-	    	  
-    		  
-    		  var markerLatLng = new google.maps.LatLng(lat,lng);
-    		  markerLatLngs.push(markerLatLng);
-    		  
-    		  marker = new google.maps.Marker({
-        	      position: markerLatLng,
-        	      map: map,
-        	      title: $scope.servicos[i].cliente.nome
-        	  }); 
-    		  
-    		  
-    		  
-    	  }*/
-    	  
-//    	  google.maps.event.addListener(marker, 'click', function() {
-//			    infowindow.open(map,marker);
-//		  });
+    	  });    	  
 
     	}
     
@@ -686,7 +741,192 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	  			infowindow.open(map, this);
     	      });
     	}
+    	
+    	function initialize2() {	
+    		directionsDisplay = new google.maps.DirectionsRenderer();
+    		var latlng = new google.maps.LatLng(-18.8800397, -47.05878999999999);
+    		
+    	    var options = {
+    	        zoom: 5,
+    			center: latlng,
+    	        mapTypeId: google.maps.MapTypeId.ROADMAP
+    	    };
 
-//    google.maps.event.addDomListener(window, 'load', initialize);
+    	    map = new google.maps.Map(document.getElementById("map-canvas2"), options);
+    		directionsDisplay.setMap(map);
+    		directionsDisplay.setPanel(document.getElementById("trajeto-texto"));
+    		
+    		if (navigator.geolocation) {
+    			navigator.geolocation.getCurrentPosition(function (position) {
+
+    				pontoPadrao = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    				map.setCenter(pontoPadrao);
+    				
+    				var geocoder = new google.maps.Geocoder();
+    				
+    				geocoder.geocode({
+    					"location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+    	            },
+    	            function(results, status) {
+    					if (status == google.maps.GeocoderStatus.OK) {
+    						$("#txtEnderecoPartida").val(results[0].formatted_address);
+    						$scope.enderecoGPS = results[0].formatted_address;
+    						$scope.enderecoGPS2 = results[0].formatted_address;
+    						$scope.$digest();
+    						
+    						toastr.options = {
+    			    				  "closeButton": false,
+    			    				  "debug": false,
+    			    				  "progressBar": false,
+    			    				  "positionClass": "toast-top-center",
+    			    				  "onclick": null,
+    			    				  "showDuration": "300",
+    			    				  "hideDuration": "1000",
+    			    				  "timeOut": "5000",
+    			    				  "extendedTimeOut": "1000",
+    			    				  "showEasing": "swing",
+    			    				  "hideEasing": "linear",
+    			    				  "showMethod": "fadeIn",
+    			    				  "hideMethod": "fadeOut"
+    			    				}
+    			    		
+    			    	    toastr.info('<span>A localização pelo GPS foi definida como padrão.</span></br>'+
+    			    	    		    '<span>Para alterar escolha a opção "Meu endereço".</span>');
+    					}
+    	            });
+    			});
+    		}
+    	}
+    	
+    	$scope.meuEndereco = function(servico){
+    		
+    		$scope.enderecoGPS = servico.diarista.endereco.logradouro;
+    		
+    		toastr.options = {
+    				  "closeButton": false,
+    				  "debug": false,
+    				  "progressBar": false,
+    				  "positionClass": "toast-top-center",
+    				  "onclick": null,
+    				  "showDuration": "300",
+    				  "hideDuration": "1000",
+    				  "timeOut": "5000",
+    				  "extendedTimeOut": "1000",
+    				  "showEasing": "swing",
+    				  "hideEasing": "linear",
+    				  "showMethod": "fadeIn",
+    				  "hideMethod": "fadeOut"
+    				}
+    		
+    		toastr.info('<span>Alterado para meu endereço.<span></br><span>Escolha uma opção de rota.</span>');
+    		
+    	};
+    	
+    	$scope.gps = function(servico){
+    		
+    		$scope.enderecoGPS = $scope.enderecoGPS2;
+    		
+    		toastr.options = {
+  				  "closeButton": false,
+  				  "debug": false,
+  				  "progressBar": false,
+  				  "positionClass": "toast-top-center",
+  				  "onclick": null,
+  				  "showDuration": "300",
+  				  "hideDuration": "1000",
+  				  "timeOut": "5000",
+  				  "extendedTimeOut": "1000",
+  				  "showEasing": "swing",
+  				  "hideEasing": "linear",
+  				  "showMethod": "fadeIn",
+  				  "hideMethod": "fadeOut"
+  				}
+  		
+    		toastr.info('<span>Alterado para GPS.<span></br><span>Escolha uma opção de rota.</span>');
+    		
+    	}
+    	
+    	$scope.tracarRotaDeCarro = function(servico){
+    		
+    		if($scope.enderecoGPS == ''){
+    			toastr.options = {
+    	  				  "closeButton": false,
+    	  				  "debug": false,
+    	  				  "progressBar": false,
+    	  				  "positionClass": "toast-top-center",
+    	  				  "onclick": null,
+    	  				  "showDuration": "300",
+    	  				  "hideDuration": "1000",
+    	  				  "timeOut": "5000",
+    	  				  "extendedTimeOut": "1000",
+    	  				  "showEasing": "swing",
+    	  				  "hideEasing": "linear",
+    	  				  "showMethod": "fadeIn",
+    	  				  "hideMethod": "fadeOut"
+    	  				}
+    	  		
+    	    	toastr.warning('<span>Escolha uma opção de localização.</span>');    			
+    		}else{
+    		var enderecoPartida = $scope.enderecoGPS;
+	    		var enderecoChegada = servico.endereco.logradouro;
+	    		
+	    		var request = {
+	    			origin: enderecoPartida,
+	    			destination: enderecoChegada,
+	    			travelMode: google.maps.TravelMode.DRIVING
+	    		};
+	    		
+	    		directionsService.route(request, function(result, status) {
+	    			if (status == google.maps.DirectionsStatus.OK) {
+	    				directionsDisplay.setDirections(result);
+	    			}
+	    		});
+    		
+    		};
+    		
+    	};
+    	
+    	$scope.tracarRotaDePe = function(servico){
+    		
+    		if($scope.enderecoGPS == ''){
+    			toastr.options = {
+    	  				  "closeButton": false,
+    	  				  "debug": false,
+    	  				  "progressBar": false,
+    	  				  "positionClass": "toast-top-center",
+    	  				  "onclick": null,
+    	  				  "showDuration": "300",
+    	  				  "hideDuration": "1000",
+    	  				  "timeOut": "5000",
+    	  				  "extendedTimeOut": "1000",
+    	  				  "showEasing": "swing",
+    	  				  "hideEasing": "linear",
+    	  				  "showMethod": "fadeIn",
+    	  				  "hideMethod": "fadeOut"
+    	  				}
+    	  		
+    	    	toastr.warning('<span>Escolha uma opção de localização.</span>');    			
+    		}else{
+	    		var enderecoPartida = $scope.enderecoGPS;
+	    		var enderecoChegada = servico.endereco.logradouro;
+	    		
+	    		var request = {
+	    			origin: enderecoPartida,
+	    			destination: enderecoChegada,
+	    			travelMode: google.maps.TravelMode.WALKING
+	    		};
+	    		
+	    		directionsService.route(request, function(result, status) {
+	    			if (status == google.maps.DirectionsStatus.OK) {
+	    				directionsDisplay.setDirections(result);
+	    			}
+	    		});
+    		};
+    		
+    	};
+    	
+    	$(function () {
+    		  $('[data-toggle="tooltip"]').tooltip()
+    	})
 	
 }

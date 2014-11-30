@@ -108,17 +108,9 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     		      fadeLevel: 1
     		 }); 
     		  
-//    		  $scope.clienteVO.fotoUsuario = $scope.clienteVO.fotoUsuario.slice(22);
+//    		 $scope.clienteVO.fotoUsuario = $scope.clienteVO.fotoUsuario.slice(22);
     		 $scope.clienteVO.fotoUsuario = $scope.clienteVO.fotoUsuario;
-    		 
-    		var cpf = $scope.clienteVO.cpf;
- 			cpf = cpf.replace('.','').replace('.','').replace('-','');
- 			$scope.clienteVO.cpf = cpf;
- 			
- 			var tel = $scope.clienteVO.telefone;
- 			tel = tel.replace('(','').replace(')','').replace(' ','').replace('-','');
- 			$scope.clienteVO.telefone = tel;
-    		  
+    		   		  
     		 if($scope.selected != undefined){
     			 $scope.clienteVO.cidade = $scope.selected;
     		 }    		 
@@ -206,6 +198,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             $scope.notificacoes = [];
             $scope.note = data;
             $scope.count = data.length;
+            
+            $('#body').oLoader('hide');
             
             if(data.length > 0){
                 for(var i = 0; i < 10 ; i++){
@@ -312,7 +306,17 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     }
     
     $scope.validaEnviarServico = function(servicoForm){
-    	
+    	 
+    	$('body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		});
+    	 
 	   	 if($scope.descricao != '' &&
 	   	           $scope.data != '' && $scope.enderecos.length > 0){ 
 	   		
@@ -355,6 +359,9 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'}
             }).success(function(data) {
+            	
+            	$('body').oLoader('hide');
+            	
                 hideModal();
                 bootbox.dialog({
                     title:"Solicitação realizada com sucesso!",
@@ -406,6 +413,16 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
 
  /*---------  LIST DIARISTAS FROM DATABASE  ------------------------------*/    
   function listarDiaristas(){
+	  	 
+		 $('#body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		 });
 	  
 	  	var url = "" + $location.$$absUrl;
   	
@@ -417,8 +434,11 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
 				headers : {
 					'Content-Type' : 'application/json'
 				}
-			}).success(function(data, status, headers, config) {
+			}).success(function(data, status, headers, config) {				
 				$scope.diaristas = data;
+				
+				$('#body').oLoader('hide');
+				
 				$scope.MasterDiarista = data[0];
 				doPaginationDiarist($scope.diaristas);
 			}).error(function(data, status, headers, config) {
@@ -624,6 +644,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             	for(var i = 0 ; i < data.length; i++){
             		$scope.historico.unshift(data[i]);
             	}
+            	
+            	$('#body').oLoader('hide');
                 //doPagination($scope.favoritos);                 
             })
             .error(function (data, status, headers, config) {
@@ -784,7 +806,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
             })
             .success(function (data, status, headers, config) {                 
                 $scope.favoritos = data;
-                           
+                
+                $('#body').oLoader('hide');
                 //doPagination($scope.favoritos);
                         
             })
@@ -803,7 +826,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	
     	var url = "" + $location.$$absUrl;
     	
-    	if(url == "http://localhost:8080/cleanUp/protected/cliente/servicosCliente" ||
+    	if(url == "http://localhost:8080/cleanUp/protected/cliente/servicosCliente" || 
     			url == "http://10.1.2.16:8080/cleanUp/protected/cliente/servicosCliente"){
     		
     		$scope.currentPage = null;
@@ -821,6 +844,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
                 
             	$scope.servicosList = data;
             	
+            	$('#body').oLoader('hide');
 //                for(var i = 0 ; i < data.length; i++){
 //    	    		if(data[i].status != 'CANCELAR'){
 //    	    			$scope.servicosList.push(data[i]);
