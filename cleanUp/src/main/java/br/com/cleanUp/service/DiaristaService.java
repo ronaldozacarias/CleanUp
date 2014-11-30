@@ -104,6 +104,14 @@ public class DiaristaService {
 		}
 	}
 	
+	public Diarista findByIdUsuario(Integer idUsuario) throws NegocioException {
+		try {
+			return diaristaRepository.findByIdUsuario(idUsuario);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao tentar buscar diarista.");
+		}
+	}
+	
 	public List<Diarista> listaDeDiaristaPorEspecialidade(Especialidade e) throws NegocioException{
 		ArrayList<Diarista> listaDeDiarista = new ArrayList<Diarista>();
 		ArrayList<Diarista> listaDeDiaristaPorEspecialidade = new ArrayList<Diarista>();

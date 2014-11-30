@@ -12,7 +12,7 @@ public class ClienteVO {
 	private Cidade cidade;
 	private String senha;
 	private String email;
-	
+	private Integer codigoUsuario;
 	public String getFotoUsuario() {
 		return fotoUsuario;
 	}
