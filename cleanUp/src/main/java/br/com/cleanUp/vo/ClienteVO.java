@@ -12,7 +12,7 @@ public class ClienteVO {
 	private Cidade cidade;
 	private String senha;
 	private String email;
-	private Integer codigoUsuario;
+	private Integer codUsuario;
 	public String getFotoUsuario() {
 		return fotoUsuario;
 	}
@@ -60,6 +60,12 @@ public class ClienteVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Integer getCodUsuario() {
+		return codUsuario;
+	}
+	public void setCodUsuario(Integer codUsuario) {
+		this.codUsuario = codUsuario;
 	}	
 
 }
