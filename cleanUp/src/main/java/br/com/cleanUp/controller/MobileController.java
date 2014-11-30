@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import br.com.cleanUp.exception.NegocioException;
 import br.com.cleanUp.model.Cidade;
@@ -18,6 +20,7 @@ import br.com.cleanUp.model.Cliente;
 import br.com.cleanUp.model.Diarista;
 import br.com.cleanUp.model.Endereco;
 import br.com.cleanUp.model.Especialidade;
+import br.com.cleanUp.model.Favorito;
 import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
 import br.com.cleanUp.model.StatusNotificacao;
@@ -28,7 +31,9 @@ import br.com.cleanUp.service.CidadeService;
 import br.com.cleanUp.service.ClienteService;
 import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.EspecialidadeService;
+import br.com.cleanUp.service.FavoritoService;
 import br.com.cleanUp.service.ServicoService;
+import br.com.cleanUp.util.AtributoDeSessao;
 import br.com.cleanUp.util.Util;
 import br.com.cleanUp.vo.AceitarServicoVO;
 import br.com.cleanUp.vo.ClassificacaoVO;
@@ -61,6 +66,9 @@ public class MobileController {
 
 	@Autowired
 	private CidadeService cidadeService;
+	
+	@Autowired
+	private FavoritoService favoritoService;
 
 	@RequestMapping(value = "/cliente/listDiaristas", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
@@ -225,5 +233,33 @@ public class MobileController {
 	public List<Cidade> listarCidades() throws NegocioException {
 		return cidadeService.todasCidadesList();
 	}
+	
+	@RequestMapping(value = "/listar/favoritos", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Favorito> listaDeFavoritosPorCliente(Usuario u)throws NegocioException{
+		Cliente c = new Cliente();
+		try {
+			c = clienteService.findByIdUsuario(u.getId());
+			return favoritoService.listaFavoritoPorCliente(c);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Listar Favoritos");
+		}
+	}
+	
+	@RequestMapping(value = "/listar/addfavorito", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void salvarFavoritos(@RequestBody Favorito favorito)throws NegocioException{
+			favoritoService.savad(favorito);
 
+	}
+	
+	@RequestMapping(value = "/listar/removefavorito", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public void removerFavoritos(@RequestBody Favorito favorito)throws NegocioException{
+		try {		
+			favoritoService.remove(favorito);
+		} catch (NegocioException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
