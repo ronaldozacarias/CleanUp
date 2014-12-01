@@ -621,6 +621,41 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		
 	};
 	
+$scope.setarComoVizualizada = function(not){
+    	
+    	$scope.notificacaoVO = {
+    		idNotificacao: not.idNotificacao
+    	};
+    	
+    	 $('body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		 });
+    	
+      	$http({
+  	      url: '/cleanUp/protected/notificacao/setarComoVisualizada',
+  	      data: $scope.notificacaoVO,
+  	      method: "POST",
+  	      headers: {'Content-Type': 'application/json'}
+	  	}).success(function(data) {
+	  		listarNotificacoes();  
+	  		$('body').oLoader('hide');
+	  		location.reload();
+	  		
+	       }).error(function(data) {
+	    	   
+	    	   $('body').oLoader('hide');
+	    	   
+	  	       exibirMensagemErro(data);
+	  	 });
+    	
+    };
+	
 	/*---------  ADD SERVICE IN LIST  -----------------------------------------*/
     $scope.addService = function (servico, index) {
     	

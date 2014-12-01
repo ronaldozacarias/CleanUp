@@ -151,7 +151,7 @@
 		            </div>
 		            
 		            <div class="alert alert-info" ng-show="servicosList.length == 0">
-					      <h3>Não há dados para gerar suficiente<br>
+					      <h3>Não há dados suficiente para gerar o resumo<br>
 						  </h3><h5>Em breve você poderá comparar os dados e graficos dos seus serviços.</h5>
 									    
 					</div>

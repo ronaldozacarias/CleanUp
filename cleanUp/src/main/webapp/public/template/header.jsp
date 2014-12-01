@@ -163,7 +163,7 @@
                         <div class="list-group">
                            <!-- list item-->
                            <a ng-show="profile == 'ROLE_DIARIST'" href="{{linkNotificacoes}}" class="list-group-item" ng-repeat="notificacao in notificacoes">
-                              <div class="media" ng-show="notificacao.status =! 'ENCERRADA'">
+                              <div class="media" ng-show="notificacao.status != 'ENCERRADA'">
                                  <div class="pull-left">
                                     <em class="fa fa-exclamation-circle text-info"></em>
                                  </div>
