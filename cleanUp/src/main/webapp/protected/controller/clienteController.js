@@ -247,7 +247,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
 	  	}).success(function(data) {
 	  		listarNotificacoes();  
 	  		$('#body').oLoader('hide');
-	  		
+	  		location.reload();
 	  		
 	       }).error(function(data) {
 	    	   
