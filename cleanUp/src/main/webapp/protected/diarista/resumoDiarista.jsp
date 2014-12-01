@@ -23,11 +23,12 @@
                <section class="col-md-13">
                
                	 
-               	   <div class="panel panel-default">
+               	   <div ng-show="servicosList.length > 0" class="panel panel-default">
 		               <div class="panel-heading">
 							<div class="form-inline">
-			                  		<small class="avSol"><em class="fa fa-circle"></em> TOTAL DE SOLICITAÇÕES. </small>
-			                  		<small class="avReg"><em class="fa fa-circle"></em> SERVIÇOS PENDENTES. </small>
+			                  		<small class="avGre"><em class="fa fa-circle"></em> TOTAL DE SOLICITAÇÕES. </small>
+			                  		<small class="avReg"><em class="fa fa-circle"></em> PENDENTES. </small>
+			                  		<small class="avSol"><em class="fa fa-circle"></em> ACEITOS. </small>
 					                <small class="avNeg"><em class="fa fa-circle"></em> SERVIÇOS CANCELADOS. </small>
 					                <small class="avPos"><em class="fa fa-circle"></em> TOTAL DE SERVIÇOS CONCLUÍDOS. </small>					                
 			                 </div>					   
@@ -35,11 +36,11 @@
 		               <div class="panel-body">
 		                  <div class="form-inline">
 		                  		
-		                  		 <div class="col-lg-3">
+		                  		 <div class="col-lg-2">
 				<!-- 	                  START widget -->
 					                  <div class="panel widget">
 					                     <div class="row row-table row-flush">
-					                        <div class="col-xs-4 bg-info text-center">
+					                        <div class="col-xs-4 bg-green text-center">
 					                           <em class="fa fa-share-square-o fa-2x"></em>
 					                        </div>
 					                        <div class="col-xs-8">
@@ -52,7 +53,7 @@
 				<!-- 	                  END widget -->
 					               </div>
 					               
-					               <div class="col-lg-3">
+					               <div class="col-lg-2">
 				<!-- 	                  START widget -->
 					                  <div class="panel widget">
 					                     <div class="row row-table row-flush">
@@ -69,7 +70,24 @@
 				<!-- 	                  END widget -->
 					               </div>
 					               
-					               <div class="col-lg-3">
+					               <div class="col-lg-2">
+				<!-- 	                  START widget -->
+					                  <div class="panel widget">
+					                     <div class="row row-table row-flush">
+					                        <div class="col-xs-4 bg-info text-center">
+					                           <em class="fa fa-check fa-2x"></em>
+					                        </div>
+					                        <div class="col-xs-8">
+					                           <div class="panel-body text-center">
+					                              <h4 class="mt0">{{countServAceito}}</h4>
+					                           </div>
+					                        </div>
+					                     </div>
+					                  </div>
+				<!-- 	                  END widget -->
+					               </div>
+					               
+					               <div class="col-lg-2">
 				<!-- 	                  START widget -->
 					                  <div class="panel widget">
 					                     <div class="row row-table row-flush">
@@ -86,7 +104,7 @@
 				<!-- 	                  END widget -->
 					               </div>
 					               
-					               <div class="col-lg-3">
+					               <div class="col-md-2">
 						               <div class="panel widget">
 						                     <div class="row row-table row-flush">
 						                        <div class="col-xs-4 bg-success text-center">
@@ -106,7 +124,7 @@
 		            </div>
                   
                   
-                  <div class="panel panel-default">
+                  <div ng-show="servicosList.length > 0" class="panel panel-default">
 		               <div class="panel-heading">
 							<div class="form-inline">
 			                  		Veja aqui suas avaliações de forma prática e objetiva				                
@@ -131,6 +149,12 @@
 		               </div>        
 		               
 		            </div>
+		            
+		            <div class="alert alert-info" ng-show="servicosList.length == 0">
+					      <h3>Não há dados para gerar suficiente<br>
+						  </h3><h5>Em breve você poderá comparar os dados e graficos dos seus serviços.</h5>
+									    
+					</div>
                                  
                </section>              
                

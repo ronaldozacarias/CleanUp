@@ -27,7 +27,7 @@
                      <div class="panel-body tomwel">
                         <div class="media p mt0">
                            <div class="pull-left">
-                              <img src="<c:url value='/resources/assets/img/user/05.jpg'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
+                              <img src="<c:url value='{{MasterDiarista.fotoUsuario}}'  />" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
                            </div>
                            <div class="media-body">
                               <div class="media-heading masterdiarista">
@@ -87,7 +87,7 @@
 	               <div class="panel-body listDiarista">
 	                        <div class="media mt0">
 	                           <div class="pull-left">
-	                              <img src="/cleanUp/resources/assets/img/user/05.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+	                              <img src="{{diarista.fotoUsuario}}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
 	                           </div>
 	                           <div class="media-body">
 	                              <div class="media-heading masterdiarista">
@@ -105,7 +105,7 @@
 	                           	   <div class="media-heading masterdiarista">
 	                                 <ul class="list-unstyled">
 	                                    <li class="mb-sm ng-binding espec" ng-repeat="especialidade in diarista.especialidades">
-	                                       <em class="fa fa-map-marker fa-fw"></em>{{especialidade.nomeEspecialidade}}
+	                                       <em class="fa fa-check-square-o fa-fw"></em>{{especialidade.nomeEspecialidade}}
 	                                    </li>	                                    	
 	                                 </ul>
 	                                 <div class="btn btn-oval btn-success pull-right" ng-click="selectedDiarista(diarista);">
@@ -166,7 +166,7 @@
 								<div class="form-group ">
 								       	<label for="datePicker">Data do serviço</label>
 								       	<div id="datePicker" data-pick-time="false" class="datetimepicker input-group date mb-lg">
-					                    	<input id="dp" placeholder="dd/MM/yyyy" ng-model="data" type="text" class="form-control" required>
+					                    	<input disabled id="dp" placeholder="dd/MM/yyyy" ng-model="data" type="text" class="form-control" required>
 					                        <span class="input-group-addon">
 					                        	<span class="fa-calendar fa"></span>
 					                        </span>

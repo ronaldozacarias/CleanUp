@@ -56,16 +56,16 @@
             </div>
             <div class="col-md-10">
                <ul class="list-inline menuapp-buttons">
-                  <li class="mr-lg">                  	
-                     <a href="#">
-                        <strong>Demo</strong>
-                     </a>
-                  </li>
-                  <li class="mr-lg">
-                     <a href="#">
-                        <strong>Features</strong>
-                     </a>
-                  </li>
+<!--                   <li class="mr-lg">                  	 -->
+<!--                      <a href="#"> -->
+<!--                         <strong>Demo</strong> -->
+<!--                      </a> -->
+<!--                   </li> -->
+<!--                   <li class="mr-lg"> -->
+<!--                      <a href="#"> -->
+<!--                         <strong>Features</strong> -->
+<!--                      </a> -->
+<!--                   </li> -->
                   <li>
                   	 <a href="login">
 	                  	 <button type="button" class="btn btn-labeled btn-default">Entrar
@@ -87,15 +87,15 @@
                </div>
                <div class="col-xs-12 col-lg-6 align-middle">
                   <div class="side-presentation">
-                     <div class="h1 header-title">Elegant &amp; Clean Bootstrap Admin</div>
+                     <div class="h1 header-title">Encontre o que procura</div>
                      <br>
-                     <p class="header-subtitle">Get your app frontend done fast with this complete bootstrap theme.</p>
+                     <p class="header-subtitle">de maneira prática, cômoda e inteligente.</p>
                      <br>
-                     <div class="header-button">
-                        <a href="#" class="btn btn-primary btn-lg btn-fw">
-                           <strong>Discover Now</strong>
-                        </a>
-                     </div>
+<!--                      <div class="header-button"> -->
+<!--                         <a href="#" class="btn btn-primary btn-lg btn-fw"> -->
+<!--                            <strong>Discover Now</strong> -->
+<!--                         </a> -->
+<!--                      </div> -->
                      <br>
                      <br>
                      <p>Available on</p>

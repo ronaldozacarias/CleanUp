@@ -144,6 +144,11 @@
  	margin-right: 5px;
  }
  
+ .avGre{
+ 	color: #01b6ad;
+ 	margin-right: 5px;
+ } 
+ 
  #canvas-holder{
  	width: 400px;
  	height: 180px

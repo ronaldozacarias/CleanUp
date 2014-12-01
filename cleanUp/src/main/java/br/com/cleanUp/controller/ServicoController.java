@@ -91,16 +91,22 @@ public class ServicoController {
 	@ResponseBody
 	public void cancelarServico(@RequestBody ServicoVO servicoVO) throws NegocioException{
 		
-		Servico servico = new Servico();
+		Servico servico = servicoService.findByOne(servicoVO.getCodigo());
 		
-		servico.setCodServico(servicoVO.getCodigo());
-		servico.setDataServico(new Date());
-		servico.getNotificacao().setStatus(StatusNotificacao.ENCERRADA);
+		Notificacao notificacao = new Notificacao();
+		notificacao.setIdNotificacao(servico.getNotificacao().getIdNotificacao());
+		notificacao.setCliente(servico.getCliente());
+		notificacao.setDiarista(servico.getDiarista());
+		notificacao.setDataEnvioNotificacao(new Date());
+		notificacao.setDescricaoNotificacao(TipoNotificacao.CANCELAMENTO_DE_SOLICITACAO.getTipoNotificacao());
+		notificacao.setStatus(StatusNotificacao.SERVICO_CANCELADO);
+		
+		servico.setNotificacao(notificacao);
 
 		servicoService.cancelarServico(servico);
 
-	}	
-	
+	}
+		
 	@RequestMapping(value = "listarServicosPorCliente", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Servico> servicosPorCliente(@RequestParam("codigoCliente") int codigoCliente) throws NegocioException {

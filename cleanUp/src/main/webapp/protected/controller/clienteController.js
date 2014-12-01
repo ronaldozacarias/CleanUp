@@ -225,18 +225,34 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     
     $scope.setarComoVizualizada = function(not){
     	
+    	$scope.notificacaoVO = {
+    		idNotificacao: not.idNotificacao
+    	};
+    	
+    	 $('#body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		 });
+    	
       	$http({
-  	      url: '',
+  	      url: '/cleanUp/protected/notificacao/setarComoVisualizada',
   	      data: $scope.notificacaoVO,
   	      method: "POST",
   	      headers: {'Content-Type': 'application/json'}
 	  	}).success(function(data) {
-	  	      bootbox.dialog({
-	 		         title:"Diarista removida dos favoritos!",
-	  		     message: "<div class='loginbootbox'>Obrigado por sua preferencia</div>"
-	  	      });
-	  	      listarFavoritosCli();
+	  		listarNotificacoes();  
+	  		$('#body').oLoader('hide');
+	  		
+	  		
 	       }).error(function(data) {
+	    	   
+	    	   $('#body').oLoader('hide');
+	    	   
 	  	       exibirMensagemErro(data);
 	  	 });
     	
@@ -425,8 +441,8 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
 		 });
 	  
 	  	var url = "" + $location.$$absUrl;
-  	
-  		if(url == "http://localhost:8080/cleanUp/protected/home"){
+	  	  	
+  		if(url.slice(-23) == "/cleanUp/protected/home"){
   	
 			$http({
 				url : '/cleanUp/protected/diarista/ranqueamentoDiarista',
@@ -625,8 +641,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	
     	var url = "" + $location.$$absUrl;
     	    	
-    	if(url == "http://localhost:8080/cleanUp/protected/cliente/historicoServicosCliente" ||
-    	   url == "http://10.1.2.16:8080/cleanUp/protected/cliente/historicoServicosCliente"){
+    	if(url.slice(-51) == "/cleanUp/protected/cliente/historicoServicosCliente"){
     		
     		$scope.currentPage = null;
     	    $scope.entryLimit = null;
@@ -790,8 +805,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	
     	var url = "" + $location.$$absUrl;
     	
-    	if(url == "http://localhost:8080/cleanUp/protected/cliente/favoritos" ||
-    			url == "http://10.1.2.16:8080/cleanUp/protected/cliente/favoritos"){
+    	if(url.slice(-36) == "/cleanUp/protected/cliente/favoritos"){
     		
     		$scope.currentPage = null;
     	    $scope.entryLimit = null;
@@ -826,8 +840,7 @@ function clienteController($scope, $filter, $http, $timeout, $location) {
     	
     	var url = "" + $location.$$absUrl;
     	
-    	if(url == "http://localhost:8080/cleanUp/protected/cliente/servicosCliente" || 
-    			url == "http://10.1.2.16:8080/cleanUp/protected/cliente/servicosCliente"){
+    	if(url.slice(-42) == "/cleanUp/protected/cliente/servicosCliente"){
     		
     		$scope.currentPage = null;
     	    $scope.entryLimit = null;

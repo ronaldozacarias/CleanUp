@@ -20,9 +20,71 @@
             <div class="row">
                <!-- START dashboard main content-->
                <section class="col-md-13">
+                      
+			  		<div class="alert alert-info" ng-show="servicosList.length == 0">
+					      <h3>Você ainda não aceitou um serviço<br>
+						  </h3><h5>Mas olha o que te aguarda logo abaixo.</h5>
+									    
+					</div>
+			  		
+					<div class="col-lg-4" ng-show="servicosAceitos.length == 0">
+	                  <!-- START widget-->
+	                  <div class="panel widget">
+	                     <div class="row row-table row-flush">
+	                        <div class="col-xs-5">
+	                           <img src="<c:url value='/resources/assets/img/aceitos.png'  />" alt="" class="img-responsive"/>
+	                        </div>
+	                        <div class="col-xs-7 align-middle p-lg">
+	                           <p>
+	                              <strong>Serviços aceitos</strong>
+	                           </p>
+	                           <p>Nesta vão estar listados todos os serviços aceitos por você.</p>
+	                        </div>
+	                     </div>
+	                  </div>
+	                  <!-- END widget-->
+	               </div>
+	               
+	               <div class="col-lg-4" ng-show="servicosAceitos.length == 0">
+	                  <!-- START widget-->
+	                  <div class="panel widget">
+	                     <div class="row row-table row-flush">
+	                        <div class="col-xs-5">
+	                           <img src="<c:url value='/resources/assets/img/mapa.png'  />" alt="" class="img-responsive"/>
+	                        </div>
+	                        <div class="col-xs-7 align-middle p-lg">
+	                           <p>
+	                              <strong>Mapa</strong>
+	                           </p>
+	                           <p>Aqui é onde será exibido as rotas que estarão disponíves em Serviços aceitos.</p>
+	                        </div>
+	                     </div>
+	                  </div>
+	                  <!-- END widget-->
+	               </div>
+	               
+	               <div class="col-lg-4" ng-show="servicosAceitos.length == 0">
+	                  <!-- START widget-->
+	                  <div class="panel widget">
+	                     <div class="row row-table row-flush">
+	                        <div class="col-xs-5">
+	                           <img src="<c:url value='/resources/assets/img/trajeto.png'  />" alt="" class="img-responsive"/>
+	                        </div>
+	                        <div class="col-xs-7 align-middle p-lg">
+	                           <p>
+	                              <strong>Trajeto</strong>
+	                           </p>
+	                           <p>E para sua maior comodidade aqui será exibido o trajaeto da rota.</p>
+	                        </div>
+	                     </div>
+	                  </div>
+	                  <!-- END widget-->
+	               </div>
+	               
+	               
                
-	           <div class="row">
-		               <div class="col-lg-4 scrollServices">
+	           <div class="row">	           		   	
+		               <div class="col-lg-4 scrollServices" ng-show="servicosAceitos.length > 0">
 		                  <div class="panel panel-default" ng-repeat="servico in servicosAceitos">		                  	  
                               <div class="panel-heading">
 	                                 <h4 class="panel-title"><a class="">Data: &nbsp{{servico.dataServico | date:'dd/MM/yyyy'}}</a>
@@ -51,7 +113,7 @@
 	                              </div>
 	                       </div>
 		               </div>
-		               <div class="col-lg-5">
+		               <div class="col-lg-5" ng-show="servicosAceitos.length > 0">
 		                  <div class="panel panel-default">
 		                     <div class="panel-heading">Últimos serviços aceitos</div>
 		                     <div class="panel-body">
@@ -59,7 +121,7 @@
 		                     </div>
 		                  </div>
 		               </div>
-		               <div class="col-lg-3">
+		               <div class="col-lg-3" ng-show="servicosAceitos.length > 0">
 		                  <div class="well well-sm">
 		                     <h4>Trajeto</h4>
 		                     <div id="trajeto-texto"></div>

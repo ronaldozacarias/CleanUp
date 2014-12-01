@@ -66,7 +66,7 @@ function cadastroController($scope, $http, $filter, $timeout) {
 
 	// Essa função cria um contato
 	$scope.createPeople = function(newPeopleForm) {
-		
+				
 		$scope.pessoa.cidade = $scope.selected.codigoCidade + "";
 			
 		if ($scope.termos == true &&
@@ -76,16 +76,17 @@ function cadastroController($scope, $http, $filter, $timeout) {
 		    $scope.pessoa.email != null &&
 		    $scope.pessoa.senha != null &&
 		    $scope.pessoa.telefone != null) {
+			
+			$('body').oLoader({
+			      backgroundColor:'#fff',
+			      fadeInTime: 500,
+			      fadeOutTime: 1000,
+			      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+			      style: 0,
+			      imageBgColor: 'none',
+			      fadeLevel: 1
+			 });
 					
-			var cpf = $scope.pessoa.cpf;
-			cpf = cpf.replace('.','').replace('.','').replace('-','');
-			$scope.pessoa.cpf = cpf;
-			
-			var tel = $scope.pessoa.telefone;
-			tel = tel.replace('(','').replace(')','').replace(' ','').replace('-','');
-			$scope.pessoa.telefone = tel;
-			
-			
 			if($scope.mostrar){
 				if($scope.especialidadesDiarista.length > 0){
 					
@@ -108,6 +109,9 @@ function cadastroController($scope, $http, $filter, $timeout) {
 				            method: "POST",
 				            headers: {'Content-Type': 'application/json'}
 				        }).success(function(data) {
+				        	
+				        	$('body').oLoader('hide');
+				        	
 				        	bootbox.alert("Cadastro realizado com sucesso!", function() {
 				        		location.reload();
 				        	});
@@ -133,11 +137,16 @@ function cadastroController($scope, $http, $filter, $timeout) {
 			            headers: {'Content-Type': 'application/json'}
 			        }).success(function(data) {			        	
 			        	
+			        	$('body').oLoader('hide');
+			        	
 			        	bootbox.alert("Cadastro realizado com sucesso!", function() {
 			        		location.reload();
 			        	});
 			        	
 			        }).error(function(data) {
+			        	
+			        	$('body').oLoader('hide');
+			        	
 			        	exibirMensagemErro(data);
 			       });				
 					

@@ -25,6 +25,12 @@
 
                     <div class="col-lg-13">
                     
+                    		<div class="alert alert-info" ng-show="servicosList.length == 0">
+					              		<h3>Sem serviços<br>
+										     </h3><h5>Você ainda não foi solicitada por um cliente para realização de serviços.</h5>
+									    
+					        </div>
+                    
 	                    	<div class="panel widget col-lg-12" ng-repeat="servico in filtered = (servicosList | filter:searchString) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 					               <div class="panel-body">
 					               			<input type="hidden" value="{{servico.codigo}}" />

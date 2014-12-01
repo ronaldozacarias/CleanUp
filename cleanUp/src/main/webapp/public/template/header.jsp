@@ -163,18 +163,9 @@
                         <div class="list-group">
                            <!-- list item-->
                            <a ng-show="profile == 'ROLE_DIARIST'" href="{{linkNotificacoes}}" class="list-group-item" ng-repeat="notificacao in notificacoes">
-                              <div class="media" ng-show="notificacao.status == 'PENDENTE'" ng-click="abriModal()">
+                              <div class="media" ng-show="notificacao.status =! 'ENCERRADA'">
                                  <div class="pull-left">
-                                    <em class="fa fa-question fa-2x text-info"></em>
-                                 </div>
-                                 <div class="media-body clearfix">
-                                    <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
-                                 </div>
-                              </div>
-                              
-                              <div class="media" ng-show="notificacao.status == 'ENCERRADA'" ng-click="setarnotificaaoConcluida()">
-                                 <div class="pull-left">
-                                    <em class="fa fa-times fa-2x text-danger"></em>
+                                    <em class="fa fa-exclamation-circle text-info"></em>
                                  </div>
                                  <div class="media-body clearfix">
                                     <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
@@ -182,18 +173,10 @@
                               </div>
                            </a>
                            <a ng-show="profile == 'ROLE_CLIENT'" href="{{linkNotificacoes}}" class="list-group-item" ng-repeat="notificacao in notificacoes">
-                              <div class="media" ng-show="notificacao.status == 'CONCLUIDA'" ng-click="abriModal()">
+                                                            
+                              <div class="media" ng-show="notificacao.status != 'SERVICO_CANCELADO'">
                                  <div class="pull-left">
-                                    <em class="fa fa-check fa-2x text-success"></em>
-                                 </div>
-                                 <div class="media-body clearfix">
-                                    <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
-                                 </div>
-                              </div>
-                              
-                              <div class="media" ng-show="notificacao.status == 'CANCELADA'" ng-click="setarnotificaaoConcluida()">
-                                 <div class="pull-left">
-                                    <em class="fa fa-times fa-2x text-danger"></em>
+                                    <em class="fa fa-exclamation-circle text-info"></em>
                                  </div>
                                  <div class="media-body clearfix">
                                     <div class="media-heading">{{notificacao.descricaoNotificacao}}</div>
@@ -201,9 +184,15 @@
                               </div>
                            </a>                           
                            <!-- last list item -->
-                           <a href="{{linkNotificacoes}}" class="list-group-item">
-                           	  <em class="fa fa-mail-forward"></em>
+                           <a ng-show="notificacoes.length > 0" href="{{linkNotificacoes}}" class="list-group-item">
+                           	  <em class="fa fa-mail-forward"></em>&nbsp
                               <small>Todas notificações...</small>
+                              
+<!--                               <span class="badge">14</span> -->
+                           </a>
+                           <a ng-show="notificacoes.length == 0" href="" class="list-group-item">
+                           	  <em class="fa fa-exclamation"></em>&nbsp
+                              <small>Você não tem notificações</small>
                               
 <!--                               <span class="badge">14</span> -->
                            </a>

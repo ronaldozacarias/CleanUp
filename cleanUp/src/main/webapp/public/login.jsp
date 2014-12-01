@@ -48,7 +48,7 @@
 <!--                      	<a href="#" class="text-muted">Forgot your password?</a> -->
                      </div>
                   </div>
-                  <button type="submit" class="btn btn-block btn-success">Login</button>
+                  <button type="submit" class="btn btn-block btn-success" ng-click="spinner();">Login</button>
                </form>
             </div>
          </div>
@@ -61,6 +61,8 @@
    <!-- Main vendor Scripts-->
    <script src="<c:url value='/resources/assets/jquery/jquery.min.js' />"></script>
    <script src="<c:url value='/resources/assets/bootstrap/js/bootstrap.min.js' />"></script>
+   
+   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
    
    <!-- Animo-->
    <script src="<c:url value='/resources/assets/animo/animo.min.js' />"></script>

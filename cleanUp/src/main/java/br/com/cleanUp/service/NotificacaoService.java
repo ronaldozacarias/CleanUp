@@ -38,5 +38,31 @@ public class NotificacaoService {
 		return notificacoesCliente;
 		
 	}
+	
+	public Notificacao findByOne(int codigo) throws NegocioException {
+		
+		Notificacao notificacao;
+		
+		try {
+			notificacao = notificacaoRepository.findOne(codigo);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao retornar Notificação");
+		}
+		
+		return notificacao;
+		
+	}
+	
+	public void setVisualizada(Notificacao notificacao) throws NegocioException {
+		
+		try {
+			notificacaoRepository.save(notificacao);
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao encerrar notificação");
+		}
+		
+	}
+	
+	
 
 }

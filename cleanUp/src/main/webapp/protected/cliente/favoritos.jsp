@@ -94,7 +94,7 @@
 								<div class="form-group ">
 								       	<label for="datePicker">Data do serviço</label>
 								       	<div id="datePicker" data-pick-time="false" class="datetimepicker input-group date mb-lg">
-					                    	<input id="dp" placeholder="dd/MM/yyyy" ng-model="data" type="text" class="form-control" required>
+					                    	<input disabled id="dp" placeholder="dd/MM/yyyy" ng-model="data" type="text" class="form-control" required>
 					                        <span class="input-group-addon">
 					                        	<span class="fa-calendar fa"></span>
 					                        </span>

@@ -90,23 +90,21 @@ public class ServicoService {
 		}
 	}
 	
-	public void cancelarServico(Servico s)throws NegocioException{
-		Servico serv = new Servico();
-		serv = this.findById(s);
+	public void cancelarServico(Servico servico)throws NegocioException{
 		
 		Date dataCancelamento = new Date();
 		long millisCancelamento = dataCancelamento.getTime();
-		Date dataSevico = serv.getDataServico();
+		Date dataSevico = servico.getDataServico();
 		long millisServico = dataSevico.getTime();
 		
 //		HistorioServico hs = new HistorioServico();
-			if ((millisServico - millisCancelamento) <= 172800000 && serv.getStatus().equals(StatusServico.ACEITO)) {
-				serv.setStatus(StatusServico.ACEITO);
+			if ((millisServico - millisCancelamento) <= 172800000 && servico.getStatus().equals(StatusServico.ACEITO)) {
+				servico.setStatus(StatusServico.ACEITO);
 				throw new NegocioException("O cancelamento não pode ser Realizado: Só é permitido a exclusão com dois dias de antecedência");
 			}else{			
-				serv.setStatus(StatusServico.CANCELAR);
-				this.historioServicoService.salvarHistorioDeServico(serv);				
-				this.singleEdit(serv);
+				servico.setStatus(StatusServico.CANCELAR);
+				this.historioServicoService.salvarHistorioDeServico(servico);				
+				this.singleEdit(servico);
 			}
 	}
 	
@@ -114,6 +112,16 @@ public class ServicoService {
 		Servico serv = new Servico();
 		try {
 			serv = servicoRepository.findOne(s.getCodServico());
+		} catch (Exception e) {
+			throw new NegocioException("Erro ao Buscar Servico");
+		}
+		return serv;
+	}
+	
+	public Servico findByOne(int s) throws NegocioException{
+		Servico serv = new Servico();
+		try {
+			serv = servicoRepository.findOne(s);
 		} catch (Exception e) {
 			throw new NegocioException("Erro ao Buscar Servico");
 		}

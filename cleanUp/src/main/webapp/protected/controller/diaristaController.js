@@ -50,6 +50,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	$scope.countServPendente = 0;
     $scope.countServCancel = 0;
     $scope.countServConcluido = 0;
+    $scope.countServAceito = 0;
     $scope.countSolicitacoes = 0;
 	
 	function hideModal(){
@@ -83,8 +84,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		
 		var url = "" + $location.$$absUrl;
 		
-		if(url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" || 
-		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
+		if(url.slice(-42) == "/cleanUp/protected/diarista/resumoDiarista"){
 			
 			 $http({         
 		          url: '/cleanUp/protected/relatorios/gerarRelatorioDiarista',
@@ -296,10 +296,8 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	
 	function listarHistoricoServicos(){
     	var url = "" + $location.$$absUrl;
-    	
     	    	
-    	if(url == "http://localhost:8080/cleanUp/protected/diarista/historicoServicosDir" ||
-    	   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/historicoServicosDir"){
+    	if(url.slice(-48) == "/cleanUp/protected/diarista/historicoServicosDir"){
     		
     		$scope.currentPage = null;
     	    $scope.entryLimit = null;
@@ -363,10 +361,14 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     	    		}
     	    	}
     	    	
-    	    	$scope.countSolicitacoes = data.length;    		    
-    		    
-    		    if(url == "http://localhost:8080/cleanUp/protected/home"){
-    		    	initialize2();
+    	    	$scope.countSolicitacoes = data.length;
+        
+    		    if(url.slice(-23) == "/cleanUp/protected/home"){
+    		    	
+    		    	if($scope.servicosAceitos.length > 0){
+    		    		initialize2();
+    		    	}    		    	
+    		    	
     		    }
     	
     	    })
@@ -378,7 +380,6 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     	    });  		
     	
 	};
-	
 	
 	function listarServicos(){
 		
@@ -394,14 +395,11 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		      fadeLevel: 1
 		 }); 
     	
-		if(url == "http://localhost:8080/cleanUp/protected/home" || 
-		   url == "http://localhost:8080/cleanUp/protected/diarista/servicos" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/perfilDiarista" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/notificacoes" ||
-		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
-		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
-		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
+		if(url.slice(-23) == "/cleanUp/protected/home" || 
+		   url.slice(-36) == "/cleanUp/protected/diarista/servicos" ||
+		   url.slice(-42) == "/cleanUp/protected/diarista/resumoDiarista" ||
+		   url.slice(-42) == "/cleanUp/protected/diarista/perfilDiarista" ||
+		   url.slice(-40) == "/cleanUp/protected/diarista/notificacoes"){
     		
     		$scope.currentPage = null;
         	$scope.entryLimit = null;
@@ -437,6 +435,9 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
                 	}
                 	if(data[i].status == 'CANCELAR'){
                 		$scope.countServCancel++;
+                	}
+                	if(data[i].status == 'ACEITO'){
+                		$scope.countServAceito++;
                 	}
                 }
     		    
@@ -483,16 +484,12 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		
 		var url = "" + $location.$$absUrl;
     	
-		if(url == "http://localhost:8080/cleanUp/protected/home" || 
-		   url == "http://localhost:8080/cleanUp/protected/diarista/servicos" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/resumoDiarista" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/notificacoes" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/perfilDiarista" ||
-		   url == "http://localhost:8080/cleanUp/protected/diarista/historicoServicosDir" ||
-		   url == "http://10.1.2.16:8080/cleanUp/protected/home" || 
-		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/servicos" ||
-		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/notificacoes" ||
-		   url == "http://10.1.2.16:8080/cleanUp/protected/diarista/resumoDiarista"){
+		if(url.slice(-23) == "/cleanUp/protected/home" || 
+           url.slice(-36) == "/cleanUp/protected/diarista/servicos" ||
+		   url.slice(-42) == "/cleanUp/protected/diarista/resumoDiarista" ||
+		   url.slice(-42) == "/cleanUp/protected/diarista/perfilDiarista" ||
+		   url.slice(-40) == "/cleanUp/protected/diarista/notificacoes" ||
+		   url.slice(-48) == "/cleanUp/protected/diarista/historicoServicosDir"){
 			
 			$http({
 		        url: '/cleanUp/protected/notificacao/getNotificacoes',
@@ -553,10 +550,9 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	    .success(function (data, status, headers, config) { 
 	    	$('body').oLoader('hide');
 	    	hideModal();
-	    	bootbox.dialog({
-        		title:"Serviço enviado com sucesso!",
-        		message: "Para cancelar o serviço clique neste <a href='/cleanUp/protected/diarista/servicos'>link</a>"
-            });
+	    	bootbox.alert("Serviço enviado com sucesso!", function() {
+        		location.reload();
+        	});
 	    	listarNotificacoes();
 	    	listarServicos();
 			$scope.aceitarServicoVO = null;
@@ -586,22 +582,37 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 			codigo:servico.codServico
 		};
 		
+		$('body').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		});
+		
         $http({
 	        url: '/cleanUp/protected/servico/cancelar',
 	        data: $scope.servicoVO,
 	        method: "POST",
             headers: {'Content-Type': 'application/json; charset=utf-8'}
 	    })
-	    .success(function (data, status, headers, config) {   	    	
-	    	bootbox.dialog({
-        		title:"Serviço cancelado com sucesso!",
-        		message: "Obrigado por sua preferência"
-            });
+	    .success(function (data, status, headers, config) {
+	    	
+	    	$('body').oLoader('hide');
+	    	
+	    	bootbox.alert("Serviço cancelado com sucesso!", function() {
+        		location.reload();
+        	});
+	    	
 	    	listarServicos();
 	    	listarNotificacoes();
 			$scope.aceitarServicoVO = null;
 	    })
 	    .error(function (data, status, headers, config) {
+	    	$('body').oLoader('hide');
+	    	
 	    	bootbox.dialog({
 	    		title:"Erro inesperado!",
 	            message: data

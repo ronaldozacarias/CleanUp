@@ -44,7 +44,7 @@
                      <span class="fa fa-phone form-control-feedback text-muted"></span>
                   </div>
                   <div class="form-group has-feedback">
-                     <input id="signupInputRePassword1" type="text" placeholder="Cidade" class="form-control" ng-model="selected" required="required" typeahead="cidade as cidade.nomeCidade for cidade in cidades | filter:$viewValue | limitTo:8">
+                     <input id="signupInputRePassword1" type="text" placeholder="Cidade" class="form-control" ng-model="selected" typeahead="cidade as cidade.nomeCidade for cidade in cidades | filter:$viewValue | limitTo:8">
 <!--                      <input type="text" ng-model="selected" placeholder="Digite sua Cidade" typeahead="cidade as cidade.nomeCidade for cidade in cidades | filter:$viewValue | limitTo:8" class="login"> -->
                      <span class="fa fa-globe form-control-feedback text-muted"></span>
                   </div>
@@ -128,6 +128,8 @@
    <script src="<c:url value='/resources/assets/bootstrap/js/bootstrap.min.js' />"></script>
    <script src="<c:url value='/resources/js/checklist-model.js' />"></script>
    <script src="<c:url value='/resources/js/bootbox.min.js' />"></script>
+   
+   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
    
    <script src="<c:url value='/resources/assets/animo/animo.min.js' />"></script>
    <script src="<c:url value='/resources/assets/js/pages.js' />"></script>
