@@ -33,7 +33,7 @@
                   </div>
                   
                   <!-- timeline-badge CANCELAR -->
-                  <div class="timeline-badge danger" ng-show="hist.status == 'CANCELAR'">
+                  <div class="timeline-badge danger" ng-show="hist.status == 'CANCELADO'">
                      <em class="fa fa-times"></em>
                   </div>
                   

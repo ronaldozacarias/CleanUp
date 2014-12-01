@@ -30,6 +30,7 @@ import br.com.cleanUp.service.DiaristaService;
 import br.com.cleanUp.service.HistoricoServicoService;
 import br.com.cleanUp.service.ServicoService;
 import br.com.cleanUp.util.AtributoDeSessao;
+import br.com.cleanUp.vo.NotificacaoVO;
 import br.com.cleanUp.vo.ServicoVO;
 
 @Controller
@@ -135,6 +136,20 @@ public class ServicoController {
 		List<Servico> servicosPorCliente = servicoService.findByServicosPorClienteCli(cliente.getCodigo());
 		
 		return servicosPorCliente;
+		
+	}
+	
+	@RequestMapping(value = "getServicoPorNoificacao", method = RequestMethod.POST)
+	@ResponseBody
+	public Servico servicosPorNotificacao(@RequestBody NotificacaoVO notificacaoVO) throws NegocioException {
+		
+		Notificacao notificacao = new Notificacao();
+		
+		notificacao.setIdNotificacao(notificacaoVO.getIdNotificacao());
+		
+		Servico servico = servicoService.findByNotificacao(notificacao);
+		
+		return servico;
 		
 	}
 	

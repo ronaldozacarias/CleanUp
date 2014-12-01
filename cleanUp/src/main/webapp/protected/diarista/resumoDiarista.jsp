@@ -124,27 +124,15 @@
 		            </div>
                   
                   
-                  <div ng-show="servicosList.length > 0" class="panel panel-default">
+                  <div ng-show="servicosList.length > 0" class="panel panel-default col-md-5">
 		               <div class="panel-heading">
 							<div class="form-inline">
-			                  		Veja aqui suas avaliações de forma prática e objetiva				                
+			                  		Gráfico de Avaliação				                
 			                 </div>					   
 					   </div>
 		               <div class="panel-body">
-		                  <div class="form-inline col-md-5">		                  		
-		                  		<div>
-									<div id="canvas-holder">
-										<canvas id="chart-area">
-										</canvas>
-									</div>									
-		                        </div>  
-		                  </div>
 		                  
-		                 <div style="left:50px;" class="panel-body col-md-5">
-	                        <div class="alert alert-success">Avaliações positivas.</div>           
-	                        <div class="alert alert-warning">Avaliações regulares. </div>
-	                        <div class="alert alert-danger">Avaliações ruins.</div>
-	                     </div>
+		                  <div id="graph"></div>		                 
 		                  
 		               </div>        
 		               
@@ -207,6 +195,10 @@
    <!-- END Page Custom Script-->
    
    <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
+   
+   <script src="<c:url value='/resources/assets/morris/raphael-min.js' />" ></script>
+   
+   <script src="<c:url value='/resources/assets/morris/morris.min.js' />" ></script>
    
    <script src="<c:url value='/resources/rate/jquery.raty.js' />"></script>
    <!-- App Main-->

@@ -69,7 +69,7 @@
 		                                 	<li class="mb-sm ng-binding">
 		                                       <em class="fa fa-info fa-fw"></em> Status: {{servico.status}}</li>	                                    	
 		                                 </ul>
-		                                 <div ng-if="servico.status != 'CANCELAR' && servico.status != 'CONCLUIDO' " class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
+		                                 <div ng-if="servico.status != 'CANCELADO' && servico.status != 'CONCLUIDO' " class="btn btn-oval btn-danger pull-right" ng-click="cancelarServico(servico)">
 		                                 	<input type="hidden" value="{{servico.codigo}}" />
 												<i class="fa fa-times"></i>
 										 </div>

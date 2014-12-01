@@ -78,8 +78,10 @@
 /* ========================================================================
    Component: bootstrap-reset.less
  ========================================================================== */
-.scrollServices{
-	
+#graph {
+  width: 250px;
+  height: 250px;
+  margin: 20px auto 0 auto;
 }
 
 .scrollServices{

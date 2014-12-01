@@ -102,7 +102,7 @@ public class ServicoService {
 				servico.setStatus(StatusServico.ACEITO);
 				throw new NegocioException("O cancelamento não pode ser Realizado: Só é permitido a exclusão com dois dias de antecedência");
 			}else{			
-				servico.setStatus(StatusServico.CANCELAR);
+				servico.setStatus(StatusServico.CANCELADO);
 				this.historioServicoService.salvarHistorioDeServico(servico);				
 				this.singleEdit(servico);
 			}
@@ -211,6 +211,17 @@ public class ServicoService {
 			
 		}
 			
+	}
+	
+	public Servico findByNotificacao(Notificacao notificacao) throws NegocioException{
+		
+		try{
+			return servicoRepository.findByNotificacao(notificacao);
+		}
+		catch(Exception e){
+			throw new NegocioException("Erro ao retornar objeto.");
+		}
+		
 	}
 	
 }

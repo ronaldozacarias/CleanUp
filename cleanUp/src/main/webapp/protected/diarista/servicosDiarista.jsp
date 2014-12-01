@@ -104,7 +104,7 @@
 				                  <!-- START panel-->
 				                  <div class="panel panel-default">
 				                     <div class="panel-heading"><em class="fa fa-calendar fa-fw"></em>Data: {{servico.dataServico | date:'longDate'}}
-				                        <a href="javascript:void(0);"  title="" class="pull-right" data-original-title="Close Panel" ng-click="cancelarServico(servico)">
+				                        <a href="javascript:void(0);"  title="" class="pull-right" data-original-title="Close Panel" ng-click="cancelarServicoModal(servico, $index)">
 				                           <em class="fa fa-times"></em>
 				                        </a>
 				                     </div>
@@ -123,7 +123,7 @@
 				                   <div ng-show="servicos.length == 0">
 				                          <div class="alert alert-success">
 				                                <div class="accordion-inner">
-				                                   	<h2>Todos os serviços foram aceitos</h2>	                                   	                               	
+				                                   	<h2>Todos as operações foram concluidas</h2>	                                   	                               	
 				                                </div>	                                                                                                
 				                          </div>
 				                          

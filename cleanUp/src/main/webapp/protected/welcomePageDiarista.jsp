@@ -9,19 +9,19 @@
          <!-- START Page content-->
          <div class="main-content">
          
-         	<button type="button" class="btn btn-oval btn-primary pull-right">
-         	<em class="fa fa-question fa-fw mr-sm"></em>Help</button>
+<!--          	<button type="button" class="btn btn-oval btn-primary pull-right"> -->
+<!--          	<em class="fa fa-question fa-fw mr-sm"></em>Help</button> -->
          	
             <h3><spring:message code="homePage" />
                <br>
-               <small><spring:message code="homePageSmall" /></small>
+               <small>Desfrute de toda comodidade que a CleanUp pode dispor</small>
             </h3>
             
             <div class="row">
                <!-- START dashboard main content-->
                <section class="col-md-13">
                       
-			  		<div class="alert alert-info" ng-show="servicosList.length == 0">
+			  		<div class="alert alert-info" ng-show="servicosAceitos.length == 0">
 					      <h3>Você ainda não aceitou um serviço<br>
 						  </h3><h5>Mas olha o que te aguarda logo abaixo.</h5>
 									    

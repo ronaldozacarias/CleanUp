@@ -6,7 +6,7 @@
       <nav role="navigation" class="navbar navbar-default navbar-top navbar-fixed-top">
          <!-- START navbar header-->
          <div class="navbar-header">
-            <a href="dashboard.html" class="navbar-brand">
+            <a href="/cleanUp/protected/home" class="navbar-brand">
                <div class="brand-logo">
                   <img src="<c:url value='/resources/assets/img/logo.png'  />" alt="App Logo" class="img-responsive"/>
                </div>

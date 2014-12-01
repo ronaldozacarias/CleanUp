@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import br.com.cleanUp.model.Notificacao;
 import br.com.cleanUp.model.Servico;
 
 public interface ServicoRepository extends CrudRepository<Servico, Integer> {
@@ -24,4 +25,6 @@ public interface ServicoRepository extends CrudRepository<Servico, Integer> {
 
 	@Query("FROM Servico s where s.diarista.codigo =:codigoDiarista")
 	List<Servico> listarServicoPorDiarista(@Param("codigoDiarista") int codigoDiarista);
+	
+	Servico findByNotificacao(Notificacao notificacao);
 }

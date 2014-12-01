@@ -16,8 +16,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	$scope.edit = false;
 	listarNotificacoes();
 	listarServicos();
-	listarServicosAceitos();
-	gerarResumoDiarista();
+	listarServicosAceitos();	
 	listarHistoricoServicos();
 	var myLatlng;
 	$scope.servicos = [];
@@ -79,6 +78,8 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	    });
 	 };
 	 
+	 
+	gerarResumoDiarista();
 	
 	function gerarResumoDiarista(){
 		
@@ -106,47 +107,66 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		          $scope.avalRuim = Math.round( ruim );
 		          
 		          
-		          var doughnutData = [
-		      	    				
-		                            {
-										value: $scope.avalRegu,
-										color: "#ff902b",
-										highlight: "#FF732B",
-										label: "Avaliações regulares"
-									},
-		      	    				{
-		      	    					value: $scope.avalRuim,
-		      	    					color: "#f35839",
-		      	    					highlight: "#A50505",
-		      	    					label: "Avaliações Ruíns"
-		      	    				},
-		      	    				{
-		      	    					value: $scope.avalBom,
-		      	    					color:"#7bbf62",
-		      	    					highlight: "#006400",
-		      	    					label: "Avaliações positivas"
-		      	    				}
-		      	    			];
-
-		      	var ctx = document.getElementById("chart-area").getContext("2d");
-		      	window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
-		          
-		          
-		          
-		          var loader1 = $('.aBo').ClassyLoader({
-		        	    animate: true,
-		        	    percentage: $scope.avalBom
+		          Morris.Donut({
+		        	  element: 'graph',
+		        	  data: [
+		        	    {value: $scope.avalBom, label: 'Bom'},
+		        	    {value: $scope.avalRegu, label: 'Regular'},
+		        	    {value: $scope.avalRuim, label: 'Ruim'}
+		        	  ],
+		        	  backgroundColor: 'none',
+		        	  labelColor: '#000',
+		        	  colors: [
+		        	    '#006400',
+		        	    '#ff902b',
+		        	    '#f35839'
+		        	  ],
+		        	  formatter: function(x){ return x + "%"}
 		          });
 		          
-		          var loader2 = $('.aRe').ClassyLoader({
-		        	    animate: true,
-		        	    percentage: $scope.avalRegu
-		          });
 		          
-		          var loader3 = $('.aRu').ClassyLoader({
-		        	    animate: true,
-		        	    percentage: $scope.avalRuim
-		          });
+//		          var doughnutData = [
+//		      	    				
+//		                            {
+//										value: $scope.avalRegu,
+//										color: "#ff902b",
+//										highlight: "#FF732B",
+//										label: "Avaliações regulares"
+//									},
+//		      	    				{
+//		      	    					value: $scope.avalRuim,
+//		      	    					color: "#f35839",
+//		      	    					highlight: "#A50505",
+//		      	    					label: "Avaliações Ruíns"
+//		      	    				},
+//		      	    				{
+//		      	    					value: $scope.avalBom,
+//		      	    					color:"#7bbf62",
+//		      	    					highlight: "#006400",
+//		      	    					label: "Avaliações positivas"
+//		      	    				}
+//		      	    			]; 
+//		          
+//
+//		      	var ctx = document.getElementById("chart-area").getContext("2d");
+//		      	window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+//		          
+//		          
+//		          
+//		          var loader1 = $('.aBo').ClassyLoader({
+//		        	    animate: true,
+//		        	    percentage: $scope.avalBom
+//		          });
+//		          
+//		          var loader2 = $('.aRe').ClassyLoader({
+//		        	    animate: true,
+//		        	    percentage: $scope.avalRegu
+//		          });
+//		          
+//		          var loader3 = $('.aRu').ClassyLoader({
+//		        	    animate: true,
+//		        	    percentage: $scope.avalRuim
+//		          });
 		          
 		          
 		      })
@@ -419,7 +439,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
     	    	$('body').oLoader('hide');
     	    	
     	    	for(var i = 0 ; i < data.length; i++){
-    	    		if(data[i].status != 'CANCELAR'){
+    	    		if(data[i].status != 'CANCELADO'){
     	    			$scope.servicosList.unshift(data[i]);
     	    		}
     	    	}
@@ -433,7 +453,7 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
                 	if(data[i].status == 'CONCLUIDO'){
                 		$scope.countServConcluido++;
                 	}
-                	if(data[i].status == 'CANCELAR'){
+                	if(data[i].status == 'CANCELADO'){
                 		$scope.countServCancel++;
                 	}
                 	if(data[i].status == 'ACEITO'){
@@ -576,6 +596,16 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 		
 	};
 	
+	$scope.cancelarServicoModal = function(servico, index){
+		
+		bootbox.confirm("Você deseja realmente cancelar este serviço?" , function(result) {
+	  		  if(result == true){
+	  			  $scope.cancelarServicoDiaristaModal(servico, index);
+	  		  }
+		}); 
+		
+	};
+	
 	$scope.cancelarServicoDiarista = function(servico){
 		
 		$scope.servicoVO = {
@@ -612,6 +642,50 @@ function diaristaController($scope, $filter, $http, $timeout, $location) {
 	    })
 	    .error(function (data, status, headers, config) {
 	    	$('body').oLoader('hide');
+	    	
+	    	bootbox.dialog({
+	    		title:"Erro inesperado!",
+	            message: data
+	        });
+	    });
+		
+	};
+	
+	$scope.cancelarServicoDiaristaModal = function(servico, index){
+		
+		$scope.servicoVO = {
+			codigo:servico.codServico
+		};
+		
+		$('#myModal').oLoader({
+		      backgroundColor:'#fff',
+		      fadeInTime: 500,
+		      fadeOutTime: 1000,
+		      image: '/cleanUp/resources/assets/jloader/spinner.gif',
+		      style: 0,
+		      imageBgColor: 'none',
+		      fadeLevel: 1
+		});
+		
+        $http({
+	        url: '/cleanUp/protected/servico/cancelar',
+	        data: $scope.servicoVO,
+	        method: "POST",
+            headers: {'Content-Type': 'application/json; charset=utf-8'}
+	    })
+	    .success(function (data, status, headers, config) {
+	    	
+	    	$('#myModal').oLoader('hide');
+	    	
+	    	bootbox.alert("Serviço cancelado com sucesso!", function() {
+	    		$scope.servicos.splice(index, 1);
+	    		listarServicos();
+		    	listarNotificacoes();
+        	});
+	    	
+	    })
+	    .error(function (data, status, headers, config) {
+	    	$('#myModal').oLoader('hide');
 	    	
 	    	bootbox.dialog({
 	    		title:"Erro inesperado!",
@@ -725,7 +799,7 @@ $scope.setarComoVizualizada = function(not){
 	    });           
               
         
-    };
+    };   
     
     
     /*---------  GOOGLE MAPS ---------------------------------------*/

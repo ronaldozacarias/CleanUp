@@ -53,6 +53,8 @@
 	   <!-- FastClick for mobiles-->
 	   <script src="<c:url value='/resources/assets/fastclick/fastclick.js' />" type="application/javascript"></script>
 	   
+	   <script src="<c:url value='/resources/assets/jloader/js/jquery.oLoader.min.js' />" ></script>
+	   
 	   <!-- Bootstrap Datepicker -->
    	   <link href="<c:url value='/resources/assets/slider/css/slider.css'  />" rel="stylesheet"/>
    	   <link href="<c:url value='/resources/assets/chosen/chosen.min.css'  />" rel="stylesheet"/>

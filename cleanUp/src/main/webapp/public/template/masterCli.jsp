@@ -57,6 +57,7 @@
 	   <!-- Bootstrap Datepicker -->
    	   <link href="<c:url value='/resources/assets/slider/css/slider.css'  />" rel="stylesheet"/>
    	   <link href="<c:url value='/resources/assets/chosen/chosen.min.css'  />" rel="stylesheet"/>
+   	   
 	   <link href="<c:url value='/resources/assets/datetimepicker/css/bootstrap-datetimepicker.min.css'  />" rel="stylesheet"/>	   
 	   
 	   <script src="<c:url value='http://maps.googleapis.com/maps/api/js?sensor=false' />"></script>

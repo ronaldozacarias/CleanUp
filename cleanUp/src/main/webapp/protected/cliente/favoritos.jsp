@@ -28,7 +28,7 @@
                   <div ng-show="showServicos">
                     
 <!--                    <div class="col-lg-4" ng-repeat="fav in filtered = (favoritos | filter:searchService) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit"> -->
-	               <div class="col-lg-4" ng-repeat="fav in favoritos | filter:searchString">   
+	               <div class="col-lg-5" ng-repeat="fav in favoritos | filter:searchString">   
 	                  <!-- START panel-->
 	                  <div class="panel panel-default">
 	                     <div class="panel-heading">{{fav.diarista.nome}}
@@ -50,8 +50,8 @@
 	                        </ul>
 	                        <div class="media-heading">
 	                                 <ul class="list-unstyled">
-	                                    <li class="mb-sm ng-binding espec" ng-repeat="especialidade in fav.diarista.especialidades">
-	                                       <em class="fa fa-wrench fa-fw"></em>{{especialidade.nomeEspecialidade}}
+	                                    <li class="mb-sm ng-binding espec col-md-4" ng-repeat="especialidade in fav.diarista.especialidades">
+	                                       <em class="fa fa-check-square-o fa-fw"></em>{{especialidade.nomeEspecialidade}}
 	                                    </li>	                                    	
 	                                 </ul>
 	                              </div>
